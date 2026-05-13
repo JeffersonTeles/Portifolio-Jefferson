@@ -30,7 +30,7 @@ import {
 const socialLinks = [
   { icon: FaGithub, label: 'GitHub', href: 'https://github.com/JeffersonTeles' },
   { icon: FaLinkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/jeffersonteles/' },
-  { icon: FaWhatsapp, label: 'WhatsApp', href: 'https://wa.me/5500000000000' },
+  { icon: FaWhatsapp, label: 'WhatsApp', href: 'https://wa.me/5531998456721?text=Olá%20Jefferson%20Teles' },
   { icon: FaEnvelope, label: 'Email', href: 'mailto:jeffersonteles.dev@gmail.com' },
 ]
 
@@ -54,36 +54,48 @@ const projects = [
     category: 'Automação',
     description: 'Plataforma de automação WhatsApp com funis, respostas inteligentes e gestão de leads.',
     tech: ['Node.js', 'OpenAI', 'WhatsApp API'],
+    demo: 'https://jeffersonteles.dev/projetos/fluxzap-ai',
+    github: 'https://github.com/JeffersonTeles/fluxzap-ai',
   },
   {
     name: 'Finance Vision',
     category: 'Dashboards',
     description: 'Dashboard financeiro inteligente com insights preditivos e alertas automáticos.',
     tech: ['React', 'Supabase', 'Python'],
+    demo: 'https://jeffersonteles.dev/projetos/finance-vision',
+    github: 'https://github.com/JeffersonTeles/finance-vision',
   },
   {
     name: 'AffiliAI Engine',
     category: 'IA',
     description: 'Sistema de afiliados com recomendação de campanhas orientada por IA generativa.',
     tech: ['TypeScript', 'PostgreSQL', 'OpenAI API'],
+    demo: 'https://jeffersonteles.dev/projetos/affiliai-engine',
+    github: 'https://github.com/JeffersonTeles/affiliai-engine',
   },
   {
     name: 'LP Forge',
     category: 'Landing Pages',
     description: 'Gerador de landing pages com IA para criação de copy, layout e testes A/B.',
     tech: ['Next.js', 'TailwindCSS', 'Firebase'],
+    demo: 'https://jeffersonteles.dev/projetos/lp-forge',
+    github: 'https://github.com/JeffersonTeles/lp-forge',
   },
   {
     name: 'Smart CRM Flow',
     category: 'Sistemas Inteligentes',
     description: 'CRM automatizado com enriquecimento de dados, segmentação e jornada omnichannel.',
     tech: ['React', 'Node.js', 'APIs REST'],
+    demo: 'https://jeffersonteles.dev/projetos/smart-crm-flow',
+    github: 'https://github.com/JeffersonTeles/smart-crm-flow',
   },
   {
     name: 'Pulse Analytics',
     category: 'SaaS',
     description: 'Painel analytics moderno para produtos digitais com métricas de retenção e receita.',
     tech: ['React', 'Supabase', 'Docker'],
+    demo: 'https://jeffersonteles.dev/projetos/pulse-analytics',
+    github: 'https://github.com/JeffersonTeles/pulse-analytics',
   },
 ]
 
@@ -226,6 +238,19 @@ function App() {
     () => (filter === 'Todos' ? projects : projects.filter((project) => project.category === filter)),
     [filter],
   )
+
+  const handleContactSubmit = (event) => {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+    const name = formData.get('name')?.toString() ?? ''
+    const email = formData.get('email')?.toString() ?? ''
+    const message = formData.get('message')?.toString() ?? ''
+    const subject = encodeURIComponent(`Contato via portfólio - ${name}`)
+    const body = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`)
+    window.location.href = `mailto:jeffersonteles.dev@gmail.com?subject=${subject}&body=${body}`
+    setSent(true)
+    event.currentTarget.reset()
+  }
 
   if (loading) {
     return (
@@ -394,8 +419,8 @@ function App() {
                   <p className="mt-3 text-sm text-slate-300">{project.description}</p>
                   <p className="mt-3 text-xs text-slate-400">{project.tech.join(' • ')}</p>
                   <div className="mt-5 flex gap-3">
-                    <a href="#" className="btn-primary flex-1 text-center">Demo</a>
-                    <a href="#" className="btn-secondary flex-1 text-center">GitHub</a>
+                    <a href={project.demo} target="_blank" rel="noreferrer" className="btn-primary flex-1 justify-center text-center">Demo</a>
+                    <a href={project.github} target="_blank" rel="noreferrer" className="btn-secondary flex-1 justify-center text-center">GitHub</a>
                   </div>
                 </div>
               </motion.article>
@@ -474,25 +499,19 @@ function App() {
         <motion.section id="contato" className="mx-auto w-full max-w-6xl px-4 pb-24 pt-24 md:px-6" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }} variants={sectionFade}>
           <SectionTitle eyebrow="Contato" title="Vamos construir algo incrível juntos." />
           <div className="grid gap-8 md:grid-cols-2">
-            <form
-              className="glass-card rounded-2xl p-6"
-              onSubmit={(event) => {
-                event.preventDefault()
-                setSent(true)
-              }}
-            >
+            <form className="glass-card rounded-2xl p-6" onSubmit={handleContactSubmit}>
               <div className="space-y-4">
                 <label className="block text-sm text-slate-300">
                   Nome
-                  <input required className="mt-2 w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-3 text-slate-100 focus:border-cyan-300 focus:outline-none" />
+                  <input required name="name" className="mt-2 w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-3 text-slate-100 focus:border-cyan-300 focus:outline-none" />
                 </label>
                 <label className="block text-sm text-slate-300">
                   Email
-                  <input required type="email" className="mt-2 w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-3 text-slate-100 focus:border-cyan-300 focus:outline-none" />
+                  <input required name="email" type="email" className="mt-2 w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-3 text-slate-100 focus:border-cyan-300 focus:outline-none" />
                 </label>
                 <label className="block text-sm text-slate-300">
                   Mensagem
-                  <textarea required rows="5" className="mt-2 w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-3 text-slate-100 focus:border-cyan-300 focus:outline-none" />
+                  <textarea required name="message" rows="5" className="mt-2 w-full rounded-lg border border-white/10 bg-slate-900/70 px-4 py-3 text-slate-100 focus:border-cyan-300 focus:outline-none" />
                 </label>
               </div>
               <button type="submit" className="btn-primary mt-5 w-full justify-center">Enviar</button>

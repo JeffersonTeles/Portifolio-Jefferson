@@ -1,4 +1,4 @@
-# Portifolio-Jefferson
+# Portfólio Jefferson
 
 Portfólio premium de **Jefferson Teles** desenvolvido com **React + TailwindCSS + Framer Motion**.
 
