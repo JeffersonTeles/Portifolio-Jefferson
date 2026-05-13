@@ -1,130 +1,112 @@
+// src/components/Navbar.jsx
 import React, { useState, useEffect } from 'react';
+import { Link as ScrollLink } from 'react-scroll';
 import { motion } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
-import { Link as ScrollLink } from 'react-scroll';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenu, setMobileMenu] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navItems = [
-    { label: 'Sobre', to: 'about' },
-    { label: 'Projetos', to: 'projects' },
-    { label: 'Experiência', to: 'experience' },
-    { label: 'Serviços', to: 'services' },
-    { label: 'Stack', to: 'stack' },
-    { label: 'Contato', to: 'contact' },
+    { name: 'Início', link: 'hero' },
+    { name: 'Sobre', link: 'about' },
+    { name: 'Tecnologias', link: 'tech' },
+    { name: 'Projetos', link: 'projects' },
+    { name: 'Serviços', link: 'services' },
+    { name: 'Contato', link: 'contact' }
   ];
 
   return (
-    <motion.nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'glass border-b border-neon-cyan/20'
-          : 'bg-transparent'
-      }`}
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 sm:h-20">
-          {/* Logo */}
-          <motion.div
-            className="flex-shrink-0"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled 
+            ? 'bg-gray-900/95 backdrop-blur-md border-b border-gray-800 shadow-lg' 
+            : 'bg-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
             <ScrollLink
               to="hero"
-              className="text-xl sm:text-2xl font-bold gradient-text cursor-pointer"
+              smooth={true}
+              duration={500}
+              className="cursor-pointer group"
             >
-              JT.
+              <div>
+                <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                  Jefferson Teles
+                </span>
+                <div className="h-0.5 w-0 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300" />
+              </div>
             </ScrollLink>
-          </motion.div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <ScrollLink
-                key={item.to}
-                to={item.to}
-                spy={true}
-                smooth={true}
-                offset={-80}
-                className="text-sm font-medium text-gray-300 hover:text-neon-cyan transition-colors duration-300 cursor-pointer"
-              >
-                {item.label}
-              </ScrollLink>
-            ))}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 bg-gradient-to-r from-neon-cyan to-neon-blue rounded-lg font-medium text-dark-900 hover:shadow-neon-cyan transition-all duration-300"
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center space-x-1">
+              {navItems.map((item, idx) => (
+                <ScrollLink
+                  key={idx}
+                  to={item.link}
+                  smooth={true}
+                  duration={500}
+                  spy={true}
+                  activeClass="text-blue-400"
+                  className="px-4 py-2 text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer text-sm font-medium"
+                >
+                  {item.name}
+                </ScrollLink>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenu(!mobileMenu)}
+              className="md:hidden text-gray-300 hover:text-blue-400 transition-colors"
             >
-              <ScrollLink to="contact" spy={true} smooth={true} offset={-80}>
-                Contato
-              </ScrollLink>
-            </motion.button>
+              {mobileMenu ? <FiX size={24} /> : <FiMenu size={24} />}
+            </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <motion.button
-            className="md:hidden text-neon-cyan text-2xl"
-            onClick={() => setIsOpen(!isOpen)}
-            whileTap={{ scale: 0.9 }}
-          >
-            {isOpen ? <FiX /> : <FiMenu />}
-          </motion.button>
         </div>
+      </motion.nav>
 
-        {/* Mobile Menu */}
+      {/* Mobile Menu */}
+      {mobileMenu && (
         <motion.div
-          className={`md:hidden bg-dark-800/95 backdrop-blur-md border-t border-neon-cyan/20 ${
-            isOpen ? 'block' : 'hidden'
-          }`}
-          initial={{ opacity: 0, height: 0 }}
-          animate={{
-            opacity: isOpen ? 1 : 0,
-            height: isOpen ? 'auto' : 0,
-          }}
+          initial={{ opacity: 0, x: '100%' }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: '100%' }}
+          className="fixed top-16 right-0 bottom-0 w-64 bg-gray-900/95 backdrop-blur-xl z-40 border-l border-gray-800 md:hidden"
         >
-          <div className="px-4 pt-4 pb-6 space-y-4">
-            {navItems.map((item) => (
+          <div className="flex flex-col p-6 space-y-4">
+            {navItems.map((item, idx) => (
               <ScrollLink
-                key={item.to}
-                to={item.to}
-                spy={true}
+                key={idx}
+                to={item.link}
                 smooth={true}
-                offset={-80}
-                className="block text-gray-300 hover:text-neon-cyan transition-colors duration-300 cursor-pointer"
-                onClick={() => setIsOpen(false)}
+                duration={500}
+                onClick={() => setMobileMenu(false)}
+                className="text-gray-300 hover:text-blue-400 transition-colors py-2 text-sm cursor-pointer"
               >
-                {item.label}
+                {item.name}
               </ScrollLink>
             ))}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full px-6 py-2 bg-gradient-to-r from-neon-cyan to-neon-blue rounded-lg font-medium text-dark-900 hover:shadow-neon-cyan transition-all duration-300"
-            >
-              <ScrollLink to="contact" spy={true} smooth={true} offset={-80}>
-                Contato
-              </ScrollLink>
-            </motion.button>
           </div>
         </motion.div>
-      </div>
-    </motion.nav>
+      )}
+    </>
   );
 };
 

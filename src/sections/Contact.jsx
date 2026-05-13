@@ -1,256 +1,142 @@
+// src/sections/Contact.jsx
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi';
-import { SiWhatsapp, SiLinkedin, SiGithub } from 'react-icons/si';
-import { fadeInUp } from '../utils/animations';
+import { SiWhatsapp } from 'react-icons/si';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: '',
+    message: ''
   });
-
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Formulário enviado:', formData);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setFormData({ name: '', email: '', message: '' });
-      setIsSubmitted(false);
-    }, 3000);
+    // Implementar lógica de envio
+    console.log('Form submitted:', formData);
+    alert('Mensagem enviada! Entrarei em contato em breve.');
+    setFormData({ name: '', email: '', message: '' });
   };
 
-  const contactLinks = [
-    {
-      icon: FiMail,
-      label: 'Email',
-      value: 'jefferson@example.com',
-      href: 'mailto:jefferson@example.com',
-      color: 'text-neon-cyan',
-    },
-    {
-      icon: SiWhatsapp,
-      label: 'WhatsApp',
-      value: '+55 (44) 999277915',
-      href: '#',
-      color: 'text-neon-blue',
-    },
-    {
-      icon: SiLinkedin,
-      label: 'LinkedIn',
-      value: '@jefferson-teles',
-      href: '#',
-      color: 'text-neon-purple',
-    },
-    {
-      icon: SiGithub,
-      label: 'GitHub',
-      value: '@jefferson-teles',
-      href: '#',
-      color: 'text-neon-cyan',
-    },
+  const contactInfo = [
+    { icon: SiWhatsapp, text: "+55 (11) 99999-9999", link: "https://wa.me/5511999999999", color: "hover:text-green-400" },
+    { icon: FiMail, text: "jefferson@teles.dev", link: "mailto:jefferson@teles.dev", color: "hover:text-blue-400" },
+    { icon: FiMapPin, text: "São Paulo, SP", link: null, color: "hover:text-gray-300" }
   ];
 
   return (
-    <section id="contact" className="relative py-20 px-4 overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-0 w-96 h-96 bg-neon-cyan/5 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-neon-purple/5 rounded-full blur-3xl pointer-events-none"></div>
-      </div>
-
-      <div className="max-w-5xl mx-auto relative z-10">
-        {/* Section Header */}
-        <motion.div className="text-center mb-16" {...fadeInUp}>
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 gradient-text">
-            Vamos Construir Algo Incrível Juntos
+    <section id="contact" className="py-20 px-4 bg-gray-900/50">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Contato
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Estou pronto para discutir seu próximo projeto e transformar suas ideias em realidade
+          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+            Vamos conversar sobre seu próximo projeto
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
+        <div className="grid lg:grid-cols-2 gap-12">
           <motion.div
-            className="space-y-8"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true, amount: 0.3 }}
           >
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Informações de Contato
-              </h3>
-              <p className="text-gray-400 mb-8">
-                Escolha o melhor canal para entrar em contato. Respondo rapidamente a todas as mensagens.
-              </p>
-            </div>
+            <h3 className="text-2xl font-bold mb-6">Vamos trabalhar juntos?</h3>
+            <p className="text-gray-400 mb-8 leading-relaxed">
+              Estou disponível para novos projetos e parcerias. 
+              Entre em contato para discutirmos suas ideias e como posso ajudar.
+            </p>
 
-            {/* Contact Links */}
             <div className="space-y-4">
-              {contactLinks.map((link, index) => {
-                const Icon = link.icon;
-                return (
-                  <motion.a
-                    key={index}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group glass rounded-xl p-4 border border-neon-cyan/20 hover:border-neon-cyan/60 transition-all duration-300 flex items-center gap-4 cursor-pointer"
-                    whileHover={{
-                      y: -5,
-                      boxShadow: '0 0 20px rgba(0, 217, 255, 0.2)',
-                    }}
-                  >
-                    <div
-                      className={`text-2xl ${link.color} group-hover:scale-110 transition-transform duration-300`}
+              {contactInfo.map((info, idx) => (
+                <div key={idx}>
+                  {info.link ? (
+                    <a
+                      href={info.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex items-center gap-3 text-gray-300 ${info.color} transition-colors`}
                     >
-                      <Icon />
+                      <info.icon size={20} />
+                      <span>{info.text}</span>
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-3 text-gray-300">
+                      <info.icon size={20} />
+                      <span>{info.text}</span>
                     </div>
-                    <div>
-                      <p className="text-sm text-gray-400">{link.label}</p>
-                      <p className="text-white font-medium group-hover:text-neon-cyan transition-colors">
-                        {link.value}
-                      </p>
-                    </div>
-                  </motion.a>
-                );
-              })}
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-4 pt-8">
-              <motion.div
-                className="glass rounded-xl p-4 text-center border border-neon-cyan/20"
-                whileHover={{ y: -5 }}
-              >
-                <div className="text-2xl font-bold gradient-text">24h</div>
-                <p className="text-xs text-gray-400">Tempo de resposta</p>
-              </motion.div>
-              <motion.div
-                className="glass rounded-xl p-4 text-center border border-neon-cyan/20"
-                whileHover={{ y: -5 }}
-              >
-                <div className="text-2xl font-bold gradient-text">100%</div>
-                <p className="text-xs text-gray-400">Satisfação</p>
-              </motion.div>
+                  )}
+                </div>
+              ))}
             </div>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div
-            className="glass rounded-xl p-8 border border-neon-cyan/20 hover:border-neon-cyan/60 transition-all duration-300"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true, amount: 0.3 }}
           >
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name Input */}
-              <div className="group">
+              <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Seu Nome
+                  Nome
                 </label>
-                <motion.input
+                <input
                   type="text"
-                  name="name"
+                  required
                   value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-dark-800/50 border border-neon-cyan/20 text-white placeholder-gray-500 focus:outline-none focus:border-neon-cyan/60 transition-all duration-300"
-                  placeholder="Jefferson Teles"
-                  whileFocus={{ scale: 1.01 }}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 text-white transition-colors"
+                  placeholder="Seu nome"
                 />
               </div>
 
-              {/* Email Input */}
-              <div className="group">
+              <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Seu Email
+                  Email
                 </label>
-                <motion.input
+                <input
                   type="email"
-                  name="email"
+                  required
                   value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-dark-800/50 border border-neon-cyan/20 text-white placeholder-gray-500 focus:outline-none focus:border-neon-cyan/60 transition-all duration-300"
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 text-white transition-colors"
                   placeholder="seu@email.com"
-                  whileFocus={{ scale: 1.01 }}
                 />
               </div>
 
-              {/* Message Textarea */}
-              <div className="group">
+              <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Sua Mensagem
+                  Mensagem
                 </label>
-                <motion.textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
+                <textarea
                   required
-                  rows="5"
-                  className="w-full px-4 py-3 rounded-lg bg-dark-800/50 border border-neon-cyan/20 text-white placeholder-gray-500 focus:outline-none focus:border-neon-cyan/60 transition-all duration-300 resize-none"
-                  placeholder="Conte-me sobre seu projeto..."
-                  whileFocus={{ scale: 1.01 }}
+                  rows={5}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 text-white transition-colors"
+                  placeholder="Sua mensagem..."
                 />
               </div>
 
-              {/* Submit Button */}
-              <motion.button
+              <button
                 type="submit"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full px-6 py-3 bg-gradient-to-r from-neon-cyan to-neon-blue rounded-lg font-bold text-dark-900 hover:shadow-neon-cyan transition-all duration-300 flex items-center justify-center gap-2"
-                disabled={isSubmitted}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
               >
-                {isSubmitted ? (
-                  <>
-                    <span>✓ Mensagem Enviada!</span>
-                  </>
-                ) : (
-                  <>
-                    <FiSend /> Enviar Mensagem
-                  </>
-                )}
-              </motion.button>
+                <FiSend size={18} />
+                Enviar Mensagem
+              </button>
             </form>
           </motion.div>
         </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          className="mt-16 p-8 text-center glass rounded-xl border border-neon-cyan/20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <h3 className="text-2xl font-bold text-white mb-3">
-            Pronto para começar?
-          </h3>
-          <p className="text-gray-300 mb-6">
-            Estou disponível para consultas, parcerias e novos projetos. Vamos conversar!
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(157, 78, 221, 0.6)' }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 border-2 border-neon-purple rounded-lg font-bold text-neon-purple hover:bg-neon-purple/10 transition-all duration-300 cursor-pointer"
-          >
-            Agendar uma Conversa
-          </motion.button>
-        </motion.div>
       </div>
     </section>
   );
