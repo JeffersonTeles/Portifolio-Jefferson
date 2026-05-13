@@ -1,81 +1,74 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiArrowDown, FiGithub, FiLinkedin, FiMail, FiCpu, FiZap } from 'react-icons/fi';
+import { FiArrowRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 import { SiWhatsapp } from 'react-icons/si';
 
 const Hero = () => {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center px-4 pt-20 overflow-hidden">
-      {/* Círculos neon animados */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-600/20 blur-3xl animate-pulse" />
-      
-      <div className="max-w-7xl mx-auto text-center relative z-10">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden">
+      <div className="max-w-6xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono text-cyan-400 bg-cyan-500/10 rounded-full border border-cyan-500/30 mb-6 backdrop-blur-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-            </span>
-            SISTEMA ONLINE • FULL-STACK DEVELOPER
+          <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono text-white/60 bg-white/[0.03] rounded-full border border-white/[0.05] mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+            Disponível para projetos
           </span>
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 relative"
+          className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
         >
-          <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-            Jefferson Teles
-          </span>
+          <span className="text-white">Jefferson Teles</span>
         </motion.h1>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex items-center justify-center gap-3 mb-6 flex-wrap"
+          className="flex items-center justify-center gap-2 mb-6 flex-wrap"
         >
           {['Automação', 'IA', 'APIs', 'Sistemas Web'].map((item, idx) => (
-            <span key={idx} className="px-3 py-1 text-sm font-mono text-gray-300 bg-gray-800/50 rounded-full border border-gray-700 backdrop-blur-sm">
-              {item}
+            <span key={idx} className="text-base text-white/40">
+              {idx > 0 && <span className="mx-2">•</span>}
+              <span>{item}</span>
             </span>
           ))}
         </motion.div>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-gray-400 max-w-2xl mx-auto mb-10 text-lg"
+          className="text-white/40 max-w-2xl mx-auto mb-10 text-lg leading-relaxed"
         >
-          Construindo soluções digitais práticas, automações inteligentes 
-          e sistemas web modernos com tecnologias atuais.
+          Desenvolvedor full-stack focado em automações inteligentes, 
+          APIs escaláveis e sistemas web modernos.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-4 mb-16"
         >
           <a
             href="#contact"
-            className="group relative px-8 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-medium rounded-lg transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black text-sm font-medium rounded-lg hover:bg-white/90 transition-all duration-300"
           >
-            <span className="relative z-10">INICIAR PROJETO</span>
-            <FiZap className="absolute right-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
+            Vamos construir algo
+            <FiArrowRight size={16} />
           </a>
           <a
             href="#projects"
-            className="px-8 py-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700 text-gray-300 font-medium rounded-lg hover:border-cyan-500 hover:text-cyan-400 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white/[0.03] border border-white/[0.05] text-white/80 text-sm font-medium rounded-lg hover:bg-white/[0.05] transition-all duration-300"
           >
-            EXPLORAR PROJETOS
+            Ver projetos
           </a>
         </motion.div>
 
@@ -86,32 +79,21 @@ const Hero = () => {
           className="flex justify-center gap-6"
         >
           {[
-            { icon: FiGithub, link: "https://github.com/JeffersonTeles", color: "hover:text-cyan-400" },
-            { icon: FiLinkedin, link: "https://linkedin.com/in/jeffersonteles", color: "hover:text-blue-400" },
-            { icon: SiWhatsapp, link: "https://wa.me/5511999999999", color: "hover:text-green-400" },
-            { icon: FiMail, link: "mailto:jefferson@teles.dev", color: "hover:text-cyan-400" }
+            { icon: FiGithub, link: "https://github.com/JeffersonTeles" },
+            { icon: FiLinkedin, link: "https://linkedin.com/in/jeffersonteles" },
+            { icon: SiWhatsapp, link: "https://wa.me/5511999999999" },
+            { icon: FiMail, link: "mailto:jefferson@teles.dev" }
           ].map((social, idx) => (
             <a
               key={idx}
               href={social.link}
               target="_blank"
               rel="noopener noreferrer"
-              className={`text-gray-400 ${social.color} transition-all duration-300 hover:scale-110`}
+              className="text-white/40 hover:text-white transition-all duration-300"
             >
-              <social.icon size={24} />
+              <social.icon size={20} />
             </a>
           ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        >
-          <a href="#about" className="text-gray-500 hover:text-cyan-400 transition-colors">
-            <FiArrowDown size={24} className="animate-bounce" />
-          </a>
         </motion.div>
       </div>
     </section>

@@ -3,70 +3,64 @@ import { motion } from 'framer-motion';
 import { 
   SiJavascript, SiTypescript, SiNodedotjs, SiReact, 
   SiNextdotjs, SiPython, SiFirebase, SiSupabase,
-  SiTailwindcss, SiGit, SiOpenai, SiDocker
+  SiTailwindcss, SiGit, SiDocker, SiPostgresql
 } from 'react-icons/si';
-import { FiZap, FiCpu } from 'react-icons/fi';
+import { FiCpu, FiZap } from 'react-icons/fi';
 
 const TechStack = () => {
   const technologies = [
-    { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E", glow: "hover:shadow-yellow-500/50" },
-    { name: "TypeScript", icon: SiTypescript, color: "#3178C6", glow: "hover:shadow-blue-500/50" },
-    { name: "Node.js", icon: SiNodedotjs, color: "#339933", glow: "hover:shadow-green-500/50" },
-    { name: "React", icon: SiReact, color: "#61DAFB", glow: "hover:shadow-cyan-500/50" },
-    { name: "Next.js", icon: SiNextdotjs, color: "#FFFFFF", glow: "hover:shadow-white/50" },
-    { name: "Python", icon: SiPython, color: "#3776AB", glow: "hover:shadow-blue-500/50" },
-    { name: "Firebase", icon: SiFirebase, color: "#FFCA28", glow: "hover:shadow-yellow-500/50" },
-    { name: "Supabase", icon: SiSupabase, color: "#3ECF8E", glow: "hover:shadow-green-500/50" },
-    { name: "TailwindCSS", icon: SiTailwindcss, color: "#06B6D4", glow: "hover:shadow-cyan-500/50" },
-    { name: "Git", icon: SiGit, color: "#F05032", glow: "hover:shadow-orange-500/50" },
-    { name: "Docker", icon: SiDocker, color: "#2496ED", glow: "hover:shadow-blue-500/50" },
-    { name: "IA Generativa", icon: SiOpenai, color: "#10A37F", glow: "hover:shadow-emerald-500/50" },
-    { name: "Automação", icon: FiZap, color: "#8B5CF6", glow: "hover:shadow-purple-500/50" },
-    { name: "APIs REST", icon: FiCpu, color: "#EC4899", glow: "hover:shadow-pink-500/50" }
+    { name: "JavaScript", icon: SiJavascript },
+    { name: "TypeScript", icon: SiTypescript },
+    { name: "Node.js", icon: SiNodedotjs },
+    { name: "React", icon: SiReact },
+    { name: "Next.js", icon: SiNextdotjs },
+    { name: "Python", icon: SiPython },
+    { name: "Firebase", icon: SiFirebase },
+    { name: "Supabase", icon: SiSupabase },
+    { name: "PostgreSQL", icon: SiPostgresql },
+    { name: "TailwindCSS", icon: SiTailwindcss },
+    { name: "Docker", icon: SiDocker },
+    { name: "Git", icon: SiGit },
+    { name: "APIs REST", icon: FiCpu },
+    { name: "Automação", icon: FiZap }
   ];
 
   return (
-    <section id="tech" className="relative py-20 px-4 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section id="tech" className="py-24 px-6">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="max-w-2xl mx-auto text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-              TECH STACK //
-            </span>
-            <span className="text-white"> ECOSSISTEMA</span>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            Tech Stack
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto rounded-full shadow-[0_0_15px_#0ff]" />
-          <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
-            Tecnologias que utilizo no dia a dia para construir soluções modernas
+          <div className="w-12 h-px bg-white/10 mx-auto mb-8" />
+          <p className="text-white/40">
+            Tecnologias que utilizo no desenvolvimento de sistemas modernos
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {technologies.map((tech, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-              whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-              transition={{ duration: 0.4, delay: idx * 0.03 }}
-              whileHover={{ y: -8, scale: 1.05 }}
-              className="group cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: idx * 0.02 }}
+              whileHover={{ y: -2 }}
+              className="group"
             >
-              <div className={`relative bg-gray-900/60 backdrop-blur-sm rounded-xl p-6 text-center border border-gray-800 hover:border-cyan-500/50 transition-all duration-300 ${tech.glow} hover:shadow-lg`}>
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="bg-white/[0.02] border border-white/[0.05] rounded-lg p-4 text-center hover:border-white/[0.1] transition-all duration-300">
                 <tech.icon 
-                  size={48} 
-                  style={{ color: tech.color }}
-                  className="mx-auto mb-3 group-hover:scale-110 transition-transform duration-300 relative z-10"
+                  size={32} 
+                  className="mx-auto mb-2 text-white/40 group-hover:text-white/60 transition-colors"
                 />
-                <h3 className="text-sm font-medium text-gray-300 group-hover:text-cyan-400 transition-colors relative z-10">
+                <span className="text-xs text-white/40 group-hover:text-white/60 transition-colors">
                   {tech.name}
-                </h3>
-                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 group-hover:w-12 transition-all duration-300" />
+                </span>
               </div>
             </motion.div>
           ))}
