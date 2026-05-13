@@ -6,10 +6,72 @@
   html {
     scroll-behavior: smooth;
   }
+  
   body {
-    background: black;
-    color: white;
+    @apply bg-black text-white;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Tipografia premium */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+  
+  h1 { @apply text-6xl md:text-7xl lg:text-8xl; }
+  h2 { @apply text-4xl md:text-5xl lg:text-6xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+}
+
+@layer components {
+  /* Container padrão */
+  .container-premium {
+    @apply max-w-7xl mx-auto px-6 md:px-8 lg:px-12;
+  }
+  
+  /* Seção padrão */
+  .section-premium {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+  
+  /* Título de seção */
+  .section-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4;
+  }
+  
+  .section-subtitle {
+    @apply text-white/40 max-w-2xl mx-auto;
+  }
+  
+  .section-divider {
+    @apply w-16 h-px bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mb-8;
+  }
+  
+  /* Cards padrão */
+  .card-premium {
+    @apply bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 md:p-8 
+           hover:border-white/[0.1] transition-all duration-300 hover:-translate-y-1;
+  }
+  
+  /* Badge padrão */
+  .badge-premium {
+    @apply inline-flex items-center gap-2 px-3 py-1 text-xs font-mono 
+           bg-white/[0.03] border border-white/[0.05] rounded-full text-white/60;
+  }
+  
+  /* Botão primário */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-white text-black 
+           text-sm font-medium rounded-lg hover:bg-white/90 
+           transition-all duration-300;
+  }
+  
+  /* Botão secundário */
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-white/[0.03] 
+           border border-white/[0.05] text-white/80 text-sm font-medium 
+           rounded-lg hover:bg-white/[0.05] transition-all duration-300;
   }
 }
 
@@ -20,15 +82,7 @@
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes glitch {
-  0%, 100% { transform: skew(0deg); }
-  20% { transform: skew(2deg); }
-  40% { transform: skew(-2deg); }
-  60% { transform: skew(1deg); }
-  80% { transform: skew(-1deg); }
+  50% { transform: translateY(-10px); }
 }
 
 .animate-scan {
@@ -39,23 +93,19 @@
   animation: float 4s ease-in-out infinite;
 }
 
-.animate-glitch {
-  animation: glitch 2s infinite;
-}
-
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: black;
+  background: #0a0a0a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #06b6d4;
-  border-radius: 4px;
+  background: #1a1a1a;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #22d3ee;
+  background: #06b6d4;
 }
