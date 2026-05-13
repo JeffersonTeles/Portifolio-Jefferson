@@ -1,19 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  FiReact,
   FiGitBranch,
   FiDatabase,
   FiCode,
 } from 'react-icons/fi';
-import { SiJavascript, SiTypescript, SiNodeDotJs, SiPython, SiFirebase, SiPostgresql, SiDocker, SiOpenai, SiSupabase, SiTailwindcss } from 'react-icons/si';
+import { SiReact, SiJavascript, SiTypescript, SiPython, SiFirebase, SiDocker, SiSupabase, SiTailwindcss } from 'react-icons/si';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 
 const Stack = () => {
   const technologies = [
     {
       name: 'React',
-      icon: FiReact,
+      icon: SiReact,
       category: 'Frontend',
       color: 'text-blue-400',
       glow: 'glow-blue',
@@ -34,7 +33,7 @@ const Stack = () => {
     },
     {
       name: 'Node.js',
-      icon: SiNodeDotJs,
+      icon: FiCode,
       category: 'Backend',
       color: 'text-green-400',
       glow: 'glow-cyan',
@@ -62,7 +61,7 @@ const Stack = () => {
     },
     {
       name: 'PostgreSQL',
-      icon: SiPostgresql,
+      icon: FiDatabase,
       category: 'Database',
       color: 'text-blue-600',
       glow: 'glow-blue',
@@ -83,7 +82,7 @@ const Stack = () => {
     },
     {
       name: 'OpenAI API',
-      icon: SiOpenai,
+      icon: FiCode,
       category: 'AI',
       color: 'text-green-400',
       glow: 'glow-cyan',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiCode, FiZap, FiTrendingUp, FiBot, FiDatabase, FiTarget } from 'react-icons/fi';
+import { FiCode, FiZap, FiTrendingUp, FiMessageCircle, FiDatabase, FiTarget } from 'react-icons/fi';
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from '../utils/animations';
 
 const About = () => {
@@ -27,7 +27,7 @@ const About = () => {
       color: 'text-neon-blue',
     },
     {
-      icon: FiBot,
+      icon: FiMessageCircle,
       title: 'Bots & APIs',
       description: 'Chatbots, bots WhatsApp e APIs REST',
       color: 'text-neon-purple',

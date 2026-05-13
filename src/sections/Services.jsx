@@ -5,7 +5,7 @@ import {
   FiZap,
   FiCpu,
   FiMessageCircle,
-  FiNetwork,
+  FiLink,
   FiLayout,
   FiFileText,
   FiBriefcase,
@@ -43,7 +43,7 @@ const Services = () => {
       color: 'from-neon-cyan to-neon-blue',
     },
     {
-      icon: FiNetwork,
+      icon: FiLink,
       title: 'APIs e Integrações',
       description:
         'Design e desenvolvimento de APIs RESTful robustas, integrações com terceiros e sistemas legados.',
