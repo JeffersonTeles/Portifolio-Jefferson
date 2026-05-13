@@ -1,4 +1,3 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -8,11 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#eff6ff',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
+        gray: {
+          900: '#0a0a0a',
+          800: '#1a1a1a',
+          700: '#2a2a2a',
+          600: '#3a3a3a',
         }
       },
       animation: {
