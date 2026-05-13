@@ -5,7 +5,7 @@ import {
   FiDatabase,
   FiCode,
 } from 'react-icons/fi';
-import { SiReact, SiJavascript, SiTypescript, SiPython, SiFirebase, SiDocker, SiSupabase, SiTailwindcss } from 'react-icons/si';
+import { SiReact, SiJavascript, SiTypescript, SiPython, SiFirebase, SiDocker, SiSupabase, SiTailwindcss, SiNodedotjs } from 'react-icons/si';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 
 const Stack = () => {
@@ -33,7 +33,7 @@ const Stack = () => {
     },
     {
       name: 'Node.js',
-      icon: FiCode,
+      icon: SiNodedotjs,
       category: 'Backend',
       color: 'text-green-400',
       glow: 'glow-cyan',
@@ -189,7 +189,7 @@ const Stack = () => {
               title: 'Backend',
               techs: ['Node.js', 'Python', 'APIs REST'],
               description: 'Servidores escaláveis e robustos',
-              icon: SiNodeDotJs,
+              icon: SiNodedotjs,
             },
             {
               title: 'Banco de Dados',
