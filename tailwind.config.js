@@ -21,3 +21,12 @@ export default {
   },
   plugins: [],
 }
+  extend: {
+    animation: {
+      'scan': 'scan 4s linear infinite',
+      'float': 'float 4s ease-in-out infinite',
+      'glitch': 'glitch 2s infinite',
+      'pulse-border': 'pulse-border 2s ease-in-out infinite',
+      'spin-slow': 'spin-slow 20s linear infinite',
+    }
+  }
