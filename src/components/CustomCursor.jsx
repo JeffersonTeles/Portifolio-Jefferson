@@ -4,10 +4,11 @@ import { motion, useSpring, useMotionValue, AnimatePresence } from 'framer-motio
 const CustomCursor = () => {
   const [isActive, setIsActive] = useState(false);
   const [isView, setIsView] = useState(false);
+  const [isMagnify, setIsMagnify] = useState(false);
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 700 };
+  const springConfig = { damping: 25, stiffness: 700, mass: 0.5 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
@@ -20,16 +21,24 @@ const CustomCursor = () => {
     const handleMouseOver = (e) => {
       const target = e.target;
       const isProject = target.closest('[data-cursor="view"]');
+      const isMagnifyTarget = target.closest('[data-cursor="magnify"]') || target.tagName === 'H1' || target.tagName === 'H2';
       const isLink = target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button');
 
       if (isProject) {
         setIsView(true);
+        setIsMagnify(false);
+        setIsActive(true);
+      } else if (isMagnifyTarget) {
+        setIsMagnify(true);
+        setIsView(false);
         setIsActive(true);
       } else if (isLink) {
         setIsView(false);
+        setIsMagnify(false);
         setIsActive(true);
       } else {
         setIsView(false);
+        setIsMagnify(false);
         setIsActive(false);
       }
     };
@@ -46,12 +55,12 @@ const CustomCursor = () => {
   return (
     <>
       <motion.div
-        className={`cursor-dot ${isActive ? 'active' : ''} ${isView ? 'view-mode' : ''}`}
+        className={`cursor-dot ${isActive ? 'active' : ''} ${isView ? 'view-mode' : ''} ${isMagnify ? 'magnify-mode' : ''}`}
         style={{
           translateX: cursorXSpring,
           translateY: cursorYSpring,
-          width: isView ? 80 : isActive ? 48 : 16,
-          height: isView ? 80 : isActive ? 48 : 16,
+          width: isView ? 100 : isMagnify ? 120 : isActive ? 50 : 16,
+          height: isView ? 100 : isMagnify ? 120 : isActive ? 50 : 16,
         }}
       >
         <AnimatePresence>
@@ -62,7 +71,7 @@ const CustomCursor = () => {
               exit={{ opacity: 0, scale: 0.5 }}
               className="text-[10px] font-bold tracking-widest text-white uppercase"
             >
-              View
+              Ver Obra
             </motion.span>
           )}
         </AnimatePresence>

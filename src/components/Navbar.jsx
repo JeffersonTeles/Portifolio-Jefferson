@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi';
+import { FiMenu, FiX, FiSun, FiMoon, FiVolume2, FiVolumeX } from 'react-icons/fi';
 
-const Navbar = ({ toggleTheme, isDarkMode }) => {
+const Navbar = ({ toggleTheme, isDarkMode, toggleMute, isMuted }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
 
@@ -60,19 +60,29 @@ const Navbar = ({ toggleTheme, isDarkMode }) => {
                 </ScrollLink>
               ))}
               
-              <button 
-                onClick={toggleTheme}
-                className="text-inherit/40 hover:text-lusion-primary transition-colors"
-              >
-                {isDarkMode ? <FiSun size={16} /> : <FiMoon size={16} />}
-              </button>
+              <div className="flex items-center gap-6 border-l border-lusion-text/5 pl-8">
+                <button 
+                  onClick={toggleMute}
+                  className="text-inherit/40 hover:text-lusion-primary transition-colors"
+                  title={isMuted ? "Ativar som" : "Desativar som"}
+                >
+                  {isMuted ? <FiVolumeX size={16} /> : <FiVolume2 size={16} />}
+                </button>
+                <button 
+                  onClick={toggleTheme}
+                  className="text-inherit/40 hover:text-lusion-primary transition-colors"
+                  title="Mudar tema"
+                >
+                  {isDarkMode ? <FiSun size={16} /> : <FiMoon size={16} />}
+                </button>
+              </div>
             </div>
 
             <div className="flex items-center gap-6 md:hidden">
-              <button 
-                onClick={toggleTheme}
-                className="text-inherit/40 hover:text-lusion-primary transition-colors"
-              >
+              <button onClick={toggleMute} className="text-inherit/40 hover:text-lusion-primary transition-colors">
+                {isMuted ? <FiVolumeX size={18} /> : <FiVolume2 size={18} />}
+              </button>
+              <button onClick={toggleTheme} className="text-inherit/40 hover:text-lusion-primary transition-colors">
                 {isDarkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
               </button>
               <button onClick={() => setMobileMenu(!mobileMenu)} className="text-inherit/60 hover:text-lusion-primary">

@@ -51,8 +51,24 @@
     mix-blend-mode: normal;
   }
 
-  .cursor-dot.active:not(.view-mode) {
+  .cursor-dot.magnify-mode {
+    @apply bg-white;
+    mix-blend-mode: difference;
+  }
+
+  .cursor-dot.active:not(.view-mode):not(.magnify-mode) {
     @apply bg-transparent border border-lusion-primary;
+  }
+
+  /* Custom Scrollbar for Modal */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 2px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-lusion-primary/20;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-lusion-primary;
   }
 
   /* Noise Overlay */
