@@ -12,6 +12,7 @@ import About from './sections/About';
 import TechStack from './sections/TechStack';
 import Projects from './sections/Projects';
 import Testimonials from './sections/Testimonials';
+import Clients from './sections/Clients';
 import Services from './sections/Services';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
@@ -19,9 +20,20 @@ import Footer from './sections/Footer';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [language, setLanguage] = useState('pt');
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Feature #10: Language Detection
+    const browserLang = navigator.language.split('-')[0];
+    if (browserLang === 'en') {
+      setLanguage('en');
+      // In a real i18n setup, we would trigger i18next changeLanguage here
+      window.dispatchEvent(new CustomEvent('ai-log', { 
+        detail: "English detected. Ready for global reach." 
+      }));
+    }
   }, []);
 
   const toggleTheme = () => {
@@ -49,7 +61,7 @@ function App() {
             <About />
             <TechStack />
             <Projects />
-            <Testimonials />
+            <Clients />
             <Services />
             <Contact />
           </main>

@@ -45,7 +45,7 @@ const Contact = () => {
             
             <div className="space-y-8 mt-16">
               {[
-                { icon: FiMail, label: 'Email', value: 'hello@jeffersonteles.dev' },
+                { icon: FiMail, label: 'Email', value: 'jeffersontelesdeoliveira@gmail.com' },
                 { icon: FiPhone, label: 'Phone', value: '+55 11 99999-9999' },
                 { icon: FiMapPin, label: 'Location', value: 'São Paulo, Brasil' },
               ].map((item, idx) => (

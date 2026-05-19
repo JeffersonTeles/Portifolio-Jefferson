@@ -76,7 +76,7 @@ const Hero = () => {
               </motion.p>
             </Parallax>
 
-            <motion.div variants={itemVars} className="flex flex-wrap gap-6">
+            <motion.div variants={itemVars} className="flex flex-wrap gap-6 items-center">
               <MagneticButton>
                 <a href="#contact" className="btn-lusion-primary group">
                   Iniciar projeto
@@ -88,6 +88,13 @@ const Hero = () => {
                   Ver projetos
                 </a>
               </MagneticButton>
+              <motion.a 
+                href="/cv-jefferson-teles.pdf" 
+                target="_blank"
+                className="text-[10px] font-bold tracking-widest uppercase text-lusion-text/40 hover:text-lusion-primary transition-colors border-b border-transparent hover:border-lusion-primary pb-1"
+              >
+                Download CV
+              </motion.a>
             </motion.div>
           </div>
         </motion.div>

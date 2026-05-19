@@ -50,6 +50,10 @@ const About = () => {
 
           {/* Stats/Facts */}
           <div className="lg:col-span-4 flex flex-wrap lg:flex-col justify-center gap-8 md:gap-12 border-l border-lusion-text/5 pl-8 md:pl-12">
+            <div className="mb-8 p-4 border border-dashed border-lusion-text/20 rounded-sm">
+              <p className="text-[10px] font-bold tracking-lusion-wide uppercase text-lusion-primary mb-2">Histórico Profissional</p>
+              <p className="text-xs text-lusion-text/40 italic">[Experiências a inserir]</p>
+            </div>
             {[
               { label: 'Anos de Experiência', value: '03+' },
               { label: 'Projetos Entregues', value: '40+' },
