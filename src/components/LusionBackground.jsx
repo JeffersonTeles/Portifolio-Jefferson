@@ -1,77 +1,53 @@
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { MeshDistortMaterial, Sphere, Float } from '@react-three/drei';
 import * as THREE from 'three';
 
-const Plane = ({ isDark }) => {
-  const mesh = useRef();
+const Scene = ({ isDark }) => {
   const { viewport } = useThree();
-
-  const uniforms = useMemo(
-    () => ({
-      uTime: { value: 0 },
-      uColor: { value: new THREE.Color(isDark ? "#050505" : "#F0F1FA") },
-      uAccent: { value: new THREE.Color("#1A2FFB") },
-      uMouse: { value: new THREE.Vector2(0, 0) },
-    }),
-    [isDark]
-  );
+  const sphereRef = useRef();
 
   useFrame((state) => {
     const { clock, mouse } = state;
-    mesh.current.material.uniforms.uTime.value = clock.getElapsedTime();
-    mesh.current.material.uniforms.uMouse.value.lerp(mouse, 0.05);
-    mesh.current.material.uniforms.uColor.value.lerp(new THREE.Color(isDark ? "#050505" : "#F0F1FA"), 0.05);
+    if (sphereRef.current) {
+      sphereRef.current.rotation.x = clock.getElapsedTime() * 0.2;
+      sphereRef.current.rotation.y = clock.getElapsedTime() * 0.3;
+      
+      // Follow mouse subtly
+      sphereRef.current.position.x = THREE.MathUtils.lerp(sphereRef.current.position.x, mouse.x * 2, 0.1);
+      sphereRef.current.position.y = THREE.MathUtils.lerp(sphereRef.current.position.y, mouse.y * 2, 0.1);
+    }
   });
 
-  const vertexShader = `
-    varying vec2 vUv;
-    varying float vZ;
-    uniform float uTime;
-    uniform vec2 uMouse;
-
-    void main() {
-      vUv = uv;
-      vec3 pos = position;
-      
-      float dist = distance(uv, uMouse * 0.5 + 0.5);
-      float wave = sin(dist * 10.0 - uTime * 2.0) * 0.1;
-      pos.z += wave;
-      vZ = wave;
-
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-    }
-  `;
-
-  const fragmentShader = `
-    varying vec2 vUv;
-    varying float vZ;
-    uniform vec3 uColor;
-    uniform vec3 uAccent;
-
-    void main() {
-      vec3 color = mix(uColor, uAccent, vZ * 2.0 + 0.05);
-      gl_FragColor = vec4(color, 0.4);
-    }
-  `;
-
   return (
-    <mesh ref={mesh} scale={[viewport.width * 1.5, viewport.height * 1.5, 1]}>
-      <planeGeometry args={[1, 1, 64, 64]} />
-      <shaderMaterial
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-        uniforms={uniforms}
-        transparent={true}
-      />
-    </mesh>
+    <>
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
+      <pointLight position={[-10, -10, -5]} color="#1A2FFB" intensity={2} />
+      
+      <Float speed={2} rotationIntensity={1} floatIntensity={1}>
+        <Sphere ref={sphereRef} args={[1, 100, 100]} scale={viewport.width > 5 ? 2.5 : 1.5}>
+          <MeshDistortMaterial
+            color={isDark ? "#1A2FFB" : "#1A2FFB"}
+            attach="material"
+            distort={0.4}
+            speed={2}
+            roughness={0}
+            metalness={1}
+            transparent={true}
+            opacity={0.15}
+          />
+        </Sphere>
+      </Float>
+    </>
   );
 };
 
 const LusionBackground = ({ isDark }) => {
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
-      <Canvas camera={{ position: [0, 0, 1] }}>
-        <Plane isDark={isDark} />
+    <div className="fixed inset-0 z-0 pointer-events-none">
+      <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+        <Scene isDark={isDark} />
       </Canvas>
     </div>
   );

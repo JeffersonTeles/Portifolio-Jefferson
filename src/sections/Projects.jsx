@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiArrowUpRight, FiGithub, FiX } from 'react-icons/fi';
+import { FiArrowUpRight, FiGithub, FiX, FiPlay } from 'react-icons/fi';
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -8,27 +8,29 @@ const Projects = () => {
   const projects = [
     {
       title: "IA Automation Hub",
-      category: "Automation / AI",
+      category: "Automação / IA",
       description: "Plataforma centralizada para gestão de agentes autônomos e fluxos de trabalho inteligentes.",
       longDescription: "Este projeto resolve o problema de fragmentação em fluxos de trabalho de IA. Desenvolvemos um hub que integra OpenAI, LangChain e automações customizadas em uma única interface intuitiva. O sistema permite que empresas configurem 'agentes' que respondem a gatilhos específicos, economizando centenas de horas manuais por mês.",
       tags: ["Python", "OpenAI", "React", "Docker"],
       link: "#",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1600"
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1600",
+      video: null // Placeholder for real video path
     },
     {
       title: "FinTech Dashboard",
-      category: "Web Application / SaaS",
+      category: "Aplicação Web / SaaS",
       description: "Interface de alta performance para análise de dados financeiros em tempo real.",
       longDescription: "Um dashboard financeiro focado em ultra-performance. Utilizando WebSockets para dados em tempo real e visualizações complexas com D3.js, o sistema oferece uma experiência de trading e análise sem atrasos. A arquitetura foi otimizada para lidar com milhares de atualizações por segundo.",
       tags: ["TypeScript", "Next.js", "Tailwind", "D3.js"],
       link: "#",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600"
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600",
+      video: null
     }
   ];
 
   const handleProjectHover = (title) => {
     window.dispatchEvent(new CustomEvent('ai-log', { 
-      detail: `Initializing module: ${title}...` 
+      detail: `Inicializando módulo: ${title}...` 
     }));
   };
 
@@ -39,12 +41,12 @@ const Projects = () => {
           <div className="max-w-2xl">
             <span className="text-sm font-bold tracking-lusion-wide uppercase text-lusion-primary flex items-center gap-4 mb-8">
               <span className="w-8 h-px bg-lusion-primary" />
-              02 / Projects
+              02 / Projetos
             </span>
-            <h2 className="leading-tight">Selected<br />Works</h2>
+            <h2 className="leading-tight">Trabalhos<br />Selecionados</h2>
           </div>
           <p className="text-lusion-text/40 text-xs md:text-sm tracking-lusion-wide uppercase mb-4">
-            A showcase of precision engineering.
+            Uma vitrine de engenharia de precisão.
           </p>
         </div>
 
@@ -69,7 +71,7 @@ const Projects = () => {
                   whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
                   viewport={{ once: true }}
                   transition={{ duration: 1.5, ease: [0.6, 0.05, -0.01, 0.9] }}
-                  className="w-full h-full"
+                  className="w-full h-full relative"
                 >
                   <motion.img 
                     whileHover={{ scale: 1.05 }}
@@ -78,6 +80,13 @@ const Projects = () => {
                     alt={project.title}
                     className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 transition-all duration-1000"
                   />
+                  {project.video && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+                        <FiPlay size={24} fill="currentColor" />
+                      </div>
+                    </div>
+                  )}
                 </motion.div>
               </div>
 
@@ -105,12 +114,12 @@ const Projects = () => {
                     onClick={() => setSelectedProject(project)}
                     className="flex items-center gap-2 text-xs font-bold tracking-lusion-wide uppercase group/link"
                   >
-                    Explore Project
+                    Explorar Projeto
                     <FiArrowUpRight className="group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform duration-300" />
                   </button>
                   <a href="#" className="flex items-center gap-2 text-xs font-bold tracking-lusion-wide uppercase text-lusion-text/30 hover:text-lusion-text transition-colors">
                     <FiGithub />
-                    View Source
+                    Código Fonte
                   </a>
                 </div>
               </div>
@@ -151,8 +160,18 @@ const Projects = () => {
               </button>
 
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="h-64 lg:h-auto overflow-hidden">
-                  <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover" />
+                <div className="h-64 lg:h-auto overflow-hidden bg-black flex items-center justify-center">
+                  {selectedProject.video ? (
+                    <video 
+                      src={selectedProject.video} 
+                      autoPlay 
+                      loop 
+                      muted 
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover" />
+                  )}
                 </div>
                 
                 <div className="p-8 md:p-16">
@@ -178,7 +197,7 @@ const Projects = () => {
                     </div>
                     <div className="flex gap-8 pt-8">
                       <a href={selectedProject.link} className="btn-lusion-primary">
-                        Launch Project
+                        Lançar Projeto
                         <FiArrowUpRight />
                       </a>
                       <a href="#" className="btn-lusion">

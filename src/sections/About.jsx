@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import SplitText from '../components/SplitText';
 import Parallax from '../components/Parallax';
+import GithubStats from '../components/GithubStats';
 
 const About = () => {
   return (
@@ -12,7 +13,7 @@ const About = () => {
           <div className="lg:col-span-2">
             <span className="text-sm font-bold tracking-lusion-wide uppercase text-lusion-primary flex items-center gap-4">
               <span className="w-8 h-px bg-lusion-primary" />
-              01 / About
+              01 / Sobre
             </span>
           </div>
 
@@ -46,6 +47,8 @@ const About = () => {
                 </p>
               </motion.div>
             </Parallax>
+
+            <GithubStats />
           </div>
 
           {/* Stats/Facts */}
