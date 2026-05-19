@@ -32,6 +32,18 @@ const Contact = () => {
     }
   };
 
+  const handleInputChange = (field, value) => {
+    if (value.length > 5 && value.length % 10 === 0) {
+      let message = "";
+      if (field === 'name') message = `Analisando perfil de ${value}...`;
+      if (field === 'email') message = "Verificando integridade de e-mail...";
+      if (field === 'subject') message = "Classificando intenção do projeto...";
+      if (field === 'message') message = "Sintetizando insights da mensagem...";
+      
+      window.dispatchEvent(new CustomEvent('ai-log', { detail: message }));
+    }
+  };
+
   return (
     <section id="contact" className="section-lusion bg-inherit border-t border-lusion-text/5">
       <div className="container-lusion">
@@ -39,15 +51,15 @@ const Contact = () => {
           <div className="lg:col-span-5">
             <span className="text-sm font-bold tracking-lusion-wide uppercase text-lusion-primary flex items-center gap-4 mb-8">
               <span className="w-8 h-px bg-lusion-primary" />
-              06 / Contact
+              06 / Contato
             </span>
-            <h2 className="mb-12">Let's create something<br /><span className="text-lusion-primary">remarkable.</span></h2>
+            <h2 className="mb-12">Vamos criar algo<br /><span className="text-lusion-primary">notável.</span></h2>
             
             <div className="space-y-8 mt-16">
               {[
                 { icon: FiMail, label: 'Email', value: 'jeffersontelesdeoliveira@gmail.com' },
-                { icon: FiPhone, label: 'Phone', value: '+55 11 99999-9999' },
-                { icon: FiMapPin, label: 'Location', value: 'São Paulo, Brasil' },
+                { icon: FiPhone, label: 'Telefone', value: '+55 11 99999-9999' },
+                { icon: FiMapPin, label: 'Localização', value: 'São Paulo, Brasil' },
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start gap-4">
                   <div className="mt-1 text-lusion-primary"><item.icon size={18} /></div>
@@ -86,6 +98,7 @@ const Contact = () => {
                       type="text" 
                       required
                       placeholder="Seu Nome"
+                      onChange={(e) => handleInputChange('name', e.target.value)}
                       className="w-full bg-transparent border-b border-lusion-text/10 py-4 focus:border-lusion-primary outline-none transition-colors placeholder:text-lusion-text/20 font-medium"
                     />
                   </div>
@@ -95,6 +108,7 @@ const Contact = () => {
                       type="email" 
                       required
                       placeholder="Seu Email"
+                      onChange={(e) => handleInputChange('email', e.target.value)}
                       className="w-full bg-transparent border-b border-lusion-text/10 py-4 focus:border-lusion-primary outline-none transition-colors placeholder:text-lusion-text/20 font-medium"
                     />
                   </div>
@@ -106,6 +120,7 @@ const Contact = () => {
                     type="text" 
                     required
                     placeholder="Assunto"
+                    onChange={(e) => handleInputChange('subject', e.target.value)}
                     className="w-full bg-transparent border-b border-lusion-text/10 py-4 focus:border-lusion-primary outline-none transition-colors placeholder:text-lusion-text/20 font-medium"
                   />
                 </div>
@@ -116,6 +131,7 @@ const Contact = () => {
                     rows="4" 
                     required
                     placeholder="Sua Mensagem"
+                    onChange={(e) => handleInputChange('message', e.target.value)}
                     className="w-full bg-transparent border-b border-lusion-text/10 py-4 focus:border-lusion-primary outline-none transition-colors placeholder:text-lusion-text/20 font-medium resize-none"
                   ></textarea>
                 </div>

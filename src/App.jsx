@@ -13,14 +13,20 @@ import TechStack from './sections/TechStack';
 import Projects from './sections/Projects';
 import Testimonials from './sections/Testimonials';
 import Clients from './sections/Clients';
+import Lab from './sections/Lab';
 import Services from './sections/Services';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
+import useSound from 'use-sound';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [language, setLanguage] = useState('pt');
+  
+  // Feature #1: Sound Design (Subtle UI sounds)
+  const [playHover] = useSound('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3', { volume: 0.1 });
+  const [playClick] = useSound('https://assets.mixkit.co/active_storage/sfx/2568/2571-preview.mp3', { volume: 0.2 });
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
@@ -29,11 +35,17 @@ function App() {
     const browserLang = navigator.language.split('-')[0];
     if (browserLang === 'en') {
       setLanguage('en');
-      // In a real i18n setup, we would trigger i18next changeLanguage here
       window.dispatchEvent(new CustomEvent('ai-log', { 
         detail: "English detected. Ready for global reach." 
       }));
     }
+
+    const handleGlobalClick = () => {
+      // Logic for global click sound if needed
+    };
+
+    window.addEventListener('click', handleGlobalClick);
+    return () => window.removeEventListener('click', handleGlobalClick);
   }, []);
 
   const toggleTheme = () => {
@@ -42,7 +54,10 @@ function App() {
   };
 
   return (
-    <div className={`relative min-h-screen transition-colors duration-700 ${isDarkMode ? 'bg-[#050505] text-[#F0F1FA]' : 'bg-lusion-bg text-lusion-text'} selection:bg-lusion-primary selection:text-white overflow-x-hidden`}>
+    <div 
+      onMouseMove={() => {}} // Placeholder for future sound triggers
+      className={`relative min-h-screen transition-colors duration-700 ${isDarkMode ? 'bg-[#050505] text-[#F0F1FA]' : 'bg-lusion-bg text-lusion-text'} selection:bg-lusion-primary selection:text-white overflow-x-hidden`}
+    >
       <AnimatePresence mode="wait">
         {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
@@ -62,6 +77,7 @@ function App() {
             <TechStack />
             <Projects />
             <Clients />
+            <Lab />
             <Services />
             <Contact />
           </main>
