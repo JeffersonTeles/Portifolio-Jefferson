@@ -28,7 +28,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center section-lusion pt-20">
+    <section className="relative w-full min-h-screen flex flex-col justify-center section-lusion py-32 overflow-hidden">
       <div className="container-lusion relative z-10">
         <motion.div
           variants={containerVars}
@@ -41,7 +41,7 @@ const Hero = () => {
               variants={itemVars}
               className="text-[10px] md:text-xs font-bold tracking-lusion-wide uppercase text-lusion-primary"
             >
-              Full-stack Developer & Automation Expert
+              Full-stack Developer & Especialista em Automação
             </motion.span>
             <motion.span 
               variants={itemVars}
@@ -51,17 +51,21 @@ const Hero = () => {
             </motion.span>
           </div>
 
-          <div className="overflow-hidden relative">
-            <h1 className="mb-8 break-words text-[12vw] leading-[0.8] uppercase relative z-10">
-              <SplitText text="Jefferson" delay={0.5} />
-              <br />
-              <SplitText text="Teles" delay={0.8} />
-            </h1>
+          <div className="relative">
+            <div className="overflow-hidden">
+              <h1 className="mb-8 break-words text-[12vw] leading-[0.8] uppercase relative z-10">
+                <SplitText text="Jefferson" delay={0.5} />
+                <br />
+                <SplitText text="Teles" delay={0.8} />
+              </h1>
+            </div>
+            
+            {/* Watermark Portfolio - Fixed Positioning */}
             <motion.div
-              initial={{ opacity: 0, x: 100 }}
+              initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 0.03, x: 0 }}
               transition={{ duration: 2, delay: 1 }}
-              className="absolute -top-20 -right-20 text-[25vw] font-black uppercase pointer-events-none z-0"
+              className="absolute -top-10 -right-10 text-[20vw] font-black uppercase pointer-events-none z-0 select-none whitespace-nowrap"
             >
               Portfolio
             </motion.div>
@@ -111,7 +115,7 @@ const Hero = () => {
           { icon: FiGithub, link: "https://github.com/JeffersonTeles" },
           { icon: FiLinkedin, link: "https://linkedin.com/in/jeffersonteles" },
           { icon: SiWhatsapp, link: "https://wa.me/5511999999999" },
-          { icon: FiMail, link: "mailto:jefferson@teles.dev" }
+          { icon: FiMail, link: "mailto:jeffersontelesdeoliveira@gmail.com" }
         ].map((social, idx) => (
           <a
             key={idx}
@@ -134,7 +138,7 @@ const Hero = () => {
         className="absolute right-6 md:right-12 bottom-12 hidden md:block"
       >
         <span className="text-[10px] tracking-lusion-wide uppercase text-lusion-text/40 rotate-90 origin-right block">
-          Scroll to explore
+          Role para explorar
         </span>
       </motion.div>
     </section>

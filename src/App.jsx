@@ -24,13 +24,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  
-  // Feature #1: Sound Design (Subtle UI sounds)
-  const [playHover] = useSound('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3', { volume: 0.1 });
-  const [playClick] = useSound('https://assets.mixkit.co/active_storage/sfx/2568/2571-preview.mp3', { volume: 0.2 });
 
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = 'smooth';
+    // Force top on reload
+    window.scrollTo(0, 0);
   }, []);
 
   const toggleTheme = () => {
@@ -42,10 +39,10 @@ function App() {
 
   return (
     <div 
-      className={`relative min-h-screen transition-colors duration-700 ${isDarkMode ? 'bg-[#050505] text-[#F0F1FA]' : 'bg-lusion-bg text-lusion-text'} selection:bg-lusion-primary selection:text-white overflow-x-hidden`}
+      className={`relative min-h-screen transition-colors duration-700 ${isDarkMode ? 'bg-[#050505] text-[#F0F1FA]' : 'bg-lusion-bg text-lusion-text'} selection:bg-lusion-primary selection:text-white`}
     >
       <AnimatePresence mode="wait">
-        {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+        {isLoading && <Preloader key="preloader" onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
 
       {!isLoading && (
@@ -64,7 +61,8 @@ function App() {
             toggleMute={toggleMute} 
             isMuted={isMuted} 
           />
-          <main className="relative z-10">
+          
+          <main className="relative z-10 w-full overflow-hidden">
             <Hero />
             <About />
             <TechStack />
@@ -74,6 +72,7 @@ function App() {
             <Services />
             <Contact />
           </main>
+          
           <Footer />
         </SmoothScroll>
       )}
