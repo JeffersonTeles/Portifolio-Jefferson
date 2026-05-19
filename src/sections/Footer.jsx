@@ -1,29 +1,31 @@
 import React from 'react';
-import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
-import { SiWhatsapp } from 'react-icons/si';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="border-t border-white/[0.05] py-8">
-      <div className="container-premium">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/20 text-sm">© {currentYear} Jefferson Teles</p>
+    <footer className="py-12 bg-white border-t border-lusion-text/5">
+      <div className="container-lusion">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-lusion-primary rounded-full" />
+            <span className="text-[10px] font-bold tracking-lusion-wide uppercase text-lusion-text">
+              Jefferson Teles / © 2026
+            </span>
+          </div>
+          
+          <div className="flex gap-8">
+            {['Twitter', 'Instagram', 'LinkedIn', 'Github'].map((link) => (
+              <a 
+                key={link} 
+                href="#" 
+                className="text-[10px] font-bold tracking-lusion-wide uppercase text-lusion-text/40 hover:text-lusion-primary transition-colors"
+              >
+                {link}
+              </a>
+            ))}
+          </div>
 
-          <div className="flex gap-6">
-            <a href="https://github.com/JeffersonTeles" target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-white/40 transition-colors">
-              <FiGithub size={16} />
-            </a>
-            <a href="https://linkedin.com/in/jeffersonteles" target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-white/40 transition-colors">
-              <FiLinkedin size={16} />
-            </a>
-            <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-white/40 transition-colors">
-              <SiWhatsapp size={16} />
-            </a>
-            <a href="mailto:jefferson@teles.dev" className="text-white/20 hover:text-white/40 transition-colors">
-              <FiMail size={16} />
-            </a>
+          <div className="text-[10px] font-bold tracking-lusion-wide uppercase text-lusion-text/40">
+            Designed for Precision
           </div>
         </div>
       </div>

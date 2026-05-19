@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { 
   SiJavascript, SiTypescript, SiNodedotjs, SiReact, 
   SiNextdotjs, SiPython, SiFirebase, SiSupabase,
@@ -23,36 +22,47 @@ const TechStack = () => {
   ];
 
   return (
-    <section className="section-premium bg-white/[0.01]">
-      <div className="container-premium">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="section-title">Tech Stack</h2>
-          <div className="section-divider" />
-          <p className="section-subtitle text-sm">
-            Tecnologias que utilizo no dia a dia
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <section className="py-12 md:py-20 bg-white overflow-hidden border-y border-lusion-text/5">
+      <div className="relative flex overflow-x-hidden">
+        <div className="animate-marquee whitespace-nowrap flex items-center">
           {technologies.map((tech, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: idx * 0.02 }}
-              className="card-premium text-center"
-            >
-              <tech.icon size={32} className="mx-auto mb-3 text-white/40" />
-              <span className="text-sm text-white/60">{tech.name}</span>
-            </motion.div>
+            <div key={idx} className="flex items-center gap-4 mx-10 md:mx-16 group">
+              <tech.icon size={32} className="text-lusion-text/10 group-hover:text-lusion-primary transition-colors duration-500" />
+              <span className="text-3xl md:text-5xl font-bold tracking-lusion-tighter text-lusion-text/5 group-hover:text-lusion-text transition-colors duration-500 uppercase select-none">
+                {tech.name}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="absolute top-0 animate-marquee2 whitespace-nowrap flex items-center">
+          {technologies.map((tech, idx) => (
+            <div key={idx} className="flex items-center gap-4 mx-10 md:mx-16 group">
+              <tech.icon size={32} className="text-lusion-text/10 group-hover:text-lusion-primary transition-colors duration-500" />
+              <span className="text-3xl md:text-5xl font-bold tracking-lusion-tighter text-lusion-text/5 group-hover:text-lusion-text transition-colors duration-500 uppercase select-none">
+                {tech.name}
+              </span>
+            </div>
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+        .animate-marquee2 {
+          animation: marquee2 30s linear infinite;
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-100%); }
+        }
+        @keyframes marquee2 {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(0%); }
+        }
+      `}</style>
     </section>
   );
 };

@@ -1,87 +1,73 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiCpu, FiZap, FiCode, FiDatabase, FiServer, FiLink } from 'react-icons/fi';
+import SplitText from '../components/SplitText';
+import Parallax from '../components/Parallax';
 
 const About = () => {
-  const stats = [
-    { value: "3+", label: "anos de experiência" },
-    { value: "15+", label: "projetos concluídos" },
-    { value: "10+", label: "tecnologias" }
-  ];
-
-  const focuses = [
-    { icon: FiZap, text: "Automações inteligentes" },
-    { icon: FiCpu, text: "IA aplicada" },
-    { icon: FiLink, text: "Integrações" },
-    { icon: FiServer, text: "APIs escaláveis" },
-    { icon: FiCode, text: "Sistemas web" },
-    { icon: FiDatabase, text: "Soluções SaaS" }
-  ];
-
   return (
-    <section className="section-premium">
-      <div className="container-premium">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="section-title">Sobre</h2>
-          <div className="section-divider" />
-          <p className="section-subtitle text-sm">
-            Desenvolvedor full-stack focado em soluções inteligentes
-          </p>
-        </motion.div>
+    <section id="about" className="section-lusion bg-white overflow-hidden">
+      <div className="container-lusion">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          {/* Section Indicator */}
+          <div className="lg:col-span-2">
+            <span className="text-sm font-bold tracking-lusion-wide uppercase text-lusion-primary flex items-center gap-4">
+              <span className="w-8 h-px bg-lusion-primary" />
+              01 / About
+            </span>
+          </div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="space-y-4"
-          >
-            <p className="text-white/60 leading-relaxed">
-              Desenvolvo sistemas web modernos, automações inteligentes e 
-              soluções digitais focadas em performance e escalabilidade.
-            </p>
-            <p className="text-white/60 leading-relaxed">
-              Com perfil autodidata e aprendizado contínuo, construo projetos 
-              práticos que resolvem problemas reais através de tecnologia.
-            </p>
-            <p className="text-white/60 leading-relaxed">
-              Meu trabalho combina backend moderno, APIs bem estruturadas e 
-              interfaces funcionais para entregar produtos digitais de qualidade.
-            </p>
-          </motion.div>
+          {/* Main Content */}
+          <div className="lg:col-span-6">
+            <h2 className="mb-12">
+              <SplitText text="Transformando idéias em " />
+              <span className="text-lusion-primary">
+                <SplitText text="experiências" delay={0.5} />
+              </span>
+              <SplitText text=" digitais tangíveis." delay={0.8} />
+            </h2>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="space-y-8"
-          >
-            <div className="grid grid-cols-3 gap-4">
-              {stats.map((stat, idx) => (
-                <div key={idx} className="text-center p-4 bg-white/[0.02] rounded-xl border border-white/[0.05]">
-                  <div className="text-2xl font-bold text-white">{stat.value}</div>
-                  <div className="text-xs text-white/40">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+            <Parallax offset={20}>
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="space-y-6 text-lg md:text-xl text-lusion-text/60 leading-relaxed"
+              >
+                <p>
+                  Com foco em automação, IA e desenvolvimento full-stack, eu ajudo empresas a 
+                  digitalizarem processos complexos através de interfaces intuitivas e back-ends 
+                  extremamente robustos.
+                </p>
+                <p>
+                  Meu trabalho é focado na interseção entre design minimalista e engenharia de precisão, 
+                  garantindo que cada linha de código contribua para uma performance excepcional 
+                  e uma experiência de usuário memorável.
+                </p>
+              </motion.div>
+            </Parallax>
+          </div>
 
-            <div className="bg-white/[0.02] rounded-xl p-6 border border-white/[0.05]">
-              <h3 className="text-sm font-medium text-white/60 mb-4">Foco principal</h3>
-              <div className="grid grid-cols-2 gap-3">
-                {focuses.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2 text-white/40 text-sm">
-                    <item.icon size={14} />
-                    <span>{item.text}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+          {/* Stats/Facts */}
+          <div className="lg:col-span-4 flex flex-wrap lg:flex-col justify-center gap-8 md:gap-12 border-l border-lusion-text/5 pl-8 md:pl-12">
+            {[
+              { label: 'Anos de Experiência', value: '03+' },
+              { label: 'Projetos Entregues', value: '40+' },
+              { label: 'Automações Ativas', value: '100+' },
+            ].map((stat, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="min-w-[140px]"
+              >
+                <p className="text-4xl md:text-5xl font-bold tracking-lusion-tighter mb-1">{stat.value}</p>
+                <p className="text-[10px] font-bold tracking-lusion-wide uppercase text-lusion-text/40">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

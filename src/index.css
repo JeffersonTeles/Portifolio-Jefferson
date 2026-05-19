@@ -8,104 +8,84 @@
   }
   
   body {
-    @apply bg-black text-white;
+    @apply bg-lusion-bg text-lusion-text;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    cursor: none; /* Hide default cursor for the custom one */
   }
   
-  /* Tipografia premium */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
+    @apply font-bold tracking-lusion-tighter;
   }
   
-  h1 { @apply text-6xl md:text-7xl lg:text-8xl; }
-  h2 { @apply text-4xl md:text-5xl lg:text-6xl; }
-  h3 { @apply text-2xl md:text-3xl; }
+  h1 { @apply text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] leading-[0.9]; }
+  h2 { @apply text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1]; }
 }
 
 @layer components {
-  /* Container padrão */
-  .container-premium {
-    @apply max-w-7xl mx-auto px-6 md:px-8 lg:px-12;
+  /* Hide custom cursor on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .cursor-dot { @apply hidden; }
+    body { cursor: auto !important; }
   }
-  
-  /* Seção padrão */
-  .section-premium {
-    @apply py-20 md:py-28 lg:py-32;
+  .container-lusion {
+    @apply max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20;
   }
-  
-  /* Título de seção */
-  .section-title {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4;
+
+  .section-lusion {
+    @apply py-24 md:py-32 lg:py-40;
   }
-  
-  .section-subtitle {
-    @apply text-white/40 max-w-2xl mx-auto;
+
+  /* Custom Cursor */
+  .cursor-dot {
+    @apply fixed top-0 left-0 bg-lusion-primary rounded-full pointer-events-none z-[9999]
+           flex items-center justify-center overflow-hidden;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background-color 0.3s;
+    mix-blend-mode: difference;
   }
-  
-  .section-divider {
-    @apply w-16 h-px bg-gradient-to-r from-cyan-500 to-purple-500 mx-auto mb-8;
+
+  .cursor-dot.view-mode {
+    @apply bg-lusion-primary;
+    mix-blend-mode: normal;
   }
-  
-  /* Cards padrão */
-  .card-premium {
-    @apply bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 md:p-8 
-           hover:border-white/[0.1] transition-all duration-300 hover:-translate-y-1;
+
+  .cursor-dot.active:not(.view-mode) {
+    @apply bg-transparent border border-lusion-primary;
   }
-  
-  /* Badge padrão */
-  .badge-premium {
-    @apply inline-flex items-center gap-2 px-3 py-1 text-xs font-mono 
-           bg-white/[0.03] border border-white/[0.05] rounded-full text-white/60;
+
+  /* Noise Overlay */
+  .noise-overlay {
+    @apply fixed inset-0 pointer-events-none z-[9998] opacity-[0.03];
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
   }
-  
-  /* Botão primário */
-  .btn-primary {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-white text-black 
-           text-sm font-medium rounded-lg hover:bg-white/90 
-           transition-all duration-300;
+
+  /* Buttons */
+  .btn-lusion {
+    @apply inline-flex items-center gap-4 px-8 py-4 border border-lusion-text/10 
+           text-sm font-medium tracking-lusion-wide uppercase transition-all duration-500
+           hover:bg-lusion-text hover:text-white hover:border-lusion-text;
   }
-  
-  /* Botão secundário */
-  .btn-secondary {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-white/[0.03] 
-           border border-white/[0.05] text-white/80 text-sm font-medium 
-           rounded-lg hover:bg-white/[0.05] transition-all duration-300;
+
+  .btn-lusion-primary {
+    @apply btn-lusion bg-lusion-primary text-white border-lusion-primary hover:bg-lusion-text;
   }
 }
 
-@keyframes scan {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-.animate-scan {
-  animation: scan 4s linear infinite;
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
+/* Scrollbar Lusion Style */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  @apply bg-lusion-bg;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1a1a1a;
-  border-radius: 3px;
+  @apply bg-lusion-text/10;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #06b6d4;
+  @apply bg-lusion-primary;
 }

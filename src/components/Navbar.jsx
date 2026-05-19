@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
-import { motion } from 'framer-motion';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi';
 
-const Navbar = () => {
+const Navbar = ({ toggleTheme, isDarkMode }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
 
@@ -14,77 +14,104 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { name: 'Início', link: 'hero' },
-    { name: 'Sobre', link: 'about' },
-    { name: 'Stack', link: 'tech' },
-    { name: 'Projetos', link: 'projects' },
-    { name: 'Serviços', link: 'services' },
-    { name: 'Contato', link: 'contact' }
+    { name: 'Home', link: 'hero' },
+    { name: 'About', link: 'about' },
+    { name: 'Projects', link: 'projects' },
+    { name: 'Contact', link: 'contact' }
   ];
 
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.4 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-black/80 backdrop-blur-xl border-b border-white/[0.05]' : 'bg-transparent'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled ? 'bg-inherit/80 backdrop-blur-md py-4' : 'bg-transparent py-8'
         }`}
       >
-        <div className="container-premium py-4">
+        <div className="container-lusion">
           <div className="flex justify-between items-center">
-            <ScrollLink to="hero" smooth={true} duration={500} className="cursor-pointer">
-              <span className="text-lg font-medium tracking-tight text-white/90 hover:text-white transition-colors">
+            <ScrollLink to="hero" smooth={true} duration={500} className="cursor-pointer group">
+              <span className="text-xs font-bold tracking-lusion-wide uppercase text-inherit flex items-center gap-2">
+                <span className="w-2 h-2 bg-lusion-primary rounded-full group-hover:scale-150 transition-transform" />
                 Jefferson Teles
               </span>
             </ScrollLink>
 
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-12">
               {navItems.map((item, idx) => (
                 <ScrollLink
                   key={idx}
                   to={item.link}
                   smooth={true}
-                  duration={500}
+                  duration={800}
                   spy={true}
-                  activeClass="text-white"
-                  className="text-sm text-white/60 hover:text-white transition-colors cursor-pointer"
+                  activeClass="text-lusion-primary"
+                  className="text-[10px] font-bold tracking-lusion-wide uppercase text-inherit/40 hover:text-lusion-primary transition-all cursor-pointer relative overflow-hidden group"
                 >
-                  {item.name}
+                  <span className="block group-hover:-translate-y-full transition-transform duration-300">
+                    {item.name}
+                  </span>
+                  <span className="absolute top-full left-0 block text-lusion-primary group-hover:-translate-y-full transition-transform duration-300">
+                    {item.name}
+                  </span>
                 </ScrollLink>
               ))}
+              
+              <button 
+                onClick={toggleTheme}
+                className="text-inherit/40 hover:text-lusion-primary transition-colors"
+              >
+                {isDarkMode ? <FiSun size={16} /> : <FiMoon size={16} />}
+              </button>
             </div>
 
-            <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden text-white/60 hover:text-white">
-              {mobileMenu ? <FiX size={20} /> : <FiMenu size={20} />}
-            </button>
+            <div className="flex items-center gap-6 md:hidden">
+              <button 
+                onClick={toggleTheme}
+                className="text-inherit/40 hover:text-lusion-primary transition-colors"
+              >
+                {isDarkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
+              </button>
+              <button onClick={() => setMobileMenu(!mobileMenu)} className="text-inherit/60 hover:text-lusion-primary">
+                {mobileMenu ? <FiX size={20} /> : <FiMenu size={20} />}
+              </button>
+            </div>
           </div>
         </div>
       </motion.nav>
 
-      {mobileMenu && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="fixed top-16 left-0 right-0 bg-black/95 backdrop-blur-xl z-40 border-b border-white/[0.05] md:hidden"
-        >
-          <div className="container-premium py-4">
+      <AnimatePresence>
+        {mobileMenu && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className={`fixed inset-0 z-[60] flex flex-col justify-center items-center gap-8 md:hidden ${isDarkMode ? 'bg-[#050505] text-[#F0F1FA]' : 'bg-lusion-bg text-lusion-text'}`}
+          >
+            <button 
+              onClick={() => setMobileMenu(false)} 
+              className="absolute top-8 right-8 text-inherit/60"
+            >
+              <FiX size={32} />
+            </button>
             {navItems.map((item, idx) => (
               <ScrollLink
                 key={idx}
                 to={item.link}
                 smooth={true}
-                duration={500}
+                duration={800}
                 onClick={() => setMobileMenu(false)}
-                className="block py-3 text-white/60 hover:text-white transition-colors text-sm cursor-pointer"
+                className="text-4xl font-bold tracking-lusion-tighter text-inherit hover:text-lusion-primary transition-colors cursor-pointer"
               >
                 {item.name}
               </ScrollLink>
             ))}
-          </div>
-        </motion.div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

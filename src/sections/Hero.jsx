@@ -2,94 +2,134 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 import { SiWhatsapp } from 'react-icons/si';
+import MagneticButton from '../components/MagneticButton';
+import SplitText from '../components/SplitText';
+import Parallax from '../components/Parallax';
 
 const Hero = () => {
+  const containerVars = {
+    initial: { opacity: 0 },
+    animate: { 
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVars = {
+    initial: { y: 100, opacity: 0 },
+    animate: { 
+      y: 0, 
+      opacity: 1,
+      transition: { duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }
+    }
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center section-premium pt-32">
-      <div className="container-premium text-center">
+    <section className="relative min-h-screen flex flex-col justify-center section-lusion pt-20">
+      <div className="container-lusion relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          variants={containerVars}
+          initial="initial"
+          animate="animate"
+          className="flex flex-col"
         >
-          <span className="badge-premium mb-6 inline-flex">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-            Disponível para projetos
-          </span>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
-        >
-          Jefferson Teles
-        </motion.h1>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex items-center justify-center gap-3 mb-6 flex-wrap"
-        >
-          {['Automação', 'IA', 'APIs', 'Sistemas Web'].map((item, idx) => (
-            <span key={idx} className="text-white/40 text-sm">
-              {idx > 0 && <span className="mx-2">•</span>}
-              {item}
-            </span>
-          ))}
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-white/40 max-w-2xl mx-auto mb-10 text-lg leading-relaxed"
-        >
-          Desenvolvedor full-stack focado em automações inteligentes, 
-          APIs escaláveis e sistemas web modernos.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex flex-wrap justify-center gap-4 mb-16"
-        >
-          <a href="#contact" className="btn-primary">
-            Iniciar projeto
-            <FiArrowRight size={16} />
-          </a>
-          <a href="#projects" className="btn-secondary">
-            Ver projetos
-          </a>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="flex justify-center gap-8"
-        >
-          {[
-            { icon: FiGithub, link: "https://github.com/JeffersonTeles" },
-            { icon: FiLinkedin, link: "https://linkedin.com/in/jeffersonteles" },
-            { icon: SiWhatsapp, link: "https://wa.me/5511999999999" },
-            { icon: FiMail, link: "mailto:jefferson@teles.dev" }
-          ].map((social, idx) => (
-            <a
-              key={idx}
-              href={social.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/30 hover:text-white/60 transition-all duration-300"
+          <div className="overflow-hidden mb-4 flex justify-between items-end">
+            <motion.span 
+              variants={itemVars}
+              className="text-[10px] md:text-xs font-bold tracking-lusion-wide uppercase text-lusion-primary"
             >
-              <social.icon size={20} />
-            </a>
-          ))}
+              Full-stack Developer & Automation Expert
+            </motion.span>
+            <motion.span 
+              variants={itemVars}
+              className="text-[10px] md:text-xs font-bold tracking-lusion-wide uppercase text-lusion-text/20"
+            >
+              Portfolio / 2026
+            </motion.span>
+          </div>
+
+          <div className="overflow-hidden relative">
+            <h1 className="mb-8 break-words text-[12vw] leading-[0.8] uppercase relative z-10">
+              <SplitText text="Jefferson" delay={0.5} />
+              <br />
+              <SplitText text="Teles" delay={0.8} />
+            </h1>
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 0.03, x: 0 }}
+              transition={{ duration: 2, delay: 1 }}
+              className="absolute -top-20 -right-20 text-[25vw] font-black uppercase pointer-events-none z-0"
+            >
+              Portfolio
+            </motion.div>
+          </div>
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
+            <Parallax offset={30} className="max-w-xl">
+              <motion.p variants={itemVars} className="text-lg md:text-2xl text-lusion-text/60 leading-relaxed font-medium">
+                Especialista em criar experiências digitais de alto impacto, 
+                automações inteligentes e sistemas escaláveis que transformam 
+                a tecnologia em valor real.
+              </motion.p>
+            </Parallax>
+
+            <motion.div variants={itemVars} className="flex flex-wrap gap-6">
+              <MagneticButton>
+                <a href="#contact" className="btn-lusion-primary group">
+                  Iniciar projeto
+                  <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+                </a>
+              </MagneticButton>
+              <MagneticButton>
+                <a href="#projects" className="btn-lusion">
+                  Ver projetos
+                </a>
+              </MagneticButton>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
+
+      {/* Social Sidebar - Lusion Style */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="fixed left-6 md:left-12 bottom-12 z-20 hidden lg:flex flex-col gap-6"
+      >
+        {[
+          { icon: FiGithub, link: "https://github.com/JeffersonTeles" },
+          { icon: FiLinkedin, link: "https://linkedin.com/in/jeffersonteles" },
+          { icon: SiWhatsapp, link: "https://wa.me/5511999999999" },
+          { icon: FiMail, link: "mailto:jefferson@teles.dev" }
+        ].map((social, idx) => (
+          <a
+            key={idx}
+            href={social.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-lusion-text/30 hover:text-lusion-primary transition-colors duration-300"
+          >
+            <social.icon size={18} />
+          </a>
+        ))}
+        <div className="w-px h-12 bg-lusion-text/10 mx-auto" />
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute right-6 md:right-12 bottom-12 hidden md:block"
+      >
+        <span className="text-[10px] tracking-lusion-wide uppercase text-lusion-text/40 rotate-90 origin-right block">
+          Scroll to explore
+        </span>
+      </motion.div>
     </section>
   );
 };
