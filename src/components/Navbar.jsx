@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX, FiSun, FiMoon, FiVolume2, FiVolumeX } from 'react-icons/fi';
 
 const Navbar = ({ toggleTheme, isDarkMode, toggleMute, isMuted }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -14,11 +17,12 @@ const Navbar = ({ toggleTheme, isDarkMode, toggleMute, isMuted }) => {
   }, []);
 
   const navItems = [
-    { name: 'Home', link: 'hero' },
-    { name: 'Sobre', link: 'about' },
-    { name: 'Projetos', link: 'projects' },
-    { name: 'Lab', link: 'lab' },
-    { name: 'Contato', link: 'contact' }
+    { name: 'Home', link: 'hero', isExternal: false },
+    { name: 'Sobre', link: 'about', isExternal: false },
+    { name: 'Projetos', link: 'projects', isExternal: false },
+    { name: 'Blog', link: '/blog', isExternal: true },
+    { name: 'Lab', link: 'lab', isExternal: false },
+    { name: 'Contato', link: 'contact', isExternal: false }
   ];
 
   return (
@@ -33,31 +37,46 @@ const Navbar = ({ toggleTheme, isDarkMode, toggleMute, isMuted }) => {
       >
         <div className="container-lusion">
           <div className="flex justify-between items-center">
-            <ScrollLink to="hero" smooth={true} duration={500} className="cursor-pointer group">
+            <RouterLink to="/" className="cursor-pointer group">
               <span className="text-xs font-bold tracking-lusion-wide uppercase text-inherit flex items-center gap-2">
                 <span className="w-2 h-2 bg-lusion-primary rounded-full group-hover:scale-150 transition-transform" />
                 Jefferson Teles
               </span>
-            </ScrollLink>
+            </RouterLink>
 
-            <div className="hidden md:flex items-center gap-12">
+            <div className="hidden md:flex items-center gap-10">
               {navItems.map((item, idx) => (
-                <ScrollLink
-                  key={idx}
-                  to={item.link}
-                  smooth={true}
-                  duration={800}
-                  spy={true}
-                  activeClass="text-lusion-primary"
-                  className="text-[10px] font-bold tracking-lusion-wide uppercase text-inherit/40 hover:text-lusion-primary transition-all cursor-pointer relative overflow-hidden group"
-                >
-                  <span className="block group-hover:-translate-y-full transition-transform duration-300">
-                    {item.name}
-                  </span>
-                  <span className="absolute top-full left-0 block text-lusion-primary group-hover:-translate-y-full transition-transform duration-300">
-                    {item.name}
-                  </span>
-                </ScrollLink>
+                item.isExternal || !isHomePage ? (
+                  <RouterLink
+                    key={idx}
+                    to={item.isExternal ? item.link : "/"}
+                    className="text-[10px] font-bold tracking-lusion-wide uppercase text-inherit/40 hover:text-lusion-primary transition-all cursor-pointer relative overflow-hidden group"
+                  >
+                    <span className="block group-hover:-translate-y-full transition-transform duration-300">
+                      {item.name}
+                    </span>
+                    <span className="absolute top-full left-0 block text-lusion-primary group-hover:-translate-y-full transition-transform duration-300">
+                      {item.name}
+                    </span>
+                  </RouterLink>
+                ) : (
+                  <ScrollLink
+                    key={idx}
+                    to={item.link}
+                    smooth={true}
+                    duration={800}
+                    spy={true}
+                    activeClass="text-lusion-primary"
+                    className="text-[10px] font-bold tracking-lusion-wide uppercase text-inherit/40 hover:text-lusion-primary transition-all cursor-pointer relative overflow-hidden group"
+                  >
+                    <span className="block group-hover:-translate-y-full transition-transform duration-300">
+                      {item.name}
+                    </span>
+                    <span className="absolute top-full left-0 block text-lusion-primary group-hover:-translate-y-full transition-transform duration-300">
+                      {item.name}
+                    </span>
+                  </ScrollLink>
+                )
               ))}
               
               <div className="flex items-center gap-6 border-l border-lusion-text/5 pl-8">
@@ -109,16 +128,27 @@ const Navbar = ({ toggleTheme, isDarkMode, toggleMute, isMuted }) => {
               <FiX size={32} />
             </button>
             {navItems.map((item, idx) => (
-              <ScrollLink
-                key={idx}
-                to={item.link}
-                smooth={true}
-                duration={800}
-                onClick={() => setMobileMenu(false)}
-                className="text-4xl font-bold tracking-lusion-tighter text-inherit hover:text-lusion-primary transition-colors cursor-pointer"
-              >
-                {item.name}
-              </ScrollLink>
+              item.isExternal || !isHomePage ? (
+                <RouterLink
+                  key={idx}
+                  to={item.isExternal ? item.link : "/"}
+                  onClick={() => setMobileMenu(false)}
+                  className="text-4xl font-bold tracking-lusion-tighter text-inherit hover:text-lusion-primary transition-colors cursor-pointer"
+                >
+                  {item.name}
+                </RouterLink>
+              ) : (
+                <ScrollLink
+                  key={idx}
+                  to={item.link}
+                  smooth={true}
+                  duration={800}
+                  onClick={() => setMobileMenu(false)}
+                  className="text-4xl font-bold tracking-lusion-tighter text-inherit hover:text-lusion-primary transition-colors cursor-pointer"
+                >
+                  {item.name}
+                </ScrollLink>
+              )
             ))}
           </motion.div>
         )}
