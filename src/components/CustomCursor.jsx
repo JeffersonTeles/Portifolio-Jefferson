@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
 
 const CustomCursor = () => {
   const [isActive, setIsActive] = useState(false);
   const [isView, setIsView] = useState(false);
   const [isMagnify, setIsMagnify] = useState(false);
+  const [targetEl, setTargetEl] = useState(null);
+  
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
+  const canvasRef = useRef(null);
 
   const springConfig = { damping: 25, stiffness: 700, mass: 0.5 };
   const cursorXSpring = useSpring(cursorX, springConfig);
@@ -16,6 +19,25 @@ const CustomCursor = () => {
     const moveCursor = (e) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
+      
+      // Draw connection line (Efeito 3: Data Link)
+      if (canvasRef.current) {
+        const ctx = canvasRef.current.getContext('2d');
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        
+        if (isActive && targetEl) {
+          const rect = targetEl.getBoundingClientRect();
+          const targetX = rect.left + rect.width / 2;
+          const targetY = rect.top + rect.height / 2;
+          
+          ctx.beginPath();
+          ctx.moveTo(e.clientX, e.clientY);
+          ctx.lineTo(targetX, targetY);
+          ctx.strokeStyle = 'rgba(0, 212, 255, 0.2)';
+          ctx.setLineDash([5, 5]);
+          ctx.stroke();
+        }
+      }
     };
 
     const handleMouseOver = (e) => {
@@ -28,18 +50,22 @@ const CustomCursor = () => {
         setIsView(true);
         setIsMagnify(false);
         setIsActive(true);
+        setTargetEl(target.closest('[data-cursor="view"]'));
       } else if (isMagnifyTarget) {
         setIsMagnify(true);
         setIsView(false);
         setIsActive(true);
+        setTargetEl(target);
       } else if (isLink) {
         setIsView(false);
         setIsMagnify(false);
         setIsActive(true);
+        setTargetEl(isLink === true ? target : target.closest('a, button'));
       } else {
         setIsView(false);
         setIsMagnify(false);
         setIsActive(false);
+        setTargetEl(null);
       }
     };
 
@@ -50,10 +76,16 @@ const CustomCursor = () => {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, [cursorX, cursorY]);
+  }, [cursorX, cursorY, isActive, targetEl]);
 
   return (
     <>
+      <canvas 
+        ref={canvasRef} 
+        width={window.innerWidth} 
+        height={window.innerHeight} 
+        className="fixed inset-0 pointer-events-none z-[9998]"
+      />
       <motion.div
         className={`cursor-dot ${isActive ? 'active' : ''} ${isView ? 'view-mode' : ''} ${isMagnify ? 'magnify-mode' : ''}`}
         style={{

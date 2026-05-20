@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { FiArrowRight, FiDownload } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 import DecryptText from '../components/DecryptText';
 
 const Hero = () => {
+  const { t } = useTranslation();
   const prefersReducedMotion = useReducedMotion();
 
   const containerVars = {
@@ -45,7 +47,7 @@ const Hero = () => {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-dark-terminal"></span>
             </span>
             <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-dark-terminal">
-              <DecryptText text="Aberto a oportunidades" delay={1} />
+              <DecryptText text={t('hero.status')} delay={1} />
             </span>
           </motion.div>
 
@@ -53,16 +55,16 @@ const Hero = () => {
           <motion.div variants={itemVars} className="mb-6">
             <h1 className="text-5xl md:text-7xl lg:text-8xl leading-[1.1] mb-4">
               <span className="inline-block hover-glitch transition-all duration-300">
-                <DecryptText text="Jefferson" delay={0.2} />
+                <DecryptText text={t('hero.title1')} delay={0.2} />
               </span>
               <br />
               <span className="text-dark-accent">
-                <DecryptText text="Teles" delay={0.5} />
+                <DecryptText text={t('hero.title2')} delay={0.5} />
               </span>
             </h1>
             <h2 className="font-mono text-lg md:text-xl text-dark-terminal/80 tracking-tight flex items-center gap-4">
               <span className="opacity-40">&lt;</span>
-              <DecryptText text="Desenvolvedor em Construção" delay={1.5} />
+              <DecryptText text={t('hero.subtitle')} delay={1.5} />
               <span className="opacity-40">/&gt;</span>
             </h2>
           </motion.div>
@@ -72,14 +74,14 @@ const Hero = () => {
             variants={itemVars}
             className="text-dark-muted text-lg md:text-xl mb-12 max-w-2xl leading-relaxed"
           >
-            Automação, IA e Web • De suporte a código • Cascavel/PR
+            {t('hero.desc')}
           </motion.p>
 
-          {/* CTAs (Efeito 10: Camadas de Profundidade sutil) */}
+          {/* CTAs */}
           <motion.div variants={itemVars} className="flex flex-wrap gap-6 items-center">
             <a href="#projects" className="btn-primary group overflow-hidden">
               <div className="relative z-10 flex items-center gap-2">
-                Ver Projetos
+                {t('hero.btnProjects')}
                 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
               </div>
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -93,7 +95,7 @@ const Hero = () => {
             >
               <div className="relative z-10 flex items-center gap-2">
                 <FiDownload />
-                Baixar Currículo
+                {t('hero.btnResume')}
               </div>
               <div className="absolute inset-0 bg-dark-accent/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
             </a>
@@ -103,7 +105,7 @@ const Hero = () => {
 
       {/* Decorative HUD metadata in Hero */}
       <div className="absolute bottom-12 right-12 hidden xl:block font-mono text-[8px] text-white/10 tracking-[0.3em] uppercase rotate-90 origin-right">
-        UI_HUD_V3.0 // JEFFERSON_TELES_PORTFOLIO
+        UI_HUD_V4.0 // GOD_TIER_ACTIVE
       </div>
     </section>
   );

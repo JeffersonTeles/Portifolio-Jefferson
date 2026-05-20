@@ -1,72 +1,95 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiBox, FiCpu, FiCode, FiZap } from 'react-icons/fi';
+import { FiBox, FiCpu, FiCode, FiZap, FiPlay } from 'react-icons/fi';
+
+const NeuralSandbox = () => {
+  const [nodes, setNodes] = useState(5);
+  return (
+    <div className="p-4 bg-black/40 border border-white/5 rounded-sm mt-4">
+      <div className="flex justify-between items-center mb-4">
+        <span className="text-[8px] font-mono text-dark-accent">NEURAL_DENSITY_SYNC</span>
+        <input 
+          type="range" min="1" max="12" value={nodes} 
+          onChange={(e) => setNodes(parseInt(e.target.value))}
+          className="w-24 accent-dark-accent h-1"
+        />
+      </div>
+      <div className="flex flex-wrap gap-2 justify-center">
+        {Array.from({ length: nodes }).map((_, i) => (
+          <motion.div 
+            key={i}
+            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.8, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
+            className="w-4 h-4 rounded-full bg-dark-accent"
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const Lab = () => {
   const experiments = [
     {
       title: "Neural Mesh Visualizer",
       category: "Generative Art",
-      description: "Experimento com algoritmos de crescimento orgânico e visualização de pesos neuronais em 3D.",
+      description: "Algoritmos de crescimento orgânico e visualização de pesos neuronais em 3D.",
       icon: FiCpu,
-      tech: "Three.js / GLSL"
+      tech: "Three.js / GLSL",
+      sandbox: <NeuralSandbox />
     },
     {
       title: "Auto-Scale API Logic",
       category: "Architecture",
-      description: "Protótipo de middleware para balanceamento de carga preditivo baseado em tráfego histórico.",
+      description: "Middleware para balanceamento de carga preditivo baseado em tráfego histórico.",
       icon: FiZap,
-      tech: "Node.js / Redis"
+      tech: "Node.js / Redis",
+      sandbox: null
     },
     {
       title: "Voice-to-Automation",
       category: "IA / Interface",
-      description: "Interface de comando de voz para execução de scripts complexos de automação de fluxo.",
+      description: "Interface de comando de voz para execução de scripts complexos de automação.",
       icon: FiCode,
-      tech: "OpenAI / Web Speech"
+      tech: "OpenAI / Web Speech",
+      sandbox: null
     }
   ];
 
   return (
-    <section id="lab" className="section-lusion border-t border-lusion-text/5">
-      <div className="container-lusion">
+    <section id="lab" className="py-24 bg-dark-bg">
+      <div className="container-custom">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
           <div className="max-w-2xl">
-            <span className="text-sm font-bold tracking-lusion-wide uppercase text-lusion-primary flex items-center gap-4 mb-8">
-              <span className="w-8 h-px bg-lusion-primary" />
-              07 / R&D Lab
+            <span className="section-title">
+              <span className="w-8 h-px bg-dark-terminal" />
+              05 / R&D Lab
             </span>
-            <h2 className="leading-tight">Experimentos<br />Técnicos</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white">Experimentos<br />Técnicos</h2>
           </div>
-          <p className="text-lusion-text/40 text-xs md:text-sm tracking-lusion-wide uppercase mb-4 max-w-xs text-right">
-            Onde a curiosidade encontra a engenharia pura. Projetos experimentais e testes de conceito.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {experiments.map((exp, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="p-8 border border-lusion-text/5 bg-lusion-text/[0.01] hover:bg-lusion-text/[0.03] transition-all group rounded-sm"
+              transition={{ duration: 0.8, type: "spring", stiffness: 50 }}
+              className="p-8 border border-white/5 bg-dark-card hover:border-dark-accent/30 transition-all group rounded-sm flex flex-col"
             >
-              <div className="w-12 h-12 rounded-full border border-lusion-text/10 flex items-center justify-center mb-8 group-hover:border-lusion-primary group-hover:text-lusion-primary transition-colors">
+              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mb-8 group-hover:border-dark-accent group-hover:text-dark-accent transition-colors">
                 <exp.icon size={20} />
               </div>
-              <span className="text-[10px] font-bold tracking-widest uppercase text-lusion-primary mb-4 block">
-                {exp.category}
-              </span>
-              <h3 className="text-2xl font-bold tracking-tighter mb-6 group-hover:text-lusion-primary transition-colors">
-                {exp.title}
-              </h3>
-              <p className="text-sm text-lusion-text/60 leading-relaxed mb-8">
-                {exp.description}
-              </p>
-              <div className="text-[9px] font-bold tracking-widest uppercase text-lusion-text/20">
-                Stack: {exp.tech}
+              <span className="text-[10px] font-mono text-dark-accent uppercase mb-4 block">{exp.category}</span>
+              <h3 className="text-2xl font-bold text-white mb-6">{exp.title}</h3>
+              <p className="text-sm text-dark-muted leading-relaxed mb-8 flex-1">{exp.description}</p>
+              
+              {exp.sandbox}
+              
+              <div className="mt-8 pt-6 border-t border-white/5 text-[9px] font-mono text-dark-muted">
+                STACK: {exp.tech}
               </div>
             </motion.div>
           ))}

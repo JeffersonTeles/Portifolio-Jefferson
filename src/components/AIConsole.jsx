@@ -90,17 +90,52 @@ const AIConsole = ({ isStealth }) => {
     utterance.pitch = 0.8;
     window.speechSynthesis.speak(utterance);
   };
+const processCommand = (cmd) => {
+  const cleanCmd = cmd.replace('/', '').trim().toLowerCase();
+  playBeep();
 
-  const processCommand = (cmd) => {
-    const cleanCmd = cmd.replace('/', '').trim();
-    playBeep();
-    
-    switch (cleanCmd) {
-      case 'help':
-      case 'ajuda':
-        addLog("Available: /dark, /light, /github, /cv, /clear, /stealth, /pitch");
-        break;
-      case 'dark':
+  // Virtual Jefferson Logic (Efeito 8)
+  const questions = {
+    react: /react|frontend|interface/i,
+    java: /java|spring|backend/i,
+    freela: /freela|trabalho|projeto|vaga/i,
+    idade: /idade|anos/i,
+    local: /local|onde|cascavel/i
+  };
+
+  if (questions.react.test(cleanCmd)) {
+    addLog("JT_BOT: Sim, domino React, Tailwind e Framer Motion para criar UIs de alto nível.");
+    return;
+  }
+  if (questions.java.test(cleanCmd)) {
+    addLog("JT_BOT: Conhecimento sólido em Java e Spring Boot para APIs robustas.");
+    return;
+  }
+  if (questions.freela.test(cleanCmd)) {
+    addLog("JT_BOT: Estou disponível para oportunidades como Dev Júnior e projetos de automação.");
+    return;
+  }
+
+  switch (cleanCmd) {
+    case 'help':
+    case 'ajuda':
+      addLog("Available: /dark, /light, /github, /cv, /stealth, /pitch, /terminal, /lang [pt/en]");
+      break;
+    case 'terminal':
+      addLog("EXEC: LAUNCHING PURE_SHELL_V4...");
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('toggle-terminal', { detail: true }));
+      }, 1000);
+      break;
+    case 'lang pt':      import('../i18n').then(i18n => i18n.default.changeLanguage('pt'));
+      addLog("Idioma alterado para Português.");
+      break;
+    case 'lang en':
+      import('../i18n').then(i18n => i18n.default.changeLanguage('en'));
+      addLog("Language switched to English.");
+      break;
+    case 'dark':
+...
         document.documentElement.classList.add('dark');
         addLog("Dark mode override active.");
         break;

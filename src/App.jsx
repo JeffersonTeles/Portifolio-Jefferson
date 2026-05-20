@@ -25,6 +25,7 @@ import Services from './sections/Services';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
 import Blog from './pages/Blog';
+import TerminalMode from './components/TerminalMode';
 import { SectionProvider } from './context/SectionContext';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [isStealth, setIsStealth] = useState(false);
+  const [isTerminal, setIsTerminal] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,11 +41,15 @@ function App() {
     }, 2000);
 
     const handleStealth = (e) => setIsStealth(e.detail);
+    const handleTerminal = (e) => setIsTerminal(e.detail);
+    
     window.addEventListener('toggle-stealth', handleStealth);
+    window.addEventListener('toggle-terminal', handleTerminal);
     
     return () => {
       clearTimeout(timer);
       window.removeEventListener('toggle-stealth', handleStealth);
+      window.removeEventListener('toggle-terminal', handleTerminal);
     };
   }, []);
 
@@ -145,6 +151,8 @@ function App() {
               )}
             </SmoothScroll>
           )}
+
+          {isTerminal && <TerminalMode onClose={() => setIsTerminal(false)} />}
         </div>
       </SectionProvider>
     </Router>
