@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiArrowUpRight, FiGithub, FiX, FiPlay } from 'react-icons/fi';
+import { FiArrowUpRight, FiGithub, FiX, FiPlay, FiCalendar } from 'react-icons/fi';
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -14,7 +14,7 @@ const Projects = () => {
       tags: ["Python", "OpenAI", "React", "Docker"],
       link: "#",
       image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1600",
-      video: null // Placeholder for real video path
+      video: null
     },
     {
       title: "FinTech Dashboard",
@@ -30,7 +30,7 @@ const Projects = () => {
 
   const handleProjectHover = (title) => {
     window.dispatchEvent(new CustomEvent('ai-log', { 
-      detail: `Inicializando módulo: ${title}...` 
+      detail: `Analisando arquitetura: ${title}...` 
     }));
   };
 
@@ -45,9 +45,19 @@ const Projects = () => {
             </span>
             <h2 className="leading-tight">Trabalhos<br />Selecionados</h2>
           </div>
-          <p className="text-lusion-text/40 text-xs md:text-sm tracking-lusion-wide uppercase mb-4">
-            Uma vitrine de engenharia de precisão.
-          </p>
+          
+          <div className="flex flex-col items-end">
+            <p className="text-lusion-text/40 text-xs md:text-sm tracking-lusion-wide uppercase mb-6">
+              Precisão técnica em cada pixel.
+            </p>
+            <a 
+              href="https://calendly.com" 
+              target="_blank" 
+              className="flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase text-lusion-primary border border-lusion-primary/20 px-6 py-3 rounded-full hover:bg-lusion-primary hover:text-white transition-all duration-500"
+            >
+              <FiCalendar /> Agendar Reunião
+            </a>
+          </div>
         </div>
 
         <div className="space-y-32 md:space-y-48">
@@ -62,10 +72,16 @@ const Projects = () => {
               className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 group"
             >
               <div 
-                className="lg:col-span-7 overflow-hidden bg-lusion-text/5 aspect-[16/9] relative rounded-sm cursor-pointer"
+                className="lg:col-span-7 overflow-hidden bg-lusion-text/5 aspect-[16/9] relative rounded-sm cursor-pointer shadow-2xl"
                 data-cursor="view"
                 onClick={() => setSelectedProject(project)}
               >
+                {/* Infinity Tier: Glass Shader Overlay (CSS) */}
+                <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                  <div className="absolute inset-0 backdrop-blur-[2px] bg-white/5 dark:bg-black/5" />
+                  <div className="absolute inset-0 border-[20px] border-white/10 dark:border-black/10" />
+                </div>
+
                 <motion.div 
                   initial={{ clipPath: 'inset(100% 0 0 0)' }}
                   whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
@@ -74,19 +90,12 @@ const Projects = () => {
                   className="w-full h-full relative"
                 >
                   <motion.img 
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 1.2, ease: [0.6, 0.05, -0.01, 0.9] }}
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 1.5, ease: [0.6, 0.05, -0.01, 0.9] }}
                     src={project.image} 
                     alt={project.title}
-                    className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 transition-all duration-1000"
+                    className="w-full h-full object-cover grayscale-[60%] group-hover:grayscale-0 transition-all duration-1000"
                   />
-                  {project.video && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
-                        <FiPlay size={24} fill="currentColor" />
-                      </div>
-                    </div>
-                  )}
                 </motion.div>
               </div>
 
@@ -141,7 +150,7 @@ const Projects = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-lusion-bg/95 backdrop-blur-xl"
+              className="absolute inset-0 bg-lusion-bg/95 backdrop-blur-2xl"
               onClick={() => setSelectedProject(null)}
             />
             
@@ -150,7 +159,7 @@ const Projects = () => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 100, opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="relative w-full max-w-6xl bg-inherit border border-lusion-text/5 overflow-hidden rounded-sm max-h-[90vh] overflow-y-auto custom-scrollbar shadow-2xl"
+              className="relative w-full max-w-6xl bg-inherit border border-lusion-text/10 overflow-hidden rounded-sm max-h-[90vh] overflow-y-auto custom-scrollbar shadow-2xl"
             >
               <button 
                 onClick={() => setSelectedProject(null)}

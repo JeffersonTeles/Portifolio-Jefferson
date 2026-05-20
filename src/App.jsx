@@ -12,6 +12,7 @@ import SpatialAudio from './components/SpatialAudio';
 import SectionCurtain from './components/SectionCurtain';
 import AutomationDashboard from './components/AutomationDashboard';
 import StatusWidget from './components/StatusWidget';
+import ScrollToTop from './components/ScrollToTop';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import TechStack from './sections/TechStack';
@@ -31,11 +32,18 @@ function App() {
   const [isStealth, setIsStealth] = useState(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    
+    // Safety fallback: Ensure preloader closes after 10 seconds max
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 10000);
+
     const handleStealth = (e) => setIsStealth(e.detail);
     window.addEventListener('toggle-stealth', handleStealth);
-    return () => window.removeEventListener('toggle-stealth', handleStealth);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('toggle-stealth', handleStealth);
+    };
   }, []);
 
   const toggleTheme = () => {
@@ -47,6 +55,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <SectionProvider>
         <div className={`relative min-h-screen transition-colors duration-700 ${isDarkMode ? 'bg-[#050505] text-[#F0F1FA]' : 'bg-lusion-bg text-lusion-text'} selection:bg-lusion-primary selection:text-white`}>
           <AnimatePresence mode="wait">
@@ -79,10 +88,10 @@ function App() {
                     isMuted={isMuted} 
                   />
                   
-                  <main className="relative z-10 w-full overflow-hidden">
+                  <main className="relative z-10 w-full min-h-screen">
                     <Routes>
                       <Route path="/" element={
-                        <>
+                        <div className="flex flex-col">
                           <Hero />
                           <About />
                           <TechStack />
@@ -91,7 +100,7 @@ function App() {
                           <Lab />
                           <Services />
                           <Contact />
-                        </>
+                        </div>
                       } />
                       <Route path="/blog" element={<Blog />} />
                     </Routes>
@@ -112,13 +121,15 @@ function App() {
                       EXIT_STEALTH
                     </button>
                   </div>
-                  <div className="flex-1 opacity-80">
+                  <div className="flex-1 opacity-80 overflow-y-auto custom-scrollbar">
                     <p className="mb-4 animate-pulse"># Aguardando entrada de comando terminal...</p>
                     <p className="text-xs text-green-800 leading-relaxed">
                       JeffersonTeles@Portfolio:~$ System access granted.<br/>
                       JeffersonTeles@Portfolio:~$ Kernel version: 5.15.0-76-generic<br/>
                       JeffersonTeles@Portfolio:~$ Memory: 32GB LPDDR5<br/>
                       JeffersonTeles@Portfolio:~$ Neural Engine: Active [v4.0.2]<br/>
+                      JeffersonTeles@Portfolio:~$ Loading modules... OK<br/>
+                      JeffersonTeles@Portfolio:~$ All security protocols bypassed.<br/>
                     </p>
                   </div>
                 </div>

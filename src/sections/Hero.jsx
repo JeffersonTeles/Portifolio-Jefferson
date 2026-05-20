@@ -63,9 +63,9 @@ const Hero = () => {
             {/* Watermark Portfolio - Fixed Positioning */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 0.03, x: 0 }}
+              animate={{ opacity: 0.02, x: 0 }}
               transition={{ duration: 2, delay: 1 }}
-              className="absolute -top-10 -right-10 text-[20vw] font-black uppercase pointer-events-none z-0 select-none whitespace-nowrap"
+              className="absolute -top-10 -right-10 text-[20vw] font-black uppercase pointer-events-none z-0 select-none whitespace-nowrap hidden lg:block"
             >
               Portfolio
             </motion.div>
