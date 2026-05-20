@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { FiArrowRight, FiDownload } from 'react-icons/fi';
+import DecryptText from '../components/DecryptText';
 
 const Hero = () => {
   const prefersReducedMotion = useReducedMotion();
-  const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches;
 
   const containerVars = {
     initial: { opacity: 0 },
@@ -27,13 +27,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20">
-      {/* Background Decorative Elements */}
-      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-dark-accent/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-dark-terminal/20 rounded-full blur-[120px]" />
-      </div>
-
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center overflow-hidden">
       <div className="container-custom relative z-10">
         <motion.div
           variants={containerVars}
@@ -50,20 +44,26 @@ const Hero = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-dark-terminal opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-dark-terminal"></span>
             </span>
-            <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-dark-terminal">
-              Aberto a oportunidades
+            <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-dark-terminal">
+              <DecryptText text="Aberto a oportunidades" delay={1} />
             </span>
           </motion.div>
 
           {/* Headline */}
           <motion.div variants={itemVars} className="mb-6">
             <h1 className="text-5xl md:text-7xl lg:text-8xl leading-[1.1] mb-4">
-              <span className="inline-block hover:glitch-text transition-all duration-300">Jefferson</span>
+              <span className="inline-block hover-glitch transition-all duration-300">
+                <DecryptText text="Jefferson" delay={0.2} />
+              </span>
               <br />
-              <span className="text-dark-accent">Teles</span>
+              <span className="text-dark-accent">
+                <DecryptText text="Teles" delay={0.5} />
+              </span>
             </h1>
-            <h2 className="font-mono text-lg md:text-xl text-dark-terminal/80 tracking-tight">
-              &lt; Desenvolvedor em Construção /&gt;
+            <h2 className="font-mono text-lg md:text-xl text-dark-terminal/80 tracking-tight flex items-center gap-4">
+              <span className="opacity-40">&lt;</span>
+              <DecryptText text="Desenvolvedor em Construção" delay={1.5} />
+              <span className="opacity-40">/&gt;</span>
             </h2>
           </motion.div>
 
@@ -72,38 +72,38 @@ const Hero = () => {
             variants={itemVars}
             className="text-dark-muted text-lg md:text-xl mb-12 max-w-2xl leading-relaxed"
           >
-            Automação, IA e Web · De suporte a código · Cascavel/PR
+            Automação, IA e Web • De suporte a código • Cascavel/PR
           </motion.p>
 
-          {/* CTAs */}
+          {/* CTAs (Efeito 10: Camadas de Profundidade sutil) */}
           <motion.div variants={itemVars} className="flex flex-wrap gap-6 items-center">
-            <a href="#projects" className="btn-primary group">
-              <span className="flex items-center gap-2">
+            <a href="#projects" className="btn-primary group overflow-hidden">
+              <div className="relative z-10 flex items-center gap-2">
                 Ver Projetos
                 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </span>
+              </div>
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             </a>
             
             <a 
               href="/resume.pdf" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="btn-secondary group"
+              className="btn-secondary group overflow-hidden"
             >
-              <span className="flex items-center gap-2">
+              <div className="relative z-10 flex items-center gap-2">
                 <FiDownload />
                 Baixar Currículo
-              </span>
+              </div>
+              <div className="absolute inset-0 bg-dark-accent/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
             </a>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Decorative Terminal Line */}
-      <div className="absolute bottom-10 left-0 w-full overflow-hidden pointer-events-none opacity-10">
-        <div className="whitespace-nowrap font-mono text-[10vw] font-black uppercase text-white/5 select-none">
-          React • Node.js • TypeScript • PostgreSQL • Java • Supabase • 
-        </div>
+      {/* Decorative HUD metadata in Hero */}
+      <div className="absolute bottom-12 right-12 hidden xl:block font-mono text-[8px] text-white/10 tracking-[0.3em] uppercase rotate-90 origin-right">
+        UI_HUD_V3.0 // JEFFERSON_TELES_PORTFOLIO
       </div>
     </section>
   );
