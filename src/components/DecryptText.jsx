@@ -5,7 +5,7 @@ const DecryptText = ({ text = "", className, delay = 0 }) => {
   const chars = '!@#$%^&*()_+[]{}:;|,.<>?0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   useEffect(() => {
-    if (!text) return;
+    if (!text || typeof text !== 'string') return;
 
     let timeout;
     let iteration = 0;
@@ -37,7 +37,7 @@ const DecryptText = ({ text = "", className, delay = 0 }) => {
     };
   }, [text, delay]);
 
-  return <span className={className}>{displayText || text || ""}</span>;
+  return <span className={className}>{displayText || (typeof text === 'string' ? text : "")}</span>;
 };
 
 export default DecryptText;

@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const SplitText = ({ text, className, delay = 0 }) => {
+const SplitText = ({ text = "", className, delay = 0 }) => {
+  if (!text || typeof text !== 'string') return null;
   const letters = text.split("");
 
   const containerVars = {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronDown, FiChevronUp, FiTerminal, FiMic, FiMicOff } from 'react-icons/fi';
-import useSound from 'use-sound';
 
 const AIConsole = ({ isStealth }) => {
   const [isMinimized, setIsMinimized] = useState(false);
@@ -13,10 +12,6 @@ const AIConsole = ({ isStealth }) => {
     "Voice recognition standby."
   ]);
   const scrollRef = useRef(null);
-
-  // Sound Effects (Fixed: Added format and placeholder handling)
-  const [playClick] = useSound('/click.mp3', { volume: 0.1, format: ['mp3'] });
-  const [playBeep] = useSound('/beep.mp3', { volume: 0.05, format: ['mp3'] });
 
   // Web Speech API Setup
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -50,7 +45,6 @@ const AIConsole = ({ isStealth }) => {
       if (!isMinimized && Math.random() > 0.7) {
         const randomMsg = messages[Math.floor(Math.random() * messages.length)];
         addLog(randomMsg);
-        try { playBeep(); } catch(e) {}
       }
     }, 8000);
 
@@ -74,7 +68,6 @@ const AIConsole = ({ isStealth }) => {
   };
 
   const startListening = () => {
-    try { playClick(); } catch(e) {}
     if (!recognition) {
       addLog("Erro: Reconhecimento de voz não suportado.");
       return;
@@ -93,7 +86,6 @@ const AIConsole = ({ isStealth }) => {
 
   const processCommand = (cmd) => {
     const cleanCmd = cmd.replace('/', '').trim().toLowerCase();
-    try { playBeep(); } catch(e) {}
     
     const questions = {
       react: /react|frontend|interface/i,
@@ -163,7 +155,6 @@ const AIConsole = ({ isStealth }) => {
 
   const handleCommand = (e) => {
     if (e.key === 'Enter' && inputValue.trim()) {
-      try { playClick(); } catch(e) {}
       addLog(`user@jt:~$ ${inputValue}`);
       processCommand(inputValue.toLowerCase());
       setInputValue("");
@@ -175,7 +166,7 @@ const AIConsole = ({ isStealth }) => {
       <div className={`bg-black/80 backdrop-blur-xl border border-white/10 rounded-sm overflow-hidden shadow-2xl transition-all duration-700 ${isStealth ? 'border-dark-terminal/50' : ''}`}>
         <div 
           className="flex items-center justify-between gap-2 p-3 border-b border-white/5 cursor-pointer hover:bg-white/5"
-          onClick={() => { setIsMinimized(!isMinimized); try { playClick(); } catch(e) {} }}
+          onClick={() => { setIsMinimized(!isMinimized); }}
         >
           <div className="flex items-center gap-2">
             <FiTerminal size={14} className={isStealth ? 'text-dark-terminal' : 'text-dark-accent'} />
