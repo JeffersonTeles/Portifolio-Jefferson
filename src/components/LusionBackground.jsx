@@ -1,8 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { MeshDistortMaterial, Sphere, Float, Grid, Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
-import { Pane } from 'tweakpane';
 import { useSection } from '../context/SectionContext';
 
 const Scene = ({ isDark, config }) => {
@@ -15,20 +14,20 @@ const Scene = ({ isDark, config }) => {
   const getMorphScale = () => {
     if (config.manual) return config.scale;
     switch(currentSection) {
-      case 'about': return 3.5;
-      case 'projects': return 2;
-      case 'lab': return 4;
-      default: return 2.5;
+      case 'about': return 2.5;
+      case 'projects': return 1.5;
+      case 'lab': return 3;
+      default: return 2;
     }
   };
 
   const getMorphDistort = () => {
     if (config.manual) return config.distort;
     switch(currentSection) {
-      case 'hero': return 0.4;
-      case 'services': return 0.8;
+      case 'hero': return 0.3;
+      case 'services': return 0.6;
       case 'contact': return 0.2;
-      default: return 0.5;
+      default: return 0.4;
     }
   };
 
@@ -45,7 +44,7 @@ const Scene = ({ isDark, config }) => {
     
     if (gridRef.current) {
       gridRef.current.rotation.z = time * 0.05;
-      gridRef.current.position.z = -2 + Math.sin(time + mouse.x) * config.physics;
+      gridRef.current.position.z = -3 + Math.sin(time + mouse.x) * config.physics;
     }
 
     if (particlesRef.current) {
@@ -70,7 +69,8 @@ const Scene = ({ isDark, config }) => {
       <ambientLight intensity={0.5} />
       <pointLight position={[-10, -10, -5]} color={config.color} intensity={2} />
       
-      <group ref={gridRef} position={[0, 0, -2]}>
+      {/* Background Grid - Pushed back */}
+      <group ref={gridRef} position={[0, 0, -3]}>
         <Grid
           infiniteGrid
           fadeDistance={50}
@@ -84,8 +84,9 @@ const Scene = ({ isDark, config }) => {
         />
       </group>
 
+      {/* Main Sphere - Pushed back slightly to not overlap content */}
       <Float speed={config.speed} rotationIntensity={1} floatIntensity={1}>
-        <Sphere ref={sphereRef} args={[1, 100, 100]} scale={getMorphScale()}>
+        <Sphere ref={sphereRef} args={[1, 100, 100]} scale={getMorphScale()} position={[0, 0, -1]}>
           <MeshDistortMaterial
             color={config.color}
             distort={getMorphDistort()}
@@ -98,7 +99,8 @@ const Scene = ({ isDark, config }) => {
         </Sphere>
       </Float>
 
-      <Points ref={particlesRef} positions={particles}>
+      {/* Particles - Pushed back */}
+      <Points ref={particlesRef} positions={particles} position={[0, 0, -2]}>
         <PointMaterial
           transparent
           color={config.color}
@@ -118,39 +120,13 @@ const LusionBackground = ({ isDark, isStealth }) => {
     speed: 2,
     distort: 0.4,
     scale: 2.5,
-    opacity: 0.15,
+    opacity: 0.1, // Reduced default opacity
     physics: 0.2,
     manual: false
   });
 
-  useEffect(() => {
-    if (isStealth) return; // Disable panel in stealth mode
-
-    const pane = new Pane({
-      title: 'JT Core Engine Parameters',
-      expanded: false,
-    });
-
-    pane.containerElem_.style.zIndex = '1000';
-    pane.containerElem_.style.top = '100px';
-
-    pane.addInput(config, 'color', { label: 'Engine Accent' });
-    pane.addInput(config, 'speed', { min: 0, max: 10, label: 'Core Velocity' });
-    pane.addInput(config, 'distort', { min: 0, max: 2, label: 'Morph Intensity' });
-    pane.addInput(config, 'scale', { min: 1, max: 5, label: 'Geometric Scale' });
-    pane.addInput(config, 'opacity', { min: 0, max: 1, label: 'Aether Density' });
-    pane.addInput(config, 'physics', { min: 0, max: 1, label: 'Grid Gravity' });
-    pane.addInput(config, 'manual', { label: 'Manual Override' });
-
-    pane.on('change', (ev) => {
-      setConfig((prev) => ({ ...prev, [ev.presetKey]: ev.value }));
-    });
-
-    return () => pane.dispose();
-  }, [isStealth]);
-
   return (
-    <div className={`fixed inset-0 z-0 pointer-events-none transition-opacity duration-1000 ${isStealth ? 'opacity-20 grayscale' : 'opacity-100'}`}>
+    <div className={`fixed inset-0 z-[-1] pointer-events-none transition-opacity duration-1000 ${isStealth ? 'opacity-20 grayscale' : 'opacity-100'}`}>
       <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
         <Scene isDark={isDark} config={config} />
       </Canvas>
