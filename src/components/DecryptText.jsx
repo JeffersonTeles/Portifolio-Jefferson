@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
-const DecryptText = ({ text, className, delay = 0 }) => {
+const DecryptText = ({ text = "", className, delay = 0 }) => {
   const [displayText, setDisplayText] = useState('');
   const chars = '!@#$%^&*()_+[]{}:;|,.<>?0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   useEffect(() => {
+    if (!text) return;
+
     let timeout;
     let iteration = 0;
     const maxIterations = 10;
@@ -36,7 +37,7 @@ const DecryptText = ({ text, className, delay = 0 }) => {
     };
   }, [text, delay]);
 
-  return <span className={className}>{displayText || text}</span>;
+  return <span className={className}>{displayText || text || ""}</span>;
 };
 
 export default DecryptText;
