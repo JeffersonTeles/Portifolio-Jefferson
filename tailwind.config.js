@@ -4,7 +4,6 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -12,7 +11,7 @@ export default {
           bg: '#0a0a0f',
           card: '#12121e',
           accent: '#00d4ff', // Cyan
-          terminal: '#00ff88', // Green
+          terminal: '#00ff88', // Green Terminal
           muted: '#808080',
         }
       },
@@ -20,9 +19,8 @@ export default {
         mono: ['Space Mono', 'monospace'],
         sans: ['Inter', 'sans-serif'],
       },
-      letterSpacing: {
-        'tighter': '-0.04em',
-        'wide': '0.15em',
+      animation: {
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       }
     },
   },

@@ -1,53 +1,53 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiArrowUpRight, FiGithub, FiExternalLink } from 'react-icons/fi';
+import { FiExternalLink, FiGithub } from 'react-icons/fi';
 
 const Projects = () => {
   const projects = [
     {
-      title: "Caixa Viva",
-      desc: "SaaS de check-in financeiro para MEIs.",
-      stack: ["Next.js", "Supabase", "Vercel"],
-      status: "Em desenvolvimento",
+      name: "Caixa Viva",
+      desc: "SaaS financeiro para MEIs focado em check-in de fluxo de caixa.",
+      stack: ["Next.js", "Supabase", "Tailwind"],
+      status: "Em dev",
       statusColor: "text-yellow-400",
       statusBg: "bg-yellow-400/10",
-      link: "#",
+      link: "#"
     },
     {
-      title: "Escudo",
-      desc: "Detecção de deepfakes e conteúdo IA para o mercado BR.",
-      stack: ["Next.js", "IA APIs", "Tailwind"],
-      status: "Em desenvolvimento",
+      name: "Escudo",
+      desc: "Plataforma de detecção de deepfakes e conteúdo IA para o mercado BR.",
+      stack: ["Next.js", "IA APIs", "Python"],
+      status: "Em dev",
       statusColor: "text-yellow-400",
       statusBg: "bg-yellow-400/10",
-      link: "#",
+      link: "#"
     },
     {
-      title: "Bot Afiliados ML",
-      desc: "Bot Node.js monitor de ofertas via Puppeteer e WhatsApp.",
+      name: "Bot Afiliados ML",
+      desc: "Ranqueia ofertas ML/Shopee via IA no WhatsApp automaticamente.",
       stack: ["Node.js", "Puppeteer", "WhatsApp API"],
-      status: "Em desenvolvimento",
+      status: "Em dev",
       statusColor: "text-yellow-400",
       statusBg: "bg-yellow-400/10",
-      link: "#",
+      link: "#"
     },
     {
-      title: "Casamento",
-      desc: "Site de casamento com RSVP e lista de presentes.",
-      stack: ["Next.js", "Vercel", "Framer Motion"],
-      status: "Em produção",
-      statusColor: "text-green-400",
-      statusBg: "bg-green-400/10",
-      link: "https://casamento-ten-rho.vercel.app",
+      name: "Site de Casamento",
+      desc: "Plataforma de RSVP + lista de presentes com integração de pagamentos.",
+      stack: ["Next.js", "Vercel", "Tailwind"],
+      status: "Produção",
+      statusColor: "text-dark-terminal",
+      statusBg: "bg-dark-terminal/10",
+      link: "https://casamento-ten-rho.vercel.app"
     },
     {
-      title: "Attack Shark X11 Driver",
-      desc: "Configuração de mouse gamer no Linux via WebHID.",
-      stack: ["Linux", "WebHID", "udev"],
+      name: "Attack Shark X11",
+      desc: "Driver e configurador de mouse gamer no Linux via WebHID.",
+      stack: ["WebHID", "udev", "JavaScript"],
       status: "Concluído",
       statusColor: "text-dark-muted",
       statusBg: "bg-white/5",
-      link: "https://github.com/JeffersonTeles/attack-shark-x11",
+      link: "https://github.com/JeffersonTeles/attack-shark-x11"
     }
   ];
 
@@ -56,11 +56,11 @@ const Projects = () => {
       <div className="container-custom">
         <div className="section-title mb-16">
           <span className="w-8 h-px bg-dark-terminal" />
-          03 / Projetos
+          <span className="mono-tag">03 / Projetos Selecionados</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((p, i) => (
+          {projects.map((project, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
@@ -68,53 +68,49 @@ const Projects = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               whileHover={{ y: -10 }}
-              className="group relative bg-dark-card border border-white/5 p-8 rounded-sm hover:border-dark-accent/50 transition-all duration-500"
+              className="glass-card group relative p-8 flex flex-col h-full overflow-hidden"
             >
-              {/* Status Tag */}
-              <div className={`absolute top-6 right-6 px-2 py-1 rounded-sm ${p.statusBg} border border-white/5`}>
-                <span className={`text-[8px] font-mono font-bold uppercase tracking-widest ${p.statusColor}`}>
-                  {p.status}
-                </span>
-              </div>
-
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-dark-accent transition-colors">
-                {p.title}
-              </h3>
+              {/* Glow Effect */}
+              <div className="absolute inset-0 bg-dark-accent/0 group-hover:bg-dark-accent/5 transition-colors duration-500" />
               
-              <p className="text-dark-muted text-sm mb-8 leading-relaxed line-clamp-2">
-                {p.desc}
-              </p>
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="flex justify-between items-start mb-6">
+                  <div className={`px-2 py-1 rounded-sm border border-white/5 ${project.statusBg}`}>
+                    <span className={`font-mono text-[8px] font-bold uppercase tracking-widest ${project.statusColor}`}>
+                      {project.status}
+                    </span>
+                  </div>
+                  <div className="flex gap-4">
+                    <a href={project.link} target="_blank" className="text-dark-muted hover:text-white transition-colors">
+                      <FiGithub size={18} />
+                    </a>
+                    {project.link !== "#" && (
+                      <a href={project.link} target="_blank" className="text-dark-accent hover:text-white transition-colors">
+                        <FiExternalLink size={18} />
+                      </a>
+                    )}
+                  </div>
+                </div>
 
-              <div className="flex flex-wrap gap-2 mb-10">
-                {p.stack.map((s, si) => (
-                  <span key={si} className="font-mono text-[9px] text-dark-terminal/60 bg-dark-terminal/5 px-2 py-0.5 border border-dark-terminal/10 rounded-sm uppercase tracking-tighter">
-                    {s}
-                  </span>
-                ))}
+                <h3 className="text-2xl font-bold mb-3 group-hover:text-dark-accent transition-colors">
+                  {project.name}
+                </h3>
+                
+                <p className="text-dark-muted text-sm mb-8 leading-relaxed flex-1">
+                  {project.desc}
+                </p>
+
+                <div className="flex flex-wrap gap-2 pt-6 border-t border-white/5">
+                  {project.stack.map((s, si) => (
+                    <span key={si} className="text-[9px] font-mono text-dark-terminal opacity-60 uppercase tracking-tighter">
+                      {s}
+                    </span>
+                  ))}
+                </div>
               </div>
 
-              <div className="flex items-center gap-6">
-                <a 
-                  href={p.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase text-white hover:text-dark-accent transition-colors"
-                >
-                  <FiExternalLink /> Live Demo
-                </a>
-                <a 
-                  href="#" 
-                  className="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase text-dark-muted hover:text-white transition-colors"
-                >
-                  <FiGithub /> Repo
-                </a>
-              </div>
-
-              {/* Decorative Corner */}
-              <div className="absolute bottom-0 right-0 w-8 h-8 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                <div className="absolute bottom-0 right-0 w-full h-[1px] bg-dark-accent" />
-                <div className="absolute bottom-0 right-0 h-full w-[1px] bg-dark-accent" />
-              </div>
+              {/* Bottom Line Glow */}
+              <div className="absolute bottom-0 left-0 w-0 h-px bg-dark-accent group-hover:w-full transition-all duration-700" />
             </motion.div>
           ))}
         </div>
