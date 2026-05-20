@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 const SpatialAudio = ({ isMuted }) => {
-  // Sound logic disabled to prevent 403 errors and stabilize the app
+  // Sound logic removed for maximum stability
   return null;
 };
 

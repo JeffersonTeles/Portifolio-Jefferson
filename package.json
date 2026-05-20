@@ -27,8 +27,7 @@
     "react-router-dom": "^7.15.1",
     "react-scroll": "^1.9.0",
     "three": "^0.184.0",
-    "tweakpane": "^4.0.5",
-    "use-sound": "^5.0.0"
+    "tweakpane": "^4.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
