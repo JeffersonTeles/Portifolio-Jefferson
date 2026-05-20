@@ -8,20 +8,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        lusion: {
-          bg: '#F0F1FA',
-          primary: '#1A2FFB',
-          text: '#050505',
+        dark: {
+          bg: '#0a0a0f',
+          card: '#12121e',
+          accent: '#00d4ff', // Cyan
+          terminal: '#00ff88', // Green
           muted: '#808080',
         }
       },
-      letterSpacing: {
-        'lusion-tighter': '-0.04em',
-        'lusion-wide': '0.15em',
+      fontFamily: {
+        mono: ['Space Mono', 'monospace'],
+        sans: ['Inter', 'sans-serif'],
       },
-      fontSize: {
-        '10xl': '10rem',
-        '11xl': '12rem',
+      letterSpacing: {
+        'tighter': '-0.04em',
+        'wide': '0.15em',
       }
     },
   },

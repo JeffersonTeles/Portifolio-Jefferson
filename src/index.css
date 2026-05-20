@@ -3,105 +3,97 @@
 @tailwind utilities;
 
 @layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
   html {
     scroll-behavior: smooth;
   }
   
   body {
-    @apply bg-lusion-bg text-lusion-text;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-dark-bg text-white selection:bg-dark-accent/30 selection:text-dark-accent;
+    font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    cursor: none; /* Hide default cursor for the custom one */
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-lusion-tighter;
+    @apply font-bold tracking-tighter;
   }
-  
-  h1 { @apply text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] leading-[0.9]; }
-  h2 { @apply text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1]; }
 }
 
 @layer components {
-  /* Hide custom cursor on touch devices */
-  @media (hover: none) and (pointer: coarse) {
-    .cursor-dot { @apply hidden; }
-    body { cursor: auto !important; }
-  }
-  .container-lusion {
-    @apply max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20;
+  .container-custom {
+    @apply max-w-7xl mx-auto px-6 md:px-12;
   }
 
-  .section-lusion {
-    @apply py-24 md:py-32 lg:py-40;
+  .section-title {
+    @apply font-mono text-dark-terminal text-sm tracking-[0.3em] uppercase mb-4 flex items-center gap-4;
   }
 
-  /* Custom Cursor */
-  .cursor-dot {
-    @apply fixed top-0 left-0 bg-lusion-primary rounded-full pointer-events-none z-[9999]
-           flex items-center justify-center overflow-hidden;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s, background-color 0.3s;
-    mix-blend-mode: difference;
+  .btn-primary {
+    @apply relative px-8 py-3 bg-dark-accent text-dark-bg font-bold rounded-sm 
+           hover:shadow-[0_0_20px_rgba(0,212,255,0.5)] transition-all duration-300;
   }
 
-  .cursor-dot.view-mode {
-    @apply bg-lusion-primary;
-    mix-blend-mode: normal;
+  .btn-secondary {
+    @apply relative px-8 py-3 border border-dark-accent/30 text-dark-accent font-bold rounded-sm
+           hover:bg-dark-accent/5 transition-all duration-300;
   }
 
-  .cursor-dot.magnify-mode {
-    @apply bg-white;
-    mix-blend-mode: difference;
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
   }
-
-  .cursor-dot.active:not(.view-mode):not(.magnify-mode) {
-    @apply bg-transparent border border-lusion-primary;
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-bg;
   }
-
-  /* Custom Scrollbar for Modal */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 2px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-lusion-primary/20;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-lusion-primary;
-  }
-
-  /* Noise Overlay */
-  .noise-overlay {
-    @apply fixed inset-0 pointer-events-none z-[9998] opacity-[0.03];
-    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-  }
-
-  /* Buttons */
-  .btn-lusion {
-    @apply inline-flex items-center gap-4 px-8 py-4 border border-lusion-text/10 
-           text-sm font-medium tracking-lusion-wide uppercase transition-all duration-500
-           hover:bg-lusion-text hover:text-white hover:border-lusion-text;
-  }
-
-  .btn-lusion-primary {
-    @apply btn-lusion bg-lusion-primary text-white border-lusion-primary hover:bg-lusion-text;
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full hover:bg-dark-accent/30 transition-colors;
   }
 }
 
-/* Scrollbar Lusion Style */
-::-webkit-scrollbar {
-  width: 4px;
+/* Glitch Effect Classes */
+.glitch-text {
+  position: relative;
+  text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+  animation: glitch 500ms infinite;
 }
 
-::-webkit-scrollbar-track {
-  @apply bg-lusion-bg;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-lusion-text/10;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-lusion-primary;
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+      0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  14% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+      0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  15% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+      0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+      0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+      0.05em 0 0 rgba(0, 255, 0, 0.75),
+      0 -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  99% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+      0.05em 0 0 rgba(0, 255, 0, 0.75),
+      0 -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  100% {
+    text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
 }

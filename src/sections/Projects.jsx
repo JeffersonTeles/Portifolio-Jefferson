@@ -1,225 +1,124 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiArrowUpRight, FiGithub, FiX, FiPlay, FiCalendar } from 'react-icons/fi';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FiArrowUpRight, FiGithub, FiExternalLink } from 'react-icons/fi';
 
 const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState(null);
-
   const projects = [
     {
-      title: "IA Automation Hub",
-      category: "Automação / IA",
-      description: "Plataforma centralizada para gestão de agentes autônomos e fluxos de trabalho inteligentes.",
-      longDescription: "Este projeto resolve o problema de fragmentação em fluxos de trabalho de IA. Desenvolvemos um hub que integra OpenAI, LangChain e automações customizadas em uma única interface intuitiva. O sistema permite que empresas configurem 'agentes' que respondem a gatilhos específicos, economizando centenas de horas manuais por mês.",
-      tags: ["Python", "OpenAI", "React", "Docker"],
+      title: "Caixa Viva",
+      desc: "SaaS de check-in financeiro para MEIs.",
+      stack: ["Next.js", "Supabase", "Vercel"],
+      status: "Em desenvolvimento",
+      statusColor: "text-yellow-400",
+      statusBg: "bg-yellow-400/10",
       link: "#",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1600",
-      video: null
     },
     {
-      title: "FinTech Dashboard",
-      category: "Aplicação Web / SaaS",
-      description: "Interface de alta performance para análise de dados financeiros em tempo real.",
-      longDescription: "Um dashboard financeiro focado em ultra-performance. Utilizando WebSockets para dados em tempo real e visualizações complexas com D3.js, o sistema oferece uma experiência de trading e análise sem atrasos. A arquitetura foi otimizada para lidar com milhares de atualizações por segundo.",
-      tags: ["TypeScript", "Next.js", "Tailwind", "D3.js"],
+      title: "Escudo",
+      desc: "Detecção de deepfakes e conteúdo IA para o mercado BR.",
+      stack: ["Next.js", "IA APIs", "Tailwind"],
+      status: "Em desenvolvimento",
+      statusColor: "text-yellow-400",
+      statusBg: "bg-yellow-400/10",
       link: "#",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600",
-      video: null
+    },
+    {
+      title: "Bot Afiliados ML",
+      desc: "Bot Node.js monitor de ofertas via Puppeteer e WhatsApp.",
+      stack: ["Node.js", "Puppeteer", "WhatsApp API"],
+      status: "Em desenvolvimento",
+      statusColor: "text-yellow-400",
+      statusBg: "bg-yellow-400/10",
+      link: "#",
+    },
+    {
+      title: "Casamento",
+      desc: "Site de casamento com RSVP e lista de presentes.",
+      stack: ["Next.js", "Vercel", "Framer Motion"],
+      status: "Em produção",
+      statusColor: "text-green-400",
+      statusBg: "bg-green-400/10",
+      link: "https://casamento-ten-rho.vercel.app",
+    },
+    {
+      title: "Attack Shark X11 Driver",
+      desc: "Configuração de mouse gamer no Linux via WebHID.",
+      stack: ["Linux", "WebHID", "udev"],
+      status: "Concluído",
+      statusColor: "text-dark-muted",
+      statusBg: "bg-white/5",
+      link: "https://github.com/JeffersonTeles/attack-shark-x11",
     }
   ];
 
-  const handleProjectHover = (title) => {
-    window.dispatchEvent(new CustomEvent('ai-log', { 
-      detail: `Analisando arquitetura: ${title}...` 
-    }));
-  };
-
   return (
-    <section id="projects" className="section-lusion">
-      <div className="container-lusion">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
-          <div className="max-w-2xl">
-            <span className="text-sm font-bold tracking-lusion-wide uppercase text-lusion-primary flex items-center gap-4 mb-8">
-              <span className="w-8 h-px bg-lusion-primary" />
-              02 / Projetos
-            </span>
-            <h2 className="leading-tight">Trabalhos<br />Selecionados</h2>
-          </div>
-          
-          <div className="flex flex-col items-end">
-            <p className="text-lusion-text/40 text-xs md:text-sm tracking-lusion-wide uppercase mb-6">
-              Precisão técnica em cada pixel.
-            </p>
-            <a 
-              href="https://calendly.com" 
-              target="_blank" 
-              className="flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase text-lusion-primary border border-lusion-primary/20 px-6 py-3 rounded-full hover:bg-lusion-primary hover:text-white transition-all duration-500"
-            >
-              <FiCalendar /> Agendar Reunião
-            </a>
-          </div>
+    <section id="projects" className="py-24 bg-dark-bg">
+      <div className="container-custom">
+        <div className="section-title mb-16">
+          <span className="w-8 h-px bg-dark-terminal" />
+          03 / Projetos
         </div>
 
-        <div className="space-y-32 md:space-y-48">
-          {projects.map((project, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 50 }}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((p, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              onMouseEnter={() => handleProjectHover(project.title)}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 group"
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -10 }}
+              className="group relative bg-dark-card border border-white/5 p-8 rounded-sm hover:border-dark-accent/50 transition-all duration-500"
             >
-              <div 
-                className="lg:col-span-7 overflow-hidden bg-lusion-text/5 aspect-[16/9] relative rounded-sm cursor-pointer shadow-2xl"
-                data-cursor="view"
-                onClick={() => setSelectedProject(project)}
-              >
-                {/* Infinity Tier: Glass Shader Overlay (CSS) */}
-                <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                  <div className="absolute inset-0 backdrop-blur-[2px] bg-white/5 dark:bg-black/5" />
-                  <div className="absolute inset-0 border-[20px] border-white/10 dark:border-black/10" />
-                </div>
-
-                <motion.div 
-                  initial={{ clipPath: 'inset(100% 0 0 0)' }}
-                  whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.5, ease: [0.6, 0.05, -0.01, 0.9] }}
-                  className="w-full h-full relative"
-                >
-                  <motion.img 
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ duration: 1.5, ease: [0.6, 0.05, -0.01, 0.9] }}
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover grayscale-[60%] group-hover:grayscale-0 transition-all duration-1000"
-                  />
-                </motion.div>
+              {/* Status Tag */}
+              <div className={`absolute top-6 right-6 px-2 py-1 rounded-sm ${p.statusBg} border border-white/5`}>
+                <span className={`text-[8px] font-mono font-bold uppercase tracking-widest ${p.statusColor}`}>
+                  {p.status}
+                </span>
               </div>
 
-              <div className="lg:col-span-5 flex flex-col justify-center">
-                <span className="text-[10px] md:text-xs font-bold tracking-lusion-wide uppercase text-lusion-primary mb-4">
-                  {project.category}
-                </span>
-                <h3 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-lusion-tighter mb-6 group-hover:text-lusion-primary transition-colors duration-500">
-                  {project.title}
-                </h3>
-                <p className="text-lusion-text/60 text-lg md:text-xl mb-8 max-w-md leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-3 mb-12">
-                  {project.tags.map((tag, tIdx) => (
-                    <span key={tIdx} className="text-[10px] font-bold tracking-lusion-wide uppercase border border-lusion-text/10 px-3 py-1 text-lusion-text/40 group-hover:border-lusion-primary group-hover:text-lusion-primary transition-colors">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+              <h3 className="text-2xl font-bold mb-3 group-hover:text-dark-accent transition-colors">
+                {p.title}
+              </h3>
+              
+              <p className="text-dark-muted text-sm mb-8 leading-relaxed line-clamp-2">
+                {p.desc}
+              </p>
 
-                <div className="flex gap-8">
-                  <button 
-                    onClick={() => setSelectedProject(project)}
-                    className="flex items-center gap-2 text-xs font-bold tracking-lusion-wide uppercase group/link"
-                  >
-                    Explorar Projeto
-                    <FiArrowUpRight className="group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform duration-300" />
-                  </button>
-                  <a href="#" className="flex items-center gap-2 text-xs font-bold tracking-lusion-wide uppercase text-lusion-text/30 hover:text-lusion-text transition-colors">
-                    <FiGithub />
-                    Código Fonte
-                  </a>
-                </div>
+              <div className="flex flex-wrap gap-2 mb-10">
+                {p.stack.map((s, si) => (
+                  <span key={si} className="font-mono text-[9px] text-dark-terminal/60 bg-dark-terminal/5 px-2 py-0.5 border border-dark-terminal/10 rounded-sm uppercase tracking-tighter">
+                    {s}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-6">
+                <a 
+                  href={p.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase text-white hover:text-dark-accent transition-colors"
+                >
+                  <FiExternalLink /> Live Demo
+                </a>
+                <a 
+                  href="#" 
+                  className="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase text-dark-muted hover:text-white transition-colors"
+                >
+                  <FiGithub /> Repo
+                </a>
+              </div>
+
+              {/* Decorative Corner */}
+              <div className="absolute bottom-0 right-0 w-8 h-8 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <div className="absolute bottom-0 right-0 w-full h-[1px] bg-dark-accent" />
+                <div className="absolute bottom-0 right-0 h-full w-[1px] bg-dark-accent" />
               </div>
             </motion.div>
           ))}
         </div>
       </div>
-
-      {/* Project Detail Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12"
-          >
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-lusion-bg/95 backdrop-blur-2xl"
-              onClick={() => setSelectedProject(null)}
-            />
-            
-            <motion.div 
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 100, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="relative w-full max-w-6xl bg-inherit border border-lusion-text/10 overflow-hidden rounded-sm max-h-[90vh] overflow-y-auto custom-scrollbar shadow-2xl"
-            >
-              <button 
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-8 right-8 z-10 text-lusion-text/40 hover:text-lusion-primary transition-colors"
-              >
-                <FiX size={32} />
-              </button>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="h-64 lg:h-auto overflow-hidden bg-black flex items-center justify-center">
-                  {selectedProject.video ? (
-                    <video 
-                      src={selectedProject.video} 
-                      autoPlay 
-                      loop 
-                      muted 
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover" />
-                  )}
-                </div>
-                
-                <div className="p-8 md:p-16">
-                  <span className="text-xs font-bold tracking-lusion-wide uppercase text-lusion-primary mb-6 block">
-                    {selectedProject.category}
-                  </span>
-                  <h2 className="text-5xl md:text-7xl font-bold tracking-lusion-tighter mb-8">
-                    {selectedProject.title}
-                  </h2>
-                  <div className="space-y-8">
-                    <p className="text-xl md:text-2xl text-lusion-text/60 leading-relaxed font-medium italic">
-                      {selectedProject.description}
-                    </p>
-                    <p className="text-lg text-lusion-text/80 leading-relaxed">
-                      {selectedProject.longDescription}
-                    </p>
-                    <div className="flex flex-wrap gap-4 pt-8 border-t border-lusion-text/5">
-                      {selectedProject.tags.map((tag, tIdx) => (
-                        <span key={tIdx} className="text-xs font-bold tracking-lusion-wide uppercase border border-lusion-text/10 px-4 py-2">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex gap-8 pt-8">
-                      <a href={selectedProject.link} className="btn-lusion-primary">
-                        Lançar Projeto
-                        <FiArrowUpRight />
-                      </a>
-                      <a href="#" className="btn-lusion">
-                        Github Repo
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

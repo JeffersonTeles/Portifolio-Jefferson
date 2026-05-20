@@ -1,146 +1,110 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { FiArrowRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
-import { SiWhatsapp } from 'react-icons/si';
-import MagneticButton from '../components/MagneticButton';
-import SplitText from '../components/SplitText';
-import Parallax from '../components/Parallax';
+import { motion, useReducedMotion } from 'framer-motion';
+import { FiArrowRight, FiDownload } from 'react-icons/fi';
 
 const Hero = () => {
+  const prefersReducedMotion = useReducedMotion();
+  const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches;
+
   const containerVars = {
     initial: { opacity: 0 },
     animate: { 
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.3
+        delayChildren: 0.2
       }
     }
   };
 
   const itemVars = {
-    initial: { y: 100, opacity: 0 },
+    initial: { y: 20, opacity: 0 },
     animate: { 
       y: 0, 
       opacity: 1,
-      transition: { duration: 0.8, ease: [0.6, 0.05, -0.01, 0.9] }
+      transition: { duration: 0.5, ease: "easeOut" }
     }
   };
 
   return (
-    <section className="relative w-full min-h-screen flex flex-col justify-center section-lusion py-32 overflow-hidden">
-      <div className="container-lusion relative z-10">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20">
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-dark-accent/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-dark-terminal/20 rounded-full blur-[120px]" />
+      </div>
+
+      <div className="container-custom relative z-10">
         <motion.div
           variants={containerVars}
           initial="initial"
           animate="animate"
-          className="flex flex-col"
+          className="max-w-4xl"
         >
-          <div className="overflow-hidden mb-4 flex justify-between items-end">
-            <motion.span 
-              variants={itemVars}
-              className="text-[10px] md:text-xs font-bold tracking-lusion-wide uppercase text-lusion-primary"
-            >
-              Full-stack Developer & Especialista em Automação
-            </motion.span>
-            <motion.span 
-              variants={itemVars}
-              className="text-[10px] md:text-xs font-bold tracking-lusion-wide uppercase text-lusion-text/20"
-            >
-              Portfolio / 2026
-            </motion.span>
-          </div>
+          {/* Status Badge */}
+          <motion.div 
+            variants={itemVars}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-dark-terminal/20 bg-dark-terminal/5 mb-8"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-dark-terminal opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-dark-terminal"></span>
+            </span>
+            <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-dark-terminal">
+              Aberto a oportunidades
+            </span>
+          </motion.div>
 
-          <div className="relative">
-            <div className="overflow-hidden">
-              <h1 className="mb-8 break-words text-[12vw] leading-[0.8] uppercase relative z-10">
-                <SplitText text="Jefferson" delay={0.5} />
-                <br />
-                <SplitText text="Teles" delay={0.8} />
-              </h1>
-            </div>
+          {/* Headline */}
+          <motion.div variants={itemVars} className="mb-6">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl leading-[1.1] mb-4">
+              <span className="inline-block hover:glitch-text transition-all duration-300">Jefferson</span>
+              <br />
+              <span className="text-dark-accent">Teles</span>
+            </h1>
+            <h2 className="font-mono text-lg md:text-xl text-dark-terminal/80 tracking-tight">
+              &lt; Desenvolvedor em Construção /&gt;
+            </h2>
+          </motion.div>
+
+          {/* Subtitle */}
+          <motion.p 
+            variants={itemVars}
+            className="text-dark-muted text-lg md:text-xl mb-12 max-w-2xl leading-relaxed"
+          >
+            Automação, IA e Web · De suporte a código · Cascavel/PR
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div variants={itemVars} className="flex flex-wrap gap-6 items-center">
+            <a href="#projects" className="btn-primary group">
+              <span className="flex items-center gap-2">
+                Ver Projetos
+                <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              </span>
+            </a>
             
-            {/* Watermark Portfolio - Fixed Positioning */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 0.02, x: 0 }}
-              transition={{ duration: 2, delay: 1 }}
-              className="absolute -top-10 -right-10 text-[20vw] font-black uppercase pointer-events-none z-0 select-none whitespace-nowrap hidden lg:block"
+            <a 
+              href="/resume.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="btn-secondary group"
             >
-              Portfolio
-            </motion.div>
-          </div>
-
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
-            <Parallax offset={30} className="max-w-xl">
-              <motion.p variants={itemVars} className="text-lg md:text-2xl text-lusion-text/60 leading-relaxed font-medium">
-                Especialista em criar experiências digitais de alto impacto, 
-                automações inteligentes e sistemas escaláveis que transformam 
-                a tecnologia em valor real.
-              </motion.p>
-            </Parallax>
-
-            <motion.div variants={itemVars} className="flex flex-wrap gap-6 items-center">
-              <MagneticButton>
-                <a href="#contact" className="btn-lusion-primary group">
-                  Iniciar projeto
-                  <FiArrowRight className="transition-transform group-hover:translate-x-1" />
-                </a>
-              </MagneticButton>
-              <MagneticButton>
-                <a href="#projects" className="btn-lusion">
-                  Ver projetos
-                </a>
-              </MagneticButton>
-              <motion.a 
-                href="/cv-jefferson-teles.pdf" 
-                target="_blank"
-                className="text-[10px] font-bold tracking-widest uppercase text-lusion-text/40 hover:text-lusion-primary transition-colors border-b border-transparent hover:border-lusion-primary pb-1"
-              >
-                Download CV
-              </motion.a>
-            </motion.div>
-          </div>
+              <span className="flex items-center gap-2">
+                <FiDownload />
+                Baixar Currículo
+              </span>
+            </a>
+          </motion.div>
         </motion.div>
       </div>
 
-      {/* Social Sidebar - Lusion Style */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="fixed left-6 md:left-12 bottom-12 z-20 hidden lg:flex flex-col gap-6"
-      >
-        {[
-          { icon: FiGithub, link: "https://github.com/JeffersonTeles" },
-          { icon: FiLinkedin, link: "https://linkedin.com/in/jeffersonteles" },
-          { icon: SiWhatsapp, link: "https://wa.me/5511999999999" },
-          { icon: FiMail, link: "mailto:jeffersontelesdeoliveira@gmail.com" }
-        ].map((social, idx) => (
-          <a
-            key={idx}
-            href={social.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-lusion-text/30 hover:text-lusion-primary transition-colors duration-300"
-          >
-            <social.icon size={18} />
-          </a>
-        ))}
-        <div className="w-px h-12 bg-lusion-text/10 mx-auto" />
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute right-6 md:right-12 bottom-12 hidden md:block"
-      >
-        <span className="text-[10px] tracking-lusion-wide uppercase text-lusion-text/40 rotate-90 origin-right block">
-          Role para explorar
-        </span>
-      </motion.div>
+      {/* Decorative Terminal Line */}
+      <div className="absolute bottom-10 left-0 w-full overflow-hidden pointer-events-none opacity-10">
+        <div className="whitespace-nowrap font-mono text-[10vw] font-black uppercase text-white/5 select-none">
+          React • Node.js • TypeScript • PostgreSQL • Java • Supabase • 
+        </div>
+      </div>
     </section>
   );
 };

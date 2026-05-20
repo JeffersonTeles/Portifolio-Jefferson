@@ -1,82 +1,83 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import SplitText from '../components/SplitText';
-import Parallax from '../components/Parallax';
-import GithubStats from '../components/GithubStats';
-import ExperienceTimeline from '../components/ExperienceTimeline';
 
 const About = () => {
+  const values = ["Autonomia", "Impacto real", "Aprendizado contínuo"];
+
   return (
-    <section id="about" className="section-lusion bg-white overflow-hidden">
-      <div className="container-lusion">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-          {/* Section Indicator */}
-          <div className="lg:col-span-2">
-            <span className="text-sm font-bold tracking-lusion-wide uppercase text-lusion-primary flex items-center gap-4">
-              <span className="w-8 h-px bg-lusion-primary" />
-              01 / Sobre
-            </span>
-          </div>
+    <section id="about" className="py-24 bg-dark-bg">
+      <div className="container-custom">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          {/* Text Content */}
+          <div className="lg:col-span-7">
+            <div className="section-title">
+              <span className="w-8 h-px bg-dark-terminal" />
+              01 / Sobre Mim
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white">
+              Da infraestrutura física para o <span className="text-dark-accent">desenvolvimento de produtos</span>.
+            </h2>
 
-          {/* Main Content */}
-          <div className="lg:col-span-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-20">
-              <div>
-                <h2 className="mb-12">
-                  <SplitText text="Transformando idéias em " />
-                  <span className="text-lusion-primary">
-                    <SplitText text="experiências" delay={0.5} />
-                  </span>
-                  <SplitText text=" digitais tangíveis." delay={0.8} />
-                </h2>
-
-                <Parallax offset={20}>
-                  <motion.div 
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="space-y-6 text-lg md:text-xl text-lusion-text/60 leading-relaxed"
-                  >
-                    <p>
-                      Com foco em automação, IA e desenvolvimento full-stack, eu ajudo empresas a 
-                      digitalizarem processos complexos através de interfaces intuitivas e back-ends 
-                      extremamente robustos.
-                    </p>
-                    <p>
-                      Meu trabalho é focado na interseção entre design minimalista e engenharia de precisão, 
-                      garantindo que cada linha de código contribua para uma performance excepcional 
-                      e uma experiência de usuário memorável.
-                    </p>
-                  </motion.div>
-                </Parallax>
-              </div>
-
-              <div className="flex flex-col justify-center gap-12 border-l border-lusion-text/5 pl-8 md:pl-12">
-                {[
-                  { label: 'Anos de Experiência', value: '03+' },
-                  { label: 'Projetos Entregues', value: '40+' },
-                  { label: 'Automações Ativas', value: '100+' },
-                ].map((stat, idx) => (
-                  <motion.div 
-                    key={idx}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  >
-                    <p className="text-4xl md:text-5xl font-bold tracking-lusion-tighter mb-1">{stat.value}</p>
-                    <p className="text-[10px] font-bold tracking-lusion-wide uppercase text-lusion-text/40">{stat.label}</p>
-                  </motion.div>
-                ))}
-              </div>
+            <div className="space-y-6 text-dark-muted text-lg leading-relaxed">
+              <p>
+                Minha jornada na tecnologia começou com as mãos na massa: redes, Linux e hardware. Essa base técnica sólida me deu a disciplina necessária para entender como as coisas funcionam "debaixo do capô".
+              </p>
+              <p>
+                Atualmente, como <span className="text-white font-medium">Analista de Suporte Júnior na FaturÁgil</span>, aprendi a lidar com problemas reais de usuários e a importância de sistemas estáveis. Essa experiência foi o combustível para minha transição para o desenvolvimento.
+              </p>
+              <p>
+                Hoje, curso Engenharia de Software na FAG e foco em construir soluções de alto impacto usando IA e automação. Não estou apenas escrevendo código, estou construindo ferramentas que resolvem dores reais.
+              </p>
             </div>
 
-            <GithubStats />
-            <ExperienceTimeline />
+            {/* Values */}
+            <div className="mt-12 flex flex-wrap gap-4">
+              {values.map((val, i) => (
+                <div 
+                  key={i}
+                  className="px-4 py-2 border border-dark-terminal/10 bg-dark-terminal/5 rounded-sm"
+                >
+                  <span className="font-mono text-xs text-dark-terminal uppercase tracking-widest">{val}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Avatar/Visual */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative w-full aspect-square max-w-md mx-auto">
+              {/* Geometric Frame */}
+              <div className="absolute inset-0 border-2 border-dark-accent/20 rotate-45 animate-[spin_20s_linear_infinite]" />
+              <div className="absolute inset-0 border border-dark-terminal/20 -rotate-12 animate-[spin_15s_linear_infinite_reverse]" />
+              
+              {/* Image Placeholder with Geometric Pattern */}
+              <div className="absolute inset-4 bg-dark-card overflow-hidden flex items-center justify-center border border-white/10 group">
+                <svg viewBox="0 0 100 100" className="w-2/3 h-2/3 text-dark-accent opacity-20 group-hover:scale-110 transition-transform duration-700">
+                  <path d="M50 0 L100 25 L100 75 L50 100 L0 75 L0 25 Z" fill="none" stroke="currentColor" strokeWidth="1" />
+                  <path d="M50 20 L80 35 L80 65 L50 80 L20 65 L20 35 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                  <circle cx="50" cy="50" r="5" fill="currentColor" />
+                </svg>
+                
+                {/* Visual Glitch Lines */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute h-px w-full bg-dark-accent/20 top-1/4 animate-[glitch-line_3s_infinite]" />
+                  <div className="absolute h-px w-full bg-dark-terminal/20 top-2/3 animate-[glitch-line_4s_infinite_reverse]" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes glitch-line {
+          0% { transform: translateY(0); opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { transform: translateY(100px); opacity: 0; }
+        }
+      `}</style>
     </section>
   );
 };
