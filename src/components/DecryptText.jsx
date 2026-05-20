@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-const DecryptText = ({ text = "", className, delay = 0 }) => {
+const DecryptText = ({ text = "", className = "", delay = 0 }) => {
   const [displayText, setDisplayText] = useState('');
   const chars = '!@#$%^&*()_+[]{}:;|,.<>?0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   useEffect(() => {
-    if (!text || typeof text !== 'string') return;
+    // Safety check for non-string or empty inputs
+    if (!text || typeof text !== 'string') {
+      setDisplayText("");
+      return;
+    }
 
     let timeout;
     let iteration = 0;
@@ -37,7 +41,8 @@ const DecryptText = ({ text = "", className, delay = 0 }) => {
     };
   }, [text, delay]);
 
-  return <span className={className}>{displayText || (typeof text === 'string' ? text : "")}</span>;
+  // Return static text if anything fails or during delay
+  return <span className={className}>{displayText || text || ""}</span>;
 };
 
 export default DecryptText;
