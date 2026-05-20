@@ -39,62 +39,109 @@
            hover:bg-dark-accent/5 transition-all duration-300;
   }
 
-  /* Custom Scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
+  /* Scanning Animation (Efeito 2) */
+  @keyframes scanning {
+    0% { top: 0; opacity: 0; }
+    5% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+    95% { opacity: 0.5; }
+    100% { top: 100%; opacity: 0; }
   }
-  ::-webkit-scrollbar-track {
-    @apply bg-dark-bg;
+
+  .animate-scanning {
+    animation: scanning 8s linear infinite;
   }
-  ::-webkit-scrollbar-thumb {
-    /* Scanning Animation (Efeito 2) */
-    @keyframes scanning {
-      0% { top: 0; opacity: 0; }
-      5% { opacity: 0.5; }
-      50% { opacity: 0.8; }
-      95% { opacity: 0.5; }
-      100% { top: 100%; opacity: 0; }
-    }
 
-    .animate-scanning {
-      animation: scanning 8s linear infinite;
-    }
+  /* Film Grain Overlay (Efeito 6) */
+  .grain-overlay {
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    filter: contrast(150%) brightness(100%);
+  }
 
-    /* Film Grain Overlay (Efeito 6) */
-    .grain-overlay {
-      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-      filter: contrast(150%) brightness(100%);
-    }
+  /* Glitch Text Classes */
+  .glitch-text {
+    position: relative;
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+      0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    animation: glitch 500ms infinite;
+  }
 
-    /* Glitch Text Improvements */
-    .hover-glitch:hover {
-      @apply glitch-text;
-    }
+  .hover-glitch:hover {
+    @apply glitch-text;
+  }
 
-    /* Metadata Section Dividers (Efeito 7) */
-    .section-metadata {
-      @apply flex items-center gap-4 py-8 pointer-events-none;
-    }
+  /* Metadata Section Dividers (Efeito 7) */
+  .section-metadata {
+    @apply flex items-center gap-4 py-8 pointer-events-none;
+  }
 
-    .metadata-line {
-      @apply flex-1 h-px bg-white/5 relative;
-    }
+  .metadata-line {
+    @apply flex-1 h-px bg-white/5 relative;
+  }
 
-    .metadata-line::after {
-      content: '';
-      @apply absolute top-0 left-0 w-8 h-full bg-dark-accent/30;
-    }
+  .metadata-line::after {
+    content: '';
+    @apply absolute top-0 left-0 w-8 h-full bg-dark-accent/30;
+  }
 
-    .metadata-text {
-      @apply font-mono text-[8px] tracking-[0.3em] text-dark-muted uppercase;
-    }
-    }
+  .metadata-text {
+    @apply font-mono text-[8px] tracking-[0.3em] text-dark-muted uppercase;
+  }
+}
 
-    @layer utilities {
-    /* Chromatic Aberration Simulation (Efeito 9) */
-    .chromatic-text {
-      text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5);
-    }
-    }
+@layer utilities {
+  /* Chromatic Aberration Simulation (Efeito 9) */
+  .chromatic-text {
+    text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5);
+  }
+}
 
-    /* Custom Scrollbar */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-dark-bg;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-dark-accent/30 transition-colors;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+      0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  14% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+      0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  15% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+      0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+      0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+      0.05em 0 0 rgba(0, 255, 0, 0.75),
+      0 -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  99% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+      0.05em 0 0 rgba(0, 255, 0, 0.75),
+      0 -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  100% {
+    text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
+      -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75);
+  }
+}
