@@ -14,9 +14,9 @@ const AIConsole = ({ isStealth }) => {
   ]);
   const scrollRef = useRef(null);
 
-  // Sound Effects
-  const [playClick] = useSound('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3', { volume: 0.1 });
-  const [playBeep] = useSound('https://assets.mixkit.co/active_storage/sfx/2568/2571-preview.mp3', { volume: 0.05 });
+  // Sound Effects (Fixed: Removed 403 URLs)
+  const [playClick] = useSound('', { volume: 0.1 });
+  const [playBeep] = useSound('', { volume: 0.05 });
 
   // Web Speech API Setup
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;

@@ -39,7 +39,7 @@
            hover:bg-dark-accent/5 transition-all duration-300;
   }
 
-  /* Scanning Animation (Efeito 2) */
+  /* Scanning Animation */
   @keyframes scanning {
     0% { top: 0; opacity: 0; }
     5% { opacity: 0.5; }
@@ -52,10 +52,10 @@
     animation: scanning 8s linear infinite;
   }
 
-  /* Film Grain Overlay (Efeito 6) */
+  /* Film Grain Overlay - Using local or inline fallback */
   .grain-overlay {
-    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-    filter: contrast(150%) brightness(100%);
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
   /* Glitch Text Classes */
@@ -71,7 +71,7 @@
     @apply glitch-text;
   }
 
-  /* Metadata Section Dividers (Efeito 7) */
+  /* Metadata Section Dividers */
   .section-metadata {
     @apply flex items-center gap-4 py-8 pointer-events-none;
   }
@@ -90,8 +90,23 @@
   }
 }
 
+@keyframes glitch-line {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100px); opacity: 0; }
+}
+
+@keyframes marquee-slow {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-slow {
+  animation: marquee-slow 60s linear infinite;
+}
+
 @layer utilities {
-  /* Chromatic Aberration Simulation (Efeito 9) */
   .chromatic-text {
     text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5);
   }
@@ -142,6 +157,6 @@
   100% {
     text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
       -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
-      -0.025em -0.05em 0 rgba(0, 255, 0, 0.75);
+      -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
   }
 }

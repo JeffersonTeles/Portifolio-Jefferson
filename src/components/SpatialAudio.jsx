@@ -3,7 +3,7 @@ import useSound from 'use-sound';
 
 const SpatialAudio = ({ isMuted }) => {
   const [playAmbient, { stop, sound }] = useSound(
-    'https://assets.mixkit.co/active_storage/sfx/2558/2558-preview.mp3', // Sci-fi ambient hum
+    '', // Removed 403 URL
     { volume: 0.05, loop: true }
   );
 

@@ -33,16 +33,6 @@ const Testimonials = () => {
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        .animate-marquee-slow {
-          animation: marquee-slow 60s linear infinite;
-        }
-        @keyframes marquee-slow {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
     </section>
   );
 };
