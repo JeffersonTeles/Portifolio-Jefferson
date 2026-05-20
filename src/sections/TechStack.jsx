@@ -3,9 +3,11 @@ import { motion } from 'framer-motion';
 import { 
   SiReact, SiTypescript, SiTailwindcss, SiFramer,
   SiNodedotjs, SiPostgresql, SiSupabase, SiSpringboot,
-  SiGit, SiVercel, SiDocker, SiOpenai, SiPuppeteer, SiPlaywright
- SiJavascript, SiJava
+  SiGit, SiVercel, SiDocker, SiOpenai, SiPuppeteer,
+  SiJavascript
 } from 'react-icons/si';
+import { FaJava } from 'react-icons/fa';
+import { TbTestPipe } from 'react-icons/tb'; // Playwright alternative if missing in Si
 
 const Skills = () => {
   const categories = [
@@ -22,7 +24,7 @@ const Skills = () => {
       title: "Backend",
       skills: [
         { name: "Node.js", icon: SiNodedotjs, level: "Intermediário" },
-        { name: "Java", icon: SiSpringboot, level: "Intermediário" },
+        { name: "Java", icon: FaJava, level: "Intermediário" },
         { name: "PostgreSQL", icon: SiPostgresql, level: "Intermediário" },
         { name: "Supabase", icon: SiSupabase, level: "Proficiente" },
       ]
@@ -39,7 +41,7 @@ const Skills = () => {
       title: "IA & Automação",
       skills: [
         { name: "APIs REST", icon: SiJavascript, level: "Proficiente" },
-        { name: "Playwright", icon: SiPlaywright, level: "Intermediário" },
+        { name: "Playwright", icon: TbTestPipe, level: "Intermediário" },
         { name: "Puppeteer", icon: SiPuppeteer, level: "Intermediário" },
         { name: "IA Integration", icon: SiOpenai, level: "Intermediário" },
       ]
