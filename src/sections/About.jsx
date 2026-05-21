@@ -1,110 +1,70 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const TimelineItem = ({ year, title, desc, isLast }) => (
-  <div className="flex gap-8 relative pb-12">
-    {!isLast && <div className="absolute left-[7px] top-8 w-px h-full bg-white/10" />}
-    <div className="relative">
-      <div className="w-[15px] h-[15px] rounded-full border-2 border-premium-accent bg-premium-bg z-10 relative" />
-    </div>
-    <div className="flex flex-col">
-      <span className="font-mono text-[10px] text-premium-accent font-bold uppercase tracking-[0.2em] mb-2">{year}</span>
-      <h4 className="text-white font-bold text-lg mb-2 tracking-tight">{title}</h4>
-      <p className="text-premium-muted text-sm leading-relaxed max-w-md">{desc}</p>
-    </div>
-  </div>
-);
-
 const About = () => {
-  const values = [
-    "Software Architecture", 
-    "AI Integration", 
-    "Process Automation", 
-    "Embedded Systems",
-    "Linux Infrastructure",
-    "Premium Frontend"
-  ];
-
   const timeline = [
-    { year: "2020", title: "Technical Genesis", desc: "Hands-on experience with hardware, Linux systems, and networking infrastructure." },
-    { year: "2023", title: "Support Engineering", desc: "Diagnostic-first mindset as a Support Analyst at FaturÁgil, bridging user needs and software stability." },
-    { year: "2024", title: "Product Building", desc: "Developing real-world SaaS, AI tools, and intelligent bots focused on scalability." },
-    { year: "2026", title: "Junior Engineer", desc: "Pursuing Software Engineering at FAG, delivering high-performance digital products." }
+    { year: "2020", title: "Infrastructure Origins", desc: "Hands-on with networking, Linux administration, and hardware optimization." },
+    { year: "2023", title: "Strategic Support", desc: "Analista de Suporte at FaturÁgil. Mastering diagnostics and complex problem-solving." },
+    { year: "2024", title: "Product Building", desc: "Developing SaaS (Caixa Viva), security tools (Escudo), and intelligent automations." },
+    { year: "2026", title: "Software Engineering", desc: "Pursuing academic and professional excellence. The builder era." }
   ];
 
   return (
-    <section id="about" className="py-40 bg-premium-bg relative overflow-hidden">
-      <div className="premium-container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
+    <section id="about" className="py-40 bg-builder-bg relative">
+      <div className="container mx-auto px-8 md:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
           
-          {/* Left: Narrative */}
+          {/* Left Column: The Narrative */}
           <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/20 mb-8 block">
-                01 / Perspective
-              </span>
-              <h2 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-12">
-                From low-level <span className="text-premium-accent">infrastructure</span> to high-impact <span className="italic">digital products.</span>
-              </h2>
+            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-builder-accent mb-8 block italic">
+              &gt; whoami
+            </span>
+            <h2 className="text-4xl md:text-6xl font-extrabold text-white leading-[1.1] mb-12 uppercase tracking-tighter">
+              A builder driven by <span className="text-builder-accent">curiosity</span> and technical <span className="italic">precision.</span>
+            </h2>
+            
+            <div className="space-y-8 text-xl text-builder-muted font-light leading-relaxed max-w-2xl">
+              <p>
+                Iniciei no hardware, dominando <span className="text-white">redes e servidores Linux</span>. Essa base sólida me deu a disciplina necessária para entender como os sistemas funcionam do nível mais baixo até a interface.
+              </p>
+              <p>
+                Como <span className="text-white">Analista de Suporte</span>, aprendi a diagnosticar dores reais de usuários e a importância de sistemas estáveis. Hoje, canalizo essa experiência para o desenvolvimento de software de alta performance.
+              </p>
+              <p>
+                Meu foco é a interseção entre <span className="text-white">IA, Automação e Design Moderno</span>. Construo ferramentas que não apenas funcionam, mas resolvem problemas estratégicos com elegância.
+              </p>
+            </div>
 
-              <div className="space-y-8 text-lg md:text-xl text-premium-muted leading-relaxed font-light">
-                <p>
-                  My journey started with the raw curiosity of how systems communicate. I built my foundation in <span className="text-white">redes, Linux, and ESP32 hardware</span>—understanding technology from the hardware layer up.
-                </p>
-                <p>
-                  This technical rigor evolved during my time as a <span className="text-white">Support Analyst at FaturÁgil</span>, where I mastered the art of problem-solving under pressure. That diagnostic mindset is what I bring to my engineering today.
-                </p>
-                <p>
-                  Today, I build <span className="text-white text-glow">intelligent solutions</span> that bridge the gap between complex automation and premium user experiences. I don't just code; I architect results.
-                </p>
-              </div>
-
-              {/* Tag Cloud */}
-              <div className="mt-16 flex flex-wrap gap-3">
-                {values.map((val, i) => (
-                  <span 
-                    key={i}
-                    className="px-4 py-2 border border-white/5 bg-white/[0.01] text-white/40 text-[10px] uppercase font-bold tracking-widest rounded-sm"
-                  >
-                    {val}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
+            <div className="flex flex-wrap gap-4 mt-16">
+              {["Autonomia", "Impacto Real", "Aprendizado Contínuo", "Open Source"].map((tag, i) => (
+                <span key={i} className="px-4 py-2 border border-white/5 bg-white/[0.01] text-[10px] font-mono text-builder-terminal uppercase tracking-widest">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
 
-          {/* Right: Premium Timeline */}
+          {/* Right Column: Visual Timeline */}
           <div className="lg:col-span-5 relative">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-              className="bg-premium-card/50 border border-white/5 p-10 md:p-16 backdrop-blur-xl relative"
-            >
-              {/* Geometric Decoration */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_top_right,rgba(0,212,255,0.1),transparent)] pointer-events-none" />
-              
-              <h3 className="font-display text-2xl font-bold mb-16 uppercase tracking-tighter italic text-white/80">Trajectory</h3>
-              
-              <div className="flex flex-col">
-                {timeline.map((item, i) => (
-                  <TimelineItem 
-                    key={i} 
-                    {...item} 
-                    isLast={i === timeline.length - 1} 
-                  />
-                ))}
-              </div>
-            </motion.div>
-            
-            {/* Visual Weight Object */}
-            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-premium-accent/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="bg-builder-card p-12 border border-white/5 relative overflow-hidden group">
+               <div className="absolute top-0 right-0 w-32 h-32 bg-builder-accent/5 blur-[60px] group-hover:bg-builder-accent/10 transition-colors" />
+               
+               <div className="space-y-12 relative z-10">
+                 {timeline.map((item, i) => (
+                   <div key={i} className="flex gap-6 group/item">
+                     <div className="flex flex-col items-center">
+                        <div className="w-2.5 h-2.5 rounded-full border border-builder-accent group-hover/item:bg-builder-accent transition-colors duration-500 shadow-[0_0_10px_rgba(0,212,255,0.3)]" />
+                        {i !== timeline.length - 1 && <div className="w-px h-full bg-white/5 mt-2" />}
+                     </div>
+                     <div className="pb-4">
+                        <span className="text-[10px] font-mono text-builder-accent/60 block mb-1">{item.year}</span>
+                        <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-2">{item.title}</h4>
+                        <p className="text-xs text-builder-muted leading-relaxed font-medium">{item.desc}</p>
+                     </div>
+                   </div>
+                 ))}
+               </div>
+            </div>
           </div>
 
         </div>

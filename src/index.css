@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 @layer base {
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
 
   html {
     scroll-behavior: smooth;
-    background: #050816;
+    background: #05060f;
   }
   
   body {
-    @apply bg-premium-bg text-white selection:bg-premium-accent/30 selection:text-premium-accent;
+    @apply bg-builder-bg text-white selection:bg-builder-accent/30 selection:text-builder-accent overflow-x-hidden;
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
   }
@@ -22,42 +22,33 @@
 }
 
 @layer components {
-  .btn-premium {
-    @apply relative px-8 py-4 font-semibold text-sm uppercase tracking-badge transition-all duration-500 rounded-full
-           bg-white text-black hover:bg-premium-accent hover:text-white active:scale-95 overflow-hidden;
+  .premium-container {
+    @apply max-w-7xl mx-auto px-8 md:px-16;
   }
 
-  .btn-premium-outline {
-    @apply relative px-8 py-4 font-semibold text-sm uppercase tracking-badge transition-all duration-500 rounded-full
-           border border-white/10 text-white hover:bg-white/5 active:scale-95;
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 3px;
   }
-
-  .glass-premium {
-    @apply bg-white/[0.02] border border-white/[0.05] backdrop-blur-xl;
+  ::-webkit-scrollbar-track {
+    @apply bg-builder-bg;
   }
-
-  .text-glow {
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/10 hover:bg-builder-accent transition-colors rounded-full;
   }
 }
 
-/* Cinematic Transitions */
-.reveal-up {
-  @apply opacity-0 translate-y-12;
-  animation: reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.text-glow {
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
 }
 
-@keyframes reveal {
-  to { @apply opacity-100 translate-y-0; }
+@keyframes gradient-slow {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
 }
 
-/* Custom Scrollbar Luxury */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  @apply bg-premium-bg;
-}
-::-webkit-scrollbar-thumb {
-  @apply bg-white/10 rounded-full hover:bg-premium-accent transition-colors;
+.animate-gradient-slow {
+  background-size: 200% auto;
+  animation: gradient-slow 8s linear infinite;
 }

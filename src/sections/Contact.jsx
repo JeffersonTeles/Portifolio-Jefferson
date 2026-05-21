@@ -1,50 +1,41 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiArrowRight, FiLinkedin, FiGithub, FiMail } from 'react-icons/fi';
+import { FiArrowRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 import { SiWhatsapp } from 'react-icons/si';
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-40 bg-premium-bg relative overflow-hidden">
-      {/* Background HUD Lines */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
-        <div className="absolute top-0 left-1/2 w-px h-full bg-white" />
-        <div className="absolute top-1/2 left-0 w-full h-px bg-white" />
-      </div>
-
-      <div className="premium-container relative z-10">
+    <section id="contact" className="py-40 bg-builder-bg">
+      <div className="container mx-auto px-8 md:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
           
-          {/* Left: Strategic CTA */}
+          {/* Left: Headline */}
           <div className="lg:col-span-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
             >
-              <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-premium-accent mb-8 block">
-                04 / Uplink
+              <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-builder-accent mb-8 block italic">
+                02 / Uplink
               </span>
-              <h2 className="text-5xl md:text-8xl font-extrabold text-white leading-[0.9] uppercase tracking-cinematic mb-12">
-                Let’s build<br />
-                <span className="text-white/20 outline-text italic">Remarkable</span><br />
+              <h2 className="text-5xl md:text-8xl font-extrabold text-white leading-[0.9] uppercase tracking-tighter mb-12">
+                Let's build<br />
+                <span className="text-builder-accent italic">Remarkable</span><br />
                 Products.
               </h2>
-              
-              <p className="text-premium-muted text-xl md:text-2xl font-light max-w-2xl leading-relaxed mb-16">
-                Currently open to <span className="text-white">Software Engineering</span> roles and strategic technical collaborations. Secure your spot in the next development cycle.
+              <p className="text-builder-muted text-xl md:text-2xl font-light max-w-2xl leading-relaxed mb-16">
+                Estou ativamente buscando oportunidades como <span className="text-white">Software Engineer Júnior</span> e parcerias estratégicas em IA e Automação. 
               </p>
 
-              <div className="flex flex-wrap gap-8">
+              <div className="flex flex-wrap gap-8 items-center">
                 <a 
-                  href="mailto:jeffersontelesdeoliveira@gmail.com" 
-                  className="btn-premium flex items-center gap-4 group"
+                  href="mailto:jeffersontelesdeoliveira@gmail.com"
+                  className="px-10 py-5 bg-white text-black font-bold uppercase text-xs tracking-widest hover:bg-builder-accent hover:text-white transition-all duration-500 rounded-none"
                 >
                   Start Conversation
-                  <FiArrowRight className="transition-transform group-hover:translate-x-2" />
                 </a>
-                <div className="flex items-center gap-6 px-4">
+                <div className="flex gap-6">
                   {[
                     { icon: FiLinkedin, url: "https://linkedin.com/in/jeffersonteles" },
                     { icon: FiGithub, url: "https://github.com/JeffersonTeles" },
@@ -54,10 +45,9 @@ const Contact = () => {
                       key={i} 
                       href={social.url} 
                       target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-white/20 hover:text-premium-accent transition-all duration-300 transform hover:scale-110"
+                      className="text-white/20 hover:text-white transition-colors p-2 border border-white/5 bg-white/[0.02] hover:border-builder-accent/40"
                     >
-                      <social.icon size={24} />
+                      <social.icon size={20} />
                     </a>
                   ))}
                 </div>
@@ -65,35 +55,27 @@ const Contact = () => {
             </motion.div>
           </div>
 
-          {/* Right: Technical Meta */}
+          {/* Right: Technical Metadata */}
           <div className="lg:col-span-4 hidden lg:block">
-            <div className="p-12 border border-white/5 bg-white/[0.01] backdrop-blur-sm rounded-sm">
-               <div className="space-y-8">
-                  <div>
-                    <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest block mb-2">Availability</span>
-                    <p className="text-sm font-bold text-dark-terminal uppercase tracking-widest animate-pulse">● Slots Open for Q3-Q4</p>
-                  </div>
-                  <div>
-                    <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest block mb-2">Based In</span>
-                    <p className="text-sm text-white font-medium uppercase tracking-widest tracking-tighter">Cascavel, PR • Brazil</p>
-                  </div>
-                  <div>
-                    <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest block mb-2">Response Time</span>
-                    <p className="text-sm text-white font-medium uppercase tracking-widest tracking-tighter">&lt; 24 Hours Standard</p>
-                  </div>
-               </div>
+            <div className="p-12 border border-white/5 bg-white/[0.01] space-y-12">
+              <div>
+                <span className="text-[8px] font-mono text-white/20 uppercase tracking-widest block mb-3 text-glow">Location_Services</span>
+                <p className="text-sm font-bold text-white uppercase tracking-tighter italic">Cascavel, PR • South America</p>
+              </div>
+              <div>
+                <span className="text-[8px] font-mono text-white/20 uppercase tracking-widest block mb-3 text-glow">Availability_Status</span>
+                <p className="text-sm font-bold text-builder-terminal uppercase tracking-widest animate-pulse">● Available for Q3_2026</p>
+              </div>
+              <div className="pt-8 border-t border-white/5">
+                 <p className="text-[7px] font-mono text-white/10 leading-relaxed uppercase tracking-[0.2em]">
+                   Secure Link Protocol // 0x55_4A_54_45_4C_45_53
+                 </p>
+              </div>
             </div>
           </div>
 
         </div>
       </div>
-
-      <style jsx>{`
-        .outline-text {
-          -webkit-text-stroke: 1px rgba(255,255,255,0.2);
-          color: transparent;
-        }
-      `}</style>
     </section>
   );
 };
