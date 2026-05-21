@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [
     react()
-    // Temporarily disabled PWA to resolve cache issues causing black screen
   ],
   base: '/',
   server: {
