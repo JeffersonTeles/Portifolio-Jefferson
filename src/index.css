@@ -3,64 +3,61 @@
 @tailwind utilities;
 
 @layer base {
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
 
   html {
     scroll-behavior: smooth;
+    background: #050816;
   }
   
   body {
-    @apply bg-luxury-bg text-luxury-text;
+    @apply bg-premium-bg text-white selection:bg-premium-accent/30 selection:text-premium-accent;
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
   }
   
   h1, h2, h3, h4 {
-    font-family: 'Space Grotesk', sans-serif;
-    @apply tracking-premium;
+    @apply font-display tracking-cinematic;
   }
 }
 
 @layer components {
-  .premium-container {
-    @apply max-w-7xl mx-auto px-8 md:px-16;
+  .btn-premium {
+    @apply relative px-8 py-4 font-semibold text-sm uppercase tracking-badge transition-all duration-500 rounded-full
+           bg-white text-black hover:bg-premium-accent hover:text-white active:scale-95 overflow-hidden;
   }
 
-  .premium-btn {
-    @apply px-10 py-4 font-semibold text-sm uppercase tracking-sub transition-all duration-500 rounded-none;
+  .btn-premium-outline {
+    @apply relative px-8 py-4 font-semibold text-sm uppercase tracking-badge transition-all duration-500 rounded-full
+           border border-white/10 text-white hover:bg-white/5 active:scale-95;
   }
 
-  .btn-luxury-primary {
-    @apply premium-btn bg-white text-black hover:bg-luxury-accent hover:text-white;
+  .glass-premium {
+    @apply bg-white/[0.02] border border-white/[0.05] backdrop-blur-xl;
   }
 
-  .btn-luxury-outline {
-    @apply premium-btn border border-white/20 text-white hover:border-white hover:bg-white/5;
-  }
-
-  /* Refined Marquee */
-  .marquee-content {
-    @apply flex gap-12 whitespace-nowrap animate-marquee;
+  .text-glow {
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
   }
 }
 
-/* Fluid Transitions */
+/* Cinematic Transitions */
 .reveal-up {
-  @apply opacity-0 translate-y-8;
-  animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  @apply opacity-0 translate-y-12;
+  animation: reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes reveal {
   to { @apply opacity-100 translate-y-0; }
 }
 
-/* Custom Scrollbar Premium */
+/* Custom Scrollbar Luxury */
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-luxury-bg;
+  @apply bg-premium-bg;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/10 hover:bg-luxury-accent transition-colors;
+  @apply bg-white/10 rounded-full hover:bg-premium-accent transition-colors;
 }

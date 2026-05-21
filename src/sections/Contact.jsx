@@ -1,122 +1,99 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { FiLinkedin, FiGithub, FiMail, FiCopy, FiCheck } from 'react-icons/fi';
+import { FiArrowRight, FiLinkedin, FiGithub, FiMail } from 'react-icons/fi';
+import { SiWhatsapp } from 'react-icons/si';
 
 const Contact = () => {
-  const [copied, setCopied] = useState(false);
-  const email = "jeffersontelesdeoliveira@gmail.com";
-
-  const copyEmail = () => {
-    navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-    window.dispatchEvent(new CustomEvent('ai-log', { 
-      detail: "COMM_LINK: Email address copied to clipboard." 
-    }));
-  };
-
-  const containerVars = {
-    initial: { opacity: 0 },
-    whileInView: { 
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 }
-    },
-    viewport: { once: true }
-  };
-
-  const itemVars = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { 
-      opacity: 1, y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-    }
-  };
-
-  const socialLinks = [
-    { name: 'LinkedIn', icon: FiLinkedin, url: 'https://linkedin.com/in/jeffersonteles' },
-    { name: 'GitHub', icon: FiGithub, url: 'https://github.com/JeffersonTeles' },
-    { name: 'Email', icon: FiMail, url: `mailto:${email}` }
-  ];
-
   return (
-    <section id="contact" className="section-container relative overflow-hidden pb-40">
-      <motion.h3 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="font-mono text-dark-accent text-sm tracking-[0.3em] uppercase mb-24"
-      >
-        console.log("vamos_construir()")
-      </motion.h3>
+    <section id="contact" className="py-40 bg-premium-bg relative overflow-hidden">
+      {/* Background HUD Lines */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+        <div className="absolute top-0 left-1/2 w-px h-full bg-white" />
+        <div className="absolute top-1/2 left-0 w-full h-px bg-white" />
+      </div>
 
-      <div className="flex flex-col items-center text-center">
-        <motion.h2 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl md:text-7xl lg:text-8xl font-black text-white leading-tight mb-16 max-w-4xl tracking-premium"
-        >
-          Vamos construir algo <span className="text-dark-terminal drop-shadow-[0_0_20px_rgba(0,255,136,0.2)]">juntos.</span>
-        </motion.h2>
-
-        {/* Dynamic Email Display */}
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          onClick={copyEmail}
-          className="group relative cursor-pointer mb-20 px-6 py-4 border border-white/5 bg-white/[0.01] rounded-sm hover:border-dark-accent/30 transition-all duration-500"
-        >
-          <div className="flex items-center gap-4">
-            <span className="font-mono text-xs md:text-sm text-dark-muted group-hover:text-white transition-colors">
-              {email}
-            </span>
-            {copied ? <FiCheck className="text-dark-terminal" /> : <FiCopy className="text-dark-accent opacity-0 group-hover:opacity-100 transition-all" />}
-          </div>
-          <AnimatePresence>
-            {copied && (
-              <motion.span 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                className="absolute -top-8 left-1/2 -translate-x-1/2 font-mono text-[8px] uppercase text-dark-terminal tracking-widest"
-              >
-                Copiado!
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Social Stagger Buttons */}
-        <motion.div 
-          variants={containerVars}
-          initial="initial"
-          whileInView="whileInView"
-          viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-6"
-        >
-          {socialLinks.map((link, i) => (
-            <motion.a
-              key={i}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={itemVars}
-              className="btn-outline group min-w-[160px]"
+      <div className="premium-container relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
+          
+          {/* Left: Strategic CTA */}
+          <div className="lg:col-span-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
             >
-              <link.icon className="group-hover:text-dark-accent transition-colors" />
-              {link.name}
-            </motion.a>
-          ))}
-        </motion.div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-premium-accent mb-8 block">
+                04 / Uplink
+              </span>
+              <h2 className="text-5xl md:text-8xl font-extrabold text-white leading-[0.9] uppercase tracking-cinematic mb-12">
+                Let’s build<br />
+                <span className="text-white/20 outline-text italic">Remarkable</span><br />
+                Products.
+              </h2>
+              
+              <p className="text-premium-muted text-xl md:text-2xl font-light max-w-2xl leading-relaxed mb-16">
+                Currently open to <span className="text-white">Software Engineering</span> roles and strategic technical collaborations. Secure your spot in the next development cycle.
+              </p>
+
+              <div className="flex flex-wrap gap-8">
+                <a 
+                  href="mailto:jeffersontelesdeoliveira@gmail.com" 
+                  className="btn-premium flex items-center gap-4 group"
+                >
+                  Start Conversation
+                  <FiArrowRight className="transition-transform group-hover:translate-x-2" />
+                </a>
+                <div className="flex items-center gap-6 px-4">
+                  {[
+                    { icon: FiLinkedin, url: "https://linkedin.com/in/jeffersonteles" },
+                    { icon: FiGithub, url: "https://github.com/JeffersonTeles" },
+                    { icon: SiWhatsapp, url: "https://wa.me/5545999999999" }
+                  ].map((social, i) => (
+                    <a 
+                      key={i} 
+                      href={social.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-white/20 hover:text-premium-accent transition-all duration-300 transform hover:scale-110"
+                    >
+                      <social.icon size={24} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right: Technical Meta */}
+          <div className="lg:col-span-4 hidden lg:block">
+            <div className="p-12 border border-white/5 bg-white/[0.01] backdrop-blur-sm rounded-sm">
+               <div className="space-y-8">
+                  <div>
+                    <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest block mb-2">Availability</span>
+                    <p className="text-sm font-bold text-dark-terminal uppercase tracking-widest animate-pulse">● Slots Open for Q3-Q4</p>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest block mb-2">Based In</span>
+                    <p className="text-sm text-white font-medium uppercase tracking-widest tracking-tighter">Cascavel, PR • Brazil</p>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-mono text-white/20 uppercase tracking-widest block mb-2">Response Time</span>
+                    <p className="text-sm text-white font-medium uppercase tracking-widest tracking-tighter">&lt; 24 Hours Standard</p>
+                  </div>
+               </div>
+            </div>
+          </div>
+
+        </div>
       </div>
 
-      {/* Decorative Background HUD */}
-      <div className="absolute left-1/2 bottom-0 -translate-x-1/2 opacity-5 pointer-events-none select-none">
-        <span className="font-mono text-[15vw] font-black uppercase text-white whitespace-nowrap">Uplink</span>
-      </div>
+      <style jsx>{`
+        .outline-text {
+          -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+          color: transparent;
+        }
+      `}</style>
     </section>
   );
 };

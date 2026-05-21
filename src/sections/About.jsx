@@ -1,136 +1,114 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const Timeline = () => {
-  const events = [
-    { year: '2020', title: 'TI Técnica', desc: 'Redes, Linux e Hardware' },
-    { year: '2023', title: 'Suporte de Software', desc: 'Analista @ FaturÁgil' },
-    { year: '2024', title: 'Produtos Próprios', desc: 'Caixa Viva, Escudo, Bots' },
-    { year: '2026', title: 'Dev Júnior', desc: 'Engenharia de Software', current: true },
+const TimelineItem = ({ year, title, desc, isLast }) => (
+  <div className="flex gap-8 relative pb-12">
+    {!isLast && <div className="absolute left-[7px] top-8 w-px h-full bg-white/10" />}
+    <div className="relative">
+      <div className="w-[15px] h-[15px] rounded-full border-2 border-premium-accent bg-premium-bg z-10 relative" />
+    </div>
+    <div className="flex flex-col">
+      <span className="font-mono text-[10px] text-premium-accent font-bold uppercase tracking-[0.2em] mb-2">{year}</span>
+      <h4 className="text-white font-bold text-lg mb-2 tracking-tight">{title}</h4>
+      <p className="text-premium-muted text-sm leading-relaxed max-w-md">{desc}</p>
+    </div>
+  </div>
+);
+
+const About = () => {
+  const values = [
+    "Software Architecture", 
+    "AI Integration", 
+    "Process Automation", 
+    "Embedded Systems",
+    "Linux Infrastructure",
+    "Premium Frontend"
+  ];
+
+  const timeline = [
+    { year: "2020", title: "Technical Genesis", desc: "Hands-on experience with hardware, Linux systems, and networking infrastructure." },
+    { year: "2023", title: "Support Engineering", desc: "Diagnostic-first mindset as a Support Analyst at FaturÁgil, bridging user needs and software stability." },
+    { year: "2024", title: "Product Building", desc: "Developing real-world SaaS, AI tools, and intelligent bots focused on scalability." },
+    { year: "2026", title: "Junior Engineer", desc: "Pursuing Software Engineering at FAG, delivering high-performance digital products." }
   ];
 
   return (
-    <div className="mt-12 space-y-8">
-      {events.map((event, i) => (
-        <div key={i} className="flex gap-6 relative group">
-          {i !== events.length - 1 && (
-            <div className="absolute left-[11px] top-8 w-px h-full bg-white/5 group-hover:bg-dark-accent/20 transition-colors" />
-          )}
-          <div className="relative">
-            <div className={`w-[23px] h-[23px] rounded-full border-2 flex items-center justify-center bg-dark-bg z-10 relative ${event.current ? 'border-dark-terminal shadow-[0_0_10px_#00ff88]' : 'border-white/10'}`}>
-              {event.current && <div className="w-2 h-2 bg-dark-terminal rounded-full animate-pulse" />}
-            </div>
-          </div>
-          <div className="pb-2">
-            <div className="flex items-center gap-3 mb-1">
-              <span className={`font-mono text-xs ${event.current ? 'text-dark-terminal' : 'text-dark-muted'}`}>{event.year}</span>
-              <span className="w-4 h-px bg-white/10" />
-              <h4 className="text-sm font-bold text-white/90">{event.title}</h4>
-            </div>
-            <p className="text-xs text-dark-muted font-light tracking-wide">{event.desc}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-const About = () => {
-  const tags = ["Autonomia", "Impacto Real", "Aprendizado Contínuo", "Open Source"];
-
-  const fadeUp = (delay = 0) => ({
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }
-  });
-
-  return (
-    <section id="about" className="section-container relative overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
-        
-        {/* Left: Narrative Content */}
-        <div className="lg:col-span-7">
-          <motion.h3 {...fadeUp(0.1)} className="font-mono text-dark-accent text-sm tracking-[0.3em] uppercase mb-8">
-            &gt; whoami
-          </motion.h3>
+    <section id="about" className="py-40 bg-premium-bg relative overflow-hidden">
+      <div className="premium-container relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
           
-          <motion.div {...fadeUp(0.2)} className="space-y-6">
-            <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight">
-              Uma transição forjada por <span className="text-dark-terminal">curiosidade</span> e <span className="text-dark-accent italic underline underline-offset-8 decoration-1 decoration-dark-accent/30">intencionalidade</span>.
-            </h2>
-            <p className="text-dark-muted text-lg leading-relaxed max-w-2xl font-light">
-              Comecei consertando computadores e configurando redes. Passei pelo suporte técnico de software, onde aprendi a ouvir e diagnosticar. 
-              Hoje, construo produtos reais unindo <span className="text-white font-medium">IA, automação e código</span>. 
-              A tecnologia para mim não é o fim, é o meio para criar impacto real.
-            </p>
-          </motion.div>
-
-          <motion.div {...fadeUp(0.4)} className="flex flex-wrap gap-3 mt-10">
-            {tags.map((tag, i) => (
-              <span key={i} className="px-4 py-2 border border-white/5 bg-white/[0.02] rounded-sm font-mono text-[10px] text-dark-muted uppercase tracking-widest hover:border-dark-accent/30 hover:text-dark-accent transition-all cursor-default">
-                {tag}
+          {/* Left: Narrative */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/20 mb-8 block">
+                01 / Perspective
               </span>
-            ))}
-          </motion.div>
-        </div>
+              <h2 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-12">
+                From low-level <span className="text-premium-accent">infrastructure</span> to high-impact <span className="italic">digital products.</span>
+              </h2>
 
-        {/* Right: Technical Avatar & Timeline */}
-        <div className="lg:col-span-5 w-full">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="relative aspect-square max-w-[380px] mx-auto lg:ml-auto"
-          >
-            {/* Hexagon SVG Avatar */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <svg viewBox="0 0 100 100" className="w-full h-full text-dark-accent/10">
-                <path d="M50 0 L93.3 25 L93.3 75 L50 100 L6.7 75 L6.7 25 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
-              </svg>
-              
-              <div className="absolute inset-10 border border-white/10 bg-dark-card/30 backdrop-blur-xl overflow-hidden flex items-center justify-center rounded-sm group">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#00d4ff05_0%,transparent_70%)]" />
-                
-                {/* Tech HUD internal */}
-                <div className="relative z-10 flex flex-col items-center">
-                   <span className="font-mono text-4xl font-black text-white/90 tracking-tighter group-hover:text-dark-accent transition-colors duration-500">JT</span>
-                   <div className="w-8 h-px bg-dark-terminal/40 mt-2" />
-                   <span className="font-mono text-[8px] text-dark-terminal uppercase mt-4 tracking-[0.2em] opacity-50">Identity_Verified</span>
-                </div>
-
-                {/* Animated HUD Lines */}
-                <div className="absolute inset-0 overflow-hidden opacity-20">
-                  <div className="absolute h-px w-full bg-dark-accent top-1/4 -left-full animate-[scan_4s_linear_infinite]" />
-                  <div className="absolute w-px h-full bg-dark-terminal left-1/3 -top-full animate-[scan-v_6s_linear_infinite_1s]" />
-                </div>
+              <div className="space-y-8 text-lg md:text-xl text-premium-muted leading-relaxed font-light">
+                <p>
+                  My journey started with the raw curiosity of how systems communicate. I built my foundation in <span className="text-white">redes, Linux, and ESP32 hardware</span>—understanding technology from the hardware layer up.
+                </p>
+                <p>
+                  This technical rigor evolved during my time as a <span className="text-white">Support Analyst at FaturÁgil</span>, where I mastered the art of problem-solving under pressure. That diagnostic mindset is what I bring to my engineering today.
+                </p>
+                <p>
+                  Today, I build <span className="text-white text-glow">intelligent solutions</span> that bridge the gap between complex automation and premium user experiences. I don't just code; I architect results.
+                </p>
               </div>
-            </div>
+
+              {/* Tag Cloud */}
+              <div className="mt-16 flex flex-wrap gap-3">
+                {values.map((val, i) => (
+                  <span 
+                    key={i}
+                    className="px-4 py-2 border border-white/5 bg-white/[0.01] text-white/40 text-[10px] uppercase font-bold tracking-widest rounded-sm"
+                  >
+                    {val}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right: Premium Timeline */}
+          <div className="lg:col-span-5 relative">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className="bg-premium-card/50 border border-white/5 p-10 md:p-16 backdrop-blur-xl relative"
+            >
+              {/* Geometric Decoration */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_top_right,rgba(0,212,255,0.1),transparent)] pointer-events-none" />
+              
+              <h3 className="font-display text-2xl font-bold mb-16 uppercase tracking-tighter italic text-white/80">Trajectory</h3>
+              
+              <div className="flex flex-col">
+                {timeline.map((item, i) => (
+                  <TimelineItem 
+                    key={i} 
+                    {...item} 
+                    isLast={i === timeline.length - 1} 
+                  />
+                ))}
+              </div>
+            </motion.div>
             
-            {/* Glow */}
-            <div className="absolute inset-10 bg-dark-accent/5 rounded-full blur-3xl animate-pulse-slow" />
-          </motion.div>
+            {/* Visual Weight Object */}
+            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-premium-accent/5 rounded-full blur-[100px] pointer-events-none" />
+          </div>
 
-          <motion.div {...fadeUp(0.5)}>
-            <Timeline />
-          </motion.div>
         </div>
-
       </div>
-
-      <style jsx>{`
-        @keyframes scan {
-          0% { left: -100%; opacity: 0; }
-          50% { opacity: 1; }
-          100% { left: 100%; opacity: 0; }
-        }
-        @keyframes scan-v {
-          0% { top: -100%; opacity: 0; }
-          50% { opacity: 1; }
-          100% { top: 100%; opacity: 0; }
-        }
-      `}</style>
     </section>
   );
 };
