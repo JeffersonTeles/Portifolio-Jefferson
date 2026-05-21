@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { 
   SiReact, SiTypescript, SiTailwindcss, SiFramer,
   SiNodedotjs, SiPostgresql, SiSupabase, SiSpringboot,
@@ -7,40 +8,41 @@ import {
 } from 'react-icons/si';
 
 const Skills = () => {
+  const { t } = useTranslation();
   const categories = [
     {
-      title: "Frontend",
+      title: t('skills.frontend'),
       skills: [
-        { name: "React", icon: SiReact, level: "Proficiente" },
-        { name: "TypeScript", icon: SiTypescript, level: "Intermediário" },
-        { name: "Tailwind CSS", icon: SiTailwindcss, level: "Proficiente" },
-        { name: "Framer Motion", icon: SiFramer, level: "Intermediário" },
+        { name: "React", icon: SiReact, level: t('skills.levels.proficient') },
+        { name: "TypeScript", icon: SiTypescript, level: t('skills.levels.intermediate') },
+        { name: "Tailwind CSS", icon: SiTailwindcss, level: t('skills.levels.proficient') },
+        { name: "Framer Motion", icon: SiFramer, level: t('skills.levels.intermediate') },
       ]
     },
     {
-      title: "Backend",
+      title: t('skills.backend'),
       skills: [
-        { name: "Node.js", icon: SiNodedotjs, level: "Intermediário" },
-        { name: "Java", icon: SiSpringboot, level: "Intermediário" },
-        { name: "PostgreSQL", icon: SiPostgresql, level: "Intermediário" },
-        { name: "Supabase", icon: SiSupabase, level: "Intermediário" },
+        { name: "Node.js", icon: SiNodedotjs, level: t('skills.levels.intermediate') },
+        { name: "Java", icon: SiSpringboot, level: t('skills.levels.intermediate') },
+        { name: "PostgreSQL", icon: SiPostgresql, level: t('skills.levels.intermediate') },
+        { name: "Supabase", icon: SiSupabase, level: t('skills.levels.intermediate') },
       ]
     },
     {
-      title: "DevOps & Tools",
+      title: t('skills.devops'),
       skills: [
-        { name: "Git", icon: SiGit, level: "Proficiente" },
-        { name: "Vercel", icon: SiVercel, level: "Proficiente" },
-        { name: "Docker", icon: SiDocker, level: "Básico" },
+        { name: "Git", icon: SiGit, level: t('skills.levels.proficient') },
+        { name: "Vercel", icon: SiVercel, level: t('skills.levels.proficient') },
+        { name: "Docker", icon: SiDocker, level: t('skills.levels.basic') },
       ]
     },
     {
-      title: "IA & Automação",
+      title: t('skills.automation'),
       skills: [
-        { name: "Playwright", icon: SiPuppeteer, level: "Intermediário" },
-        { name: "Puppeteer", icon: SiPuppeteer, level: "Intermediário" },
-        { name: "APIs REST", icon: SiNodedotjs, level: "Proficiente" },
-        { name: "IA Integration", icon: SiOpenai, level: "Intermediário" },
+        { name: "Playwright", icon: SiPuppeteer, level: t('skills.levels.intermediate') },
+        { name: "Puppeteer", icon: SiPuppeteer, level: t('skills.levels.intermediate') },
+        { name: "APIs REST", icon: SiNodedotjs, level: t('skills.levels.proficient') },
+        { name: "IA Integration", icon: SiOpenai, level: t('skills.levels.intermediate') },
       ]
     }
   ];
@@ -50,7 +52,7 @@ const Skills = () => {
       <div className="container-custom">
         <div className="section-title mb-16">
           <span className="w-8 h-px bg-dark-terminal" />
-          <span className="mono-tag">02 / Skills</span>
+          <span className="mono-tag">02 / {t('skills.title')}</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">

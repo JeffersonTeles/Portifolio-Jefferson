@@ -1,10 +1,13 @@
 import React from 'react';
-import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import { FiGithub } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="py-12 bg-dark-bg border-t border-white/5">
-      <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+      <div className="container-custom">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           
           <div className="flex flex-col items-center md:items-start gap-2">
@@ -12,7 +15,7 @@ const Footer = () => {
               Jefferson Teles © 2026
             </p>
             <p className="font-mono text-[8px] text-white/10 uppercase tracking-tighter">
-              Desenvolvedor em Construção • Cascavel/PR
+              {t('footer.location')}
             </p>
           </div>
 

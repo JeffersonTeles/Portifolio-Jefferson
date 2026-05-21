@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const About = () => {
-  const tags = ["Autonomia", "Impacto real", "Aprendizado contínuo"];
+  const { t } = useTranslation();
+  const tags = t('about.values', { returnObjects: true });
 
   return (
     <section id="about" className="py-24 bg-dark-bg/50 relative overflow-hidden">
@@ -13,28 +15,22 @@ const About = () => {
           <div className="lg:col-span-7">
             <div className="section-title mb-8">
               <span className="w-8 h-px bg-dark-terminal" />
-              <span className="mono-tag">01 / Sobre Mim</span>
+              <span className="mono-tag">01 / {t('about.title')}</span>
             </div>
             
             <h2 className="text-3xl md:text-5xl font-bold mb-8 leading-tight">
-              A base da <span className="text-dark-terminal">infraestrutura</span> somada à paixão pelo <span className="text-dark-accent">produto</span>.
+              {t('about.headline')}
             </h2>
 
             <div className="space-y-6 text-dark-muted text-lg leading-relaxed max-w-2xl">
-              <p>
-                Minha trajetória na tecnologia começou com uma base técnica sólida em <span className="text-white">redes, Linux e hardware</span>. Essa vivência me ensinou a pensar criticamente sobre como os sistemas operam do nível mais baixo até a interface.
-              </p>
-              <p>
-                Como <span className="text-white">Analista de Suporte Júnior na FaturÁgil</span>, refinei minha capacidade de diagnóstico e resolução de problemas sob pressão, mantendo sempre o foco na experiência final do usuário.
-              </p>
-              <p>
-                Atualmente, estou canalizando esse conhecimento para o <span className="text-white">desenvolvimento de software</span>. Curso Engenharia de Software na FAG e foco em construir soluções de alto impacto usando as stacks mais modernas de <span className="text-dark-accent">IA e Web</span>.
-              </p>
+              <p>{t('about.p1')}</p>
+              <p>{t('about.p2')}</p>
+              <p>{t('about.p3')}</p>
             </div>
 
             {/* Values Tags */}
             <div className="mt-12 flex flex-wrap gap-4">
-              {tags.map((tag, i) => (
+              {Array.isArray(tags) && tags.map((tag, i) => (
                 <motion.div 
                   key={i}
                   initial={{ opacity: 0, scale: 0.9 }}

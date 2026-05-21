@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronDown, FiChevronUp, FiTerminal } from 'react-icons/fi';
 import i18n from '../i18n';
+import { useSection } from '../context/SectionContext';
 
 const AIConsole = () => {
+  const { currentSection } = useSection();
   const [isMinimized, setIsMinimized] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [logs, setLogs] = useState([
-    "JT_OS v4.0 initialized.",
+    "JT_OS v4.0.2 initialized.",
     "System security protocols active.",
     "Type /help for commands."
   ]);
@@ -18,6 +20,22 @@ const AIConsole = () => {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [logs]);
+
+  // CLI Narrative (Feature 4)
+  useEffect(() => {
+    const messages = {
+      hero: "SYNC: Core link established with main module.",
+      about: "ACCESS: Identity vault authorized. Scanning history...",
+      skills: "ANALYSIS: Technical matrix active. Evaluating stack...",
+      projects: "DATA_FETCH: Archive access granted. Rendering works...",
+      lab: "RESEARCH: Experimental drive active. Sandboxes ready.",
+      services: "UPLINK: Capabilities module online.",
+      contact: "COMM_LINK: Uplink established. Waiting for handshake."
+    };
+    if (messages[currentSection]) {
+      addLog(`SYSTEM: ${messages[currentSection]}`);
+    }
+  }, [currentSection]);
 
   const addLog = (msg) => {
     setLogs(prev => [...prev.slice(-20), msg]);
@@ -76,7 +94,7 @@ const AIConsole = () => {
           <div className="flex items-center gap-2">
             <FiTerminal size={14} className="text-dark-accent" />
             <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-dark-accent/60">
-              JT_INTERFACE_v4.0
+              JT_CLI_CORE_V4.0.2
             </span>
           </div>
           {isMinimized ? <FiChevronUp size={14} /> : <FiChevronDown size={14} />}
@@ -108,7 +126,7 @@ const AIConsole = () => {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={handleCommand}
-                  placeholder="Aguardando input..."
+                  placeholder="Waiting for input..."
                   className="bg-transparent border-none outline-none text-[9px] font-mono w-full text-white placeholder:text-white/10"
                 />
               </div>
