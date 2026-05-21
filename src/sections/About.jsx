@@ -1,86 +1,79 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
 
 const About = () => {
-  const { t } = useTranslation();
-  const tags = t('about.values', { returnObjects: true });
-
   return (
-    <section id="about" className="py-24 bg-dark-bg/50 relative overflow-hidden">
-      <div className="container mx-auto px-6 md:px-12 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+    <section id="about" className="py-32 bg-luxury-bg">
+      <div className="premium-container">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
           
-          {/* Text Content */}
-          <div className="lg:col-span-7">
-            <div className="section-title mb-8">
-              <span className="w-8 h-px bg-dark-terminal" />
-              <span className="mono-tag">01 / {t('about.title')}</span>
-            </div>
-            
-            <h2 className="text-3xl md:text-5xl font-bold mb-8 leading-tight">
-              {t('about.headline')}
-            </h2>
-
-            <div className="space-y-6 text-dark-muted text-lg leading-relaxed max-w-2xl">
-              <p>{t('about.p1')}</p>
-              <p>{t('about.p2')}</p>
-              <p>{t('about.p3')}</p>
-            </div>
-
-            {/* Values Tags */}
-            <div className="mt-12 flex flex-wrap gap-4">
-              {Array.isArray(tags) && tags.map((tag, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="px-4 py-2 border border-white/5 bg-white/[0.02] rounded-sm"
-                >
-                  <span className="font-mono text-[10px] text-dark-terminal uppercase tracking-[0.2em]">{tag}</span>
-                </motion.div>
-              ))}
+          {/* Section Indicator */}
+          <div className="lg:col-span-3">
+            <div className="sticky top-32">
+              <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/20 mb-8 block">
+                01 / Strategy & History
+              </span>
+              <div className="flex flex-col gap-6">
+                {["Efficiency", "Reliability", "Architecture"].map((val, i) => (
+                  <div key={i} className="flex items-center gap-4 group">
+                    <div className="w-1.5 h-1.5 bg-luxury-accent scale-0 group-hover:scale-100 transition-transform duration-500" />
+                    <span className="text-[11px] font-medium uppercase tracking-widest text-luxury-muted group-hover:text-white transition-colors">
+                      {val}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* SVG Avatar / Geometric Visual */}
-          <div className="lg:col-span-5 relative flex justify-center">
-            <motion.div 
-              initial={{ opacity: 0, rotate: -10 }}
-              whileInView={{ opacity: 1, rotate: 0 }}
+          {/* Main Narrative */}
+          <div className="lg:col-span-9">
+            <motion.h2 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 1 }}
-              className="relative w-full aspect-square max-w-[400px]"
+              transition={{ duration: 0.8 }}
+              className="text-4xl md:text-6xl font-medium mb-16 leading-[1.1] text-white"
             >
-              {/* Outer Hexagon */}
-              <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full text-dark-accent/10">
-                <path d="M50 0 L93.3 25 L93.3 75 L50 100 L6.7 75 L6.7 25 Z" fill="none" stroke="currentColor" strokeWidth="0.5" />
-              </svg>
-              
-              {/* Inner Decoration */}
-              <div className="absolute inset-8 border border-white/10 bg-dark-card/50 backdrop-blur-3xl overflow-hidden flex items-center justify-center rounded-sm">
-                <svg viewBox="0 0 100 100" className="w-1/2 h-1/2 text-dark-accent opacity-20">
-                   <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" className="animate-[spin_20s_linear_infinite]" />
-                   <path d="M30 30 L70 70 M70 30 L30 70" stroke="currentColor" strokeWidth="1" />
-                   <circle cx="50" cy="50" r="5" fill="currentColor" />
-                </svg>
-                
-                {/* HUD Lines */}
-                <div className="absolute top-4 left-4 font-mono text-[6px] text-dark-terminal opacity-40">
-                  REF_JT_01 // SECURE_ACCESS
-                </div>
-                <div className="absolute bottom-4 right-4 font-mono text-[6px] text-dark-accent opacity-40">
-                  COORD_53.45_24.95
-                </div>
-              </div>
+              Transforming complex technical challenges into <span className="italic text-luxury-muted">seamless digital products.</span>
+            </motion.h2>
 
-              {/* Orbiting Elements */}
-              <div className="absolute inset-0 animate-[spin_10s_linear_infinite]">
-                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-dark-terminal rounded-full shadow-[0_0_10px_#00ff88]" />
-              </div>
-            </motion.div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg text-luxury-muted leading-relaxed">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <p className="mb-8">
+                  My background is rooted in technical precision. Starting with Linux architecture and infrastructure, I developed a critical understanding of how systems communicate at the core level.
+                </p>
+                <p>
+                  As a Software Engineer focused on <span className="text-white">Full-stack development</span>, I bridge the gap between robust backend architecture and elegant, responsive front-end experiences.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <p className="mb-8 border-l border-luxury-accent/30 pl-8">
+                  Currently pursuing Software Engineering at FAG, I focus on delivering impact through clean code and scalable solutions. My goal is to build software that is not only functional but <span className="text-white">technically superior</span>.
+                </p>
+                <div className="flex gap-12 mt-12">
+                  <div>
+                    <span className="text-3xl font-bold text-white block mb-2">03+</span>
+                    <span className="text-[9px] uppercase tracking-widest">Years XP</span>
+                  </div>
+                  <div>
+                    <span className="text-3xl font-bold text-white block mb-2">40+</span>
+                    <span className="text-[9px] uppercase tracking-widest">Projects</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
 
         </div>
