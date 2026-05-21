@@ -15,13 +15,10 @@ const resources = {
       },
       about: {
         title: "Sobre Mim",
-        headline: "Da infraestrutura física para o desenvolvimento de produtos.",
-        p1: "Minha jornada na tecnologia começou com as mãos na massa: redes, Linux e hardware.",
-        p2: "Atualmente, como Analista de Suporte Júnior na FaturÁgil, aprendi a lidar com problemas reais de usuários.",
-        p3: "Hoje, curso Engenharia de Software na FAG e foco em construir soluções de alto impacto."
-      },
-      skills: {
-        title: "Skills"
+        headline: "A base da infraestrutura somada à paixão pelo produto.",
+        p1: "Minha trajetória na tecnologia começou com uma base técnica sólida em redes, Linux e hardware. Essa vivência me ensinou a pensar criticamente sobre como os sistemas operam.",
+        p2: "Como Analista de Suporte Júnior na FaturÁgil, refinei minha capacidade de diagnóstico e resolução de problemas sob pressão.",
+        p3: "Atualmente, curso Engenharia de Software na FAG e foco em construir soluções de alto impacto usando IA e Web."
       }
     }
   },
@@ -31,20 +28,17 @@ const resources = {
         status: "Open to opportunities",
         title1: "Jefferson",
         title2: "Teles",
-        subtitle: "Developer in Progress",
+        subtitle: "Developer in Construction",
         desc: "Automation, AI & Web • Support to Code • Cascavel/PR",
         btnProjects: "View Projects",
-        btnResume: "Download Resume"
+        btnResume: "Download CV"
       },
       about: {
         title: "About Me",
-        headline: "From physical infrastructure to product development.",
-        p1: "My tech journey started hands-on: networks, Linux, and hardware.",
-        p2: "Currently, as a Junior Support Analyst at FaturÁgil, I've learned to handle real user problems.",
-        p3: "Now, I'm studying Software Engineering at FAG, focusing on building high-impact solutions."
-      },
-      skills: {
-        title: "Skills"
+        headline: "Infrastructure foundation meets product passion.",
+        p1: "My tech journey began with a solid technical base in networking, Linux, and hardware. This taught me to think critically about how systems operate.",
+        p2: "As a Junior Support Analyst at FaturÁgil, I refined my diagnostic and problem-solving skills under pressure.",
+        p3: "Currently, I am studying Software Engineering at FAG, focusing on high-impact IA and Web solutions."
       }
     }
   }
@@ -55,6 +49,7 @@ i18n
   .init({
     resources,
     lng: 'pt',
+    fallbackLng: 'pt',
     interpolation: {
       escapeValue: false
     }
