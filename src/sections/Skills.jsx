@@ -1,95 +1,103 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
 import { 
-  SiReact, SiTypescript, SiTailwindcss, SiFramer,
-  SiNodedotjs, SiPostgresql, SiSupabase, SiSpringboot,
-  SiGit, SiVercel, SiDocker, SiOpenai, SiPuppeteer
+  SiReact, SiTypescript, SiTailwindcss, SiFramer, SiNextdotjs,
+  SiNodedotjs, SiSpringboot, SiPostgresql, SiSupabase,
+  SiGit, SiVercel, SiLinux, SiDocker,
+ SiPuppeteer, SiOpenai, SiJavascript
 } from 'react-icons/si';
 
+const SkillChip = ({ name, icon: Icon, level, delay }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.95 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.4, delay }}
+    whileHover={{ backgroundColor: "rgba(0, 212, 255, 0.08)", borderColor: "rgba(0, 212, 255, 0.3)" }}
+    className="flex items-center gap-3 px-4 py-2 bg-white/[0.02] border border-white/5 rounded-sm transition-all group cursor-default"
+  >
+    <Icon className="text-dark-muted group-hover:text-dark-accent transition-colors duration-300" size={18} />
+    <div className="flex flex-col">
+      <span className="text-[11px] font-bold text-white/90 uppercase tracking-wider">{name}</span>
+      <span className="text-[8px] font-mono text-dark-terminal/60 uppercase">{level}</span>
+    </div>
+  </motion.div>
+);
+
 const Skills = () => {
-  const { t } = useTranslation();
-  const categories = [
+  const groups = [
     {
-      title: t('skills.frontend'),
+      title: "Frontend",
       skills: [
-        { name: "React", icon: SiReact, level: t('skills.levels.proficient') },
-        { name: "TypeScript", icon: SiTypescript, level: t('skills.levels.intermediate') },
-        { name: "Tailwind CSS", icon: SiTailwindcss, level: t('skills.levels.proficient') },
-        { name: "Framer Motion", icon: SiFramer, level: t('skills.levels.intermediate') },
+        { name: "React", icon: SiReact, level: "Proficiente" },
+        { name: "TypeScript", icon: SiTypescript, level: "Intermediário" },
+        { name: "Tailwind", icon: SiTailwindcss, level: "Proficiente" },
+        { name: "Framer Motion", icon: SiFramer, level: "Intermediário" },
+        { name: "Next.js", icon: SiNextdotjs, level: "Intermediário" },
       ]
     },
     {
-      title: t('skills.backend'),
+      title: "Backend",
       skills: [
-        { name: "Node.js", icon: SiNodedotjs, level: t('skills.levels.intermediate') },
-        { name: "Java", icon: SiSpringboot, level: t('skills.levels.intermediate') },
-        { name: "PostgreSQL", icon: SiPostgresql, level: t('skills.levels.intermediate') },
-        { name: "Supabase", icon: SiSupabase, level: t('skills.levels.intermediate') },
+        { name: "Node.js", icon: SiNodedotjs, level: "Proficiente" },
+        { name: "Java", icon: SiSpringboot, level: "Intermediário" },
+        { name: "PostgreSQL", icon: SiPostgresql, level: "Intermediário" },
+        { name: "Supabase", icon: SiSupabase, level: "Intermediário" },
+        { name: "REST APIs", icon: SiJavascript, level: "Proficiente" },
       ]
     },
     {
-      title: t('skills.devops'),
+      title: "DevOps & Tools",
       skills: [
-        { name: "Git", icon: SiGit, level: t('skills.levels.proficient') },
-        { name: "Vercel", icon: SiVercel, level: t('skills.levels.proficient') },
-        { name: "Docker", icon: SiDocker, level: t('skills.levels.basic') },
+        { name: "Git", icon: SiGit, level: "Proficiente" },
+        { name: "Vercel", icon: SiVercel, level: "Proficiente" },
+        { name: "Linux", icon: SiLinux, level: "Proficiente" },
+        { name: "Docker", icon: SiDocker, level: "Básico" },
       ]
     },
     {
-      title: t('skills.automation'),
+      title: "IA & Automação",
       skills: [
-        { name: "Playwright", icon: SiPuppeteer, level: t('skills.levels.intermediate') },
-        { name: "Puppeteer", icon: SiPuppeteer, level: t('skills.levels.intermediate') },
-        { name: "APIs REST", icon: SiNodedotjs, level: t('skills.levels.proficient') },
-        { name: "IA Integration", icon: SiOpenai, level: t('skills.levels.intermediate') },
+        { name: "Playwright", icon: SiPuppeteer, level: "Intermediário" },
+        { name: "Puppeteer", icon: SiPuppeteer, level: "Intermediário" },
+        { name: "WhatsApp API", icon: SiJavascript, level: "Intermediário" },
+        { name: "Prompt Eng.", icon: SiOpenai, level: "Intermediário" },
       ]
     }
   ];
 
   return (
-    <section id="skills" className="py-24 bg-dark-bg/30">
-      <div className="container-custom">
-        <div className="section-title mb-16">
-          <span className="w-8 h-px bg-dark-terminal" />
-          <span className="mono-tag">02 / {t('skills.title')}</span>
-        </div>
+    <section id="skills" className="section-container bg-dark-bg/30 relative">
+      <motion.h3 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="font-mono text-dark-accent text-sm tracking-[0.3em] uppercase mb-16"
+      >
+        skills.map(s =&gt; s.level)
+      </motion.h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {categories.map((cat, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <h3 className="font-mono text-xs text-dark-muted uppercase tracking-[0.2em] mb-8 border-b border-white/5 pb-4">
-                {cat.title}
-              </h3>
-              
-              <div className="flex flex-wrap gap-3">
-                {cat.skills.map((skill, si) => (
-                  <div 
-                    key={si}
-                    className="group relative flex items-center gap-2 px-3 py-1.5 border border-white/5 bg-white/[0.02] rounded-sm hover:border-dark-accent/50 transition-all cursor-default"
-                  >
-                    <skill.icon className="text-dark-muted group-hover:text-dark-accent transition-colors" size={14} />
-                    <span className="text-[10px] font-mono text-dark-muted group-hover:text-white transition-colors">
-                      {skill.name}
-                    </span>
-                    
-                    {/* Level Tooltip */}
-                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-dark-accent text-dark-bg text-[8px] font-bold uppercase rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20">
-                      {skill.level}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+        {groups.map((group, groupIndex) => (
+          <div key={groupIndex} className="flex flex-col gap-6">
+            <h4 className="font-mono text-[10px] text-white/20 uppercase tracking-[0.3em] border-b border-white/5 pb-4">
+              {group.title}
+            </h4>
+            <div className="grid grid-cols-1 gap-3">
+              {group.skills.map((skill, skillIndex) => (
+                <SkillChip 
+                  key={skillIndex} 
+                  {...skill} 
+                  delay={(groupIndex * 0.1) + (skillIndex * 0.05)} 
+                />
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
+
+      {/* Decorative Matrix Background */}
+      <div className="absolute right-0 top-0 w-64 h-64 bg-dark-terminal/5 rounded-full blur-[100px] pointer-events-none -z-10" />
     </section>
   );
 };

@@ -1,131 +1,184 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiArrowUpRight, FiGithub, FiX, FiCheckCircle } from 'react-icons/fi';
+import { FiArrowUpRight, FiGithub, FiExternalLink } from 'react-icons/fi';
+
+const ProjectCard = ({ id, name, desc, stack, status, statusColor, link, index }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group relative w-full border-b border-white/5 py-12 lg:py-20 cursor-default"
+    >
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 lg:gap-12 relative z-10">
+        
+        {/* Left: ID & Info */}
+        <div className="flex items-start gap-8 lg:gap-16 flex-1">
+          <div className="relative pt-1">
+            <span className="font-mono text-sm lg:text-lg text-dark-accent opacity-50">#{id}</span>
+            {/* Animated line on hover */}
+            <motion.div 
+              initial={{ width: 0 }}
+              animate={{ width: isHovered ? "100%" : 0 }}
+              className="absolute -bottom-2 left-0 h-px bg-dark-accent"
+            />
+          </div>
+
+          <div className="flex-1">
+            <div className="flex items-center gap-4 mb-4">
+              <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white group-hover:text-dark-accent transition-colors duration-500 tracking-premium">
+                {name}
+              </h3>
+              <div className={`px-2 py-0.5 rounded-sm border border-current bg-transparent ${statusColor} opacity-70`}>
+                <span className="font-mono text-[8px] lg:text-[10px] uppercase font-black tracking-[0.2em]">{status}</span>
+              </div>
+            </div>
+            <p className="text-dark-muted text-sm md:text-lg lg:text-xl max-w-2xl font-light leading-relaxed">
+              {desc}
+            </p>
+          </div>
+        </div>
+
+        {/* Right: Revealable Details */}
+        <div className="flex flex-col lg:items-end gap-8 min-w-[200px]">
+          <AnimatePresence>
+            {isHovered && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
+                className="flex flex-wrap lg:justify-end gap-3 max-w-[300px]"
+              >
+                {stack.map((s, i) => (
+                  <span key={i} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full font-mono text-[9px] text-white/40 uppercase tracking-tighter">
+                    {s}
+                  </span>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="flex items-center gap-6">
+            {link && link !== "#" && (
+              <a 
+                href={link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white hover:text-dark-accent transition-colors group/link"
+              >
+                Launch
+                <FiArrowUpRight className="group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
+              </a>
+            )}
+            <a 
+              href="https://github.com/JeffersonTeles" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-dark-muted hover:text-white transition-colors"
+            >
+              <FiGithub />
+              Source
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Subtle Background Glow */}
+      <div className="absolute inset-0 bg-dark-accent/[0.01] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+    </motion.div>
+  );
+};
 
 const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState(null);
-
   const projects = [
     {
-      id: "caixaviva",
-      title: "Caixa Viva",
-      category: "SaaS / Fintech",
-      desc: "Financial check-in solution for micro-entrepreneurs.",
-      stack: ["Next.js", "Supabase", "Tailwind"],
-      status: "In Development",
-      statusColor: "text-amber-400",
+      id: "01",
+      name: "CAIXA VIVA",
+      desc: "SaaS de check-in financeiro para MEIs — controle de caixa simplificado com dashboard visual.",
+      stack: ["Next.js", "Supabase", "Tailwind", "TypeScript"],
+      status: "Em desenvolvimento",
+      statusColor: "text-yellow-400",
       link: "#"
     },
     {
-      id: "escudo",
-      title: "Escudo",
-      category: "AI / Security",
-      desc: "Deepfake detection platform for the Brazilian market.",
-      stack: ["Next.js", "AI APIs", "Python"],
-      status: "Beta Access",
-      statusColor: "text-luxury-accent",
+      id: "02",
+      name: "ESCUDO",
+      desc: "Plataforma de detecção de deepfakes e conteúdo gerado por IA para o mercado brasileiro.",
+      stack: ["Next.js", "IA APIs", "Python", "TypeScript"],
+      status: "Em desenvolvimento",
+      statusColor: "text-yellow-400",
       link: "#"
     },
     {
-      id: "casamento",
-      title: "Wedding Site",
-      category: "Web Application",
-      desc: "Full RSVP and gift list platform with payment integration.",
-      stack: ["Next.js", "Vercel", "Stripe"],
-      status: "Active Production",
-      statusColor: "text-emerald-400",
+      id: "03",
+      name: "BOT AFILIADOS ML",
+      desc: "Bot que monitora, ranqueia via IA e envia ofertas do Mercado Livre e Shopee no WhatsApp.",
+      stack: ["Node.js", "Puppeteer", "WhatsApp API", "SQLite"],
+      status: "Em desenvolvimento",
+      statusColor: "text-yellow-400",
+      link: "#"
+    },
+    {
+      id: "04",
+      name: "CASAMENTO",
+      desc: "Site com RSVP, lista de presentes e galeria para casamento real. Interface minimalista.",
+      stack: ["Next.js", "Vercel", "Framer Motion"],
+      status: "Em produção",
+      statusColor: "text-dark-terminal",
       link: "https://casamento-ten-rho.vercel.app"
+    },
+    {
+      id: "05",
+      name: "ATTACK SHARK X11",
+      desc: "Configuração de mouse gamer no Linux via WebHID e regras udev customizadas.",
+      stack: ["Linux", "WebHID", "Shell Script"],
+      status: "Concluído",
+      statusColor: "text-dark-muted",
+      link: "https://github.com/JeffersonTeles"
     }
   ];
 
   return (
-    <section id="projects" className="py-40 bg-luxury-bg border-y border-white/5">
+    <section id="projects" className="bg-dark-bg border-t border-white/5 pt-32 pb-24">
       <div className="premium-container">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-32">
-          <div className="max-w-2xl">
-            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/20 mb-8 block">
-              02 / Curated Portfolio
-            </span>
-            <h2 className="text-5xl md:text-8xl font-extrabold uppercase leading-[0.9]">
-              Selected<br />Works
-            </h2>
-          </div>
-        </div>
+        <motion.h3 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="font-mono text-dark-accent text-sm tracking-[0.3em] uppercase mb-16"
+        >
+          projects.filter(p =&gt; p.impact &gt; 0)
+        </motion.h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1px bg-white/5 border border-white/5">
+        <div className="flex flex-col">
           {projects.map((project, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: i * 0.2 }}
-              onClick={() => setSelectedProject(project)}
-              className="bg-luxury-bg p-12 group cursor-pointer relative overflow-hidden"
-            >
-              {/* Card Hover Effect */}
-              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.03] transition-opacity duration-700" />
-              
-              <div className="relative z-10 flex flex-col h-full">
-                <div className="flex justify-between items-center mb-12">
-                  <span className={`text-[8px] font-bold uppercase tracking-[0.3em] ${project.statusColor}`}>
-                    {project.status}
-                  </span>
-                  <FiArrowUpRight size={20} className="text-white/20 group-hover:text-luxury-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500" />
-                </div>
-
-                <span className="text-[10px] uppercase tracking-widest text-white/40 mb-4">{project.category}</span>
-                <h3 className="text-3xl font-bold text-white mb-6 tracking-tighter uppercase">{project.title}</h3>
-                <p className="text-luxury-muted text-sm leading-relaxed mb-12 flex-1">{project.desc}</p>
-                
-                <div className="flex flex-wrap gap-4 pt-8 border-t border-white/5">
-                  {project.stack.map((s, si) => (
-                    <span key={si} className="text-[9px] font-bold uppercase tracking-widest text-white/40">{s}</span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+            <ProjectCard key={i} {...project} index={i} />
           ))}
         </div>
-      </div>
 
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div 
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[1000] flex items-center justify-center p-6 bg-black/95 backdrop-blur-xl"
+        {/* Call to Action for more projects */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+          className="mt-20 text-center"
+        >
+          <a 
+            href="https://github.com/JeffersonTeles" 
+            target="_blank" 
+            className="font-mono text-[10px] text-white/20 uppercase tracking-[0.4em] hover:text-dark-accent transition-colors"
           >
-            <motion.div 
-              initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }}
-              className="bg-luxury-bg border border-white/10 w-full max-w-4xl p-12 md:p-20 relative"
-            >
-              <button onClick={() => setSelectedProject(null)} className="absolute top-12 right-12 text-white/20 hover:text-white transition-colors">
-                <FiX size={32} />
-              </button>
-
-              <div className="max-w-2xl">
-                <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-luxury-accent mb-8 block">Project Analysis</span>
-                <h2 className="text-5xl md:text-7xl font-bold uppercase mb-12 leading-tight">{selectedProject.title}</h2>
-                
-                <div className="space-y-12">
-                  <div>
-                    <p className="text-xl md:text-2xl text-luxury-muted leading-relaxed italic">
-                      "A strategic solution for modern digital environments."
-                    </p>
-                  </div>
-                  
-                  <div className="flex gap-8">
-                    {selectedProject.link !== "#" && (
-                      <a href={selectedProject.link} target="_blank" className="btn-luxury-primary">Live Experience</a>
-                    )}
-                    <a href="#" className="btn-luxury-outline">Source Files</a>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            // Explore full archive on GitHub
+          </a>
+        </motion.div>
+      </div>
     </section>
   );
 };
