@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FiArrowRight, FiCode, FiZap, FiCpu } from "react-icons/fi";
+import { FiArrowRight, FiCode, FiZap, FiCpu, FiEye } from "react-icons/fi";
 import TypewriterBlock from "../components/TypewriterBlock";
 import MagneticButton from "../components/MagneticButton";
 import AutomationDashboard from "../components/AutomationDashboard";
+import CVPreviewModal from "../components/CVPreviewModal";
 import { useTranslation } from "react-i18next";
 
 const Hero = () => {
   const { t } = useTranslation();
+  const [isCVOpen, setIsCVOpen] = useState(false);
 
   const fadeUp = {
     initial: { opacity: 0, y: 40 },
@@ -16,7 +18,7 @@ const Hero = () => {
     transition: { duration: 1, ease: [0.16, 1, 0.3, 1] },
   };
 
-  return (
+  const heroContent = (
     <section
       id="hero"
       className="relative min-h-screen flex items-center pt-24 overflow-hidden bg-black"
@@ -83,14 +85,13 @@ const Hero = () => {
                 </a>
               </MagneticButton>
               <MagneticButton>
-                <a
-                  href="/cv-jefferson-teles.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => setIsCVOpen(true)}
                   className="flex items-center justify-center gap-2 px-8 py-4 glass-panel text-white font-medium text-sm rounded-full hover:bg-white/5 transition-all duration-300"
                 >
+                  <FiEye size={14} />
                   {t("hero.btnResume")}
-                </a>
+                </button>
               </MagneticButton>
             </motion.div>
 
@@ -123,6 +124,13 @@ const Hero = () => {
         </div>
       </div>
     </section>
+  );
+
+  return (
+    <>
+      {heroContent}
+      <CVPreviewModal isOpen={isCVOpen} onClose={() => setIsCVOpen(false)} />
+    </>
   );
 };
 

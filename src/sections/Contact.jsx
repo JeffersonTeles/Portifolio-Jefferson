@@ -1,9 +1,48 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FiArrowRight, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import {
+  FiArrowRight,
+  FiCheckCircle,
+  FiCopy,
+  FiGithub,
+  FiLinkedin,
+  FiMail,
+} from "react-icons/fi";
 import { SiWhatsapp } from "react-icons/si";
 import MagneticButton from "../components/MagneticButton";
 import ContactModal from "../components/ContactModal";
+
+const CopyEmailButton = ({ email }) => {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // fallback: select text
+    }
+  };
+  return (
+    <button
+      onClick={handleCopy}
+      className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 text-white/30 hover:text-white hover:border-white/30 transition-all text-[9px] font-bold uppercase tracking-widest"
+      aria-label="Copiar email"
+    >
+      {copied ? (
+        <>
+          <FiCheckCircle size={12} className="text-green-400" />
+          <span className="text-green-400">Copiado!</span>
+        </>
+      ) : (
+        <>
+          <FiCopy size={12} />
+          <span>Copiar</span>
+        </>
+      )}
+    </button>
+  );
+};
 
 const Contact = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -83,8 +122,35 @@ const Contact = () => {
                       <social.icon size={22} />
                     </a>
                   ))}
+                  <a
+                    href="mailto:jeffersonteles.dev@gmail.com"
+                    aria-label="Enviar email"
+                    className="text-white/30 hover:text-white transition-all hover:-translate-y-1"
+                  >
+                    <FiMail size={22} />
+                  </a>
                 </div>
               </div>
+
+              {/* Direct email with copy */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="mt-16 flex items-center gap-4 group/email"
+              >
+                <span className="text-[8px] font-mono text-white/20 uppercase tracking-[0.4em]">
+                  Direct_Link:
+                </span>
+                <a
+                  href="mailto:jeffersonteles.dev@gmail.com"
+                  className="text-sm font-mono text-white/50 hover:text-white transition-colors"
+                >
+                  jeffersonteles.dev@gmail.com
+                </a>
+                <CopyEmailButton email="jeffersonteles.dev@gmail.com" />
+              </motion.div>
             </motion.div>
           </div>
 

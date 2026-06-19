@@ -17,7 +17,8 @@ const ProjectCard = ({ project, index, t, onOpenDetails }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
-      className="group relative flex flex-col gap-8 py-20 px-8 md:px-12 glass-panel hover:bg-white/[0.04] transition-all duration-700 mb-12 rounded-2xl overflow-hidden"
+      className="group relative flex flex-col gap-8 py-20 px-8 md:px-12 glass-panel hover:bg-white/[0.04] transition-all duration-700 mb-12 rounded-2xl overflow-hidden cursor-pointer"
+      onClick={() => onOpenDetails(project)}
     >
       {/* Project Thumbnail */}
       {project.image && (
@@ -92,7 +93,10 @@ const ProjectCard = ({ project, index, t, onOpenDetails }) => {
 
           {/* Technical View Button */}
           <div
-            onClick={() => onOpenDetails(project)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpenDetails(project);
+            }}
             className="p-6 bg-white/[0.02] border border-white/[0.05] rounded-xl flex flex-col justify-center items-center text-center group/tech cursor-pointer hover:border-white/20 transition-all md:col-span-1"
           >
             <div className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center group-hover/tech:bg-white group-hover/tech:text-black transition-all duration-500">
@@ -112,6 +116,7 @@ const ProjectCard = ({ project, index, t, onOpenDetails }) => {
                 rel="noopener noreferrer"
                 className="flex flex-col items-center gap-3"
                 aria-label={`Launch ${project.title}`}
+                onClick={(e) => e.stopPropagation()}
               >
                 <div className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center group-hover/action:bg-white group-hover/action:text-black transition-all duration-500">
                   <FiBox size={20} />
@@ -144,6 +149,13 @@ const Projects = () => {
   const { t } = useTranslation();
   const projects = t("projects.list", { returnObjects: true });
   const [selectedProject, setSelectedProject] = useState(null);
+  const [activeFilter, setActiveFilter] = useState("Todos");
+
+  const allTechs = ["Todos", ...new Set(projects.flatMap((p) => p.stack))];
+  const filtered =
+    activeFilter === "Todos"
+      ? projects
+      : projects.filter((p) => p.stack.includes(activeFilter));
 
   return (
     <section id="projects" className="py-40 bg-black relative">
@@ -167,10 +179,31 @@ const Projects = () => {
             <br />
             Experience.
           </motion.h2>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-wrap gap-3 mb-16"
+          >
+            {allTechs.map((tech) => (
+              <button
+                key={tech}
+                onClick={() => setActiveFilter(tech)}
+                className={`px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all duration-300 ${
+                  activeFilter === tech
+                    ? "bg-white text-black border-white"
+                    : "bg-transparent text-white/40 border-white/10 hover:border-white/30 hover:text-white/60"
+                }`}
+              >
+                {tech}
+              </button>
+            ))}
+          </motion.div>
         </div>
 
         <div className="flex flex-col gap-6">
-          {projects.map((project, i) => (
+          {filtered.map((project, i) => (
             <ProjectCard
               key={i}
               project={project}

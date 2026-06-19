@@ -17,6 +17,7 @@ import AmbientAudio from "./components/AmbientAudio";
 import ScrollToTop from "./components/ScrollToTop";
 import Preloader from "./components/Preloader";
 import ScrollProgress from "./components/ScrollProgress";
+import SectionIndicator from "./components/SectionIndicator";
 
 // Sections
 import Hero from "./sections/Hero";
@@ -31,6 +32,8 @@ import Testimonials from "./sections/Testimonials";
 
 // Pages
 import Blog from "./pages/Blog";
+import NotFound from "./pages/NotFound";
+import ProjectPage from "./pages/ProjectPage";
 
 // Section Provider
 import { SectionProvider, useSection } from "./context/SectionContext";
@@ -58,6 +61,7 @@ function AppContent({ isDarkMode, toggleTheme }) {
       <AmbientAudio />
       <ShaderTransition />
       <ScrollProgress />
+      <SectionIndicator />
 
       {/* Visual Refinement: Grain Filter */}
       <div className="fixed inset-0 z-[9999] pointer-events-none opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
@@ -91,6 +95,8 @@ function AppContent({ isDarkMode, toggleTheme }) {
             }
           />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/projeto/:slug" element={<ProjectPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 

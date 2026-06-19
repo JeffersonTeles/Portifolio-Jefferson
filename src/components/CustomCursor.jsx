@@ -1,5 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  motion,
+  useSpring,
+  useMotionValue,
+  AnimatePresence,
+} from "framer-motion";
 
 const CustomCursor = () => {
   const [isActive, setIsActive] = useState(false);
@@ -7,10 +12,11 @@ const CustomCursor = () => {
   const [isMagnify, setIsMagnify] = useState(false);
   const [isXRay, setIsXRay] = useState(false);
   const [targetEl, setTargetEl] = useState(null);
-  
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   const canvasRef = useRef(null);
+  const trailRef = useRef([]);
 
   const springConfig = { damping: 30, stiffness: 800, mass: 0.5 };
   const cursorXSpring = useSpring(cursorX, springConfig);
@@ -18,35 +24,53 @@ const CustomCursor = () => {
 
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
-    height: window.innerHeight
+    height: window.innerHeight,
   });
 
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
     const moveCursor = (e) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-      
+
+      const now = Date.now();
+      trailRef.current = [
+        ...trailRef.current.filter((p) => now - p.t < 500),
+        { x: e.clientX, y: e.clientY, t: now },
+      ].slice(-20);
+
       if (canvasRef.current) {
-        const ctx = canvasRef.current.getContext('2d');
+        const ctx = canvasRef.current.getContext("2d");
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        
+
+        // Draw particle trail
+        const nowDraw = Date.now();
+        trailRef.current.forEach((point) => {
+          const age = nowDraw - point.t;
+          const opacity = Math.max(0, 0.18 * (1 - age / 500));
+          const size = Math.max(0.3, 2.2 * (1 - age / 500));
+          ctx.beginPath();
+          ctx.arc(point.x, point.y, size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${opacity})`;
+          ctx.fill();
+        });
+
         if (isActive && targetEl && !isXRay) {
           const rect = targetEl.getBoundingClientRect();
           const targetX = rect.left + rect.width / 2;
           const targetY = rect.top + rect.height / 2;
-          
+
           ctx.beginPath();
           ctx.moveTo(e.clientX, e.clientY);
           ctx.lineTo(targetX, targetY);
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+          ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
           ctx.setLineDash([2, 4]);
           ctx.stroke();
         }
@@ -56,8 +80,15 @@ const CustomCursor = () => {
     const handleMouseOver = (e) => {
       const target = e.target;
       const isProject = target.closest('[data-cursor="view"]');
-      const isMagnifyTarget = target.closest('[data-cursor="magnify"]') || target.tagName === 'H1' || target.tagName === 'H2';
-      const isLink = target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button');
+      const isMagnifyTarget =
+        target.closest('[data-cursor="magnify"]') ||
+        target.tagName === "H1" ||
+        target.tagName === "H2";
+      const isLink =
+        target.tagName === "A" ||
+        target.tagName === "BUTTON" ||
+        target.closest("a") ||
+        target.closest("button");
       const isXRayTarget = target.closest('[data-xray="true"]');
 
       setIsXRay(!!isXRayTarget);
@@ -76,7 +107,7 @@ const CustomCursor = () => {
         setIsView(false);
         setIsMagnify(false);
         setIsActive(true);
-        setTargetEl(isLink === true ? target : target.closest('a, button'));
+        setTargetEl(isLink === true ? target : target.closest("a, button"));
       } else {
         setIsView(false);
         setIsMagnify(false);
@@ -85,42 +116,58 @@ const CustomCursor = () => {
       }
     };
 
-    window.addEventListener('mousemove', moveCursor);
-    window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener("mousemove", moveCursor);
+    window.addEventListener("mouseover", handleMouseOver);
 
     return () => {
-      window.removeEventListener('mousemove', moveCursor);
-      window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener("mousemove", moveCursor);
+      window.removeEventListener("mouseover", handleMouseOver);
     };
   }, [cursorX, cursorY, isActive, targetEl, isXRay]);
 
   return (
     <>
-      <canvas 
-        ref={canvasRef} 
-        width={windowSize.width} 
-        height={windowSize.height} 
+      <canvas
+        ref={canvasRef}
+        width={windowSize.width}
+        height={windowSize.height}
         className="fixed inset-0 pointer-events-none z-[9998]"
       />
-      
+
       {/* X-Ray Lens Filter Mask */}
-      <div 
+      <div
         className="fixed inset-0 z-[9997] pointer-events-none mix-blend-difference"
         style={{
-          clipPath: `circle(${isXRay ? '100px' : '0px'} at ${cursorX.get()}px ${cursorY.get()}px)`,
-          transition: 'clip-path 0.3s ease-out'
+          clipPath: `circle(${isXRay ? "100px" : "0px"} at ${cursorX.get()}px ${cursorY.get()}px)`,
+          transition: "clip-path 0.3s ease-out",
         }}
       >
         <div className="w-full h-full bg-white opacity-10" />
       </div>
 
       <motion.div
-        className={`cursor-dot ${isActive ? 'active' : ''} ${isView ? 'view-mode' : ''} ${isMagnify ? 'magnify-mode' : ''} ${isXRay ? 'xray-mode' : ''}`}
+        className={`cursor-dot ${isActive ? "active" : ""} ${isView ? "view-mode" : ""} ${isMagnify ? "magnify-mode" : ""} ${isXRay ? "xray-mode" : ""}`}
         style={{
           translateX: cursorXSpring,
           translateY: cursorYSpring,
-          width: isXRay ? 150 : isView ? 100 : isMagnify ? 120 : isActive ? 50 : 16,
-          height: isXRay ? 150 : isView ? 100 : isMagnify ? 120 : isActive ? 50 : 16,
+          width: isXRay
+            ? 150
+            : isView
+              ? 100
+              : isMagnify
+                ? 120
+                : isActive
+                  ? 50
+                  : 16,
+          height: isXRay
+            ? 150
+            : isView
+              ? 100
+              : isMagnify
+                ? 120
+                : isActive
+                  ? 50
+                  : 16,
         }}
       >
         <AnimatePresence>
