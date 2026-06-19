@@ -17,7 +17,8 @@ const BootSequence = ({ onComplete }) => {
     let index = 0;
     const interval = setInterval(() => {
       if (index < bootLogs.length) {
-        setLogs(prev => [...prev, bootLogs[index]]);
+        const logToAdd = bootLogs[index];
+        setLogs(prev => [...prev, logToAdd]);
         index++;
       } else {
         clearInterval(interval);

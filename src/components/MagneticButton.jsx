@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
-const MagneticButton = ({ children, className }) => {
+const MagneticButton = ({ children, className = "" }) => {
   const ref = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -10,9 +10,11 @@ const MagneticButton = ({ children, className }) => {
     const { left, top, width, height } = ref.current.getBoundingClientRect();
     const centerX = left + width / 2;
     const centerY = top + height / 2;
-    const x = clientX - centerX;
-    const y = clientY - centerY;
-    setPosition({ x: x * 0.3, y: y * 0.3 });
+    const distanceX = clientX - centerX;
+    const distanceY = clientY - centerY;
+
+    // Stronger magnetic pull within a limited range
+    setPosition({ x: distanceX * 0.4, y: distanceY * 0.4 });
   };
 
   const handleMouseLeave = () => {
@@ -26,7 +28,7 @@ const MagneticButton = ({ children, className }) => {
       onMouseLeave={handleMouseLeave}
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className={className}
+      className={`inline-block ${className}`}
     >
       {children}
     </motion.div>

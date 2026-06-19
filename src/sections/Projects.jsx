@@ -1,146 +1,155 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiArrowUpRight, FiLayers, FiZap, FiTarget, FiBox } from 'react-icons/fi';
+import { FiLayers, FiTarget, FiBox, FiArrowRight, FiCode } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
+import ProjectDetails from '../components/ProjectDetails';
 
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project, index, t, onOpenDetails }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-      className="group relative flex flex-col lg:flex-row gap-12 py-24 border-b border-white/5"
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
+      className="group relative flex flex-col gap-8 py-20 px-8 md:px-12 glass-panel hover:bg-white/[0.04] transition-all duration-700 mb-12 rounded-2xl overflow-hidden"
     >
-      {/* Visual Indicator (Number) */}
-      <div className="hidden lg:flex flex-col justify-between py-2">
-        <span className="font-mono text-sm text-builder-accent opacity-40">#0{index + 1}</span>
-        <motion.div 
-          initial={{ height: 0 }}
-          whileInView={{ height: "100px" }}
-          viewport={{ once: true }}
-          className="w-px bg-builder-accent/20 mx-auto" 
-        />
+      {/* Visual Number Indicator */}
+      <div className="absolute top-8 right-8 font-mono text-4xl text-white/[0.03] font-bold group-hover:text-white/[0.05] transition-colors">
+        0{index + 1}
       </div>
 
-      {/* Content Column */}
-      <div className="flex-1">
-        <div className="flex flex-wrap items-center gap-4 mb-6">
-          <h3 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight text-white group-hover:text-builder-accent transition-colors duration-500">
+      <div className="flex flex-col gap-10">
+        {/* Header Section */}
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-4">
+             <div className={`px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] rounded-full border ${project.statusColor} bg-white/[0.02]`}>
+               {project.status}
+             </div>
+          </div>
+          <h3 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
             {project.title}
           </h3>
-          <div className={`px-3 py-1 text-[10px] font-bold uppercase tracking-widest border rounded-none ${project.statusColor} bg-white/5`}>
-            {project.status}
-          </div>
         </div>
 
-        <p className="text-builder-muted text-lg md:text-xl font-light mb-12 max-w-3xl leading-relaxed">
+        <p className="text-white/50 text-lg md:text-xl font-light max-w-3xl leading-relaxed">
           {project.longDesc}
         </p>
 
-        {/* Dynamic Meta Info */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <div className="p-6 bg-white/[0.02] border border-white/5">
-            <div className="flex items-center gap-2 mb-3 text-builder-accent">
+        {/* Info Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {/* Stack */}
+          <div className="p-6 bg-white/[0.02] border border-white/[0.05] rounded-xl group/info hover:border-white/10 transition-colors md:col-span-1">
+            <div className="flex items-center gap-2 mb-4 text-white/40">
               <FiLayers size={14} />
               <span className="text-[10px] font-bold uppercase tracking-widest">Stack</span>
             </div>
             <div className="flex flex-wrap gap-2">
               {project.stack.map((s, i) => (
-                <span key={i} className="text-[10px] font-mono text-white/40">{s}</span>
+                <span key={i} className="px-2 py-1 rounded-md bg-white/[0.03] text-[9px] font-mono text-white/60 border border-white/[0.05]">
+                  {s}
+                </span>
               ))}
             </div>
           </div>
-          <div className="p-6 bg-white/[0.02] border border-white/5">
-            <div className="flex items-center gap-2 mb-3 text-builder-accent">
+
+          {/* Challenge */}
+          <div className="p-6 bg-white/[0.02] border border-white/[0.05] rounded-xl group/info hover:border-white/10 transition-colors md:col-span-1">
+            <div className="flex items-center gap-2 mb-4 text-white/40">
               <FiTarget size={14} />
-              <span className="text-[10px] font-bold uppercase tracking-widest">Desafio</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest">Core Challenge</span>
             </div>
             <p className="text-[11px] text-white/60 leading-relaxed font-medium italic">{project.challenge}</p>
           </div>
-          <div className="p-6 bg-white/[0.02] border border-white/5 flex flex-col justify-center items-center text-center group/btn cursor-pointer">
+
+          {/* Technical View Button */}
+          <div 
+            onClick={() => onOpenDetails(project)}
+            className="p-6 bg-white/[0.02] border border-white/[0.05] rounded-xl flex flex-col justify-center items-center text-center group/tech cursor-pointer hover:border-white/20 transition-all md:col-span-1"
+          >
+            <div className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center group-hover/tech:bg-white group-hover/tech:text-black transition-all duration-500">
+               <FiCode size={20} />
+            </div>
+            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/40 group-hover/tech:text-white transition-colors mt-3">
+              Case Study
+            </span>
+          </div>
+
+          {/* Action */}
+          <div className="p-6 bg-white/[0.02] border border-white/[0.05] rounded-xl flex flex-col justify-center items-center text-center group/action cursor-pointer hover:border-white/20 transition-all md:col-span-1">
             {project.link !== "#" ? (
-              <a href={project.link} target="_blank" className="flex flex-col items-center gap-2">
-                <FiBox size={24} className="text-white/20 group-hover/btn:text-builder-accent transition-colors" />
-                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/20 group-hover/btn:text-white transition-colors">
-                  Launch App
+              <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-3" aria-label={`Launch ${project.title}`}>
+                <div className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center group-hover/action:bg-white group-hover/action:text-black transition-all duration-500">
+                  <FiBox size={20} />
+                </div>
+                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/40 group-hover/action:text-white transition-colors">
+                  {t('projects.launchApp')}
                 </span>
               </a>
             ) : (
-              <div className="flex flex-col items-center gap-2 grayscale">
-                <FiBox size={24} className="text-white/5" />
-                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/5">
-                  Private Access
+              <div className="flex flex-col items-center gap-3 opacity-20">
+                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center">
+                  <FiBox size={20} />
+                </div>
+                <span className="text-[9px] font-bold uppercase tracking-[0.3em]">
+                  {t('projects.privateAccess')}
                 </span>
               </div>
             )}
           </div>
         </div>
       </div>
-
-      {/* Decorative Hover Line */}
-      <div className="absolute bottom-0 left-0 w-0 h-px bg-builder-accent group-hover:w-full transition-all duration-1000" />
+      
+      {/* Bottom accent glow */}
+      <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-white/[0.02] blur-[80px] rounded-full group-hover:bg-white/[0.05] transition-all duration-1000" />
     </motion.div>
   );
 };
 
 const Projects = () => {
-  const projects = [
-    {
-      title: "Caixa Viva",
-      longDesc: "SaaS financeiro focado em MEIs para gestão simplificada de fluxo de caixa e projeção de faturamento.",
-      stack: ["Next.js", "Supabase", "Tailwind", "TypeScript"],
-      challenge: "Persistência de dados real-time e UX de inserção rápida.",
-      status: "Em Desenvolvimento",
-      statusColor: "text-yellow-400 border-yellow-400/20",
-      link: "#"
-    },
-    {
-      title: "Escudo",
-      longDesc: "Plataforma de detecção de manipulação de mídia e IA focada no mercado de segurança digital brasileiro.",
-      stack: ["Next.js", "Python", "IA APIs", "Supabase"],
-      challenge: "Processamento de imagem e latência de resposta da IA.",
-      status: "Em Desenvolvimento",
-      statusColor: "text-yellow-400 border-yellow-400/20",
-      link: "#"
-    },
-    {
-      title: "Bot Afiliados ML",
-      longDesc: "Automação de inteligência comercial que monitora ofertas e distribui via WhatsApp com filtros de ROI.",
-      stack: ["Node.js", "Puppeteer", "WhatsApp API", "SQLite"],
-      challenge: "Escalabilidade de scraping e bypassing de restrições.",
-      status: "Operacional",
-      statusColor: "text-blue-400 border-blue-400/20",
-      link: "#"
-    },
-    {
-       title: "Casamento",
-       longDesc: "Plataforma completa de RSVP, lista de presentes e gestão de eventos com interface premium.",
-       stack: ["Next.js", "Vercel", "Framer Motion"],
-       challenge: "Integração de pagamentos e UX fluída para usuários leigos.",
-       status: "Em Produção",
-       statusColor: "text-builder-terminal border-builder-terminal/20",
-       link: "https://casamento-ten-rho.vercel.app"
-    }
-  ];
+  const { t } = useTranslation();
+  const projects = t('projects.list', { returnObjects: true });
+  const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section id="projects" className="py-40 bg-builder-bg">
-      <div className="container mx-auto px-8 md:px-16">
-        <div className="mb-32">
-          <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-builder-accent mb-8 block">
-            01 / Curated Works
-          </span>
-          <h2 className="text-5xl md:text-8xl font-extrabold text-white tracking-tighter uppercase leading-[0.85]">
-            Engineering<br />Experience.
-          </h2>
+    <section id="projects" className="py-40 bg-black relative">
+      <div className="premium-container relative z-10">
+        <div className="mb-24">
+          <motion.span 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="text-[11px] font-medium uppercase tracking-[0.5em] text-white/30 mb-6 block"
+          >
+            {t('projects.label')}
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl md:text-8xl font-extrabold text-white tracking-tight uppercase leading-[0.9]"
+          >
+            Architecting<br />Experience.
+          </motion.h2>
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-6">
           {projects.map((project, i) => (
-            <ProjectCard key={i} project={project} index={i} />
+            <ProjectCard 
+              key={i} 
+              project={project} 
+              index={i} 
+              t={t} 
+              onOpenDetails={(p) => setSelectedProject(p)}
+            />
           ))}
         </div>
       </div>
+
+      <ProjectDetails 
+        project={selectedProject} 
+        isOpen={!!selectedProject} 
+        onClose={() => setSelectedProject(null)} 
+      />
     </section>
   );
 };

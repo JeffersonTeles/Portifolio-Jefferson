@@ -1,90 +1,118 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FiArrowRight, FiCode, FiZap, FiCpu } from 'react-icons/fi';
-import TypewriterBlock from '../components/TypewriterBlock';
+import React from "react";
+import { motion } from "framer-motion";
+import { FiArrowRight, FiCode, FiZap, FiCpu } from "react-icons/fi";
+import TypewriterBlock from "../components/TypewriterBlock";
+import MagneticButton from "../components/MagneticButton";
+import AutomationDashboard from "../components/AutomationDashboard";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   const fadeUp = {
-    initial: { opacity: 0, y: 30 },
+    initial: { opacity: 0, y: 40 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] },
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center pt-20">
-      {/* Background Decorative Grid */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(#ffffff03_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center pt-24 overflow-hidden bg-black"
+    >
+      {/* Premium Deep Background with subtle gradient glow */}
+      <div className="absolute inset-0 bg-premium-gradient z-0 opacity-50" />
+      <div className="absolute inset-0 z-0 bg-grid-pattern [background-size:40px_40px] opacity-[0.03]" />
 
-      <div className="container mx-auto px-8 md:px-16 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Column: Bold Branding */}
-          <div className="lg:col-span-8">
-            <motion.div 
+      {/* Central glow to highlight the hero text */}
+      <div className="absolute top-[30%] left-[20%] w-[600px] h-[600px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="premium-container relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          {/* Left Column: Sophisticated Branding */}
+          <div className="lg:col-span-7">
+            <motion.div
               {...fadeUp}
               transition={{ ...fadeUp.transition, delay: 0.1 }}
-              className="inline-flex items-center gap-3 px-3 py-1 rounded-sm bg-builder-accent/10 border border-builder-accent/20 mb-10"
+              className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel mb-8"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-builder-accent animate-pulse" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-builder-accent">
-                Software Engineer // AI Builder
+              <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse shadow-glow" />
+              <span className="text-[11px] font-medium tracking-widest text-white/80 uppercase">
+                {t("hero.role")}
               </span>
             </motion.div>
 
-            <motion.h1 
+            <motion.h1
               {...fadeUp}
               transition={{ ...fadeUp.transition, delay: 0.2 }}
-              className="text-6xl md:text-8xl lg:text-[8vw] font-extrabold leading-[0.85] tracking-tighter uppercase mb-8"
+              className="text-5xl md:text-7xl lg:text-[7vw] font-extrabold leading-[1] tracking-tight mb-8"
             >
-              CRAFTING<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-builder-accent to-white bg-[length:200%_auto] animate-gradient-slow italic">
-                INTELLIGENT
-              </span><br />
-              SYSTEMS.
+              {t("hero.title1")}
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/40">
+                {t("hero.title2")}
+              </span>
+              <br />
+              {t("hero.title3")}
             </motion.h1>
 
             <motion.p
               {...fadeUp}
               transition={{ ...fadeUp.transition, delay: 0.3 }}
-              className="text-xl md:text-2xl text-builder-muted font-light max-w-2xl mb-12 leading-relaxed"
+              className="text-lg md:text-xl text-white/50 font-light max-w-2xl mb-12 leading-relaxed"
             >
-              Especialista em construir <span className="text-white">produtos digitais escaláveis</span> através de IA, automação e arquiteturas frontend de alto nível.
+              {t("hero.description").split(t("hero.descriptionHighlight"))[0]}
+              <span className="text-white font-medium">
+                {t("hero.descriptionHighlight")}
+              </span>
+              {t("hero.description").split(t("hero.descriptionHighlight"))[1]}
             </motion.p>
 
-            <motion.div 
+            <motion.div
               {...fadeUp}
               transition={{ ...fadeUp.transition, delay: 0.4 }}
-              className="flex flex-wrap gap-6"
+              className="flex flex-wrap gap-4"
             >
-              <a href="#projects" className="px-8 py-4 bg-white text-black font-bold uppercase text-[10px] tracking-widest hover:bg-builder-accent hover:text-white transition-all duration-500 rounded-none shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                Selected Works
-              </a>
-              <a href="/resume.pdf" target="_blank" className="px-8 py-4 border border-white/10 text-white font-bold uppercase text-[10px] tracking-widest hover:bg-white/5 transition-all duration-500 rounded-none">
-                Resume / CV
-              </a>
+              <MagneticButton>
+                <a
+                  href="#projects"
+                  className="group flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-semibold text-sm rounded-full hover:scale-105 transition-all duration-300 shadow-glass"
+                >
+                  {t("hero.btnWorks")}
+                </a>
+              </MagneticButton>
+              <MagneticButton>
+                <a
+                  href="/cv-jefferson-teles.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-8 py-4 glass-panel text-white font-medium text-sm rounded-full hover:bg-white/5 transition-all duration-300"
+                >
+                  {t("hero.btnResume")}
+                </a>
+              </MagneticButton>
             </motion.div>
           </div>
 
-          {/* Right Column: Code visual (Subtle) */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.5 }}
-            className="lg:col-span-4 hidden lg:flex justify-end"
+          {/* Right Column: Refined Code visual & Dashboard */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 hidden lg:flex flex-col items-end gap-8"
           >
-            <div className="relative group">
-              <div className="absolute inset-0 bg-builder-accent/20 blur-[100px] opacity-0 group-hover:opacity-40 transition-opacity duration-1000" />
+            <div className="relative group w-full flex justify-end">
+              <div className="absolute inset-0 bg-white/5 blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 rounded-full" />
               <TypewriterBlock />
             </div>
-          </motion.div>
 
+            <div className="w-full flex justify-end">
+              <AutomationDashboard />
+            </div>
+          </motion.div>
         </div>
       </div>
-
-      {/* Decorative vertical lines */}
-      <div className="absolute right-10 top-0 h-full w-px bg-gradient-to-b from-transparent via-white/5 to-transparent hidden xl:block" />
-      <div className="absolute left-10 top-0 h-full w-px bg-gradient-to-b from-transparent via-white/5 to-transparent hidden xl:block" />
     </section>
   );
 };

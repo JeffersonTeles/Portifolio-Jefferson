@@ -3,11 +3,11 @@ import React from 'react';
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true };
+    return { hasError: true, error };
   }
 
   componentDidCatch(error, errorInfo) {
@@ -17,15 +17,20 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="fixed inset-0 bg-black flex items-center justify-center p-8 text-center">
-          <div className="font-mono text-dark-accent max-w-lg">
-            <h1 className="text-2xl mb-4 uppercase tracking-[0.2em]">System Recovery Active</h1>
-            <p className="text-sm opacity-60 mb-8">
+        <div className="min-h-screen flex items-center justify-center bg-black p-8">
+          <div className="max-w-md p-8 border border-red-500/30 bg-red-500/5">
+            <h2 className="text-red-500 font-bold mb-4 uppercase tracking-widest text-sm">System Recovery Active</h2>
+            <p className="text-white/60 text-xs mb-8">
               A critical module encountered an error. The system is attempting to stabilize the interface.
             </p>
-            <button 
+            <div className="p-4 bg-black/50 border border-red-500/20 mb-8 overflow-auto max-h-40">
+               <pre className="text-red-400 text-[10px] font-mono whitespace-pre-wrap">
+                 {this.state.error && this.state.error.toString()}
+               </pre>
+            </div>
+            <button
               onClick={() => window.location.reload()}
-              className="px-6 py-2 border border-dark-accent hover:bg-dark-accent hover:text-black transition-all text-xs uppercase"
+              className="px-6 py-2 border border-red-500 hover:bg-red-500 hover:text-black transition-all text-xs uppercase text-red-500"
             >
               Restart System
             </button>

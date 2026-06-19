@@ -1,53 +1,86 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FiArrowRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
-import { SiWhatsapp } from 'react-icons/si';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { FiArrowRight, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { SiWhatsapp } from "react-icons/si";
+import MagneticButton from "../components/MagneticButton";
+import ContactModal from "../components/ContactModal";
 
 const Contact = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
-    <section id="contact" className="py-40 bg-builder-bg">
-      <div className="container mx-auto px-8 md:px-16">
+    <section id="contact" className="py-40 bg-black relative">
+      {/* Background Decor */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+
+      <div className="premium-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
-          
           {/* Left: Headline */}
           <div className="lg:col-span-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-builder-accent mb-8 block italic">
-                02 / Uplink
+              <span className="text-[11px] font-medium uppercase tracking-[0.5em] text-white/30 mb-8 block">
+                05 / Uplink
               </span>
-              <h2 className="text-5xl md:text-8xl font-extrabold text-white leading-[0.9] uppercase tracking-tighter mb-12">
-                Let's build<br />
-                <span className="text-builder-accent italic">Remarkable</span><br />
+              <h2 className="text-5xl md:text-8xl font-extrabold text-white leading-[0.9] tracking-tight mb-12">
+                Let's build
+                <br />
+                <span className="text-white/40 italic font-light">
+                  Remarkable
+                </span>
+                <br />
                 Products.
               </h2>
-              <p className="text-builder-muted text-xl md:text-2xl font-light max-w-2xl leading-relaxed mb-16">
-                Estou ativamente buscando oportunidades como <span className="text-white">Software Engineer Júnior</span> e parcerias estratégicas em IA e Automação. 
+              <p className="text-white/50 text-xl md:text-2xl font-light max-w-2xl leading-relaxed mb-16">
+                Ativamente buscando oportunidades como{" "}
+                <span className="text-white font-medium">
+                  Software Engineer
+                </span>{" "}
+                e parcerias estratégicas em IA e Automação. Remoto ou presencial
+                em Cascavel, PR.
               </p>
 
-              <div className="flex flex-wrap gap-8 items-center">
-                <a 
-                  href="mailto:jeffersontelesdeoliveira@gmail.com"
-                  className="px-10 py-5 bg-white text-black font-bold uppercase text-xs tracking-widest hover:bg-builder-accent hover:text-white transition-all duration-500 rounded-none"
-                >
-                  Start Conversation
-                </a>
-                <div className="flex gap-6">
+              <div className="flex flex-wrap gap-10 items-center">
+                <MagneticButton>
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="px-12 py-5 bg-white text-black font-bold uppercase text-[10px] tracking-widest hover:scale-105 transition-all duration-500 rounded-full shadow-glass"
+                    aria-label="Open contact form"
+                  >
+                    Start Conversation
+                  </button>
+                </MagneticButton>
+                <div className="flex gap-8">
                   {[
-                    { icon: FiLinkedin, url: "https://linkedin.com/in/jeffersonteles" },
-                    { icon: FiGithub, url: "https://github.com/JeffersonTeles" },
-                    { icon: SiWhatsapp, url: "https://wa.me/5545999999999" }
+                    {
+                      icon: FiLinkedin,
+                      url: "https://linkedin.com/in/jeffersonteles",
+                      label: "LinkedIn",
+                    },
+                    {
+                      icon: FiGithub,
+                      url: "https://github.com/JeffersonTeles",
+                      label: "GitHub",
+                    },
+                    {
+                      icon: SiWhatsapp,
+                      url: "https://wa.me/5545999999999",
+                      label: "WhatsApp",
+                    },
                   ].map((social, i) => (
-                    <a 
-                      key={i} 
-                      href={social.url} 
-                      target="_blank" 
-                      className="text-white/20 hover:text-white transition-colors p-2 border border-white/5 bg-white/[0.02] hover:border-builder-accent/40"
+                    <a
+                      key={i}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Visit my ${social.label}`}
+                      className="text-white/30 hover:text-white transition-all hover:-translate-y-1"
                     >
-                      <social.icon size={20} />
+                      <social.icon size={22} />
                     </a>
                   ))}
                 </div>
@@ -57,25 +90,44 @@ const Contact = () => {
 
           {/* Right: Technical Metadata */}
           <div className="lg:col-span-4 hidden lg:block">
-            <div className="p-12 border border-white/5 bg-white/[0.01] space-y-12">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="p-12 glass-panel rounded-3xl space-y-12"
+            >
               <div>
-                <span className="text-[8px] font-mono text-white/20 uppercase tracking-widest block mb-3 text-glow">Location_Services</span>
-                <p className="text-sm font-bold text-white uppercase tracking-tighter italic">Cascavel, PR • South America</p>
+                <span className="text-[8px] font-mono text-white/20 uppercase tracking-[0.4em] block mb-3">
+                  Location_Services
+                </span>
+                <p className="text-sm font-bold text-white uppercase tracking-tighter">
+                  Cascavel, PR • South America
+                </p>
               </div>
               <div>
-                <span className="text-[8px] font-mono text-white/20 uppercase tracking-widest block mb-3 text-glow">Availability_Status</span>
-                <p className="text-sm font-bold text-builder-terminal uppercase tracking-widest animate-pulse">● Available for Q3_2026</p>
+                <span className="text-[8px] font-mono text-white/20 uppercase tracking-[0.4em] block mb-3">
+                  Availability_Status
+                </span>
+                <p className="text-sm font-bold text-white/60 uppercase tracking-widest">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse mr-2 align-middle" />
+                  Disponível · Q3_2026
+                </p>
               </div>
-              <div className="pt-8 border-t border-white/5">
-                 <p className="text-[7px] font-mono text-white/10 leading-relaxed uppercase tracking-[0.2em]">
-                   Secure Link Protocol // 0x55_4A_54_45_4C_45_53
-                 </p>
+              <div className="pt-8 border-t border-white/[0.03]">
+                <p className="text-[7px] font-mono text-white/10 leading-relaxed uppercase tracking-[0.3em]">
+                  Secure Link Protocol // 0x55_4A_54_45_4C_45_53
+                </p>
               </div>
-            </div>
+            </motion.div>
           </div>
-
         </div>
       </div>
+
+      <ContactModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 };

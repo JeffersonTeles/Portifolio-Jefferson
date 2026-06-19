@@ -1,54 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+    html {
+        scroll-behavior: smooth;
+        background: #000000;
+    }
 
-  html {
-    scroll-behavior: smooth;
-    background: #05060f;
-  }
-  
-  body {
-    @apply bg-builder-bg text-white selection:bg-builder-accent/30 selection:text-builder-accent overflow-x-hidden;
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  h1, h2, h3, h4 {
-    @apply font-display tracking-cinematic;
-  }
+    body {
+        @apply bg-builder-bg text-white selection:bg-white/20 selection:text-white overflow-x-hidden;
+        font-family: "Inter", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply font-display tracking-cinematic leading-tight;
+    }
 }
 
 @layer components {
-  .premium-container {
-    @apply max-w-7xl mx-auto px-8 md:px-16;
-  }
+    .premium-container {
+        @apply max-w-7xl mx-auto px-6 md:px-12 lg:px-20;
+    }
 
-  /* Custom Scrollbar */
-  ::-webkit-scrollbar {
-    width: 3px;
-  }
-  ::-webkit-scrollbar-track {
-    @apply bg-builder-bg;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply bg-white/10 hover:bg-builder-accent transition-colors rounded-full;
-  }
+    .glass-panel {
+        @apply bg-white/[0.02] border border-white/[0.05] backdrop-blur-xl shadow-glass;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+        @apply bg-black;
+    }
+    ::-webkit-scrollbar-thumb {
+        @apply bg-white/20 hover:bg-white/40 transition-colors rounded-full;
+    }
 }
 
 .text-glow {
-  text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 @keyframes gradient-slow {
-  0% { background-position: 0% center; }
-  50% { background-position: 100% center; }
-  100% { background-position: 0% center; }
+    0% {
+        background-position: 0% center;
+    }
+    50% {
+        background-position: 100% center;
+    }
+    100% {
+        background-position: 0% center;
+    }
 }
 
 .animate-gradient-slow {
-  background-size: 200% auto;
-  animation: gradient-slow 8s linear infinite;
+    background-size: 200% auto;
+    animation: gradient-slow 10s ease infinite;
 }

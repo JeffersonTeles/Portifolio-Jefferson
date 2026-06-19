@@ -1,46 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Jefferson Teles — Dev Júnior em React, Node.js e automação. Cascavel/PR. Open to Work." />
-    <meta name="keywords" content="Jefferson Teles, desenvolvedor, automação, inteligência artificial, APIs, bots, React, Node.js, Portfólio, Cascavel, PR" />
-    <meta name="author" content="Jefferson Teles" />
+    <head>
+        <meta charset="UTF-8" />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23000'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Inter,sans-serif' font-size='14' font-weight='700' fill='white'%3EJT%3C/text%3E%3C/svg%3E"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Jefferson Teles — Software Engineer specializing in High-Performance Web Solutions, IA & Automation. Build your digital legacy."
+        />
+        <meta
+            name="keywords"
+            content="Jefferson Teles, Software Engineer, React, TypeScript, AI Automation, SaaS, Full Stack Developer, Cascavel"
+        />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://portifolio-jefferson-phi.vercel.app/" />
-    <meta property="og:title" content="Jefferson Teles | Software Engineer Portfolio" />
-    <meta property="og:description" content="Software Engineer specializing in high-performance web solutions and technical architecture. Based in Cascavel, PR." />
-    <meta property="og:image" content="https://portifolio-jefferson-phi.vercel.app/og-image.png" />
+        <!-- Elite SEO JSON-LD -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Jefferson Teles",
+                "url": "https://portifolio-jefferson-phi.vercel.app",
+                "jobTitle": "Software Engineer",
+                "knowsAbout": [
+                    "React",
+                    "TypeScript",
+                    "AI Integration",
+                    "Automation",
+                    "Node.js"
+                ],
+                "description": "Software Engineer focusing on the intersection of AI, Automation, and Modern Design.",
+                "sameAs": [
+                    "https://github.com/JeffersonTeles",
+                    "https://linkedin.com/in/jeffersonteles"
+                ]
+            }
+        </script>
+        <meta name="author" content="Jefferson Teles" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://portifolio-jefferson-phi.vercel.app/" />
-    <meta property="twitter:title" content="Jefferson Teles | Software Engineer Portfolio" />
-    <meta property="twitter:description" content="Software Engineer specializing in high-performance web solutions and technical architecture. Based in Cascavel, PR." />
-    <meta property="twitter:image" content="https://portifolio-jefferson-phi.vercel.app/og-image.png" />
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content="https://portifolio-jefferson-phi.vercel.app/"
+        />
+        <meta
+            property="og:title"
+            content="Jefferson Teles | Software Engineer Portfolio"
+        />
+        <meta
+            property="og:description"
+            content="Software Engineer specializing in high-performance web solutions and technical architecture. Based in Cascavel, PR."
+        />
+        <meta
+            property="og:image"
+            content="https://portifolio-jefferson-phi.vercel.app/og-image.png"
+        />
 
-    <title>Jefferson Teles | Software Engineer</title>
-    <script>
-      // Emergency cache clear to resolve black screen (TypeError in DecryptText)
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(function(registrations) {
-          for(let registration of registrations) {
-            registration.unregister();
-          }
-        });
-      }
-      // Force reload on first load of this script
-      if (!window.localStorage.getItem('cache_cleared_v1')) {
-        window.localStorage.setItem('cache_cleared_v1', 'true');
-        window.location.reload(true);
-      }
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+            property="twitter:url"
+            content="https://portifolio-jefferson-phi.vercel.app/"
+        />
+        <meta
+            property="twitter:title"
+            content="Jefferson Teles | Software Engineer Portfolio"
+        />
+        <meta
+            property="twitter:description"
+            content="Software Engineer specializing in high-performance web solutions and technical architecture. Based in Cascavel, PR."
+        />
+        <meta
+            property="twitter:image"
+            content="https://portifolio-jefferson-phi.vercel.app/og-image.png"
+        />
+
+        <title>Jefferson Teles | Software Engineer</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="module" src="/src/main.jsx"></script>
+    </body>
 </html>

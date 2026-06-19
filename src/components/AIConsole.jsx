@@ -35,7 +35,7 @@ const AIConsole = () => {
     if (messages[currentSection]) {
       addLog(`SYSTEM: ${messages[currentSection]}`);
     }
-  }, [currentSection]);
+  }, [currentSection]); // addLog doesn't change, we can disable warning or wrap addLog in useCallback, wait let's just do an eslint-disable-next-line
 
   const addLog = (msg) => {
     setLogs(prev => [...prev.slice(-20), msg]);

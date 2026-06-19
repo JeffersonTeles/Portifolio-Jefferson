@@ -4,6 +4,8 @@ const SectionContext = createContext();
 
 export const SectionProvider = ({ children }) => {
   const [currentSection, setCurrentSection] = useState('hero');
+  const [currentYear, setCurrentYear] = useState(2026);
+  const [scrollVelocity, setScrollVelocity] = useState(0);
 
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]');
@@ -12,9 +14,6 @@ export const SectionProvider = ({ children }) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setCurrentSection(entry.target.id);
-            window.dispatchEvent(new CustomEvent('ai-log', { 
-              detail: `Sincronizando ambiente: Seção ${entry.target.id.toUpperCase()} ativa.` 
-            }));
           }
         });
       },
@@ -26,7 +25,7 @@ export const SectionProvider = ({ children }) => {
   }, []);
 
   return (
-    <SectionContext.Provider value={{ currentSection }}>
+    <SectionContext.Provider value={{ currentSection, currentYear, setCurrentYear, scrollVelocity, setScrollVelocity }}>
       {children}
     </SectionContext.Provider>
   );

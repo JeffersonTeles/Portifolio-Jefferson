@@ -3,6 +3,7 @@ import { Link as ScrollLink } from 'react-scroll';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX, FiSun, FiMoon, FiGlobe } from 'react-icons/fi';
+import MagneticButton from './MagneticButton';
 import { useTranslation } from 'react-i18next';
 
 const Navbar = ({ toggleTheme, isDarkMode }) => {
@@ -21,89 +22,87 @@ const Navbar = ({ toggleTheme, isDarkMode }) => {
   const toggleLanguage = () => {
     const newLang = i18n.language === 'pt' ? 'en' : 'pt';
     i18n.changeLanguage(newLang);
-    window.dispatchEvent(new CustomEvent('ai-log', { 
-      detail: `SYNC: Language changed to ${newLang.toUpperCase()}` 
-    }));
   };
 
   const navItems = [
     { name: t('nav.home'), link: 'hero', isExternal: false },
     { name: t('nav.about'), link: 'about', isExternal: false },
     { name: t('nav.projects'), link: 'projects', isExternal: false },
-    { name: t('nav.blog'), link: '/blog', isExternal: true },
-    { name: t('nav.lab'), link: 'lab', isExternal: false },
     { name: t('nav.contact'), link: 'contact', isExternal: false }
   ];
 
   return (
     <>
       <motion.nav
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? 'bg-dark-bg/80 backdrop-blur-md py-4' : 'bg-transparent py-8'
+          scrolled ? 'bg-black/60 backdrop-blur-xl border-b border-white/[0.05] py-4' : 'bg-transparent py-8'
         }`}
       >
-        <div className="container-custom flex justify-between items-center">
-          <RouterLink to="/" className="cursor-pointer group flex items-center gap-3">
-            <div className="w-2 h-2 bg-dark-accent rounded-full group-hover:scale-150 transition-transform shadow-[0_0_10px_#00d4ff]" />
-            <span className="text-xs font-bold tracking-widest uppercase text-white hover:text-dark-accent transition-colors">
-              Jefferson Teles
-            </span>
-          </RouterLink>
+        <div className="premium-container flex justify-between items-center">
+          <MagneticButton>
+            <RouterLink to="/" className="cursor-pointer group flex items-center gap-3">
+              <div className="w-1.5 h-1.5 bg-white rounded-full group-hover:scale-150 transition-transform shadow-glow" />
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white hover:opacity-70 transition-opacity">
+                Jefferson Teles
+              </span>
+            </RouterLink>
+          </MagneticButton>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             {navItems.map((item, idx) => (
-              item.isExternal || !isHomePage ? (
-                <RouterLink
-                  key={idx}
-                  to={item.isExternal ? item.link : "/"}
-                  className="text-[10px] font-bold tracking-widest uppercase text-white/40 hover:text-dark-accent transition-all relative group"
-                >
-                  <span className="block group-hover:-translate-y-full transition-transform duration-300">{item.name}</span>
-                  <span className="absolute top-full left-0 block text-dark-accent group-hover:-translate-y-full transition-transform duration-300">{item.name}</span>
-                </RouterLink>
-              ) : (
-                <ScrollLink
-                  key={idx}
-                  to={item.link}
-                  smooth={true}
-                  duration={800}
-                  spy={true}
-                  activeClass="text-dark-accent"
-                  className="text-[10px] font-bold tracking-widest uppercase text-white/40 hover:text-dark-accent transition-all cursor-pointer relative group"
-                >
-                  <span className="block group-hover:-translate-y-full transition-transform duration-300">{item.name}</span>
-                  <span className="absolute top-full left-0 block text-dark-accent group-hover:-translate-y-full transition-transform duration-300">{item.name}</span>
-                </ScrollLink>
-              )
+              <MagneticButton key={idx}>
+                {item.isExternal || !isHomePage ? (
+                  <RouterLink
+                    to={item.isExternal ? item.link : "/"}
+                    className="text-[10px] font-medium tracking-widest uppercase text-white/40 hover:text-white transition-all relative group"
+                  >
+                    <span className="block">{item.name}</span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-300" />
+                  </RouterLink>
+                ) : (
+                  <ScrollLink
+                    to={item.link}
+                    smooth={true}
+                    duration={1000}
+                    spy={true}
+                    offset={-100}
+                    activeClass="!text-white"
+                    className="text-[10px] font-medium tracking-widest uppercase text-white/40 hover:text-white transition-all cursor-pointer relative group"
+                  >
+                    <span className="block">{item.name}</span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-300" />
+                  </ScrollLink>
+                )}
+              </MagneticButton>
             ))}
             
-            <div className="flex items-center gap-6 border-l border-white/5 pl-8">
+            <div className="flex items-center gap-8 border-l border-white/5 pl-10 ml-2">
               <button 
                 onClick={toggleLanguage}
-                className="text-white/40 hover:text-dark-accent transition-colors flex items-center gap-2"
-                title="Trocar Idioma"
+                className="text-white/30 hover:text-white transition-colors flex items-center gap-2"
+                title="Change Language"
               >
-                <FiGlobe size={16} />
-                <span className="text-[10px] font-mono">{i18n.language.toUpperCase()}</span>
+                <FiGlobe size={14} />
+                <span className="text-[10px] font-mono tracking-tighter">{i18n.language.toUpperCase()}</span>
               </button>
               <button 
                 onClick={toggleTheme}
-                className="text-white/40 hover:text-dark-accent transition-colors"
-                title="Trocar Tema"
+                className="text-white/30 hover:text-white transition-colors"
+                title="Toggle Theme"
               >
-                {isDarkMode ? <FiSun size={16} /> : <FiMoon size={16} />}
+                {isDarkMode ? <FiSun size={15} /> : <FiMoon size={15} />}
               </button>
             </div>
           </div>
 
           {/* Mobile Toggle */}
-          <div className="flex items-center gap-4 md:hidden">
-            <button onClick={toggleLanguage} className="text-white/40 hover:text-dark-accent font-mono text-[10px]">{i18n.language.toUpperCase()}</button>
-            <button onClick={() => setMobileMenu(!mobileMenu)} className="text-white hover:text-dark-accent transition-colors">
-              {mobileMenu ? <FiX size={24} /> : <FiMenu size={24} />}
+          <div className="flex items-center gap-6 md:hidden">
+            <button onClick={toggleLanguage} className="text-white/40 hover:text-white font-mono text-[10px] tracking-tighter">{i18n.language.toUpperCase()}</button>
+            <button onClick={() => setMobileMenu(!mobileMenu)} className="text-white hover:opacity-70 transition-opacity">
+              {mobileMenu ? <FiX size={20} /> : <FiMenu size={20} />}
             </button>
           </div>
         </div>
@@ -113,21 +112,23 @@ const Navbar = ({ toggleTheme, isDarkMode }) => {
       <AnimatePresence>
         {mobileMenu && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            className="fixed inset-0 z-[60] bg-dark-bg flex flex-col justify-center items-center gap-8 md:hidden p-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] bg-black flex flex-col justify-center items-center gap-10 md:hidden p-12 backdrop-blur-3xl"
           >
-            <button onClick={() => setMobileMenu(false)} className="absolute top-8 right-8 text-white/40"><FiX size={32} /></button>
+            <button onClick={() => setMobileMenu(false)} className="absolute top-8 right-8 text-white/40"><FiX size={24} /></button>
             {navItems.map((item, idx) => (
-              <RouterLink
+              <ScrollLink
                 key={idx}
-                to={item.isExternal ? item.link : "/"}
+                to={item.link}
+                smooth={true}
+                duration={1000}
                 onClick={() => setMobileMenu(false)}
-                className="text-4xl font-extrabold tracking-tighter text-white hover:text-dark-accent transition-colors"
+                className="text-3xl font-extrabold tracking-tighter text-white/40 hover:text-white transition-colors"
               >
                 {item.name}
-              </RouterLink>
+              </ScrollLink>
             ))}
           </motion.div>
         )}
