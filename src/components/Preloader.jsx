@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Preloader = ({ onComplete }) => {
   const [counter, setCounter] = useState(0);
@@ -20,8 +20,8 @@ const Preloader = ({ onComplete }) => {
   }, [onComplete]);
 
   return (
-    <motion.div 
-      exit={{ y: '-100%' }}
+    <motion.div
+      exit={{ y: "-100%" }}
       transition={{ duration: 1, ease: [0.6, 0.05, -0.01, 0.9] }}
       className="fixed inset-0 z-[100] bg-lusion-bg flex flex-col items-center justify-center"
     >
@@ -29,11 +29,11 @@ const Preloader = ({ onComplete }) => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-[15rem] md:text-[25rem] font-bold tracking-lusion-tighter text-lusion-text/5 leading-none select-none"
+          className="text-[15rem] md:text-[25rem] font-bold tracking-lusion-tighter text-white/5 leading-none select-none"
         >
           {counter}%
         </motion.div>
-        
+
         <div className="absolute bottom-20 left-12 md:left-20 overflow-hidden">
           <motion.div
             initial={{ y: 50 }}
@@ -42,7 +42,7 @@ const Preloader = ({ onComplete }) => {
           >
             <div className="w-12 h-px bg-lusion-primary animate-pulse" />
             <span className="text-xs font-bold tracking-lusion-wide uppercase text-lusion-text">
-              Initializing Studio Environment
+              Jefferson Teles // Inicializando...
             </span>
           </motion.div>
         </div>

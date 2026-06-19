@@ -93,6 +93,15 @@ const Hero = () => {
                 </a>
               </MagneticButton>
             </motion.div>
+
+            {/* Mobile: mostrar TypewriterBlock abaixo dos botões */}
+            <motion.div
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 0.5 }}
+              className="mt-12 lg:hidden"
+            >
+              <TypewriterBlock />
+            </motion.div>
           </div>
 
           {/* Right Column: Refined Code visual & Dashboard */}

@@ -68,7 +68,7 @@ const Contact = () => {
                     },
                     {
                       icon: SiWhatsapp,
-                      url: "https://wa.me/5545999999999",
+                      url: "https://wa.me/5544999277915",
                       label: "WhatsApp",
                     },
                   ].map((social, i) => (

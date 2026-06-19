@@ -1,38 +1,51 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
+
+const stats = [
+  { value: "4+", label: "Anos de Experiência" },
+  { value: "10+", label: "Projetos Entregues" },
+  { value: "15+", label: "Tecnologias Dominadas" },
+  { value: "3", label: "Produtos em Produção" },
+  { value: "100%", label: "Comprometimento" },
+  { value: "4+", label: "Anos de Experiência" },
+  { value: "10+", label: "Projetos Entregues" },
+  { value: "15+", label: "Tecnologias Dominadas" },
+  { value: "3", label: "Produtos em Produção" },
+  { value: "100%", label: "Comprometimento" },
+];
 
 const Testimonials = () => {
-  const testimonials = [
-    { name: "Carlos Silva", role: "CEO @ TechFlow", content: "O Jefferson transformou nossa operação com automações incríveis. Superou todas as expectativas." },
-    { name: "Ana Oliveira", role: "Product Manager", content: "Trabalho impecável na integração de IA. A interface ficou extremamente intuitiva." },
-    { name: "Roberto Junior", role: "Fundador @ StartupX", content: "Precisão técnica e olhar de design. Um dos melhores desenvolvedores com quem já trabalhei." },
-    { name: "Mariana Costa", role: "Diretora de Marketing", content: "As APIs desenvolvidas pelo Jefferson são rápidas e extremamente robustas. Recomendo fortemente." }
-  ];
-
   return (
-    <section className="py-24 md:py-32 bg-inherit overflow-hidden border-y border-lusion-text/5">
-      <div className="container-lusion mb-16">
-        <span className="text-sm font-bold tracking-lusion-wide uppercase text-lusion-primary flex items-center gap-4">
-          <span className="w-8 h-px bg-lusion-primary" />
-          05 / Testimonials
-        </span>
+    <section className="py-24 bg-black border-y border-white/[0.03] overflow-hidden relative">
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10 pointer-events-none" />
+
+      <div className="flex gap-20 animate-marquee-slow whitespace-nowrap">
+        {stats.map((s, i) => (
+          <div key={i} className="flex items-center gap-20 shrink-0">
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+                {s.value}
+              </span>
+              <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em]">
+                {s.label}
+              </span>
+            </div>
+            <span className="text-white/5 text-4xl font-bold select-none">
+              /
+            </span>
+          </div>
+        ))}
       </div>
 
-      <div className="relative flex overflow-x-hidden">
-        <div className="animate-marquee-slow whitespace-nowrap flex items-center">
-          {testimonials.concat(testimonials).map((item, idx) => (
-            <div key={idx} className="min-w-[400px] md:min-w-[600px] mx-10 p-12 border border-lusion-text/5 bg-lusion-text/[0.02] rounded-sm">
-              <p className="text-xl md:text-2xl font-medium mb-8 leading-relaxed italic text-lusion-text/80">
-                "{item.content}"
-              </p>
-              <div>
-                <p className="text-sm font-bold tracking-lusion-wide uppercase text-lusion-text">{item.name}</p>
-                <p className="text-[10px] font-bold tracking-lusion-wide uppercase text-lusion-text/30">{item.role}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <style>{`
+        @keyframes marquee-slow {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee-slow {
+          animation: marquee-slow 30s linear infinite;
+        }
+      `}</style>
     </section>
   );
 };

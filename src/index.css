@@ -66,3 +66,13 @@
     background-size: 200% auto;
     animation: gradient-slow 10s ease infinite;
 }
+
+/* Light mode: CSS filter invert — works perfectly for a monochrome design */
+.theme-light {
+    filter: invert(1);
+}
+.theme-light img,
+.theme-light canvas,
+.theme-light video {
+    filter: invert(1); /* double-invert so images stay natural */
+}
