@@ -1,22 +1,18 @@
 import { useEffect } from "react";
-import { useAnalytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/react";
 
 export const useTrackEvent = () => {
-  const track = useAnalytics();
-
   const trackEvent = (eventName, properties = {}) => {
-    track(eventName, properties);
+    Analytics.track(eventName, properties);
   };
 
   return trackEvent;
 };
 
 export const usePageView = (pageName) => {
-  const track = useAnalytics();
-
   useEffect(() => {
-    track("page_view", { page: pageName });
-  }, [pageName, track]);
+    Analytics.track("page_view", { page: pageName });
+  }, [pageName]);
 };
 
 export const useTrackClick = (elementName, elementCategory) => {
