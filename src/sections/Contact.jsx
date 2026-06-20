@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   FiArrowRight,
@@ -7,6 +7,7 @@ import {
   FiGithub,
   FiLinkedin,
   FiMail,
+  FiClock,
 } from "react-icons/fi";
 import { SiWhatsapp } from "react-icons/si";
 import MagneticButton from "../components/MagneticButton";
@@ -46,6 +47,24 @@ const CopyEmailButton = ({ email }) => {
 
 const Contact = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [rateLimitRemaining, setRateLimitRemaining] = useState(0);
+  const RATE_LIMIT_MS = 60000; // 1 minute rate limit
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
+
+  useEffect(() => {
+    const checkRateLimit = () => {
+      const now = Date.now();
+      const remaining = Math.max(0, RATE_LIMIT_MS - (now - lastSubmitTime));
+      setRateLimitRemaining(remaining);
+      
+      if (remaining > 0) {
+        const timer = setTimeout(checkRateLimit, 1000);
+        return () => clearTimeout(timer);
+      }
+    };
+
+    checkRateLimit();
+  }, [lastSubmitTime]);
 
   return (
     <section id="contact" className="py-40 bg-black relative">
