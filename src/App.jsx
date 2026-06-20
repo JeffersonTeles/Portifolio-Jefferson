@@ -11,7 +11,7 @@ import CommandPalette from "./components/CommandPalette";
 import CustomContextMenu from "./components/CustomContextMenu";
 import ShaderTransition from "./components/ShaderTransition";
 import GhostLogs from "./components/GhostLogs";
-import TimeTravelControl from "./components/TimeTravelControl";
+// TimeTravelControl removed — year state has no effect on displayed content
 import LusionBackground from "./components/LusionBackground";
 import HolographicOverlay from "./components/HolographicOverlay";
 import AmbientAudio from "./components/AmbientAudio";
@@ -161,7 +161,6 @@ function AppContent({ isDarkMode, toggleTheme }) {
       <LusionBackground isDark={true} isStealth={false} />
       <CustomCursor />
       <CustomContextMenu />
-      <TimeTravelControl />
       <CommandPalette isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       <Navbar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
 

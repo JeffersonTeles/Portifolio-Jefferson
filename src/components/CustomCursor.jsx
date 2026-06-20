@@ -3,6 +3,7 @@ import {
   motion,
   useSpring,
   useMotionValue,
+  useTransform,
   AnimatePresence,
 } from "framer-motion";
 
@@ -19,8 +20,11 @@ const CustomCursor = () => {
   const trailRef = useRef([]);
 
   const springConfig = { damping: 30, stiffness: 800, mass: 0.5 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
+  const rawXSpring = useSpring(cursorX, springConfig);
+  const rawYSpring = useSpring(cursorY, springConfig);
+  // Offset so the dot centre tracks the pointer, not the top-left corner
+  const cursorXSpring = useTransform(rawXSpring, (v) => v - 8);
+  const cursorYSpring = useTransform(rawYSpring, (v) => v - 8);
 
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,

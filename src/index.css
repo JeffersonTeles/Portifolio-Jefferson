@@ -46,6 +46,48 @@
     }
 }
 
+/* ─── Custom Cursor ──────────────────────────────────────── */
+@media (pointer: fine) {
+    body,
+    a,
+    button,
+    [role="button"],
+    input,
+    textarea,
+    select,
+    label {
+        cursor: none !important;
+    }
+}
+
+.cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.85);
+    mix-blend-mode: difference;
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.cursor-dot.active {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.cursor-dot.view-mode,
+.cursor-dot.magnify-mode,
+.cursor-dot.xray-mode {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+/* ──────────────────────────────────────────────────────── */
+
 .text-glow {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
