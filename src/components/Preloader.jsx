@@ -9,12 +9,12 @@ const Preloader = ({ onComplete }) => {
       setCounter((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 500);
+          setTimeout(onComplete, 150);
           return 100;
         }
-        return prev + 1;
+        return Math.min(prev + 6, 100);
       });
-    }, 20);
+    }, 10);
 
     return () => clearInterval(interval);
   }, [onComplete]);

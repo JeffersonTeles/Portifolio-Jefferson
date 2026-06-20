@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiX, FiDownload, FiMaximize } from 'react-icons/fi';
 
 const CVPreviewModal = ({ isOpen, onClose }) => {
-  const pdfUrl = '/cv-jefferson-teles.pdf';
+  const pdfUrl = '/Curriculo_Jefferson_Teles_TI.pdf';
 
   if (!isOpen) return null;
 

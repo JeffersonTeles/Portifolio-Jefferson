@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import CVDownloadButton from "../components/CVDownloadButton";
 
 const About = () => {
   const { t } = useTranslation();
@@ -88,6 +89,14 @@ const About = () => {
                   {tag}
                 </span>
               ))}
+            </motion.div>
+
+            <motion.div
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 0.6 }}
+              className="mt-8"
+            >
+              <CVDownloadButton variant="primary" size="md" />
             </motion.div>
           </div>
 

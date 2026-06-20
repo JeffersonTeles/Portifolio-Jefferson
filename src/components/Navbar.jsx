@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiSun, FiMoon, FiGlobe } from "react-icons/fi";
 import MagneticButton from "./MagneticButton";
 import { useTranslation } from "react-i18next";
+import LanguageSelector from "./LanguageSelector";
+import AnimationToggle from "./AnimationToggle";
+import SearchBar from "./SearchBar";
 
 const Navbar = ({ toggleTheme, isDarkMode }) => {
   const { t, i18n } = useTranslation();
@@ -27,6 +30,7 @@ const Navbar = ({ toggleTheme, isDarkMode }) => {
   const navItems = [
     { name: t("nav.home"), link: "hero", isExternal: false },
     { name: t("nav.about"), link: "about", isExternal: false },
+    { name: "Currículo", link: "curriculum", isExternal: false },
     { name: t("nav.projects"), link: "projects", isExternal: false },
     { name: t("nav.blog"), link: "/blog", isExternal: true, isRoute: true },
     { name: t("nav.contact"), link: "contact", isExternal: false },
@@ -93,21 +97,14 @@ const Navbar = ({ toggleTheme, isDarkMode }) => {
               </MagneticButton>
             ))}
 
-            <div className="flex items-center gap-8 border-l border-white/5 pl-10 ml-2">
-              <button
-                onClick={toggleLanguage}
-                className="text-white/30 hover:text-white transition-colors flex items-center gap-2"
-                title="Change Language"
-              >
-                <FiGlobe size={14} />
-                <span className="text-[10px] font-mono tracking-tighter">
-                  {i18n.language.toUpperCase()}
-                </span>
-              </button>
+            <div className="flex items-center gap-4 border-l border-white/5 pl-8 ml-2">
+              <SearchBar />
+              <LanguageSelector />
               <button
                 onClick={toggleTheme}
                 className="text-white/30 hover:text-white transition-colors"
                 title="Toggle Theme"
+                aria-label="Toggle dark/light theme"
               >
                 {isDarkMode ? <FiSun size={15} /> : <FiMoon size={15} />}
               </button>

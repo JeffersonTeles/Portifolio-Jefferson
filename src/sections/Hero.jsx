@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { FiArrowRight, FiCode, FiZap, FiCpu, FiEye } from "react-icons/fi";
 import TypewriterBlock from "../components/TypewriterBlock";
 import MagneticButton from "../components/MagneticButton";
 import AutomationDashboard from "../components/AutomationDashboard";
-import CVPreviewModal from "../components/CVPreviewModal";
+import CVDownloadButton from "../components/CVDownloadButton";
 import { useTranslation } from "react-i18next";
+
+const CVPreviewModal = lazy(() => import("../components/CVPreviewModal"));
 
 const Hero = () => {
   const { t } = useTranslation();
@@ -108,6 +110,7 @@ const Hero = () => {
                   {t("hero.btnResume")}
                 </button>
               </MagneticButton>
+              <CVDownloadButton variant="secondary" size="md" />
             </motion.div>
 
             {/* Mobile: mostrar TypewriterBlock abaixo dos botões */}
@@ -144,7 +147,9 @@ const Hero = () => {
   return (
     <>
       {heroContent}
-      <CVPreviewModal isOpen={isCVOpen} onClose={() => setIsCVOpen(false)} />
+      <Suspense fallback={null}>
+        <CVPreviewModal isOpen={isCVOpen} onClose={() => setIsCVOpen(false)} />
+      </Suspense>
     </>
   );
 };

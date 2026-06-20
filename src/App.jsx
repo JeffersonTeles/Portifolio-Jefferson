@@ -51,6 +51,7 @@ import { SectionProvider, useSection } from "./context/SectionContext";
 const SECTIONS = [
   "hero",
   "about",
+  "curriculum",
   "projects",
   "services",
   "skills",
@@ -136,6 +137,9 @@ function AppContent({ isDarkMode, toggleTheme }) {
     <div
       className={`relative min-h-screen bg-black text-white selection:bg-white/10 selection:text-white overflow-hidden font-sans ${!isDarkMode ? "theme-light" : ""}`}
     >
+      {/* Accessibility Skip Link */}
+      <SkipLink />
+
       {/* Ambient / background layers */}
       <SpotlightCursor />
       <GhostLogs />
@@ -164,32 +168,35 @@ function AppContent({ isDarkMode, toggleTheme }) {
       <CommandPalette isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       <Navbar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
 
-      <main className="relative z-10 w-full">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div className="flex flex-col">
-                <Hero />
-                <Testimonials />
-                <About />
-                <div data-xray="true">
-                  <Projects />
+      <main id="main-content" className="relative z-10 w-full" tabIndex={-1}>
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <div className="flex flex-col">
+                  <Hero />
+                  <Testimonials />
+                  <About />
+                  <Curriculum />
+                  <div data-xray="true">
+                    <Projects />
+                  </div>
+                  <Services />
+                  <div data-xray="true">
+                    <Skills />
+                  </div>
+                  <Certifications />
+                  <Lab />
+                  <Contact />
                 </div>
-                <Services />
-                <div data-xray="true">
-                  <Skills />
-                </div>
-                <Certifications />
-                <Lab />
-                <Contact />
-              </div>
-            }
-          />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/projeto/:slug" element={<ProjectPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+              }
+            />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/projeto/:slug" element={<ProjectPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
 
       <Footer />

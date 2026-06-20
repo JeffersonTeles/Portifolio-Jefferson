@@ -2,39 +2,70 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiAward, FiBook, FiExternalLink } from 'react-icons/fi';
 
-// Substitua com suas certificações reais
 const certs = [
   {
-    title: 'Desenvolvimento Web Full Stack',
-    issuer: 'DIO / Bootcamp',
+    title: 'AWS Cloud Practitioner',
+    issuer: 'Amazon Web Services',
     year: '2024',
-    type: 'Bootcamp',
-    icon: FiBook,
-    url: '#',
-  },
-  {
-    title: 'Node.js & APIs REST',
-    issuer: 'Udemy',
-    year: '2024',
-    type: 'Curso',
-    icon: FiBook,
-    url: '#',
-  },
-  {
-    title: 'Linux Fundamentals',
-    issuer: 'Linux Foundation',
-    year: '2023',
-    type: 'Fundamentos',
+    type: 'Cloud',
     icon: FiAward,
-    url: '#',
+    url: 'https://aws.amazon.com/certification/',
+  },
+  {
+    title: 'Google Cloud Associate',
+    issuer: 'Google Cloud',
+    year: '2023',
+    type: 'Cloud',
+    icon: FiAward,
+    url: 'https://cloud.google.com/certification',
+  },
+  {
+    title: 'React Advanced',
+    issuer: 'Meta',
+    year: '2023',
+    type: 'Frontend',
+    icon: FiBook,
+    url: 'https://www.meta.com/',
   },
   {
     title: 'Engenharia de Software',
-    issuer: 'Faculdade — Em Andamento',
+    issuer: 'Universidade — Em Andamento',
     year: '2026',
     type: 'Graduação',
     icon: FiAward,
     url: '#',
+  },
+  {
+    title: 'Técnico em Informática',
+    issuer: 'Instituto Federal',
+    year: '2022',
+    type: 'Técnico',
+    icon: FiAward,
+    url: '#',
+  },
+  {
+    title: 'Linux System Administration',
+    issuer: 'Linux Foundation',
+    year: '2023',
+    type: 'DevOps',
+    icon: FiBook,
+    url: 'https://www.linuxfoundation.org/',
+  },
+  {
+    title: 'Node.js Microservices',
+    issuer: 'Udemy',
+    year: '2024',
+    type: 'Backend',
+    icon: FiBook,
+    url: 'https://www.udemy.com/',
+  },
+  {
+    title: 'TypeScript Masterclass',
+    issuer: 'Udemy',
+    year: '2024',
+    type: 'Frontend',
+    icon: FiBook,
+    url: 'https://www.udemy.com/',
   },
 ];
 
@@ -97,9 +128,6 @@ const Certifications = () => (
           </motion.a>
         ))}
       </div>
-      <p className="text-[9px] font-mono text-white/15 mt-8 text-center uppercase tracking-widest">
-        // Atualize com suas certificações reais em src/sections/Certifications.jsx
-      </p>
     </div>
   </section>
 );

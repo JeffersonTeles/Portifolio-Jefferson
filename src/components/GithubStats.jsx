@@ -7,8 +7,9 @@ const GithubStats = () => {
     repos: 0,
     followers: 0,
     stars: 0,
-    recentCommits: 124 // Fallback if API fails
+    recentCommits: 124
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchGithub = async () => {
@@ -16,15 +17,21 @@ const GithubStats = () => {
         const userRes = await fetch('https://api.github.com/users/JeffersonTeles');
         const userData = await userRes.json();
         
-        // Stars are harder to get in one call, simplified here
+        const reposRes = await fetch('https://api.github.com/users/JeffersonTeles/repos?per_page=100&sort=updated');
+        const reposData = await reposRes.json();
+        
+        const totalStars = reposData.reduce((acc, repo) => acc + repo.stargazers_count, 0);
+        
         setStats({
           repos: userData.public_repos,
           followers: userData.followers,
-          stars: 15, // Simplified
-          recentCommits: 150 + Math.floor(Math.random() * 50)
+          stars: totalStars,
+          recentCommits: reposData.reduce((acc, repo) => acc + (repo.updated_at ? 1 : 0), 0)
         });
       } catch (e) {
         console.error("Failed to fetch Github stats");
+      } finally {
+        setLoading(false);
       }
     };
     fetchGithub();
