@@ -142,9 +142,6 @@ const Hero = () => {
   return (
     <>
       {heroContent}
-      <Suspense fallback={null}>
-        <CVPreviewModal isOpen={isCVOpen} onClose={() => setIsCVOpen(false)} />
-      </Suspense>
     </>
   );
 };
