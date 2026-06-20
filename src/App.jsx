@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { scroller } from "react-scroll";
@@ -199,14 +199,12 @@ function AppContent({ isDarkMode, toggleTheme }) {
 
       <Footer />
 
-      <Suspense fallback={null}>
-        <FloatingCTA />
-        <BackToTop />
-        <SpotlightCursor />
-        <ToastContainer />
-        <EasterEgg />
-        <ContactModal />
-      </Suspense>
+      <FloatingCTA />
+      <BackToTop />
+      <SpotlightCursor />
+      <ToastContainer />
+      <EasterEgg />
+      <ContactModal />
 
       <ShareButtons />
 
