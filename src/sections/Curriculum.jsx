@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiBriefcase, FiGraduationCap, FiAward, FiCode, FiChevronRight, FiFilter } from "react-icons/fi";
+import { FiBriefcase, FiBook, FiAward, FiCode, FiChevronRight, FiFilter } from "react-icons/fi";
 
 const Curriculum = () => {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -97,7 +97,7 @@ const Curriculum = () => {
   const filters = [
     { id: "all", label: "Todos", icon: FiFilter },
     { id: "experience", label: "Experiência", icon: FiBriefcase },
-    { id: "education", label: "Educação", icon: FiGraduationCap },
+    { id: "education", label: "Educação", icon: FiBook },
     { id: "certification", label: "Certificações", icon: FiAward }
   ];
 
@@ -180,7 +180,7 @@ const Curriculum = () => {
                         {item.year}
                       </span>
                       {item.type === "experience" && <FiBriefcase className="w-4 h-4 text-white/40" />}
-                      {item.type === "education" && <FiGraduationCap className="w-4 h-4 text-white/40" />}
+                      {item.type === "education" && <FiBook className="w-4 h-4 text-white/40" />}
                       {item.type === "certification" && <FiAward className="w-4 h-4 text-white/40" />}
                     </div>
                     
