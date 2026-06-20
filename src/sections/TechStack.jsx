@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import {
   SiReact,
   SiTypescript,
@@ -27,34 +27,52 @@ const Skills = () => {
     {
       id: "performance",
       skills: [
-        { name: "React", icon: SiReact },
-        { name: "TypeScript", icon: SiTypescript },
-        { name: "Next.js", icon: SiNextdotjs },
-        { name: "Tailwind", icon: SiTailwindcss },
-        { name: "Framer", icon: SiFramer },
+        { name: "React", icon: SiReact, level: 88 },
+        { name: "TypeScript", icon: SiTypescript, level: 80 },
+        { name: "Next.js", icon: SiNextdotjs, level: 82 },
+        { name: "Tailwind", icon: SiTailwindcss, level: 92 },
+        { name: "Framer", icon: SiFramer, level: 75 },
       ],
     },
     {
       id: "infrastructure",
       skills: [
-        { name: "Node.js", icon: SiNodedotjs },
-        { name: "Supabase", icon: SiSupabase },
-        { name: "PostgreSQL", icon: SiPostgresql },
-        { name: "Docker", icon: SiDocker },
-        { name: "Vercel", icon: SiVercel },
+        { name: "Node.js", icon: SiNodedotjs, level: 82 },
+        { name: "Supabase", icon: SiSupabase, level: 85 },
+        { name: "PostgreSQL", icon: SiPostgresql, level: 72 },
+        { name: "Docker", icon: SiDocker, level: 65 },
+        { name: "Vercel", icon: SiVercel, level: 90 },
       ],
     },
     {
       id: "intelligence",
       skills: [
-        { name: "AI Integration", icon: SiOpenai },
-        { name: "Automation", icon: FiZap },
-        { name: "Puppeteer", icon: SiPuppeteer },
-        { name: "Python", icon: SiPython },
-        { name: "Web Scraping", icon: FiGlobe },
+        { name: "AI Integration", icon: SiOpenai, level: 78 },
+        { name: "Automation", icon: FiZap, level: 85 },
+        { name: "Puppeteer", icon: SiPuppeteer, level: 80 },
+        { name: "Python", icon: SiPython, level: 68 },
+        { name: "Web Scraping", icon: FiGlobe, level: 82 },
       ],
     },
   ];
+
+  const SkillBar = ({ level }) => {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true });
+    return (
+      <div
+        ref={ref}
+        className="w-full h-px bg-white/5 rounded-full overflow-hidden mt-2"
+      >
+        <motion.div
+          className="h-full bg-white/40 rounded-full"
+          initial={{ width: 0 }}
+          animate={{ width: isInView ? `${level}%` : 0 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+        />
+      </div>
+    );
+  };
 
   return (
     <section id="skills" className="py-40 bg-black relative">
@@ -92,21 +110,23 @@ const Skills = () => {
                 {t(`skills.categories.${cat.id}`)}
               </h3>
 
-              <div className="flex flex-wrap gap-6">
+              <div className="grid grid-cols-1 gap-4 w-full">
                 {cat.skills.map((skill, si) => (
-                  <div
-                    key={si}
-                    className="flex flex-col items-center gap-3 group"
-                  >
-                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/[0.02] border border-white/[0.05] group-hover:bg-white group-hover:text-black transition-all duration-500">
-                      <skill.icon
-                        size={20}
-                        className="transition-transform group-hover:scale-110"
-                      />
+                  <div key={si} className="group/skill">
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-3">
+                        <div className="w-7 h-7 flex items-center justify-center rounded-lg bg-white/[0.03] border border-white/[0.05] group-hover/skill:bg-white group-hover/skill:text-black transition-all duration-400">
+                          <skill.icon size={14} />
+                        </div>
+                        <span className="text-[11px] font-medium text-white/50 group-hover/skill:text-white transition-colors uppercase tracking-wider">
+                          {skill.name}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-mono text-white/20 group-hover/skill:text-white/40 transition-colors">
+                        {skill.level}%
+                      </span>
                     </div>
-                    <span className="text-[9px] font-mono text-white/20 group-hover:text-white/60 transition-colors uppercase tracking-widest">
-                      {skill.name}
-                    </span>
+                    <SkillBar level={skill.level} />
                   </div>
                 ))}
               </div>

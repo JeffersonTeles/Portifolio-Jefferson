@@ -51,9 +51,36 @@ const Footer = () => {
 
         {/* Technical Attribution */}
         <div className="mt-24 pt-12 border-t border-white/[0.02] text-center">
-          <span className="font-mono text-[8px] text-white/5 uppercase tracking-[0.6em]">
-            Engineered with React • Framer Motion • Tailwind
-          </span>
+          <div className="flex items-center justify-center gap-3 flex-wrap">
+            <span className="font-mono text-[8px] text-white/10 uppercase tracking-[0.3em]">
+              Engineered with
+            </span>
+            {[
+              { name: "React", url: "https://react.dev", version: "18" },
+              {
+                name: "Framer Motion",
+                url: "https://framer.com/motion",
+                version: "10",
+              },
+              {
+                name: "Tailwind",
+                url: "https://tailwindcss.com",
+                version: "3",
+              },
+              { name: "Vite", url: "https://vitejs.dev", version: "5" },
+            ].map((tech, i) => (
+              <a
+                key={i}
+                href={tech.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`${tech.name} v${tech.version}`}
+                className="font-mono text-[8px] text-white/10 uppercase tracking-[0.3em] hover:text-white/40 transition-colors border-b border-white/5 hover:border-white/20 pb-px"
+              >
+                {tech.name}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

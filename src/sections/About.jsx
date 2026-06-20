@@ -1,9 +1,10 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 const About = () => {
   const { t } = useTranslation();
+  const [openTimeline, setOpenTimeline] = useState(null);
   const timeline = t("about.timeline", { returnObjects: true });
   const tags = t("about.tags", { returnObjects: true });
 
@@ -120,22 +121,62 @@ const About = () => {
                 {timeline.map((item, i) => (
                   <div key={i} className="flex gap-8 group/item">
                     <div className="flex flex-col items-center pt-1.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover/item:bg-white transition-colors duration-500 shadow-glow" />
+                      <motion.div
+                        animate={{
+                          backgroundColor:
+                            openTimeline === i
+                              ? "rgba(255,255,255,1)"
+                              : "rgba(255,255,255,0.2)",
+                        }}
+                        className="w-2 h-2 rounded-full transition-colors duration-300 shadow-glow"
+                      />
                       {i !== timeline.length - 1 && (
                         <div className="w-px h-full bg-white/5 mt-4" />
                       )}
                     </div>
-                    <div className="pb-2">
+                    <button
+                      className="pb-2 text-left w-full"
+                      onClick={() =>
+                        setOpenTimeline(openTimeline === i ? null : i)
+                      }
+                    >
                       <span className="text-[10px] font-mono text-white/20 block mb-2 tracking-widest">
                         {item.year}
                       </span>
-                      <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-2 group-hover/item:text-white/80 transition-colors">
+                      <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-2 group-hover/item:text-white/80 transition-colors flex items-center justify-between">
                         {item.title}
+                        <span className="text-white/20 text-xs">
+                          {openTimeline === i ? "−" : "+"}
+                        </span>
                       </h4>
                       <p className="text-xs text-white/40 leading-relaxed font-medium">
                         {item.desc}
                       </p>
-                    </div>
+                      <AnimatePresence>
+                        {openTimeline === i && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.4 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="mt-3 pt-3 border-t border-white/[0.05]">
+                              <p className="text-[10px] text-white/30 font-mono">
+                                {item.year === "2020" &&
+                                  "→ Redes TCP/IP, Linux Ubuntu/Debian, hardware e servidores físicos."}
+                                {item.year === "2023" &&
+                                  "→ Suporte N2, diagnóstico de falhas, gestão de tickets e SLAs."}
+                                {item.year === "2024" &&
+                                  "→ Next.js, Supabase, Node.js, Python, automações e integrações de IA."}
+                                {item.year === "2026" &&
+                                  "→ Engenharia de Software em curso. Foco em sistemas de alta performance."}
+                              </p>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </button>
                   </div>
                 ))}
               </div>

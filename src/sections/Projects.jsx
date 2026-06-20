@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useSpring } from "framer-motion";
 import {
   FiLayers,
   FiTarget,
@@ -11,15 +11,42 @@ import { useTranslation } from "react-i18next";
 import ProjectDetails from "../components/ProjectDetails";
 
 const ProjectCard = ({ project, index, t, onOpenDetails }) => {
+  const rotateX = useSpring(0, { stiffness: 150, damping: 20 });
+  const rotateY = useSpring(0, { stiffness: 150, damping: 20 });
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -10;
+    rotateX.set(y);
+    rotateY.set(x);
+  };
+
+  const handleMouseLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
-      className="group relative flex flex-col gap-8 py-20 px-8 md:px-12 glass-panel hover:bg-white/[0.04] transition-all duration-700 mb-12 rounded-2xl overflow-hidden cursor-pointer"
+      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      style={{ rotateX, rotateY, transformPerspective: 1200 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="group relative flex flex-col gap-8 py-20 px-8 md:px-12 glass-panel hover:bg-white/[0.04] hover:border-white/25 hover:shadow-[0_0_40px_rgba(255,255,255,0.05)] transition-all duration-700 mb-12 rounded-2xl overflow-hidden cursor-pointer"
       onClick={() => onOpenDetails(project)}
     >
+      {/* Hover badge */}
+      <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+        <div className="px-6 py-3 bg-white text-black font-bold uppercase text-[11px] tracking-widest rounded-full transform scale-90 group-hover:scale-100 transition-transform duration-300 shadow-lg">
+          Explorar →
+        </div>
+      </div>
+
       {/* Project Thumbnail */}
       {project.image && (
         <div className="relative w-full h-48 md:h-64 rounded-xl overflow-hidden mb-4">
