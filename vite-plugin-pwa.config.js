@@ -51,10 +51,6 @@ export default VitePWA({
           }
         }
       }
-    ],
-    // Disable service worker to prevent conflicts
-    disable: false,
-    // Don't register service worker automatically
-    selfDestroying: false
+    ]
   }
 });
