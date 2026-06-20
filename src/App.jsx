@@ -165,33 +165,31 @@ function AppContent({ isDarkMode, toggleTheme }) {
       <Navbar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
 
       <main id="main-content" className="relative z-10 w-full" tabIndex={-1}>
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div className="flex flex-col">
-                  <Hero />
-                  <Testimonials />
-                  <About />
-                  <div data-xray="true">
-                    <Projects />
-                  </div>
-                  <Services />
-                  <div data-xray="true">
-                    <Skills />
-                  </div>
-                  <Certifications />
-                  <Lab />
-                  <Contact />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="flex flex-col">
+                <Hero />
+                <Testimonials />
+                <About />
+                <div data-xray="true">
+                  <Projects />
                 </div>
-              }
-            />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/projeto/:slug" element={<ProjectPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+                <Services />
+                <div data-xray="true">
+                  <Skills />
+                </div>
+                <Certifications />
+                <Lab />
+                <Contact />
+              </div>
+            }
+          />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/projeto/:slug" element={<ProjectPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
 
       <Footer />
