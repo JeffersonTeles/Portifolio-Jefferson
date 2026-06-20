@@ -128,51 +128,88 @@ const Navbar = ({ toggleTheme, isDarkMode }) => {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Slide-in Sidebar */}
       <AnimatePresence>
         {mobileMenu && (
-          <motion.div
-            initial={{ opacity: 0, y: "-100%" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "-100%" }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-3xl flex flex-col justify-center items-center gap-10 md:hidden p-12"
-          >
-            <button
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setMobileMenu(false)}
-              className="absolute top-8 right-8 text-white/40 hover:text-white transition-colors"
+              className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm md:hidden"
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 h-full w-80 bg-black/95 backdrop-blur-3xl z-[70] md:hidden flex flex-col"
             >
-              <FiX size={24} />
-            </button>
-            {navItems.map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.07, duration: 0.5 }}
-              >
-                {item.isRoute ? (
-                  <RouterLink
-                    to={item.link}
-                    onClick={() => setMobileMenu(false)}
-                    className="text-3xl font-extrabold tracking-tighter text-white/40 hover:text-white transition-colors"
-                  >
-                    {item.name}
-                  </RouterLink>
-                ) : (
-                  <ScrollLink
-                    to={item.link}
-                    smooth={true}
-                    duration={1000}
-                    onClick={() => setMobileMenu(false)}
-                    className="text-3xl font-extrabold tracking-tighter text-white/40 hover:text-white transition-colors"
-                  >
-                    {item.name}
-                  </ScrollLink>
-                )}
-              </motion.div>
-            ))}
-          </motion.div>
+              <div className="flex items-center justify-between p-6 border-b border-white/10">
+                <span className="text-white font-bold text-lg">Menu</span>
+                <button
+                  onClick={() => setMobileMenu(false)}
+                  className="text-white/60 hover:text-white transition-colors"
+                >
+                  <FiX size={24} />
+                </button>
+              </div>
+              
+              <div className="flex-1 overflow-y-auto p-6">
+                <div className="flex flex-col gap-2">
+                  {navItems.map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.05 }}
+                    >
+                      {item.isRoute ? (
+                        <RouterLink
+                          to={item.link}
+                          onClick={() => setMobileMenu(false)}
+                          className="text-xl font-semibold text-white/80 hover:text-white transition-colors py-3 border-b border-white/5"
+                        >
+                          {item.name}
+                        </RouterLink>
+                      ) : (
+                        <ScrollLink
+                          to={item.link}
+                          smooth={true}
+                          duration={1000}
+                          onClick={() => setMobileMenu(false)}
+                          className="text-xl font-semibold text-white/80 hover:text-white transition-colors py-3 border-b border-white/5"
+                        >
+                          {item.name}
+                        </ScrollLink>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+                
+                <div className="mt-8 pt-8 border-t border-white/10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <LanguageSelector />
+                    <button
+                      onClick={toggleTheme}
+                      className="text-white/60 hover:text-white transition-colors"
+                      aria-label="Toggle theme"
+                    >
+                      {isDarkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+                    </button>
+                  </div>
+                  <SearchBar />
+                </div>
+              </div>
+              
+              <div className="p-6 border-t border-white/10">
+                <p className="text-white/40 text-xs text-center">
+                  © 2024 Jefferson Teles
+                </p>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
