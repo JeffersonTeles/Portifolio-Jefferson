@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 
 const Hero = () => {
   const { t } = useTranslation();
-  const trackEvent = useTrackEvent();
 
   const fadeUp = {
     initial: { opacity: 0, y: 40 },
@@ -100,9 +99,6 @@ const Hero = () => {
               </MagneticButton>
               <MagneticButton>
                 <button
-                  onClick={() => {
-                    trackEvent("click", { element: "view_cv", section: "hero" });
-                  }}
                   className="flex items-center justify-center gap-2 px-8 py-4 glass-panel text-white font-medium text-sm rounded-full hover:bg-white/5 transition-all duration-300"
                 >
                   <FiEye size={14} />
