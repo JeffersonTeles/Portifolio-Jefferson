@@ -14,6 +14,17 @@ const SearchBar = ({ data = [], onResult }) => {
     includeScore: true,
   });
 
+  // Default search data if none provided
+  const searchData = data.length > 0 ? data : [
+    { title: "Sobre", description: "Conheça mais sobre Jefferson Teles", type: "section", link: "about" },
+    { title: "Projetos", description: "Veja os projetos desenvolvidos", type: "section", link: "projects" },
+    { title: "Currículo", description: "Experiência profissional e formação", type: "section", link: "curriculum" },
+    { title: "Contato", description: "Entre em contato", type: "section", link: "contact" },
+    { title: "React", description: "Framework JavaScript moderno", type: "skill" },
+    { title: "Node.js", description: "Runtime JavaScript para backend", type: "skill" },
+    { title: "TypeScript", description: "JavaScript com tipagem estática", type: "skill" },
+  ];
+
   useEffect(() => {
     if (query.trim()) {
       const searchResults = fuse.search(query);
@@ -42,6 +53,14 @@ const SearchBar = ({ data = [], onResult }) => {
     onResult?.(result);
     setIsOpen(false);
     setQuery("");
+    
+    // Navigate to section if link is provided
+    if (result.link) {
+      const element = document.getElementById(result.link);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (

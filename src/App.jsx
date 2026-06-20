@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { AnimatePresence } from "framer-motion";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { scroller } from "react-scroll";
@@ -51,6 +51,7 @@ import { SectionProvider, useSection } from "./context/SectionContext";
 const SECTIONS = [
   "hero",
   "about",
+  "curriculum",
   "projects",
   "services",
   "skills",
@@ -136,6 +137,9 @@ function AppContent({ isDarkMode, toggleTheme }) {
     <div
       className={`relative min-h-screen bg-black text-white selection:bg-white/10 selection:text-white overflow-hidden font-sans ${!isDarkMode ? "theme-light" : ""}`}
     >
+      {/* Accessibility Skip Link */}
+      <SkipLink />
+
       {/* Ambient / background layers */}
       <SpotlightCursor />
       <GhostLogs />
@@ -173,6 +177,7 @@ function AppContent({ isDarkMode, toggleTheme }) {
                 <Hero />
                 <Testimonials />
                 <About />
+                <Curriculum />
                 <div data-xray="true">
                   <Projects />
                 </div>
@@ -193,6 +198,17 @@ function AppContent({ isDarkMode, toggleTheme }) {
       </main>
 
       <Footer />
+
+      <Suspense fallback={null}>
+        <FloatingCTA />
+        <BackToTop />
+        <SpotlightCursor />
+        <ToastContainer />
+        <EasterEgg />
+        <ContactModal />
+      </Suspense>
+
+      <ShareButtons />
 
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-white/[0.02] rounded-full blur-[120px]" />
