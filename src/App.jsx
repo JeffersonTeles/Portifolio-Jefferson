@@ -19,7 +19,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import Preloader from "./components/Preloader";
 import ScrollProgress from "./components/ScrollProgress";
 import SectionIndicator from "./components/SectionIndicator";
-import SkipLink from "./components/SkipLink";
 
 // New interactive components
 import FloatingCTA from "./components/FloatingCTA";
@@ -40,7 +39,6 @@ import Certifications from "./sections/Certifications";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import Testimonials from "./sections/Testimonials";
-import Curriculum from "./sections/Curriculum";
 
 // Pages
 import Blog from "./pages/Blog";
@@ -53,7 +51,6 @@ import { SectionProvider, useSection } from "./context/SectionContext";
 const SECTIONS = [
   "hero",
   "about",
-  "curriculum",
   "projects",
   "services",
   "skills",
@@ -139,9 +136,6 @@ function AppContent({ isDarkMode, toggleTheme }) {
     <div
       className={`relative min-h-screen bg-black text-white selection:bg-white/10 selection:text-white overflow-hidden font-sans ${!isDarkMode ? "theme-light" : ""}`}
     >
-      {/* Accessibility Skip Link */}
-      <SkipLink />
-
       {/* Ambient / background layers */}
       <SpotlightCursor />
       <GhostLogs />
@@ -180,7 +174,6 @@ function AppContent({ isDarkMode, toggleTheme }) {
                   <Hero />
                   <Testimonials />
                   <About />
-                  <Curriculum />
                   <div data-xray="true">
                     <Projects />
                   </div>
