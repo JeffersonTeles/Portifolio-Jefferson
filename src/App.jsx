@@ -54,7 +54,6 @@ import { SectionProvider, useSection } from "./context/SectionContext";
 const SECTIONS = [
   "hero",
   "about",
-  "curriculum",
   "projects",
   "services",
   "skills",
@@ -180,7 +179,6 @@ function AppContent({ isDarkMode, toggleTheme }) {
                 <Hero />
                 <Testimonials />
                 <About />
-                <Curriculum />
                 <div data-xray="true">
                   <Projects />
                 </div>

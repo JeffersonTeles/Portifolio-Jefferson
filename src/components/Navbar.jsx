@@ -29,7 +29,6 @@ const Navbar = ({ toggleTheme, isDarkMode }) => {
   const navItems = [
     { name: t("nav.home"), link: "hero", isExternal: false },
     { name: t("nav.about"), link: "about", isExternal: false },
-    { name: "Currículo", link: "curriculum", isExternal: false },
     { name: t("nav.projects"), link: "projects", isExternal: false },
     { name: t("nav.blog"), link: "/blog", isExternal: true, isRoute: true },
     { name: t("nav.contact"), link: "contact", isExternal: false },
