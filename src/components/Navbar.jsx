@@ -5,8 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiSun, FiMoon, FiGlobe } from "react-icons/fi";
 import MagneticButton from "./MagneticButton";
 import { useTranslation } from "react-i18next";
-import LanguageSelector from "./LanguageSelector";
-import SearchBar from "./SearchBar";
 
 const Navbar = ({ toggleTheme, isDarkMode }) => {
   const { t, i18n } = useTranslation();
@@ -29,7 +27,6 @@ const Navbar = ({ toggleTheme, isDarkMode }) => {
   const navItems = [
     { name: t("nav.home"), link: "hero", isExternal: false },
     { name: t("nav.about"), link: "about", isExternal: false },
-    { name: "Currículo", link: "curriculum", isExternal: false },
     { name: t("nav.projects"), link: "projects", isExternal: false },
     { name: t("nav.blog"), link: "/blog", isExternal: true, isRoute: true },
     { name: t("nav.contact"), link: "contact", isExternal: false },
@@ -97,8 +94,12 @@ const Navbar = ({ toggleTheme, isDarkMode }) => {
             ))}
 
             <div className="flex items-center gap-4 border-l border-white/5 pl-8 ml-2">
-              <SearchBar />
-              <LanguageSelector />
+              <button
+                onClick={toggleLanguage}
+                className="text-white/40 hover:text-white font-mono text-[10px] tracking-tighter"
+              >
+                {i18n.language.toUpperCase()}
+              </button>
               <button
                 onClick={toggleTheme}
                 className="text-white/30 hover:text-white transition-colors"
