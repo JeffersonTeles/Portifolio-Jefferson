@@ -75,6 +75,29 @@ const resources = {
         privateAccess: "Acesso Privado",
         list: [
           {
+            title: "Maestria Docente",
+            longDesc:
+              "Plataforma SaaS institucional para desenvolvimento docente. Trilhas formativas, submissão de evidências, validação por operadores e dashboards em tempo real para coordenação acadêmica da FAG.",
+            technicalDeepDive:
+              "Backend Node.js + Supabase com autenticação JWT, RLS por perfil, upload assíncrono de evidências via signed URLs e WebSocket para notificações em tempo real.",
+            codeSnippet:
+              "const token = jwt.sign(\n  { userId, email, role },\n  process.env.JWT_SECRET_KEY,\n  { expiresIn: '1h' }\n);",
+            codeLanguage: "javascript",
+            stack: ["React", "Node.js", "Supabase", "Express", "Socket.io", "Tailwind"],
+            challenge:
+              "Arquitetura multi-perfil (professor/operador) com fluxo de validação de evidências e progresso de trilhas em tempo real.",
+            status: "Produção",
+            statusColor: "text-emerald-400/60 border-emerald-400/20",
+            link: "https://projeto-maestria-vercel.vercel.app",
+            image:
+              "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop&q=80",
+            metrics: [
+              { label: "Docentes ativos", value: "30+" },
+              { label: "Redução de burocracia", value: "60%" },
+              { label: "Módulos funcionais", value: "8" },
+            ],
+          },
+          {
             title: "Casamento",
             longDesc:
               "Ecosystem digital premium para gestão de eventos. Integra RSVP, lista de presentes e logística em uma experiência fluida e sofisticada para usuários finais.",
@@ -91,6 +114,57 @@ const resources = {
             link: "https://casamento-ten-rho.vercel.app",
             image:
               "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=900&auto=format&fit=crop&q=80",
+            metrics: [
+              { label: "Convidados gerenciados", value: "200+" },
+              { label: "Deploy", value: "Vercel" },
+              { label: "Uptime evento", value: "100%" },
+            ],
+          },
+          {
+            title: "Bot de Vagas",
+            longDesc:
+              "Automação inteligente que monitora portais de emprego (LinkedIn, Catho, Indeed) e aplica automaticamente em vagas filtradas por critérios customizáveis. Integrado com notificações via WhatsApp.",
+            technicalDeepDive:
+              "Selenium + Playwright para scraping dinâmico, fila de tarefas assíncrona e sistema de scoring de vagas por palavras-chave e fit de perfil.",
+            codeSnippet:
+              "async def apply_to_job(driver, job_url, profile):\n    score = calculate_fit_score(job_url, profile)\n    if score >= THRESHOLD:\n        await fill_application(driver, profile)",
+            codeLanguage: "python",
+            stack: ["Python", "Selenium", "Playwright", "WhatsApp API", "PostgreSQL"],
+            challenge:
+              "Contornar detecção de bot em portais modernos mantendo alta taxa de sucesso nas candidaturas.",
+            status: "Produção",
+            statusColor: "text-blue-400/60 border-blue-400/20",
+            link: "#",
+            image:
+              "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=900&auto=format&fit=crop&q=80",
+            metrics: [
+              { label: "Candidaturas/dia", value: "50+" },
+              { label: "Portais integrados", value: "3" },
+              { label: "Tempo economizado", value: "4h/dia" },
+            ],
+          },
+          {
+            title: "Afiliado ML Bot",
+            longDesc:
+              "Sistema de automação para afiliados do Mercado Livre. Monitora produtos, variações de preço e oportunidades de arbitragem, gerando relatórios e disparando alertas em tempo real.",
+            technicalDeepDive:
+              "Web scraping com rate limiting inteligente, cache de preços e motor de regras para identificar oportunidades de margem acima do threshold definido.",
+            codeSnippet:
+              "const opportunity = products\n  .filter(p => p.margin >= MIN_MARGIN)\n  .sort((a, b) => b.margin - a.margin)[0];",
+            codeLanguage: "javascript",
+            stack: ["Node.js", "Puppeteer", "Redis", "Telegram API"],
+            challenge:
+              "Monitorar centenas de produtos em tempo real respeitando rate limits da plataforma.",
+            status: "Produção",
+            statusColor: "text-amber-400/60 border-amber-400/20",
+            link: "#",
+            image:
+              "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&auto=format&fit=crop&q=80",
+            metrics: [
+              { label: "Produtos monitorados", value: "500+" },
+              { label: "Alertas/semana", value: "120+" },
+              { label: "ROI médio identificado", value: "23%" },
+            ],
           },
         ],
       },
@@ -215,6 +289,29 @@ const resources = {
         privateAccess: "Private Access",
         list: [
           {
+            title: "Maestria Docente",
+            longDesc:
+              "Institutional SaaS platform for teacher development. Formative tracks, evidence submission, operator validation, and real-time dashboards for academic coordination.",
+            technicalDeepDive:
+              "Node.js + Supabase backend with JWT auth, profile-based RLS, async evidence upload via signed URLs and WebSocket for real-time notifications.",
+            codeSnippet:
+              "const token = jwt.sign(\n  { userId, email, role },\n  process.env.JWT_SECRET_KEY,\n  { expiresIn: '1h' }\n);",
+            codeLanguage: "javascript",
+            stack: ["React", "Node.js", "Supabase", "Express", "Socket.io", "Tailwind"],
+            challenge:
+              "Multi-profile architecture (teacher/operator) with evidence validation flow and real-time track progress.",
+            status: "Live",
+            statusColor: "text-emerald-400/60 border-emerald-400/20",
+            link: "https://projeto-maestria-vercel.vercel.app",
+            image:
+              "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop&q=80",
+            metrics: [
+              { label: "Active teachers", value: "30+" },
+              { label: "Bureaucracy reduction", value: "60%" },
+              { label: "Functional modules", value: "8" },
+            ],
+          },
+          {
             title: "Casamento",
             longDesc:
               "Premium digital ecosystem for event management. Integrates RSVP, gift lists, and logistics into a fluid and sophisticated experience for end users.",
@@ -231,6 +328,57 @@ const resources = {
             link: "https://casamento-ten-rho.vercel.app",
             image:
               "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=900&auto=format&fit=crop&q=80",
+            metrics: [
+              { label: "Managed guests", value: "200+" },
+              { label: "Deploy", value: "Vercel" },
+              { label: "Event uptime", value: "100%" },
+            ],
+          },
+          {
+            title: "Job Application Bot",
+            longDesc:
+              "Intelligent automation that monitors job boards (LinkedIn, Catho, Indeed) and automatically applies to filtered positions using customizable criteria. Integrated with WhatsApp notifications.",
+            technicalDeepDive:
+              "Selenium + Playwright for dynamic scraping, async task queue, and job scoring system by keywords and profile fit.",
+            codeSnippet:
+              "async def apply_to_job(driver, job_url, profile):\n    score = calculate_fit_score(job_url, profile)\n    if score >= THRESHOLD:\n        await fill_application(driver, profile)",
+            codeLanguage: "python",
+            stack: ["Python", "Selenium", "Playwright", "WhatsApp API", "PostgreSQL"],
+            challenge:
+              "Bypass bot detection on modern portals while maintaining a high application success rate.",
+            status: "Live",
+            statusColor: "text-blue-400/60 border-blue-400/20",
+            link: "#",
+            image:
+              "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=900&auto=format&fit=crop&q=80",
+            metrics: [
+              { label: "Applications/day", value: "50+" },
+              { label: "Integrated portals", value: "3" },
+              { label: "Time saved", value: "4h/day" },
+            ],
+          },
+          {
+            title: "Affiliate ML Bot",
+            longDesc:
+              "Automation system for Mercado Livre affiliates. Monitors products, price variations and arbitrage opportunities, generating reports and firing real-time alerts.",
+            technicalDeepDive:
+              "Web scraping with smart rate limiting, price cache, and rules engine to identify margin opportunities above a defined threshold.",
+            codeSnippet:
+              "const opportunity = products\n  .filter(p => p.margin >= MIN_MARGIN)\n  .sort((a, b) => b.margin - a.margin)[0];",
+            codeLanguage: "javascript",
+            stack: ["Node.js", "Puppeteer", "Redis", "Telegram API"],
+            challenge:
+              "Monitor hundreds of products in real-time while respecting platform rate limits.",
+            status: "Live",
+            statusColor: "text-amber-400/60 border-amber-400/20",
+            link: "#",
+            image:
+              "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&auto=format&fit=crop&q=80",
+            metrics: [
+              { label: "Products monitored", value: "500+" },
+              { label: "Alerts/week", value: "120+" },
+              { label: "Avg identified ROI", value: "23%" },
+            ],
           },
         ],
       },

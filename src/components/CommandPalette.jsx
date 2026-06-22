@@ -16,10 +16,12 @@ import {
 } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import { scroller } from "react-scroll";
+import TerminalMode from "./TerminalMode";
 
 const CommandPalette = ({ isDarkMode, toggleTheme }) => {
   const [isOpen, setIsActive] = useState(false);
   const [query, setQuery] = useState("");
+  const [terminalOpen, setTerminalOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const projects = t("projects.list", { returnObjects: true });
 
@@ -29,7 +31,11 @@ const CommandPalette = ({ isDarkMode, toggleTheme }) => {
         e.preventDefault();
         setIsActive((open) => !open);
       }
-      if (e.key === "Escape") setIsActive(false);
+      if (e.key === "`" && e.ctrlKey) {
+        e.preventDefault();
+        setTerminalOpen((open) => !open);
+      }
+      if (e.key === "Escape") { setIsActive(false); setTerminalOpen(false); }
     };
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
@@ -68,6 +74,13 @@ const CommandPalette = ({ isDarkMode, toggleTheme }) => {
       icon: FiDownload,
       label: t("hero.btnResume"),
       action: () => window.open("/cv-jefferson-teles.pdf", "_blank"),
+    },
+    {
+      type: "sys",
+      icon: FiTerminal,
+      label: "Terminal Mode",
+      desc: "Ctrl + `",
+      action: () => setTerminalOpen(true),
     },
   ];
 
@@ -181,11 +194,16 @@ const CommandPalette = ({ isDarkMode, toggleTheme }) => {
                 <span className="text-[8px] font-mono text-white/10 uppercase tracking-[0.2em]">
                   Quantum_Discovery_Link
                 </span>
+                <span className="text-[8px] font-mono text-white/10 uppercase tracking-[0.2em]">
+                  Ctrl + ` → Terminal
+                </span>
               </div>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
+
+      {terminalOpen && <TerminalMode onClose={() => setTerminalOpen(false)} />}
     </>
   );
 };

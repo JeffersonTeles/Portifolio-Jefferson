@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { AnimatePresence } from "framer-motion";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { scroller } from "react-scroll";
@@ -9,10 +9,7 @@ import Navbar from "./components/Navbar";
 import CustomCursor from "./components/CustomCursor";
 import CommandPalette from "./components/CommandPalette";
 import CustomContextMenu from "./components/CustomContextMenu";
-import ShaderTransition from "./components/ShaderTransition";
 import GhostLogs from "./components/GhostLogs";
-// TimeTravelControl removed — year state has no effect on displayed content
-import LusionBackground from "./components/LusionBackground";
 import HolographicOverlay from "./components/HolographicOverlay";
 import AmbientAudio from "./components/AmbientAudio";
 import ScrollToTop from "./components/ScrollToTop";
@@ -21,6 +18,10 @@ import ScrollProgress from "./components/ScrollProgress";
 import SectionIndicator from "./components/SectionIndicator";
 import SkipLink from "./components/SkipLink";
 import ShareButtons from "./components/ShareButtons";
+
+// Lazy-loaded heavy Three.js components
+const LusionBackground = lazy(() => import("./components/LusionBackground"));
+const ShaderTransition = lazy(() => import("./components/ShaderTransition"));
 
 // New interactive components
 import FloatingCTA from "./components/FloatingCTA";
@@ -147,7 +148,7 @@ function AppContent({ isDarkMode, toggleTheme }) {
       <GhostLogs />
       <HolographicOverlay />
       <AmbientAudio />
-      <ShaderTransition />
+      <Suspense fallback={null}><ShaderTransition /></Suspense>
 
       {/* Navigation & UI */}
       <ScrollProgress />
@@ -164,7 +165,7 @@ function AppContent({ isDarkMode, toggleTheme }) {
       {/* Grain filter */}
       <div className="fixed inset-0 z-[9999] pointer-events-none opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-      <LusionBackground isDark={true} isStealth={false} />
+      <Suspense fallback={null}><LusionBackground isDark={true} isStealth={false} /></Suspense>
       <CustomCursor />
       <CustomContextMenu />
       <CommandPalette isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
@@ -199,13 +200,6 @@ function AppContent({ isDarkMode, toggleTheme }) {
       </main>
 
       <Footer />
-
-      <FloatingCTA />
-      <BackToTop />
-      <SpotlightCursor />
-      <ToastContainer />
-      <EasterEgg />
-      <ContactModal />
 
       <ShareButtons />
 

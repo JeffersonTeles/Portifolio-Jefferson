@@ -174,13 +174,6 @@ const ProjectCard = ({ project, index, t, onOpenDetails }) => {
 
 const Projects = () => {
   const { t } = useTranslation();
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Simulate loading
-  React.useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
   const projects = t("projects.list", { returnObjects: true });
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeFilter, setActiveFilter] = useState("Todos");
