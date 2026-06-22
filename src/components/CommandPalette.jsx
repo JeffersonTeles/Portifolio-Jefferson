@@ -73,7 +73,7 @@ const CommandPalette = ({ isDarkMode, toggleTheme }) => {
       type: "sys",
       icon: FiDownload,
       label: t("hero.btnResume"),
-      action: () => window.open("/cv-jefferson-teles.pdf", "_blank"),
+      action: () => window.open("/Curriculo_Jefferson_Teles_TI.pdf", "_blank"),
     },
     {
       type: "sys",

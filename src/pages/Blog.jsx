@@ -6,6 +6,52 @@ import { Link } from "react-router-dom";
 
 const posts = [
   {
+    id: 2,
+    title: "Como construí um bot que aplica a 50 vagas por dia",
+    date: "22 Jun, 2026",
+    readTime: "7 min",
+    excerpt:
+      "A arquitetura técnica por trás de um sistema de automação de candidaturas que integra LinkedIn, Catho e Indeed com scoring de vagas por IA.",
+    content: `
+## O Problema
+
+Candidatar-se a vagas é repetitivo, lento e pouco inteligente. A maioria dos portais exige preencher os mesmos campos dezenas de vezes. Resolvi automatizar isso.
+
+## A Arquitetura
+
+O bot é dividido em três camadas:
+
+1. **Scraper** — Selenium + Playwright para navegar nos portais e extrair vagas
+2. **Scoring Engine** — analisa cada vaga com base em palavras-chave do perfil e retorna um score de 0-100
+3. **Apply Engine** — preenche formulários automaticamente e registra o status no banco
+
+\`\`\`python
+async def process_job(driver, job, profile):
+    score = calculate_fit_score(job, profile)
+    if score >= THRESHOLD:
+        await fill_application(driver, job, profile)
+        log_application(job, score)
+\`\`\`
+
+## Contornando Detecção de Bot
+
+A parte mais desafiadora. Portais modernos usam fingerprinting e análise comportamental. As técnicas que funcionaram:
+
+- **Random delays** entre ações (200ms–1200ms)
+- **Human-like mouse movements** via curvas de Bézier
+- **Undetected ChromeDriver** para evitar fingerprint do WebDriver
+- **Rotating user agents** por sessão
+
+## Resultados
+
+Após 30 dias em produção: **50+ candidaturas/dia**, taxa de abertura de convite para entrevista de ~8% (vs ~2% manual). O tempo economizado: **4 horas por dia**.
+
+## O que aprendi
+
+Automação sem inteligência é spam. O scoring engine foi o que transformou o projeto — candidaturas direcionadas têm 4x mais retorno do que candidaturas em massa.
+    `,
+  },
+  {
     id: 1,
     title: "O Futuro da Automação com Agentes de IA",
     date: "19 Mai, 2026",

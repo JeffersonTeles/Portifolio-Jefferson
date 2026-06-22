@@ -8,6 +8,7 @@ import {
   FiCode,
 } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router-dom";
 import ProjectDetails from "../components/ProjectDetails";
 
 const ProjectCard = ({ project, index, t, onOpenDetails }) => {
@@ -166,6 +167,18 @@ const ProjectCard = ({ project, index, t, onOpenDetails }) => {
         </div>
       </div>
 
+      {/* Metrics */}
+        {project.metrics && project.metrics.length > 0 && (
+          <div className="flex flex-wrap gap-8 pt-6 border-t border-white/[0.05]">
+            {project.metrics.map((m, i) => (
+              <div key={i} className="flex flex-col gap-0.5">
+                <span className="text-2xl font-extrabold text-white">{m.value}</span>
+                <span className="text-[9px] font-mono text-white/30 uppercase tracking-[0.2em]">{m.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
       {/* Bottom accent glow */}
       <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-white/[0.02] blur-[80px] rounded-full group-hover:bg-white/[0.05] transition-all duration-1000" />
     </motion.div>
@@ -176,7 +189,14 @@ const Projects = () => {
   const { t } = useTranslation();
   const projects = t("projects.list", { returnObjects: true });
   const [selectedProject, setSelectedProject] = useState(null);
-  const [activeFilter, setActiveFilter] = useState("Todos");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeFilter = searchParams.get("filter") || "Todos";
+
+  const setFilter = (tech) => {
+    if (tech === "Todos") searchParams.delete("filter");
+    else searchParams.set("filter", tech);
+    setSearchParams(searchParams, { replace: true });
+  };
 
   const allTechs = ["Todos", ...new Set(projects.flatMap((p) => p.stack))];
   const filtered =
@@ -216,7 +236,7 @@ const Projects = () => {
             {allTechs.map((tech) => (
               <button
                 key={tech}
-                onClick={() => setActiveFilter(tech)}
+                onClick={() => setFilter(tech)}
                 className={`px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all duration-300 ${
                   activeFilter === tech
                     ? "bg-white text-black border-white"

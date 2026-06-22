@@ -51,6 +51,7 @@ import ProjectPage from "./pages/ProjectPage";
 
 // Section Provider
 import { SectionProvider, useSection } from "./context/SectionContext";
+import useReducedMotion from "./hooks/useReducedMotion";
 
 const SECTIONS = [
   "hero",
@@ -65,10 +66,11 @@ const SECTIONS = [
 function AppContent({ isDarkMode, toggleTheme }) {
   const { setScrollVelocity, currentSection } = useSection();
   const [isCTAModalOpen, setIsCTAModalOpen] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   // Lenis smooth scroll
   useEffect(() => {
-    const lenis = new Lenis();
+    const lenis = new Lenis({ lerp: prefersReducedMotion ? 1 : 0.1 });
     function raf(time) {
       lenis.raf(time);
       setScrollVelocity(lenis.velocity);
@@ -76,7 +78,7 @@ function AppContent({ isDarkMode, toggleTheme }) {
     }
     requestAnimationFrame(raf);
     return () => lenis.destroy();
-  }, [setScrollVelocity]);
+  }, [setScrollVelocity, prefersReducedMotion]);
 
   // Keyboard navigation (arrow keys)
   useEffect(() => {

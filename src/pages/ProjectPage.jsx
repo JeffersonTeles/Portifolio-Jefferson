@@ -77,6 +77,18 @@ const ProjectPage = () => {
             </div>
           </div>
 
+          {/* Metrics */}
+          {project.metrics && project.metrics.length > 0 && (
+            <div className="grid grid-cols-3 gap-6 mb-20">
+              {project.metrics.map((m, i) => (
+                <div key={i} className="glass-panel p-6 rounded-2xl text-center">
+                  <p className="text-3xl font-extrabold text-white mb-1">{m.value}</p>
+                  <p className="text-[9px] font-mono text-white/30 uppercase tracking-widest">{m.label}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* Technical */}
           {project.technicalDeepDive && (
             <div className="mb-20">

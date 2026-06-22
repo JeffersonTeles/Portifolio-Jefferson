@@ -6,8 +6,10 @@ import {
   useTransform,
   AnimatePresence,
 } from "framer-motion";
+import useReducedMotion from "../hooks/useReducedMotion";
 
 const CustomCursor = () => {
+  const prefersReducedMotion = useReducedMotion();
   const [isActive, setIsActive] = useState(false);
   const [isView, setIsView] = useState(false);
   const [isMagnify, setIsMagnify] = useState(false);
@@ -128,6 +130,8 @@ const CustomCursor = () => {
       window.removeEventListener("mouseover", handleMouseOver);
     };
   }, [cursorX, cursorY, isActive, targetEl, isXRay]);
+
+  if (prefersReducedMotion) return null;
 
   return (
     <>
