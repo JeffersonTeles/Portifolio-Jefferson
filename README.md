@@ -83,10 +83,8 @@ O site é totalmente responsivo e foi testado em:
 
 ## 🔗 Links Rápidos
 
-- GitHub: [github.com/jefferson-teles](https://github.com/jefferson-teles)
-- LinkedIn: [linkedin.com/in/jefferson-teles](https://linkedin.com/in/jefferson-teles)
-- Email: jefferson@example.com
-- WhatsApp: +55 (11) 9xxxx-xxxx
+- GitHub: [github.com/JeffersonTeles](https://github.com/JeffersonTeles)
+- Email: jeffersontelesdeoliveira@gmail.com
 
 ## 📄 Licença
 
