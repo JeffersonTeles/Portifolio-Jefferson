@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiArrowLeft, FiExternalLink, FiLayers, FiTarget } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
-import Architecture3D from '../components/Architecture3D';
+import LayeredArchitecture from '../components/LayeredArchitecture';
 
 const getSlug = (title) => title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
@@ -118,7 +118,7 @@ const ProjectPage = () => {
           {/* 3D */}
           <div className="mb-20">
             <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 border-b border-white/5 pb-4 mb-8">Blueprint Arquitetural (3D)</h2>
-            <Architecture3D />
+            <LayeredArchitecture />
           </div>
 
           {/* Actions */}

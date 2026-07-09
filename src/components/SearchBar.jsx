@@ -2,27 +2,46 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiSearch, FiX } from "react-icons/fi";
 import Fuse from "fuse.js";
+import { useTranslation } from "react-i18next";
 
 const SearchBar = ({ data = [], onResult }) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
   const fuse = new Fuse(data, {
-    keys: ["title", "description", "tags"],
+    keys: ["title", "description", "tags", "stack"],
     threshold: 0.3,
     includeScore: true,
   });
 
-  // Default search data if none provided
+  // Enhanced search data with projects and sections
+  const projects = t("projects.list", { returnObjects: true });
   const searchData = data.length > 0 ? data : [
-    { title: "Sobre", description: "Conheça mais sobre Jefferson Teles", type: "section", link: "about" },
-    { title: "Projetos", description: "Veja os projetos desenvolvidos", type: "section", link: "projects" },
-    { title: "Currículo", description: "Experiência profissional e formação", type: "section", link: "curriculum" },
-    { title: "Contato", description: "Entre em contato", type: "section", link: "contact" },
-    { title: "React", description: "Framework JavaScript moderno", type: "skill" },
-    { title: "Node.js", description: "Runtime JavaScript para backend", type: "skill" },
-    { title: "TypeScript", description: "JavaScript com tipagem estática", type: "skill" },
+    // Sections
+    { title: "Sobre", description: "Conheça mais sobre Jefferson Teles e sua jornada", type: "section", link: "about" },
+    { title: "Projetos", description: "Veja os projetos desenvolvidos e case studies", type: "section", link: "projects" },
+    { title: "Currículo", description: "Experiência profissional e formação acadêmica", type: "section", link: "curriculum" },
+    { title: "Contato", description: "Entre em contato para oportunidades", type: "section", link: "contact" },
+    { title: "Serviços", description: "Capacidades digitais e expertise", type: "section", link: "services" },
+    { title: "Skills", description: "Stack tecnológica e ferramentas", type: "section", link: "skills" },
+    { title: "Lab", description: "Experimentos técnicos e protótipos", type: "section", link: "lab" },
+    // Projects
+    ...projects.map(p => ({
+      title: p.title,
+      description: p.longDesc,
+      type: "project",
+      link: "projects",
+      stack: p.stack.join(", ")
+    })),
+    // Skills
+    { title: "React", description: "Framework JavaScript moderno para interfaces", type: "skill", tags: ["frontend", "javascript", "ui"] },
+    { title: "Node.js", description: "Runtime JavaScript para backend escalável", type: "skill", tags: ["backend", "javascript", "api"] },
+    { title: "TypeScript", description: "JavaScript com tipagem estática", type: "skill", tags: ["javascript", "types", "frontend"] },
+    { title: "Python", description: "Linguagem para automação e IA", type: "skill", tags: ["automation", "ai", "backend"] },
+    { title: "TailwindCSS", description: "Framework CSS utility-first", type: "skill", tags: ["css", "styling", "frontend"] },
+    { title: "Supabase", description: "Backend as a Service com PostgreSQL", type: "skill", tags: ["database", "backend", "auth"] },
   ];
 
   useEffect(() => {
@@ -32,7 +51,22 @@ const SearchBar = ({ data = [], onResult }) => {
     } else {
       setResults([]);
     }
-  }, [query, data, fuse]);
+  }, [query, data, fuse, searchData]);
+
+  // Update fuse when searchData changes
+  useEffect(() => {
+    if (data.length === 0) {
+      const newFuse = new Fuse(searchData, {
+        keys: ["title", "description", "tags", "stack"],
+        threshold: 0.3,
+        includeScore: true,
+      });
+      if (query.trim()) {
+        const searchResults = newFuse.search(query);
+        setResults(searchResults.map(r => r.item));
+      }
+    }
+  }, [searchData, query]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -70,6 +104,8 @@ const SearchBar = ({ data = [], onResult }) => {
         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
+        aria-label="Abrir busca"
+        aria-expanded={isOpen}
       >
         <FiSearch size={16} />
         <span className="text-sm">Buscar</span>
@@ -84,6 +120,9 @@ const SearchBar = ({ data = [], onResult }) => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] flex items-start justify-center pt-32 px-4 bg-black/80 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Modal de busca"
           >
             <motion.div
               initial={{ scale: 0.95, y: -20 }}

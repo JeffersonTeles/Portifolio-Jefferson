@@ -7,11 +7,11 @@
 @layer base {
     html {
         scroll-behavior: smooth;
-        background: #000000;
+        background: #020617;
     }
 
     body {
-        @apply bg-builder-bg text-white selection:bg-white/20 selection:text-white overflow-x-hidden;
+        @apply bg-slate-950 text-slate-100 selection:bg-sky-400/25 selection:text-white overflow-x-hidden;
         font-family: "Inter", sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -31,62 +31,33 @@
     }
 
     .glass-panel {
-        @apply bg-white/[0.02] border border-white/[0.05] backdrop-blur-xl shadow-glass;
+        @apply bg-slate-900/70 border border-slate-700/60 backdrop-blur-xl shadow-glass;
+    }
+
+    /* Improved contrast for text */
+    .text-high-contrast {
+        @apply text-white/90;
+    }
+
+    .text-medium-contrast {
+        @apply text-white/70;
+    }
+
+    .text-low-contrast {
+        @apply text-white/50;
     }
 
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
-        width: 4px;
+        width: 8px;
     }
     ::-webkit-scrollbar-track {
-        @apply bg-black;
+        @apply bg-slate-950;
     }
     ::-webkit-scrollbar-thumb {
-        @apply bg-white/20 hover:bg-white/40 transition-colors rounded-full;
+        @apply bg-slate-700 hover:bg-slate-500 transition-colors rounded-full;
     }
 }
-
-/* ─── Custom Cursor ──────────────────────────────────────── */
-@media (pointer: fine) {
-    body,
-    a,
-    button,
-    [role="button"],
-    input,
-    textarea,
-    select,
-    label {
-        cursor: none !important;
-    }
-}
-
-.cursor-dot {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.85);
-    mix-blend-mode: difference;
-    will-change: transform;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease;
-}
-
-.cursor-dot.active {
-    background-color: rgba(255, 255, 255, 0.6);
-}
-
-.cursor-dot.view-mode,
-.cursor-dot.magnify-mode,
-.cursor-dot.xray-mode {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-/* ──────────────────────────────────────────────────────── */
 
 .text-glow {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
@@ -109,12 +80,41 @@
     animation: gradient-slow 10s ease infinite;
 }
 
-/* Light mode: CSS filter invert — works perfectly for a monochrome design */
-.theme-light {
-    filter: invert(1);
+.cursor-dot {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.16);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        width 150ms ease,
+        height 150ms ease,
+        opacity 150ms ease,
+        background-color 150ms ease,
+        border-color 150ms ease;
+    will-change: transform;
 }
-.theme-light img,
-.theme-light canvas,
-.theme-light video {
-    filter: invert(1); /* double-invert so images stay natural */
+
+.cursor-dot.is-visible {
+    opacity: 1;
+}
+
+.cursor-dot.is-active {
+    width: 34px;
+    height: 34px;
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+    .cursor-dot {
+        display: none;
+    }
 }

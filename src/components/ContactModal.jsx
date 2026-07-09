@@ -25,9 +25,54 @@ const ContactModal = ({ isOpen, onClose }) => {
   const formRef = useRef(null);
   const [step, setStep] = useState("idle"); // idle | sending | success | error
   const [formData, setForm] = useState({ name: "", email: "", message: "" });
+  const [errors, setErrors] = useState({ name: "", email: "", message: "" });
+
+  const validateForm = () => {
+    const newErrors = { name: "", email: "", message: "" };
+    let isValid = true;
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = "Nome é obrigatório";
+      isValid = false;
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "Nome deve ter pelo menos 2 caracteres";
+      isValid = false;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      newErrors.email = "Email é obrigatório";
+      isValid = false;
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = "Email inválido";
+      isValid = false;
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = "Mensagem é obrigatória";
+      isValid = false;
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Mensagem deve ter pelo menos 10 caracteres";
+      isValid = false;
+    } else if (formData.message.trim().length > 2000) {
+      newErrors.message = "Mensagem deve ter no máximo 2000 caracteres";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     setStep("sending");
 
     try {
@@ -38,6 +83,7 @@ const ContactModal = ({ isOpen, onClose }) => {
         EMAILJS_PUBLIC_KEY,
       );
       setStep("success");
+      setForm({ name: "", email: "", message: "" });
     } catch (err) {
       console.error("EmailJS error:", err);
       setStep("error");
@@ -47,6 +93,7 @@ const ContactModal = ({ isOpen, onClose }) => {
   const handleClose = () => {
     setStep("idle");
     setForm({ name: "", email: "", message: "" });
+    setErrors({ name: "", email: "", message: "" });
     onClose();
   };
 
@@ -140,7 +187,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                 </button>
               </motion.div>
             ) : (
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-8" noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
                     <label className="text-[9px] font-mono text-white/20 uppercase tracking-[0.3em]">
@@ -152,11 +199,21 @@ const ContactModal = ({ isOpen, onClose }) => {
                       type="text"
                       placeholder="Seu Nome"
                       value={formData.name}
-                      className="w-full bg-white/[0.02] border border-white/5 rounded-xl px-6 py-4 text-white text-sm focus:border-white/20 focus:bg-white/[0.04] transition-all outline-none placeholder:text-white/20"
-                      onChange={(e) =>
-                        setForm({ ...formData, name: e.target.value })
-                      }
+                      className={`w-full bg-white/[0.02] border rounded-xl px-6 py-4 text-white text-sm focus:bg-white/[0.04] transition-all outline-none placeholder:text-white/20 ${
+                        errors.name 
+                          ? "border-red-500/50 focus:border-red-500" 
+                          : "border-white/5 focus:border-white/20"
+                      }`}
+                      onChange={(e) => {
+                        setForm({ ...formData, name: e.target.value });
+                        if (errors.name) setErrors({ ...errors, name: "" });
+                      }}
+                      aria-invalid={!!errors.name}
+                      aria-describedby={errors.name ? "name-error" : undefined}
                     />
+                    {errors.name && (
+                      <p id="name-error" className="text-[9px] text-red-400 font-mono">{errors.name}</p>
+                    )}
                   </div>
                   <div className="space-y-3">
                     <label className="text-[9px] font-mono text-white/20 uppercase tracking-[0.3em]">
@@ -168,11 +225,21 @@ const ContactModal = ({ isOpen, onClose }) => {
                       type="email"
                       placeholder="voce@email.com"
                       value={formData.email}
-                      className="w-full bg-white/[0.02] border border-white/5 rounded-xl px-6 py-4 text-white text-sm focus:border-white/20 focus:bg-white/[0.04] transition-all outline-none placeholder:text-white/20"
-                      onChange={(e) =>
-                        setForm({ ...formData, email: e.target.value })
-                      }
+                      className={`w-full bg-white/[0.02] border rounded-xl px-6 py-4 text-white text-sm focus:bg-white/[0.04] transition-all outline-none placeholder:text-white/20 ${
+                        errors.email 
+                          ? "border-red-500/50 focus:border-red-500" 
+                          : "border-white/5 focus:border-white/20"
+                      }`}
+                      onChange={(e) => {
+                        setForm({ ...formData, email: e.target.value });
+                        if (errors.email) setErrors({ ...errors, email: "" });
+                      }}
+                      aria-invalid={!!errors.email}
+                      aria-describedby={errors.email ? "email-error" : undefined}
                     />
+                    {errors.email && (
+                      <p id="email-error" className="text-[9px] text-red-400 font-mono">{errors.email}</p>
+                    )}
                   </div>
                 </div>
 
@@ -186,11 +253,27 @@ const ContactModal = ({ isOpen, onClose }) => {
                     rows="4"
                     placeholder="Conte sobre seu projeto ou oportunidade..."
                     value={formData.message}
-                    className="w-full bg-white/[0.02] border border-white/5 rounded-2xl px-6 py-4 text-white text-sm focus:border-white/20 focus:bg-white/[0.04] transition-all outline-none resize-none placeholder:text-white/20"
-                    onChange={(e) =>
-                      setForm({ ...formData, message: e.target.value })
-                    }
+                    maxLength={2000}
+                    className={`w-full bg-white/[0.02] border rounded-2xl px-6 py-4 text-white text-sm focus:bg-white/[0.04] transition-all outline-none resize-none placeholder:text-white/20 ${
+                      errors.message 
+                        ? "border-red-500/50 focus:border-red-500" 
+                        : "border-white/5 focus:border-white/20"
+                    }`}
+                    onChange={(e) => {
+                      setForm({ ...formData, message: e.target.value });
+                      if (errors.message) setErrors({ ...errors, message: "" });
+                    }}
+                    aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? "message-error" : "message-char-count"}
                   />
+                  <div className="flex justify-between items-center">
+                    {errors.message && (
+                      <p id="message-error" className="text-[9px] text-red-400 font-mono">{errors.message}</p>
+                    )}
+                    <p id="message-char-count" className="text-[8px] font-mono text-white/20 ml-auto">
+                      {formData.message.length}/2000
+                    </p>
+                  </div>
                 </div>
 
                 <button

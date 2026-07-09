@@ -73,7 +73,25 @@ const CommandPalette = ({ isDarkMode, toggleTheme }) => {
       type: "sys",
       icon: FiDownload,
       label: t("hero.btnResume"),
-      action: () => window.open("/Curriculo_Jefferson_Teles_TI.pdf", "_blank"),
+      action: async () => {
+        const possiblePaths = [
+          "/Curriculo_Jefferson_Teles_TI.pdf",
+          "/cv-jefferson-teles.pdf",
+          "/Curriculo_Jefferson_Teles.pdf"
+        ];
+        for (const path of possiblePaths) {
+          try {
+            const response = await fetch(path, { method: 'HEAD' });
+            if (response.ok) {
+              window.open(path, "_blank");
+              return;
+            }
+          } catch (error) {
+            continue;
+          }
+        }
+        alert("Não foi possível encontrar o arquivo do currículo.");
+      },
     },
     {
       type: "sys",

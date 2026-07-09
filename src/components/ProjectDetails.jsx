@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiX, FiCode, FiActivity, FiServer, FiTerminal } from 'react-icons/fi';
-import Architecture3D from './Architecture3D';
+import LayeredArchitecture from './LayeredArchitecture';
 
 const SyntaxHighlighter = ({ code, language = "javascript" }) => {
   return (
@@ -93,7 +93,7 @@ const ProjectDetails = ({ project, isOpen, onClose }) => {
 
                <div className="flex flex-col gap-6">
                   <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 border-b border-white/5 pb-4">Architectural Blueprint (3D)</h4>
-                  <Architecture3D />
+                  <LayeredArchitecture />
                   <div className="text-[8px] font-mono text-white/10 uppercase tracking-[0.2em] text-center">Interactive Model: Drag to orbit • Scroll to zoom</div>
                </div>
 

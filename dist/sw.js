@@ -1,1 +1,18 @@
-if(!self.define){let e,s={};const i=(i,n)=>(i=new URL(i+".js",n).href,s[i]||new Promise(s=>{if("document"in self){const e=document.createElement("script");e.src=i,e.onload=s,document.head.appendChild(e)}else e=i,importScripts(i),s()}).then(()=>{let e=s[i];if(!e)throw new Error(`Module ${i} didn’t register its module`);return e}));self.define=(n,r)=>{const t=e||("document"in self?document.currentScript.src:"")||location.href;if(s[t])return;let l={};const o=e=>i(e,t),u={module:{uri:t},exports:l,require:o};s[t]=Promise.all(n.map(e=>u[e]||o(e))).then(e=>(r(...e),l))}}define(["./workbox-2fbc6a65"],function(e){"use strict";self.addEventListener("message",e=>{e.data&&"SKIP_WAITING"===e.data.type&&self.skipWaiting()}),e.precacheAndRoute([{url:"registerSW.js",revision:"1872c500de691dce40960bb85481de07"},{url:"index.html",revision:"0546a1a7a4b031a1d11ccc7e130d177e"},{url:"assets/three-CMoIRtVj.js",revision:null},{url:"assets/react-vendor-CWwPtEed.js",revision:null},{url:"assets/motion-DNWOK9dw.js",revision:null},{url:"assets/index-C0NXOv4S.js",revision:null},{url:"assets/index-BtW9Flds.css",revision:null},{url:"assets/i18n-DZOUze8m.js",revision:null},{url:"manifest.webmanifest",revision:"7fbf745c6237fccb6224bf48fc589bd9"}],{}),e.cleanupOutdatedCaches(),e.registerRoute(new e.NavigationRoute(e.createHandlerBoundToURL("index.html")))});
+self.addEventListener("install", () => {
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches
+      .keys()
+      .then((cacheNames) => Promise.all(cacheNames.map((name) => caches.delete(name))))
+      .then(() => self.registration.unregister())
+      .then(() => self.clients.matchAll({ type: "window" }))
+      .then((clients) => Promise.all(clients.map((client) => client.navigate(client.url))))
+  );
+});
+
+self.addEventListener("fetch", () => {
+  // Intentionally empty: let the network handle every request.
+});

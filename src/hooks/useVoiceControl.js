@@ -38,8 +38,26 @@ const useVoiceControl = (isActive, onCommand) => {
         scroller.scrollTo("contact", { smooth: true, offset: -100 });
         onCommand("Initiating contact protocol");
       } else if (command.includes("resume") || command.includes("currículo")) {
-        window.open("/cv-jefferson-teles.pdf", "_blank");
-        onCommand("Downloading Technical Resume");
+        (async () => {
+          const possiblePaths = [
+            "/Curriculo_Jefferson_Teles_TI.pdf",
+            "/cv-jefferson-teles.pdf",
+            "/Curriculo_Jefferson_Teles.pdf"
+          ];
+          for (const path of possiblePaths) {
+            try {
+              const response = await fetch(path, { method: 'HEAD' });
+              if (response.ok) {
+                window.open(path, "_blank");
+                onCommand("Downloading Technical Resume");
+                return;
+              }
+            } catch (error) {
+              continue;
+            }
+          }
+          onCommand("Error: CV file not found");
+        })();
       }
     };
 

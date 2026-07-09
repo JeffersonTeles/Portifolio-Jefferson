@@ -1,74 +1,53 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 const About = () => {
   const { t } = useTranslation();
-  const [openTimeline, setOpenTimeline] = useState(null);
-  const timeline = t("about.timeline", { returnObjects: true });
   const tags = t("about.tags", { returnObjects: true });
 
   const fadeUp = {
-    initial: { opacity: 0, y: 30 },
+    initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.5 },
   };
 
   return (
-    <section id="about" className="py-40 bg-black relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-      <div className="premium-container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
-          {/* Left Column: The Narrative */}
-          <div className="lg:col-span-7">
-            <motion.span
-              {...fadeUp}
-              className="text-[11px] font-medium uppercase tracking-[0.5em] text-white/30 mb-10 block"
-            >
+    <section id="about" className="py-24 bg-slate-950 border-t border-slate-800/80">
+      <div className="premium-container">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-16">
+          <div>
+            <motion.span {...fadeUp} className="text-sm text-slate-400 mb-3 block">
               {t("about.label")}
             </motion.span>
 
             <motion.h2
               {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.1 }}
-              className="text-4xl md:text-6xl font-extrabold text-white leading-[1.1] mb-12 tracking-tight"
+              transition={{ ...fadeUp.transition, delay: 0.05 }}
+              className="text-3xl md:text-4xl font-bold text-slate-100 mb-8"
             >
-              {t("about.heading1")}
-              <span className="text-white/50">{t("about.heading2")}</span>
-              {t("about.heading3")}
-              <span className="italic font-light">{t("about.heading4")}</span>
+              {t("about.heading")}
             </motion.h2>
 
-            <div className="space-y-8 text-xl text-white/40 font-light leading-relaxed max-w-2xl">
-              <motion.p
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: 0.2 }}
-              >
+            <div className="space-y-5 text-slate-300 leading-relaxed">
+              <motion.p {...fadeUp} transition={{ delay: 0.1 }}>
                 {t("about.p1")}
-                <span className="text-white font-medium">
+                <span className="text-slate-100 font-medium">
                   {t("about.p1Highlight")}
                 </span>
                 {t("about.p1End")}
               </motion.p>
-              <motion.p
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: 0.3 }}
-              >
+              <motion.p {...fadeUp} transition={{ delay: 0.15 }}>
                 {t("about.p2")}
-                <span className="text-white font-medium">
+                <span className="text-slate-100 font-medium">
                   {t("about.p2Highlight")}
                 </span>
                 {t("about.p2End")}
               </motion.p>
-              <motion.p
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: 0.4 }}
-              >
+              <motion.p {...fadeUp} transition={{ delay: 0.2 }}>
                 {t("about.p3")}
-                <span className="text-white font-medium">
+                <span className="text-slate-100 font-medium">
                   {t("about.p3Highlight")}
                 </span>
                 {t("about.p3End")}
@@ -77,13 +56,13 @@ const About = () => {
 
             <motion.div
               {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.5 }}
-              className="flex flex-wrap gap-3 mt-16"
+              transition={{ delay: 0.25 }}
+              className="flex flex-wrap gap-2 mt-8"
             >
-              {tags.map((tag, i) => (
+              {tags.map((tag) => (
                 <span
-                  key={i}
-                  className="px-4 py-2 rounded-full border border-white/5 bg-white/[0.02] text-[10px] font-medium text-white/60 uppercase tracking-widest"
+                  key={tag}
+                  className="px-3 py-1 text-xs rounded-full border border-slate-700 text-slate-400"
                 >
                   {tag}
                 </span>
@@ -91,122 +70,23 @@ const About = () => {
             </motion.div>
           </div>
 
-          {/* Right Column: Visual Timeline */}
-          <div className="lg:col-span-5 relative">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="glass-panel p-10 md:p-12 rounded-3xl relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-40 h-40 bg-white/[0.02] blur-[80px]" />
-
-              {/* Avatar */}
-              <div className="flex flex-col items-center mb-10 relative z-10">
-                <div className="w-20 h-20 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center mb-3 overflow-hidden shadow-glow">
-                  <span className="text-2xl font-extrabold text-white tracking-tight select-none">
-                    JT
-                  </span>
-                </div>
-                <p className="text-[11px] font-bold text-white uppercase tracking-widest">
-                  Jefferson Teles
-                </p>
-                <p className="text-[9px] font-mono text-white/30 uppercase tracking-[0.3em] mt-1">
-                  Software Engineer · Cascavel, BR
-                </p>
-              </div>
-
-              <div className="space-y-12 relative z-10">
-                {timeline.map((item, i) => (
-                  <div key={i} className="flex gap-8 group/item">
-                    <div className="flex flex-col items-center pt-1.5">
-                      <motion.div
-                        animate={{
-                          backgroundColor:
-                            openTimeline === i
-                              ? "rgba(255,255,255,1)"
-                              : "rgba(255,255,255,0.2)",
-                        }}
-                        className="w-2 h-2 rounded-full transition-colors duration-300 shadow-glow"
-                      />
-                      {i !== timeline.length - 1 && (
-                        <div className="w-px h-full bg-white/5 mt-4" />
-                      )}
-                    </div>
-                    <button
-                      className="pb-2 text-left w-full"
-                      onClick={() =>
-                        setOpenTimeline(openTimeline === i ? null : i)
-                      }
-                    >
-                      <span className="text-[10px] font-mono text-white/20 block mb-2 tracking-widest">
-                        {item.year}
-                      </span>
-                      <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-2 group-hover/item:text-white/80 transition-colors flex items-center justify-between">
-                        {item.title}
-                        <span className="text-white/20 text-xs">
-                          {openTimeline === i ? "−" : "+"}
-                        </span>
-                      </h4>
-                      <p className="text-xs text-white/40 leading-relaxed font-medium">
-                        {item.desc}
-                      </p>
-                      <AnimatePresence>
-                        {openTimeline === i && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.4 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="mt-3 pt-3 border-t border-white/[0.05]">
-                              <p className="text-[10px] text-white/30 font-mono">
-                                {item.year === "2020" &&
-                                  "→ Redes TCP/IP, Linux Ubuntu/Debian, hardware e servidores físicos."}
-                                {item.year === "2023" &&
-                                  "→ Suporte N2, diagnóstico de falhas, gestão de tickets e SLAs."}
-                                {item.year === "2024" &&
-                                  "→ Next.js, Supabase, Node.js, Python, automações e integrações de IA."}
-                                {item.year === "2026" &&
-                                  "→ Engenharia de Software em curso. Foco em sistemas de alta performance."}
-                              </p>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* GitHub Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="mt-6 space-y-4"
-            >
-              <span className="text-[8px] font-mono text-white/20 uppercase tracking-[0.4em] block">
-                GitHub_Activity
-              </span>
-              <img
-                src="https://github-readme-stats.vercel.app/api?username=JeffersonTeles&show_icons=true&hide_border=true&bg_color=00000000&title_color=ffffff&text_color=555555&icon_color=444444&ring_color=333333&count_private=true"
-                alt="GitHub Stats de Jefferson Teles"
-                className="w-full rounded-xl opacity-60 hover:opacity-90 transition-opacity duration-500"
-                loading="lazy"
-              />
-              <img
-                src="https://github-readme-streak-stats.herokuapp.com?user=JeffersonTeles&theme=dark&hide_border=true&background=00000000&ring=444444&fire=ffffff&currStreakLabel=555555&sideLabels=444444&dates=333333&currStreakNum=ffffff&sideNums=555555"
-                alt="GitHub Streak de Jefferson Teles"
-                className="w-full rounded-xl opacity-60 hover:opacity-90 transition-opacity duration-500"
-                loading="lazy"
-              />
-            </motion.div>
-          </div>
+          <motion.aside
+            initial={{ opacity: 0, x: 16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="rounded-xl border border-slate-800 bg-slate-900/60 p-6 self-start"
+          >
+            <h3 className="text-slate-100 font-semibold mb-4">
+              O que eu levo para um time
+            </h3>
+            <ul className="space-y-3 text-sm text-slate-400 leading-relaxed">
+              <li>Base prática em suporte, redes, Linux e diagnóstico.</li>
+              <li>Facilidade para conversar com usuário e traduzir problema em tarefa técnica.</li>
+              <li>Projetos reais com frontend, backend, banco de dados e automação.</li>
+              <li>Vontade de aprender com revisão, rotina de time e código em produção.</li>
+            </ul>
+          </motion.aside>
         </div>
       </div>
     </section>

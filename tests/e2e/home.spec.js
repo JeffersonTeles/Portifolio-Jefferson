@@ -7,46 +7,79 @@ test('homepage loads successfully', async ({ page }) => {
 
 test('navigation works correctly', async ({ page }) => {
   await page.goto('/');
-  
-  // Test navigation to About section
+
   await page.click('text=Sobre');
   await expect(page.locator('#about')).toBeVisible();
-  
-  // Test navigation to Projects section
+
+  await page.click('text=Experiência');
+  await expect(page.locator('#experience')).toBeVisible();
+
   await page.click('text=Projetos');
   await expect(page.locator('#projects')).toBeVisible();
 });
 
 test('CV download button is present', async ({ page }) => {
   await page.goto('/');
-  const downloadButton = page.locator('text=Download CV');
-  await expect(downloadButton).toBeVisible();
+  const resumeLink = page.getByRole('link', { name: /ver currículo/i });
+  await expect(resumeLink).toBeVisible();
+  await expect(resumeLink).toHaveAttribute('href', '/curriculo.pdf');
 });
 
 test('mobile menu works', async ({ page }) => {
   await page.goto('/');
   await page.setViewportSize({ width: 375, height: 667 });
   
-  const menuButton = page.locator('button[aria-label="Open menu"]');
+  const menuButton = page.locator('button[aria-label="Abrir menu"]');
   await menuButton.click();
   
-  const mobileMenu = page.locator('.fixed.inset-0.z-\\[60\\]');
+  const mobileMenu = page.locator('#mobile-menu');
   await expect(mobileMenu).toBeVisible();
 });
 
-test('search functionality works', async ({ page }) => {
+test('hero CTA links are present', async ({ page }) => {
   await page.goto('/');
-  
-  // Open search with keyboard shortcut
-  await page.keyboard.press('Meta+K');
-  
-  const searchModal = page.locator('.fixed.inset-0.z-\\[100\\]');
-  await expect(searchModal).toBeVisible();
-  
-  // Type search query
-  await page.fill('input[placeholder*="Buscar"]', 'React');
-  
-  // Verify search results appear
-  const searchResults = page.locator('text=React');
-  await expect(searchResults).toBeVisible();
+
+  const hero = page.locator('#hero');
+  await expect(page.getByRole('link', { name: /ver projetos/i })).toBeVisible();
+  await expect(hero.getByText('GitHub', { exact: true })).toBeVisible();
+  await expect(hero.getByText('WhatsApp', { exact: true })).toBeVisible();
+});
+
+test('project cards are displayed', async ({ page }) => {
+  await page.goto('/');
+
+  // Scroll to projects section
+  await page.locator('#projects').scrollIntoViewIfNeeded();
+
+  await expect(page.getByRole('heading', { name: /Maestria Docente/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Casamento/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Interface X11/i })).toBeVisible();
+});
+
+test('contact modal opens and validates form', async ({ page }) => {
+  await page.goto('/');
+
+  // Scroll to contact section
+  await page.locator('#contact').scrollIntoViewIfNeeded();
+
+  // Click contact button
+  const contactButton = page.getByRole('button', { name: /enviar mensagem/i });
+  await contactButton.click();
+
+  // Wait for modal to appear
+  const modal = page.locator('.fixed.inset-0.z-\\[400\\]');
+  await expect(modal).toBeVisible();
+
+  // Try to submit empty form
+  const submitButton = page.locator('button[type="submit"]');
+  await submitButton.click();
+
+  // Verify validation errors appear
+  const nameInput = page.locator('input[name="from_name"]');
+  await expect(nameInput).toHaveAttribute('aria-invalid', 'true');
+
+  // Close modal
+  const closeButton = page.locator('button[aria-label="Fechar modal"], button[aria-label="Close modal"]');
+  await closeButton.click();
+  await expect(modal).not.toBeVisible();
 });

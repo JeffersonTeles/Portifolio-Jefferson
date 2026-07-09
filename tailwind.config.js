@@ -6,27 +6,28 @@ export default {
     extend: {
       colors: {
         builder: {
-          bg: "#000000", // Deep black for Vercel/Linear look
-          card: "#0a0a0a", // Very dark grey
-          accent: "#ffffff", // White as primary accent for elegance
-          terminal: "#888888", // Subtle grey
-          muted: "#666666", // Muted text
+          bg: "#020617",
+          card: "#0f172a",
+          accent: "#60a5fa",
+          terminal: "#94a3b8",
+          muted: "#94a3b8",
         },
         dark: {
-          bg: "#000000",
-          card: "#0a0a0a",
-          accent: "#ffffff",
-          muted: "#666666",
+          bg: "#020617",
+          card: "#0f172a",
+          accent: "#60a5fa",
+          muted: "#94a3b8",
         },
         lusion: {
-          text: "#ffffff",
-          primary: "#ffffff",
-          bg: "#000000",
+          text: "#e2e8f0",
+          primary: "#60a5fa",
+          bg: "#020617",
         },
         premium: {
-          bg: "#000000",
-          card: "#0a0a0a",
-          accent: "#ffffff",
+          bg: "#020617",
+          card: "#0f172a",
+          accent: "#60a5fa",
+          muted: "#94a3b8",
         },
       },
       fontFamily: {
@@ -40,14 +41,14 @@ export default {
       },
       boxShadow: {
         glass: "0 4px 30px rgba(0, 0, 0, 0.1)",
-        glow: "0 0 20px rgba(255, 255, 255, 0.05)",
-        "glow-accent": "0 0 30px rgba(255, 255, 255, 0.1)",
+        glow: "0 0 20px rgba(96, 165, 250, 0.08)",
+        "glow-accent": "0 0 30px rgba(96, 165, 250, 0.16)",
       },
       backgroundImage: {
         "premium-gradient":
-          "linear-gradient(to bottom right, rgba(255,255,255,0.05), rgba(0,0,0,0))",
+          "linear-gradient(to bottom right, rgba(96,165,250,0.08), rgba(0,0,0,0))",
         "grid-pattern":
-          "radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
+          "radial-gradient(rgba(148, 163, 184, 0.1) 1px, transparent 1px)",
       },
     },
   },

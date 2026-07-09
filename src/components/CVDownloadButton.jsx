@@ -3,13 +3,44 @@ import { motion } from "framer-motion";
 import { FiDownload, FiFileText } from "react-icons/fi";
 
 const CVDownloadButton = ({ variant = "primary", size = "md", className = "" }) => {
-  const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = "/Curriculo_Jefferson_Teles_TI.pdf";
-    link.download = "Curriculo_Jefferson_Teles_TI.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownload = async () => {
+    // Try multiple possible paths for the CV file
+    const possiblePaths = [
+      "/curriculo.pdf",
+      "/resume.pdf",
+      "/Curriculo_Jefferson_Teles_TI.pdf",
+      "/cv-jefferson-teles.pdf",
+      "/Curriculo_Jefferson_Teles.pdf"
+    ];
+
+    // Try each path until one works
+    for (const path of possiblePaths) {
+      try {
+        // Check if file exists
+        const response = await fetch(path, { method: 'HEAD' });
+        if (response.ok) {
+          // File exists, trigger download
+          const link = document.createElement("a");
+          link.href = path;
+          link.download = path.split("/").pop();
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          
+          // Exit loop on success
+          return;
+        }
+      } catch (error) {
+        // Try next path
+        continue;
+      }
+    }
+
+    // If no path worked, alert user
+    alert("Não foi possível encontrar o arquivo do currículo. Por favor, entre em contato diretamente.");
   };
 
   const variants = {
