@@ -31,4 +31,10 @@ export const SectionProvider = ({ children }) => {
   );
 };
 
-export const useSection = () => useContext(SectionContext);
+export const useSection = () => {
+  const context = useContext(SectionContext);
+  if (!context) {
+    return { currentSection: 'hero', currentYear: new Date().getFullYear() };
+  }
+  return context;
+};

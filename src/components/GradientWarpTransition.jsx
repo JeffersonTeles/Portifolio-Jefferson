@@ -3,7 +3,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useSection } from "../context/SectionContext";
 
 const GradientWarpTransition = () => {
-  const { currentSection, currentYear } = useSection();
+  const { currentSection, currentYear } = useSection() || {};
   const [trigger, setTrigger] = useState(0);
   const controls = useAnimation();
 
