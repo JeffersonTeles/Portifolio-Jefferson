@@ -7,6 +7,7 @@ import Hero from "./sections/Hero";
 import Experience from "./sections/Experience";
 import Projects from "./sections/Projects";
 import Skills from "./sections/TechStack";
+import About from "./sections/About";
 import Certifications from "./sections/Certifications";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
@@ -22,6 +23,7 @@ function HomePage() {
       <Projects />
       <Skills />
       <Experience />
+      <About />
       <Certifications />
       <Contact />
     </>

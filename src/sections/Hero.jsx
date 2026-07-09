@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { FiArrowRight, FiFileText, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 import { SiWhatsapp } from "react-icons/si";
 import { useTranslation } from "react-i18next";
@@ -7,6 +7,8 @@ import MorphicSphereBackground from "../components/MorphicSphereBackground";
 
 const Hero = () => {
   const { t } = useTranslation();
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
 
   const fadeUp = {
     initial: { opacity: 0, y: 24 },
@@ -35,6 +37,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
+      ref={sectionRef}
       className="relative min-h-screen flex items-center pt-24 pb-16 bg-slate-950"
     >
         <MorphicSphereBackground isDark />
@@ -56,6 +59,26 @@ const Hero = () => {
               {t("hero.greeting")}{" "}
               <span className="text-sky-300">Jefferson Teles</span>
             </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              transition={{ delay: 0.16, duration: 0.5 }}
+              className="text-base md:text-lg text-cyan-300/90 font-medium mb-4"
+            >
+              Código limpo. Resultados sujos de sucesso.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="inline-flex items-center gap-2 mb-8 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1.5"
+            >
+              <span className="text-xs tracking-wide text-cyan-200">
+                React • Node • TypeScript • AI
+              </span>
+            </motion.div>
 
             <motion.p
               {...fadeUp}

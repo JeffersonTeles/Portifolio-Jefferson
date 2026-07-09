@@ -1,95 +1,66 @@
-import React from "react";
-import { motion } from "framer-motion";
-import {
-  SiReact,
-  SiNodedotjs,
-  SiGit,
-  SiLinux,
-  SiFlutter,
-  SiArduino,
-} from "react-icons/si";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
-const skillGroups = [
-  {
-    title: "Frontend",
-    icon: SiReact,
-    items: ["React", "JavaScript", "HTML", "CSS", "Tailwind", "Vite", "Zustand"],
-  },
-  {
-    title: "Backend e dados",
-    icon: SiNodedotjs,
-    items: ["Node.js", "Express", "Python", "API REST", "PostgreSQL", "Supabase", "SQL"],
-  },
-  {
-    title: "Automação",
-    icon: SiFlutter,
-    items: ["n8n", "Webhooks", "Gemini AI", "JSON", "Selenium", "Playwright", "Puppeteer"],
-  },
-  {
-    title: "Infra e suporte",
-    icon: SiLinux,
-    items: ["Linux", "Windows", "TCP/IP", "DNS", "VPN", "Mikrotik", "Ubiquiti"],
-  },
-  {
-    title: "Ferramentas",
-    icon: SiGit,
-    items: ["Git/GitHub", "Docker", "VS Code", "Trello", "AnyDesk", "TeamViewer"],
-  },
-  {
-    title: "Eletrônica e IoT",
-    icon: SiArduino,
-    items: ["Arduino", "ESP32", "C++", "Sensores", "Solda", "Chicotes elétricos"],
-  },
+const stackGrid = [
+  { icon: "⚛️", name: "React" },
+  { icon: "🟢", name: "Node.js" },
+  { icon: "📘", name: "TypeScript" },
+  { icon: "🐳", name: "Docker" },
+  { icon: "🔄", name: "CI/CD" },
+  { icon: "📦", name: "NPM" },
+  { icon: "🎨", name: "Tailwind CSS" },
+  { icon: "🤖", name: "AI Automation" },
+  { icon: "⚛️", name: "Framer Motion" },
+  { icon: "🟢", name: "Express" },
+  { icon: "📘", name: "JavaScript" },
+  { icon: "🐳", name: "Containers" },
+  { icon: "🔄", name: "Webhooks" },
+  { icon: "📦", name: "Vite" },
+  { icon: "🎨", name: "UI Systems" },
+  { icon: "🤖", name: "LLM Integrations" },
 ];
 
 const Skills = () => {
   const { t } = useTranslation();
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   return (
-    <section id="skills" className="py-24 bg-slate-950 border-t border-slate-800/80">
+    <section
+      id="skills"
+      ref={sectionRef}
+      className="py-24 bg-slate-950 border-t border-slate-800/80"
+    >
       <div className="premium-container">
         <motion.span
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
           className="text-sm text-slate-400 mb-3 block"
         >
           {t("skills.label")}
         </motion.span>
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+          transition={{ delay: 0.05 }}
           className="text-3xl md:text-4xl font-bold text-slate-100 mb-10"
         >
           {t("skills.heading")}
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          {skillGroups.map(({ title, icon: Icon, items }, i) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {stackGrid.map(({ icon, name }, i) => (
             <motion.div
-              key={title}
+              key={`${name}-${i}`}
               initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
               transition={{ delay: i * 0.04 }}
-              className="p-5 rounded-lg border border-slate-800 bg-slate-900/60 hover:border-sky-400/30 transition-colors"
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="p-5 rounded-lg border border-slate-800 bg-slate-900/60 hover:border-sky-400/40 transition-all duration-300"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <Icon className="text-xl text-sky-300/80" />
-                <h3 className="text-slate-100 font-semibold">{title}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {items.map((item) => (
-                  <span
-                    key={item}
-                    className="px-2 py-1 text-xs rounded-md bg-slate-800/80 text-slate-300 border border-slate-700"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
+              <div className="text-3xl mb-3">{icon}</div>
+              <h3 className="text-slate-100 font-semibold text-sm">{name}</h3>
             </motion.div>
           ))}
         </div>

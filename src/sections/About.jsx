@@ -1,51 +1,68 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 const About = () => {
   const { t } = useTranslation();
   const tags = t("about.tags", { returnObjects: true });
-
-  const fadeUp = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.5 },
-  };
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   return (
-    <section id="about" className="py-24 bg-slate-950 border-t border-slate-800/80">
+    <section
+      id="about"
+      ref={sectionRef}
+      className="py-24 bg-slate-950 border-t border-slate-800/80"
+    >
       <div className="premium-container">
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-16">
           <div>
-            <motion.span {...fadeUp} className="text-sm text-slate-400 mb-3 block">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5 }}
+              className="text-sm text-slate-400 mb-3 block"
+            >
               {t("about.label")}
             </motion.span>
 
             <motion.h2
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.05 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
               className="text-3xl md:text-4xl font-bold text-slate-100 mb-8"
             >
               {t("about.heading")}
             </motion.h2>
 
             <div className="space-y-5 text-slate-300 leading-relaxed">
-              <motion.p {...fadeUp} transition={{ delay: 0.1 }}>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
                 {t("about.p1")}
                 <span className="text-slate-100 font-medium">
                   {t("about.p1Highlight")}
                 </span>
                 {t("about.p1End")}
               </motion.p>
-              <motion.p {...fadeUp} transition={{ delay: 0.15 }}>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+              >
                 {t("about.p2")}
                 <span className="text-slate-100 font-medium">
                   {t("about.p2Highlight")}
                 </span>
                 {t("about.p2End")}
               </motion.p>
-              <motion.p {...fadeUp} transition={{ delay: 0.2 }}>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
                 {t("about.p3")}
                 <span className="text-slate-100 font-medium">
                   {t("about.p3Highlight")}
@@ -55,8 +72,9 @@ const About = () => {
             </div>
 
             <motion.div
-              {...fadeUp}
-              transition={{ delay: 0.25 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.25 }}
               className="flex flex-wrap gap-2 mt-8"
             >
               {tags.map((tag) => (
@@ -68,6 +86,17 @@ const About = () => {
                 </span>
               ))}
             </motion.div>
+
+            <motion.blockquote
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-8 rounded-xl border border-cyan-400/20 bg-cyan-400/5 p-5 text-cyan-100"
+            >
+              <p className="text-sm md:text-base leading-relaxed">
+                💡 Acredito que código não é só tecnologia — é resolver problemas humanos com eficiência.
+              </p>
+            </motion.blockquote>
           </div>
 
           <motion.aside
