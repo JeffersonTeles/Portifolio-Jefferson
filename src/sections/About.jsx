@@ -14,7 +14,7 @@ const About = () => {
       ref={sectionRef}
       className="py-24 bg-slate-950 border-t border-slate-800/80"
     >
-      <div className="premium-container">
+      <div className="page-container">
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-16">
           <div>
             <motion.span
@@ -91,7 +91,7 @@ const About = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-8 rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-5 text-emerald-100"
+              className="mt-8 rounded-xl border border-amber-400/20 bg-amber-400/5 p-5 text-amber-100"
             >
               <p className="text-sm md:text-base leading-relaxed">
                 Código não é só tecnologia — é resolver problemas de gente. 
@@ -110,10 +110,11 @@ const About = () => {
             {/* Coloque sua foto em public/photo.jpg para aparecer aqui */}
             <div className="rounded-xl overflow-hidden border border-slate-800">
               <img
-                src="/photo.jpg"
-                alt="Jefferson Teles"
-                className="w-full aspect-square object-cover object-top"
-              />
+                              src="/photo.jpg"
+                              alt="Jefferson Teles"
+                              className="w-full aspect-square object-cover object-top"
+                              onError={(e) => { e.currentTarget.parentElement.style.display = 'none'; }}
+                            />
             </div>
 
             <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6">
@@ -133,14 +134,14 @@ const About = () => {
                 Formação acadêmica
               </h3>
               <div className="flex items-start gap-4">
-                <div className="w-9 h-9 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center shrink-0">
-                  <span className="text-emerald-300 text-xs font-bold">FAG</span>
+                <div className="w-9 h-9 rounded-lg bg-amber-400/10 border border-amber-400/20 flex items-center justify-center shrink-0">
+                  <span className="text-amber-300 text-xs font-bold">FAG</span>
                 </div>
                 <div>
                   <p className="text-sm font-medium text-slate-100">Engenharia de Software</p>
                   <p className="text-xs text-slate-500 mt-0.5">Centro Universitário FAG</p>
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="px-2 py-0.5 rounded-full border border-emerald-400/20 text-[10px] text-emerald-300 bg-emerald-400/5">Bacharelado</span>
+                    <span className="px-2 py-0.5 rounded-full border border-amber-400/20 text-[10px] text-amber-300 bg-amber-400/5">Bacharelado</span>
                     <span className="text-[10px] text-slate-500">Previsão: Nov/2026</span>
                   </div>
                 </div>

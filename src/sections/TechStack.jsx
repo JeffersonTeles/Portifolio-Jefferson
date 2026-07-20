@@ -41,14 +41,7 @@ const Skills = () => {
       ref={sectionRef}
       className="py-24 bg-slate-950 border-t border-slate-800/80"
     >
-      <div className="premium-container">
-        <motion.span
-          initial={{ opacity: 0, y: 12 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-          className="text-sm text-slate-400 mb-3 block"
-        >
-          {t("skills.label")}
-        </motion.span>
+      <div className="page-container">
         <motion.h2
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
@@ -65,10 +58,10 @@ const Skills = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               transition={{ delay: idx * 0.1 }}
-              className="p-6 rounded-xl border border-slate-800 bg-slate-900/60 hover:border-emerald-400/30 transition-all duration-300"
+              className="p-6 rounded-xl border border-slate-800 bg-slate-900/60 hover:border-amber-400/30 transition-all duration-300"
             >
-              <div className="w-9 h-9 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center mb-4">
-                <cat.icon size={16} className="text-emerald-300" />
+              <div className="w-9 h-9 rounded-lg bg-amber-400/10 border border-amber-400/20 flex items-center justify-center mb-4">
+                <cat.icon size={16} className="text-amber-300" />
               </div>
               <h3 className="text-sm font-semibold text-slate-100 mb-2">
                 {cat.name}

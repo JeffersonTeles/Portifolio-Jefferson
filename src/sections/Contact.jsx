@@ -72,23 +72,14 @@ const Contact = () => {
       className="py-20 bg-slate-950 border-t border-slate-800/80"
       aria-labelledby="contact-heading"
     >
-      <div className="premium-container">
+      <div className="page-container">
         <div className="max-w-2xl">
-          <motion.span
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-sm text-slate-400 mb-3 block"
-          >
-            {t("contact.label")}
-          </motion.span>
-
           <motion.h2
             id="contact-heading"
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-slate-100 mb-4"
+            className="text-4xl md:text-5xl font-bold text-slate-100 mb-4 leading-tight"
           >
             {t("contact.heading")}
           </motion.h2>
@@ -112,7 +103,7 @@ const Contact = () => {
           >
             <button
               onClick={() => setIsModalOpen(true)}
-              className="px-6 py-3 bg-emerald-400 text-slate-950 font-medium text-sm rounded-lg hover:bg-emerald-300 transition-colors"
+              className="px-6 py-3 bg-amber-400 text-slate-950 font-semibold text-sm rounded-lg hover:bg-amber-300 hover:shadow-[0_0_24px_rgba(251,191,36,0.3)] transition-all"
             >
               {t("contact.btnForm")}
             </button>

@@ -6,7 +6,7 @@ const MorphicSphereBackground = () => {
       <motion.div
         className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
         style={{
-          background: "radial-gradient(circle at 30% 30%, #10b981, transparent 65%)",
+          background: "radial-gradient(circle at 30% 30%, #f59e0b, transparent 65%)",
           filter: "blur(90px)",
           opacity: 0.07,
         }}

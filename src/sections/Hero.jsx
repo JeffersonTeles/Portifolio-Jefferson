@@ -42,7 +42,7 @@ const Hero = () => {
       className="relative min-h-screen flex items-center pt-24 pb-16 bg-slate-950 overflow-hidden"
     >
         <MorphicSphereBackground />
-        <div className="premium-container relative z-10 w-full">
+        <div className="page-container relative z-10 w-full">
           <div className="max-w-3xl">
             <motion.p
               {...fadeUp}
@@ -58,7 +58,7 @@ const Hero = () => {
               className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight text-slate-100"
             >
               {t("hero.greeting")}{" "}
-              <span className="text-emerald-300">Jefferson Teles</span>
+              <span className="text-amber-300">Jefferson Teles</span>
             </motion.h1>
 
             <motion.p
@@ -92,7 +92,7 @@ const Hero = () => {
             >
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-400 text-slate-950 font-medium text-sm rounded-lg hover:bg-emerald-300 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 text-slate-950 font-semibold text-sm rounded-lg hover:bg-amber-300 hover:shadow-[0_0_24px_rgba(251,191,36,0.3)] transition-all"
               >
                 {t("hero.btnWorks")}
                 <FiArrowRight size={16} />

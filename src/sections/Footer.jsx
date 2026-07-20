@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="bg-slate-950 py-10 border-t border-slate-800/80">
-      <div className="premium-container">
+      <div className="page-container">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
           <p>© {new Date().getFullYear()} Jefferson Teles</p>
           <div className="flex items-center gap-5">

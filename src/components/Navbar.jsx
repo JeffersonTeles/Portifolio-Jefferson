@@ -34,9 +34,9 @@ const Navbar = () => {
         duration={800}
         offset={-80}
         spy
-        activeClass="!text-emerald-300 !border-emerald-400/40"
+        activeClass="!text-amber-300 !border-amber-400/40"
         onClick={() => setMobileMenu(false)}
-        className="text-sm text-slate-400 hover:text-emerald-300 transition-colors cursor-pointer px-3 py-1.5 rounded-lg border border-transparent hover:border-emerald-400/20"
+        className="text-sm text-slate-400 hover:text-amber-300 transition-colors cursor-pointer px-3 py-1.5 rounded-lg border border-transparent hover:border-amber-400/20"
       >
         {item.name}
       </ScrollLink>
@@ -44,7 +44,7 @@ const Navbar = () => {
       <RouterLink
         to={`/#${item.link}`}
         onClick={() => setMobileMenu(false)}
-        className="text-sm text-slate-400 hover:text-emerald-300 transition-colors px-3 py-1.5 rounded-lg border border-transparent hover:border-emerald-400/20"
+        className="text-sm text-slate-400 hover:text-amber-300 transition-colors px-3 py-1.5 rounded-lg border border-transparent hover:border-amber-400/20"
       >
         {item.name}
       </RouterLink>
@@ -61,10 +61,10 @@ const Navbar = () => {
         role="navigation"
         aria-label="Navegação principal"
       >
-        <div className="premium-container flex justify-between items-center">
+        <div className="page-container flex justify-between items-center">
           <RouterLink
             to="/"
-            className="inline-flex items-center px-4 py-2 rounded-full border border-slate-700/80 bg-slate-900/70 text-sm font-semibold text-slate-100 hover:text-emerald-300 hover:border-emerald-400/40 transition-colors"
+            className="inline-flex items-center px-4 py-2 rounded-full border border-slate-700/80 bg-slate-900/70 text-sm font-semibold text-slate-100 hover:text-amber-300 hover:border-amber-400/40 transition-colors"
           >
             Jefferson Teles
           </RouterLink>
@@ -77,7 +77,7 @@ const Navbar = () => {
               href="/curriculo.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-400/10 border border-emerald-400/30 text-emerald-300 text-sm font-medium hover:bg-sky-400/20 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-400/10 border border-amber-400/30 text-amber-300 text-sm font-medium hover:bg-amber-400/20 transition-colors"
             >
               <FiFileText size={14} />
               Currículo
@@ -125,7 +125,7 @@ const Navbar = () => {
                   href="/curriculo.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-3 rounded-lg bg-emerald-400/10 border border-emerald-400/30 text-emerald-300 text-sm font-medium hover:bg-sky-400/20 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-3 rounded-lg bg-amber-400/10 border border-amber-400/30 text-amber-300 text-sm font-medium hover:bg-amber-400/20 transition-colors"
                 >
                   <FiFileText size={14} />
                   Currículo

@@ -9,7 +9,7 @@ const ProjectCard = ({ project, index, t, isInView }) => (
     initial={{ opacity: 0, y: 24 }}
     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
     transition={{ duration: 0.5, delay: index * 0.08 }}
-    className="group rounded-xl border border-slate-800 overflow-hidden bg-slate-900/60 hover:border-emerald-400/40 transition-all duration-300 transform-gpu hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_18px_40px_rgba(52,211,153,0.2)]"
+    className="group rounded-xl border border-slate-800 overflow-hidden bg-slate-900/60 hover:border-amber-400/40 transition-all duration-300 transform-gpu hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_18px_40px_rgba(251,191,36,0.12)]"
   >
     {project.image && (
       <div className="aspect-video overflow-hidden">
@@ -98,7 +98,7 @@ const Projects = () => {
       className="py-24 bg-slate-950 border-t border-slate-800/80"
       aria-labelledby="projects-heading"
     >
-      <div className="premium-container">
+      <div className="page-container">
         <motion.span
           initial={{ opacity: 0, y: 12 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
@@ -122,7 +122,7 @@ const Projects = () => {
               onClick={() => setFilter(tech)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
                 activeFilter === tech
-                  ? "bg-emerald-400 text-slate-950 border-emerald-400"
+                  ? "bg-amber-400 text-slate-950 border-amber-400"
                   : "text-slate-400 border-slate-700 hover:border-slate-500 hover:text-slate-200"
               }`}
             >

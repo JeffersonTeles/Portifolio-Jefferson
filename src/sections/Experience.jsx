@@ -15,7 +15,7 @@ const Experience = () => {
       className="py-24 bg-black border-t border-white/5"
       aria-labelledby="experience-heading"
     >
-      <div className="premium-container">
+      <div className="page-container">
         <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16">
           <div>
             <motion.span
@@ -62,7 +62,7 @@ const Experience = () => {
                   className="relative rounded-xl border border-white/10 bg-white/[0.02] p-5 md:p-6"
                 >
                   <motion.div
-                    className="absolute -left-[30px] top-7 h-3.5 w-3.5 rounded-full border border-emerald-300/40 bg-emerald-300/30"
+                    className="absolute -left-[30px] top-7 h-3.5 w-3.5 rounded-full border border-amber-300/40 bg-amber-300/30"
                     animate={isInView ? { scale: [0.9, 1.15, 1] } : { scale: 0.9 }}
                     transition={{ delay: 0.15 + index * 0.08, duration: 0.5 }}
                   />
