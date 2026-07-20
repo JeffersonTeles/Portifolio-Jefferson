@@ -1,24 +1,16 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  FiX,
-  FiSend,
-  FiTerminal,
-  FiCheckCircle,
-  FiLock,
-  FiAlertCircle,
-} from "react-icons/fi";
+import { FiX, FiSend, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import emailjs from "@emailjs/browser";
 
 // -------------------------------------------------------
-// CONFIGURAÇÃO EMAILJS
-// 1. Crie uma conta gratuita em https://emailjs.com
-// 2. Crie um Email Service e um Email Template
-// 3. Substitua as constantes abaixo com seus IDs reais
+// Configure o EmailJS em https://emailjs.com (plano grátis)
+// 1. Crie um Email Service e um Email Template
+// 2. Substitua as constantes abaixo com seus IDs reais
 // -------------------------------------------------------
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID"; // Ex: 'service_abc123'
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID"; // Ex: 'template_xyz789'
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY"; // Ex: 'abcDEFghiJKL'
+const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 // -------------------------------------------------------
 
 const ContactModal = ({ isOpen, onClose }) => {
@@ -31,16 +23,11 @@ const ContactModal = ({ isOpen, onClose }) => {
     const newErrors = { name: "", email: "", message: "" };
     let isValid = true;
 
-    // Name validation
     if (!formData.name.trim()) {
       newErrors.name = "Nome é obrigatório";
       isValid = false;
-    } else if (formData.name.trim().length < 2) {
-      newErrors.name = "Nome deve ter pelo menos 2 caracteres";
-      isValid = false;
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
       newErrors.email = "Email é obrigatório";
@@ -50,15 +37,11 @@ const ContactModal = ({ isOpen, onClose }) => {
       isValid = false;
     }
 
-    // Message validation
     if (!formData.message.trim()) {
       newErrors.message = "Mensagem é obrigatória";
       isValid = false;
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = "Mensagem deve ter pelo menos 10 caracteres";
-      isValid = false;
-    } else if (formData.message.trim().length > 2000) {
-      newErrors.message = "Mensagem deve ter no máximo 2000 caracteres";
+      newErrors.message = "Escreva pelo menos 10 caracteres";
       isValid = false;
     }
 
@@ -68,19 +51,14 @@ const ContactModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
+    if (!validateForm()) return;
     setStep("sending");
-
     try {
       await emailjs.sendForm(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         formRef.current,
-        EMAILJS_PUBLIC_KEY,
+        EMAILJS_PUBLIC_KEY
       );
       setStep("success");
       setForm({ name: "", email: "", message: "" });
@@ -107,209 +85,169 @@ const ContactModal = ({ isOpen, onClose }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={handleClose}
-          className="absolute inset-0 bg-black/80 backdrop-blur-md"
+          className="absolute inset-0 bg-black/70 backdrop-blur-sm"
         />
 
         <motion.div
-          initial={{ scale: 0.9, opacity: 0, y: 20 }}
+          initial={{ scale: 0.95, opacity: 0, y: 16 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.9, opacity: 0, y: 20 }}
-          className="relative w-full max-w-xl glass-panel rounded-3xl overflow-hidden shadow-2xl border-white/10"
+          exit={{ scale: 0.95, opacity: 0, y: 16 }}
+          transition={{ duration: 0.2 }}
+          className="relative w-full max-w-lg bg-slate-900 border border-slate-700/60 rounded-xl overflow-hidden shadow-2xl"
         >
           {/* Header */}
-          <div className="p-8 border-b border-white/[0.05] flex justify-between items-center bg-white/[0.01]">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/10 flex items-center justify-center text-white/40">
-                <FiLock size={14} />
-              </div>
-              <div>
-                <h3 className="text-white font-bold uppercase tracking-widest text-[10px]">
-                  Secure_Comm_Link
-                </h3>
-                <p className="text-[8px] font-mono text-white/20 uppercase tracking-[0.2em]">
-                  Protocol: HANDSHAKE_v2.0
-                </p>
-              </div>
-            </div>
+          <div className="flex items-center justify-between px-6 py-5 border-b border-slate-800">
+            <h3 className="text-slate-100 font-semibold text-base">Enviar mensagem</h3>
             <button
               onClick={handleClose}
-              className="text-white/20 hover:text-white transition-colors"
-              aria-label="Fechar modal"
+              className="text-slate-500 hover:text-slate-100 transition-colors"
+              aria-label="Fechar"
             >
               <FiX size={20} />
             </button>
           </div>
 
-          <div className="p-10">
+          <div className="p-6">
             {step === "success" ? (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="py-20 text-center flex flex-col items-center gap-6"
+                className="py-12 text-center flex flex-col items-center gap-4"
               >
-                <div className="w-20 h-20 rounded-full bg-white/[0.02] border border-white/10 flex items-center justify-center text-white mb-4 shadow-glow">
-                  <FiCheckCircle size={40} />
-                </div>
-                <h4 className="text-2xl font-bold tracking-tight uppercase">
-                  Uplink Established
-                </h4>
-                <p className="text-white/40 text-sm max-w-xs font-light">
-                  Mensagem enviada com sucesso. Retornarei em breve!
-                </p>
+                <FiCheckCircle size={40} className="text-amber-400" />
+                <h4 className="text-slate-100 font-semibold text-lg">Mensagem enviada!</h4>
+                <p className="text-slate-400 text-sm">Retorno em breve. Você também pode me chamar pelo WhatsApp.</p>
                 <button
                   onClick={handleClose}
-                  className="mt-8 px-10 py-4 bg-white text-black font-bold uppercase text-[10px] tracking-widest rounded-full hover:scale-105 transition-all"
+                  className="mt-4 px-6 py-2.5 bg-amber-400 text-slate-950 font-semibold text-sm rounded-lg hover:bg-amber-300 transition-colors"
                 >
                   Fechar
                 </button>
               </motion.div>
             ) : step === "error" ? (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="py-20 text-center flex flex-col items-center gap-6"
+                className="py-12 text-center flex flex-col items-center gap-4"
               >
-                <div className="w-20 h-20 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 mb-4">
-                  <FiAlertCircle size={40} />
-                </div>
-                <h4 className="text-2xl font-bold tracking-tight uppercase text-red-400">
-                  Transmission Failed
-                </h4>
-                <p className="text-white/40 text-sm max-w-xs font-light">
-                  Falha ao enviar. Tente novamente ou entre em contato
-                  diretamente pelo LinkedIn.
+                <FiAlertCircle size={40} className="text-red-400" />
+                <h4 className="text-slate-100 font-semibold text-lg">Falha ao enviar</h4>
+                <p className="text-slate-400 text-sm">
+                  Tente novamente ou fale diretamente pelo{" "}
+                  <a
+                    href="https://linkedin.com/in/jeffersonteless"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-amber-400 hover:text-amber-300 transition-colors"
+                  >
+                    LinkedIn
+                  </a>{" "}
+                  ou{" "}
+                  <a
+                    href="https://wa.me/5544999277915"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-amber-400 hover:text-amber-300 transition-colors"
+                  >
+                    WhatsApp
+                  </a>.
                 </p>
                 <button
                   onClick={() => setStep("idle")}
-                  className="mt-8 px-10 py-4 bg-white text-black font-bold uppercase text-[10px] tracking-widest rounded-full hover:scale-105 transition-all"
+                  className="mt-4 px-6 py-2.5 bg-slate-800 text-slate-100 font-medium text-sm rounded-lg hover:bg-slate-700 transition-colors border border-slate-700"
                 >
-                  Tentar Novamente
+                  Tentar novamente
                 </button>
               </motion.div>
             ) : (
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-8" noValidate>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-3">
-                    <label className="text-[9px] font-mono text-white/20 uppercase tracking-[0.3em]">
-                      Identity_Name
-                    </label>
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" noValidate>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="space-y-1.5">
+                    <label className="text-xs text-slate-400 font-medium">Nome</label>
                     <input
                       required
                       name="from_name"
                       type="text"
-                      placeholder="Seu Nome"
+                      placeholder="Seu nome"
                       value={formData.name}
-                      className={`w-full bg-white/[0.02] border rounded-xl px-6 py-4 text-white text-sm focus:bg-white/[0.04] transition-all outline-none placeholder:text-white/20 ${
-                        errors.name 
-                          ? "border-red-500/50 focus:border-red-500" 
-                          : "border-white/5 focus:border-white/20"
+                      className={`w-full bg-slate-800/60 border rounded-lg px-4 py-2.5 text-slate-100 text-sm outline-none placeholder:text-slate-600 focus:bg-slate-800 transition-colors ${
+                        errors.name
+                          ? "border-red-500/60"
+                          : "border-slate-700 focus:border-slate-500"
                       }`}
                       onChange={(e) => {
                         setForm({ ...formData, name: e.target.value });
                         if (errors.name) setErrors({ ...errors, name: "" });
                       }}
-                      aria-invalid={!!errors.name}
-                      aria-describedby={errors.name ? "name-error" : undefined}
                     />
-                    {errors.name && (
-                      <p id="name-error" className="text-[9px] text-red-400 font-mono">{errors.name}</p>
-                    )}
+                    {errors.name && <p className="text-xs text-red-400">{errors.name}</p>}
                   </div>
-                  <div className="space-y-3">
-                    <label className="text-[9px] font-mono text-white/20 uppercase tracking-[0.3em]">
-                      Contact_Email
-                    </label>
+                  <div className="space-y-1.5">
+                    <label className="text-xs text-slate-400 font-medium">Email</label>
                     <input
                       required
                       name="reply_to"
                       type="email"
                       placeholder="voce@email.com"
                       value={formData.email}
-                      className={`w-full bg-white/[0.02] border rounded-xl px-6 py-4 text-white text-sm focus:bg-white/[0.04] transition-all outline-none placeholder:text-white/20 ${
-                        errors.email 
-                          ? "border-red-500/50 focus:border-red-500" 
-                          : "border-white/5 focus:border-white/20"
+                      className={`w-full bg-slate-800/60 border rounded-lg px-4 py-2.5 text-slate-100 text-sm outline-none placeholder:text-slate-600 focus:bg-slate-800 transition-colors ${
+                        errors.email
+                          ? "border-red-500/60"
+                          : "border-slate-700 focus:border-slate-500"
                       }`}
                       onChange={(e) => {
                         setForm({ ...formData, email: e.target.value });
                         if (errors.email) setErrors({ ...errors, email: "" });
                       }}
-                      aria-invalid={!!errors.email}
-                      aria-describedby={errors.email ? "email-error" : undefined}
                     />
-                    {errors.email && (
-                      <p id="email-error" className="text-[9px] text-red-400 font-mono">{errors.email}</p>
-                    )}
+                    {errors.email && <p className="text-xs text-red-400">{errors.email}</p>}
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <label className="text-[9px] font-mono text-white/20 uppercase tracking-[0.3em]">
-                    Payload_Message
-                  </label>
+                <div className="space-y-1.5">
+                  <label className="text-xs text-slate-400 font-medium">Mensagem</label>
                   <textarea
                     required
                     name="message"
-                    rows="4"
-                    placeholder="Conte sobre seu projeto ou oportunidade..."
+                    rows={4}
+                    placeholder="Conte sobre a oportunidade ou projeto..."
                     value={formData.message}
                     maxLength={2000}
-                    className={`w-full bg-white/[0.02] border rounded-2xl px-6 py-4 text-white text-sm focus:bg-white/[0.04] transition-all outline-none resize-none placeholder:text-white/20 ${
-                      errors.message 
-                        ? "border-red-500/50 focus:border-red-500" 
-                        : "border-white/5 focus:border-white/20"
+                    className={`w-full bg-slate-800/60 border rounded-lg px-4 py-2.5 text-slate-100 text-sm outline-none resize-none placeholder:text-slate-600 focus:bg-slate-800 transition-colors ${
+                      errors.message
+                        ? "border-red-500/60"
+                        : "border-slate-700 focus:border-slate-500"
                     }`}
                     onChange={(e) => {
                       setForm({ ...formData, message: e.target.value });
                       if (errors.message) setErrors({ ...errors, message: "" });
                     }}
-                    aria-invalid={!!errors.message}
-                    aria-describedby={errors.message ? "message-error" : "message-char-count"}
                   />
-                  <div className="flex justify-between items-center">
-                    {errors.message && (
-                      <p id="message-error" className="text-[9px] text-red-400 font-mono">{errors.message}</p>
-                    )}
-                    <p id="message-char-count" className="text-[8px] font-mono text-white/20 ml-auto">
-                      {formData.message.length}/2000
-                    </p>
+                  <div className="flex justify-between">
+                    {errors.message && <p className="text-xs text-red-400">{errors.message}</p>}
+                    <p className="text-xs text-slate-600 ml-auto">{formData.message.length}/2000</p>
                   </div>
                 </div>
 
                 <button
                   type="submit"
                   disabled={step === "sending"}
-                  className="w-full py-5 bg-white text-black font-bold uppercase text-[10px] tracking-widest rounded-full hover:scale-[1.02] transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-3 bg-amber-400 text-slate-950 font-semibold text-sm rounded-lg hover:bg-amber-300 hover:shadow-[0_0_24px_rgba(251,191,36,0.3)] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {step === "sending" ? (
                     <>
-                      <div className="w-3 h-3 border-2 border-black/20 border-t-black rounded-full animate-spin" />
-                      <span>Enviando...</span>
+                      <div className="w-4 h-4 border-2 border-slate-950/20 border-t-slate-950 rounded-full animate-spin" />
+                      Enviando...
                     </>
                   ) : (
                     <>
                       <FiSend size={14} />
-                      <span>Iniciar Handshake</span>
+                      Enviar mensagem
                     </>
                   )}
                 </button>
               </form>
             )}
-          </div>
-
-          {/* Terminal Footer */}
-          <div className="p-4 bg-white/[0.02] border-t border-white/[0.05] px-8 flex justify-between items-center">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <div
-                  className={`w-1.5 h-1.5 rounded-full animate-pulse ${step === "error" ? "bg-red-500" : "bg-green-500"}`}
-                />
-                <span className="text-[8px] font-mono text-white/20 uppercase">
-                  {step === "error" ? "Connection_Failed" : "Server_Active"}
-                </span>
-              </div>
-            </div>
-            <FiTerminal size={12} className="text-white/10" />
           </div>
         </motion.div>
       </div>
