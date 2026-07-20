@@ -39,9 +39,9 @@ const Hero = () => {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-screen flex items-center pt-24 pb-16 bg-slate-950"
+      className="relative min-h-screen flex items-center pt-24 pb-16 bg-slate-950 overflow-hidden"
     >
-        <MorphicSphereBackground isDark />
+        <MorphicSphereBackground />
         <div className="premium-container relative z-10 w-full">
           <div className="max-w-3xl">
             <motion.p

@@ -22,7 +22,7 @@ const resources = {
         metrics: [
           { value: "6+", label: "anos de TI" },
           { value: "8+", label: "tickets N2/dia" },
-          { value: "2026", label: "graduação em Eng. Software" },
+          { value: "3+", label: "projetos publicados" },
         ],
       },
       about: {
@@ -140,7 +140,7 @@ const resources = {
             status: "Open source",
             statusColor: "text-emerald-300/80 border-emerald-300/30",
             link: "https://github.com/JeffersonTeles",
-            image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=900&auto=format&fit=crop&q=80",
+            image: "/screenshot-x11.png",
           },
         ],
       },
@@ -188,7 +188,7 @@ const resources = {
         metrics: [
           { value: "6+", label: "years in IT" },
           { value: "8+", label: "L2 tickets/day" },
-          { value: "2026", label: "Software Eng. degree" },
+          { value: "3+", label: "projects published" },
         ],
       },
       about: {
@@ -306,7 +306,7 @@ const resources = {
             status: "Open source",
             statusColor: "text-emerald-300/80 border-emerald-300/30",
             link: "https://github.com/JeffersonTeles",
-            image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=900&auto=format&fit=crop&q=80",
+            image: "/screenshot-x11.png",
           },
         ],
       },
