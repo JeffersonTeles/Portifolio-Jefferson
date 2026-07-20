@@ -9,6 +9,7 @@ const Hero = () => {
   const { t } = useTranslation();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
+  const stats = t("hero.metrics", { returnObjects: true });
 
   const fadeUp = {
     initial: { opacity: 0, y: 24 },
@@ -57,71 +58,31 @@ const Hero = () => {
               className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight text-slate-100"
             >
               {t("hero.greeting")}{" "}
-              <span className="text-sky-300">Jefferson Teles</span>
+              <span className="text-emerald-300">Jefferson Teles</span>
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ delay: 0.16, duration: 0.5 }}
-              className="text-base md:text-lg text-cyan-300/90 font-medium mb-4"
-            >
-              Código limpo. Resultados sujos de sucesso.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 mb-8 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1.5"
-            >
-              <span className="text-xs tracking-wide text-cyan-200">
-                React • Node • TypeScript • AI
-              </span>
-            </motion.div>
-
-            <motion.p
               {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.2 }}
+              transition={{ ...fadeUp.transition, delay: 0.15 }}
               className="text-lg md:text-xl text-slate-300 leading-relaxed mb-8 max-w-2xl"
             >
               {t("hero.description")}
             </motion.p>
 
-            <div className="grid grid-cols-3 gap-8 mt-12 max-w-2xl mx-auto mb-10">
-              <div className="text-center">
-                <motion.span
-                  className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
-                >
-                  6+
-                </motion.span>
-                <p className="text-sm text-gray-400 mt-1">Anos de Experiência</p>
-              </div>
-              <div className="text-center">
-                <motion.span
-                  className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 }}
-                >
-                  15+
-                </motion.span>
-                <p className="text-sm text-gray-400 mt-1">Projetos Entregues</p>
-              </div>
-              <div className="text-center">
-                <motion.span
-                  className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.0 }}
-                >
-                  40%
-                </motion.span>
-                <p className="text-sm text-gray-400 mt-1">Melhoria de Performance</p>
-              </div>
+            <div className="grid grid-cols-3 gap-8 mb-10 max-w-xl">
+              {stats.map((stat, index) => (
+                <div key={stat.label} className="text-center">
+                  <motion.span
+                    className="text-3xl font-bold text-slate-100"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 + index * 0.15 }}
+                  >
+                    {stat.value}
+                  </motion.span>
+                  <p className="text-sm text-slate-500 mt-1">{stat.label}</p>
+                </div>
+              ))}
             </div>
 
             <motion.div
@@ -131,7 +92,7 @@ const Hero = () => {
             >
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-sky-400 text-slate-950 font-medium text-sm rounded-lg hover:bg-sky-300 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-400 text-slate-950 font-medium text-sm rounded-lg hover:bg-emerald-300 transition-colors"
               >
                 {t("hero.btnWorks")}
                 <FiArrowRight size={16} />

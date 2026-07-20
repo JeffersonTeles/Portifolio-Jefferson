@@ -44,7 +44,7 @@ const CVDownloadButton = ({ variant = "primary", size = "md", className = "" }) 
   };
 
   const variants = {
-    primary: "bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-lg hover:shadow-cyan-500/25",
+    primary: "bg-gradient-to-r from-emerald-500 to-teal-600 text-white hover:shadow-lg hover:shadow-emerald-500/25",
     secondary: "bg-white/5 border border-white/10 text-white hover:bg-white/10",
     ghost: "text-white/60 hover:text-white hover:bg-white/5",
   };

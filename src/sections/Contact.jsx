@@ -69,7 +69,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-24 bg-slate-950 border-t border-slate-800/80"
+      className="py-20 bg-slate-950 border-t border-slate-800/80"
       aria-labelledby="contact-heading"
     >
       <div className="premium-container">
@@ -112,7 +112,7 @@ const Contact = () => {
           >
             <button
               onClick={() => setIsModalOpen(true)}
-              className="px-6 py-3 bg-sky-400 text-slate-950 font-medium text-sm rounded-lg hover:bg-sky-300 transition-colors"
+              className="px-6 py-3 bg-emerald-400 text-slate-950 font-medium text-sm rounded-lg hover:bg-emerald-300 transition-colors"
             >
               {t("contact.btnForm")}
             </button>

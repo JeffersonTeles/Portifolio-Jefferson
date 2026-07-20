@@ -41,7 +41,7 @@ const EasterEgg = () => {
                 transition={{ duration: 2 + Math.random() * 2, delay: Math.random() * 0.5 }}
                 className="absolute text-2xl"
               >
-                {['⚡','🚀','✨','💡','🔥','⭐'][Math.floor(Math.random() * 6)]}
+                {['●','◇','○','⊕','⊛','◆'][Math.floor(Math.random() * 6)]}
               </motion.div>
             ))}
           </div>
@@ -54,7 +54,9 @@ const EasterEgg = () => {
             transition={{ type: 'spring', stiffness: 200, damping: 15 }}
             className="relative glass-panel border border-white/20 rounded-3xl p-10 text-center shadow-[0_0_80px_rgba(255,255,255,0.1)] max-w-sm mx-4"
           >
-            <div className="text-5xl mb-4">🏆</div>
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+              <span className="text-2xl font-bold text-white/60">JS</span>
+            </div>
             <p className="text-[9px] font-mono text-white/30 uppercase tracking-[0.4em] mb-2">Achievement Unlocked</p>
             <h3 className="text-2xl font-extrabold text-white tracking-tight mb-3">∞ Builder Mode</h3>
             <p className="text-sm text-white/40 font-light">

@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiGlobe } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 
 const LanguageSelector = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState("pt");
+  const { i18n } = useTranslation();
+  const currentLang = (i18n.resolvedLanguage || i18n.language || "pt").slice(0, 2);
 
   const languages = [
-    { code: "pt", label: "Português", flag: "🇧🇷" },
-    { code: "en", label: "English", flag: "🇺🇸" },
-    { code: "es", label: "Español", flag: "🇪🇸" },
+    { code: "pt", label: "Português", short: "PT" },
+    { code: "en", label: "English", short: "EN" },
   ];
 
-  const handleLanguageChange = (langCode) => {
-    setCurrentLang(langCode);
+  const handleLanguageChange = async (langCode) => {
+    await i18n.changeLanguage(langCode);
     setIsOpen(false);
-    // Aqui você integraria com i18next
-    // i18n.changeLanguage(langCode);
   };
 
   return (
@@ -28,7 +27,7 @@ const LanguageSelector = () => {
         whileTap={{ scale: 0.95 }}
       >
         <FiGlobe size={16} />
-        <span className="text-sm font-medium">{languages.find(l => l.code === currentLang)?.flag}</span>
+        <span className="text-sm font-semibold text-white/80">{languages.find(l => l.code === currentLang)?.short}</span>
       </motion.button>
 
       <AnimatePresence>
@@ -38,7 +37,7 @@ const LanguageSelector = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full right-0 mt-2 w-48 glass-panel rounded-xl overflow-hidden z-50"
+            className="absolute top-full right-0 mt-2 w-40 glass-panel rounded-xl overflow-hidden z-50"
           >
             {languages.map((lang) => (
               <button
@@ -50,7 +49,7 @@ const LanguageSelector = () => {
                     : "text-white/60 hover:text-white hover:bg-white/5"
                 }`}
               >
-                <span className="text-lg">{lang.flag}</span>
+                <span className="text-sm font-semibold text-white/50 w-6">{lang.short}</span>
                 <span className="text-sm font-medium">{lang.label}</span>
               </button>
             ))}

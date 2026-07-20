@@ -9,7 +9,7 @@ const ProjectCard = ({ project, index, t, isInView }) => (
     initial={{ opacity: 0, y: 24 }}
     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
     transition={{ duration: 0.5, delay: index * 0.08 }}
-    className="group rounded-xl border border-slate-800 overflow-hidden bg-slate-900/60 hover:border-sky-400/30 transition-all duration-300 transform-gpu hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_18px_40px_rgba(14,165,233,0.18)]"
+    className="group rounded-xl border border-slate-800 overflow-hidden bg-slate-900/60 hover:border-emerald-400/40 transition-all duration-300 transform-gpu hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_18px_40px_rgba(52,211,153,0.2)]"
   >
     {project.image && (
       <div className="aspect-video overflow-hidden">
@@ -23,7 +23,7 @@ const ProjectCard = ({ project, index, t, isInView }) => (
     )}
 
     <div className="p-6 md:p-8">
-      <div className="flex items-start justify-between gap-4 mb-3">
+      <div className="flex items-start justify-between gap-4 mb-4">
         <h3 className="text-xl md:text-2xl font-bold text-slate-100">
           {project.title}
         </h3>
@@ -41,35 +41,9 @@ const ProjectCard = ({ project, index, t, isInView }) => (
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-4">
-        {project.stack.slice(0, 4).map((tech) => (
-          <span
-            key={`tag-${tech}`}
-            className="px-2 py-0.5 text-[10px] rounded-full border border-cyan-400/25 text-cyan-300/90 bg-cyan-400/10"
-          >
-            #{tech}
-          </span>
-        ))}
-      </div>
-
-      <div className="space-y-3 mb-5">
-        <p className="text-sm text-slate-400 leading-relaxed">
-          <span className="text-slate-200 font-medium">{t("projects.problem")}: </span>
-          {project.problem}
-        </p>
-        <p className="text-sm text-slate-400 leading-relaxed">
-          <span className="text-slate-200 font-medium">{t("projects.solution")}: </span>
-          {project.solution}
-        </p>
-        <p className="text-sm text-slate-400 leading-relaxed">
-          <span className="text-slate-200 font-medium">{t("projects.challenge")}: </span>
-          {project.challenge}
-        </p>
-        <p className="text-sm text-slate-400 leading-relaxed">
-          <span className="text-slate-200 font-medium">{t("projects.result")}: </span>
-          {project.result}
-        </p>
-      </div>
+      <p className="text-sm text-slate-400 leading-relaxed mb-5">
+        {project.desc}
+      </p>
 
       <div className="flex flex-wrap gap-2 mb-6">
         {project.stack.map((tech) => (
@@ -87,7 +61,7 @@ const ProjectCard = ({ project, index, t, isInView }) => (
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm text-slate-100 hover:text-sky-300 transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-slate-100 hover:text-emerald-300 transition-colors"
         >
           {t("projects.launchApp")}
           <FiExternalLink size={14} />
@@ -148,7 +122,7 @@ const Projects = () => {
               onClick={() => setFilter(tech)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
                 activeFilter === tech
-                  ? "bg-sky-400 text-slate-950 border-sky-400"
+                  ? "bg-emerald-400 text-slate-950 border-emerald-400"
                   : "text-slate-400 border-slate-700 hover:border-slate-500 hover:text-slate-200"
               }`}
             >

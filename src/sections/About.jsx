@@ -91,10 +91,11 @@ const About = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-8 rounded-xl border border-cyan-400/20 bg-cyan-400/5 p-5 text-cyan-100"
+              className="mt-8 rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-5 text-emerald-100"
             >
               <p className="text-sm md:text-base leading-relaxed">
-                💡 Acredito que código não é só tecnologia — é resolver problemas humanos com eficiência.
+                Código não é só tecnologia — é resolver problemas de gente. 
+                É o que aprendi em 6 anos de suporte e levo para cada projeto.
               </p>
             </motion.blockquote>
           </div>
@@ -104,17 +105,47 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="rounded-xl border border-slate-800 bg-slate-900/60 p-6 self-start"
+            className="space-y-6 self-start"
           >
-            <h3 className="text-slate-100 font-semibold mb-4">
-              O que eu levo para um time
-            </h3>
-            <ul className="space-y-3 text-sm text-slate-400 leading-relaxed">
-              <li>Base prática em suporte, redes, Linux e diagnóstico.</li>
-              <li>Facilidade para conversar com usuário e traduzir problema em tarefa técnica.</li>
-              <li>Projetos reais com frontend, backend, banco de dados e automação.</li>
-              <li>Vontade de aprender com revisão, rotina de time e código em produção.</li>
-            </ul>
+            {/* Coloque sua foto em public/photo.jpg para aparecer aqui */}
+            <div className="rounded-xl overflow-hidden border border-slate-800">
+              <img
+                src="/photo.jpg"
+                alt="Jefferson Teles"
+                className="w-full aspect-square object-cover object-top"
+              />
+            </div>
+
+            <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6">
+              <h3 className="text-slate-100 font-semibold mb-4">
+                O que eu levo para um time
+              </h3>
+              <ul className="space-y-3 text-sm text-slate-400 leading-relaxed">
+                <li>Base prática em suporte, redes, Linux e diagnóstico.</li>
+                <li>Facilidade para conversar com usuário e traduzir problema em tarefa técnica.</li>
+                <li>Projetos reais com frontend, backend, banco de dados e automação.</li>
+                <li>Vontade de aprender com revisão, rotina de time e código em produção.</li>
+              </ul>
+            </div>
+
+            <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6">
+              <h3 className="text-slate-100 font-semibold mb-4">
+                Formação acadêmica
+              </h3>
+              <div className="flex items-start gap-4">
+                <div className="w-9 h-9 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center shrink-0">
+                  <span className="text-emerald-300 text-xs font-bold">FAG</span>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-slate-100">Engenharia de Software</p>
+                  <p className="text-xs text-slate-500 mt-0.5">Centro Universitário FAG</p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <span className="px-2 py-0.5 rounded-full border border-emerald-400/20 text-[10px] text-emerald-300 bg-emerald-400/5">Bacharelado</span>
+                    <span className="text-[10px] text-slate-500">Previsão: Nov/2026</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.aside>
         </div>
       </div>

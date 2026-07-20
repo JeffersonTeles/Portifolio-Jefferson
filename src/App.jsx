@@ -4,15 +4,12 @@ import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import SkipLink from "./components/SkipLink";
 import Hero from "./sections/Hero";
+import About from "./sections/About";
 import Experience from "./sections/Experience";
 import Projects from "./sections/Projects";
 import Skills from "./sections/TechStack";
-import About from "./sections/About";
-import Certifications from "./sections/Certifications";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
-import CyberGridBackground from "./components/CyberGridBackground";
-import GradientWarpTransition from "./components/GradientWarpTransition";
 
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -20,11 +17,10 @@ function HomePage() {
   return (
     <>
       <Hero />
+      <About />
+      <Experience />
       <Projects />
       <Skills />
-      <Experience />
-      <About />
-      <Certifications />
       <Contact />
     </>
   );
@@ -35,13 +31,11 @@ function App() {
     <Router>
       <ScrollToTop />
       <div className="relative min-h-screen bg-slate-950 text-slate-100 font-sans">
-        <CyberGridBackground />
-        <GradientWarpTransition />
         <SkipLink />
         <Navbar />
         <main
           id="main-content"
-          className="relative z-10 w-full"
+          className="relative z-10"
           tabIndex={-1}
           aria-label="Conteúdo principal"
         >

@@ -14,32 +14,32 @@ const resources = {
         role: "Busco vaga júnior em desenvolvimento frontend/fullstack",
         greeting: "Olá, sou",
         description:
-          "Tenho 6 anos de base em TI, redes, Linux e hardware. Hoje atuo com suporte N2 em sistema fiscal e desenvolvo projetos reais com React, Node.js, Supabase, Flutter e automações com n8n + Gemini AI.",
+          "Comecei na TI fazendo manutenção de computadores e configurando redes. Passei por suporte N2, automação industrial e hoje curso Engenharia de Software. No tempo livre, construo projetos com React, Node.js e Supabase — e automações com n8n e IA.",
         btnWorks: "Ver projetos",
         btnResume: "Ver currículo",
         btnGithub: "GitHub",
         btnWhatsapp: "WhatsApp",
         metrics: [
-          { value: "6 anos", label: "base técnica em TI" },
-          { value: "8/dia", label: "tickets N2 em média" },
-          { value: "25%", label: "menos downtime industrial" },
+          { value: "6+", label: "anos de TI" },
+          { value: "8+", label: "tickets N2/dia" },
+          { value: "2026", label: "graduação em Eng. Software" },
         ],
       },
       about: {
         label: "Sobre mim",
-        heading: "Uma transição consistente de suporte para software",
-        p1: "Estou cursando ",
+        heading: "De suporte a software — a transição que estou construindo",
+        p1: "Cursando ",
         p1Highlight: "Engenharia de Software",
         p1End:
-          " no Centro Universitário FAG, com conclusão prevista para novembro de 2026. Minha base veio de campo: manutenção, redes, Linux, certificados digitais e atendimento direto ao cliente.",
-        p2: "Trabalhei como ",
-        p2Highlight: "Analista de Suporte Júnior na FaturAgil",
+          " no Centro Universitário FAG (conclusão em nov/2026). Antes disso, aprendi TI na prática: formatando computadores, passando cabo de rede, configurando roteador e lidando com cliente bravo.",
+        p2: "Passei pelo ",
+        p2Highlight: "suporte N2 na FaturAgil",
         p2End:
-          ", resolvendo chamados N2 de sistema fiscal, NFS-e, certificados A1/A3 e homologações de APIs de Prefeituras. Essa rotina me ensinou a investigar problema real, documentar causa e falar com usuário sem enrolação.",
+          ", onde resolvia chamados de sistema fiscal, certificados A1/A3 e homologação de APIs municipais. Lá aprendi a investigar de verdade, não só seguir script.",
         p3: "Hoje foco em ",
-        p3Highlight: "React, Node.js, Supabase, Flutter e automações com IA",
+        p3Highlight: "React, Node.js, Supabase e automações com IA",
         p3End:
-          ". Busco minha primeira vaga como desenvolvedor júnior, preferencialmente remota, onde eu possa somar com visão de produto, suporte e código.",
+          ". Busco minha primeira oportunidade como desenvolvedor júnior — presencial em Cascavel ou remoto. Quero um time onde eu possa contribuir de verdade e continuar aprendendo.",
         tags: [
           "Suporte N2",
           "Linux no dia a dia",
@@ -116,61 +116,46 @@ const resources = {
         list: [
           {
             title: "Maestria Docente",
-            problem:
-              "O acompanhamento de cursos e certificados era disperso em arquivos e planilhas, o que dificultava evolução e histórico.",
-            solution:
-              "Sistema web para centralizar perfis, etapas e acompanhamento da trilha docente em uma interface única.",
+            desc: "TCC de Engenharia de Software desenvolvido em time. Modelei o fluxo de acompanhamento docente e implementei as telas principais com React e Zustand, integrado ao Supabase. O trabalho mais importante foi definir a estrutura de dados com o time antes de escrever qualquer código — a maioria dos bugs de UI vinha de dado mal modelado. Repositório privado, protótipo publicado.",
             stack: ["React", "Vite", "Zustand", "Node.js", "Express", "Supabase"],
-            challenge:
-              "Modelei o fluxo e implementei parte das telas e da base do projeto em colaboração com o restante do time.",
-            result:
-              "Projeto de TCC em andamento, com repositório privado e protótipo publicado.",
             status: "Privado",
             statusColor: "text-amber-300/80 border-amber-300/30",
             access: "Repositório privado",
             link: "https://projeto-maestria-vercel.vercel.app",
-            image:
-              "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop&q=80",
+            image: "/screenshot-maestria.png",
           },
           {
             title: "Casamento",
-            problem:
-              "O projeto precisava de uma presença online simples, elegante e fácil de abrir no celular.",
-            solution:
-              "Site publicado com foco em apresentação visual, navegação direta e acesso rápido ao conteúdo principal.",
+            desc: "Site criado como presente para um casal. A prioridade era abrir rápido no celular, ter boa apresentação e não exigir manutenção. Usei Next.js com Framer Motion para as animações de entrada. Está em produção desde o dia do evento e nunca precisou de ajuste.",
             stack: ["Next.js", "Vercel", "Framer Motion", "CSS"],
-            challenge:
-              "Organizei a estrutura visual e os componentes para manter uma experiência limpa e responsiva.",
-            result:
-              "Site em produção com link público para acesso e validação.",
             status: "Publicado",
-            statusColor: "text-sky-300/80 border-sky-300/30",
+            statusColor: "text-emerald-300/80 border-emerald-300/30",
             link: "https://casamento-ten-rho.vercel.app",
-            image:
-              "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=900&auto=format&fit=crop&q=80",
+            image: "/screenshot-casamento.png",
           },
           {
             title: "Interface X11 para Mouse no Linux",
-            problem:
-              "Alguns mouses no Linux/X11 exigem comandos de terminal para ajustes básicos, o que afasta usuários comuns.",
-            solution:
-              "Interface gráfica simples para aplicar configurações sem o usuário precisar decorar comandos.",
+            desc: "Resolvi um problema pessoal: meu mouse Redragon no Linux/X11 precisava de comandos de terminal para ajustar DPI e botões. Criei uma interface gráfica com HTML/JS que chama scripts Python por baixo, documentei no README e publiquei no GitHub pra quem tiver o mesmo problema.",
             stack: ["JavaScript", "Python", "HTML", "CSS", "Linux"],
-            challenge:
-              "Transformei comandos técnicos em uma experiência visual, com README documentado para uso pela comunidade Linux.",
-            result:
-              "Projeto publicado no GitHub como solução open source para periféricos sem driver oficial.",
             status: "Open source",
-            statusColor: "text-sky-300/80 border-sky-300/30",
+            statusColor: "text-emerald-300/80 border-emerald-300/30",
             link: "https://github.com/JeffersonTeles",
-            image:
-              "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=900&auto=format&fit=crop&q=80",
+            image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=900&auto=format&fit=crop&q=80",
           },
         ],
       },
       skills: {
         label: "Habilidades",
         heading: "Stack que aparece nos meus projetos e no trabalho",
+      },
+      certifications: {
+        label: "Formação",
+        heading: "Formação acadêmica",
+        course: "Bacharelado em Engenharia de Software",
+        institution: "Centro Universitário FAG — Cascavel/PR",
+        type: "Graduação",
+        year: "Previsão de conclusão: Nov/2026",
+        description: "Curso focado em desenvolvimento web, APIs REST, banco de dados, engenharia de requisitos e práticas ágeis. Conciliando a graduação com experiência prática em suporte N2 e projetos fullstack.",
       },
       contact: {
         label: "Contato",
@@ -195,32 +180,32 @@ const resources = {
         role: "Looking for a junior frontend/fullstack developer role",
         greeting: "Hi, I'm",
         description:
-          "I have 6 years of hands-on IT experience across networking, Linux and hardware. Today I work with L2 support for a fiscal SaaS product and build real projects with React, Node.js, Supabase, Flutter and n8n + Gemini AI automation.",
+          "I started in IT fixing computers and setting up networks. Worked my way through L2 support, industrial automation, and now I'm studying Software Engineering. In my free time, I build projects with React, Node.js, Supabase — and automations with n8n and AI.",
         btnWorks: "View projects",
         btnResume: "View resume",
         btnGithub: "GitHub",
         btnWhatsapp: "WhatsApp",
         metrics: [
-          { value: "6 years", label: "IT foundation" },
-          { value: "8/day", label: "average L2 tickets" },
-          { value: "25%", label: "less industrial downtime" },
+          { value: "6+", label: "years in IT" },
+          { value: "8+", label: "L2 tickets/day" },
+          { value: "2026", label: "Software Eng. degree" },
         ],
       },
       about: {
         label: "About me",
-        heading: "A consistent path from support to software",
-        p1: "I'm studying ",
+        heading: "From support to software — the transition I'm building",
+        p1: "Studying ",
         p1Highlight: "Software Engineering",
         p1End:
-          " at Centro Universitario FAG, graduating in November 2026. My foundation came from field work: maintenance, networking, Linux, digital certificates and direct customer support.",
-        p2: "I worked as a ",
-        p2Highlight: "Junior Support Analyst at FaturAgil",
+          " at Centro Universitario FAG (graduating Nov 2026). Before that, I learned IT hands-on: fixing computers, running network cables, configuring routers and dealing with upset customers.",
+        p2: "Worked as ",
+        p2Highlight: "L2 Support at FaturAgil",
         p2End:
-          ", handling L2 tickets for fiscal software, NFS-e, A1/A3 digital certificates and City Hall API homologation. This taught me to investigate real issues, document causes and communicate clearly.",
+          ", handling fiscal system tickets, A1/A3 digital certificates and city hall API homologation. That routine taught me to actually investigate problems, not just follow a script.",
         p3: "Today I focus on ",
-        p3Highlight: "React, Node.js, Supabase, Flutter and AI automation",
+        p3Highlight: "React, Node.js, Supabase and AI automation",
         p3End:
-          ". I'm looking for my first junior developer role, preferably remote, where I can combine product sense, support experience and code.",
+          ". Looking for my first junior developer role — on-site in Cascavel or remote. I want a team where I can contribute for real and keep growing.",
         tags: [
           "L2 support",
           "Daily Linux user",
@@ -297,61 +282,46 @@ const resources = {
         list: [
           {
             title: "Maestria Docente",
-            problem:
-              "Course and certificate tracking was spread across files and spreadsheets, which made history and progress harder to follow.",
-            solution:
-              "Web system to centralize profiles, steps and teacher development tracking in one interface.",
+            desc: "Software engineering capstone project built as a team. I designed the teacher tracking flow and implemented the main screens using React and Zustand, integrated with Supabase. The most important step was defining the data structure with the team before writing any code — most UI bugs came from poorly modeled data. Private repo, published prototype.",
             stack: ["React", "Vite", "Zustand", "Node.js", "Express", "Supabase"],
-            challenge:
-              "Designed the flow and implemented part of the screens and base project in collaboration with the rest of the team.",
-            result:
-              "TCC project in progress, with a private repository and a published prototype.",
             status: "Private",
             statusColor: "text-amber-300/80 border-amber-300/30",
             access: "Private repo",
             link: "https://projeto-maestria-vercel.vercel.app",
-            image:
-              "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop&q=80",
+            image: "/screenshot-maestria.png",
           },
           {
             title: "Wedding Site",
-            problem:
-              "The project needed a simple, elegant online presence that opens well on mobile.",
-            solution:
-              "Published site focused on visual presentation, direct navigation and quick access to the main content.",
+            desc: "Built as a gift for a couple. Priority was fast mobile loading, clean presentation and zero maintenance. Used Next.js with Framer Motion for the entrance animations. It's been live since the wedding and has never needed any changes.",
             stack: ["Next.js", "Vercel", "Framer Motion", "CSS"],
-            challenge:
-              "Organized the visual structure and components to keep the experience clean and responsive.",
-            result:
-              "Production site with a public link for access and validation.",
             status: "Published",
-            statusColor: "text-sky-300/80 border-sky-300/30",
+            statusColor: "text-emerald-300/80 border-emerald-300/30",
             link: "https://casamento-ten-rho.vercel.app",
-            image:
-              "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=900&auto=format&fit=crop&q=80",
+            image: "/screenshot-casamento.png",
           },
           {
             title: "X11 Mouse GUI for Linux",
-            problem:
-              "Some Linux/X11 mice require terminal commands for basic adjustments, which is not friendly for everyday users.",
-            solution:
-              "Simple graphical interface to apply settings without requiring users to memorize commands.",
+            desc: "Started as a personal fix: my Redragon mouse on Linux/X11 needed terminal commands to adjust DPI and buttons. I built a simple GUI with HTML/JS calling Python scripts underneath, wrote a README, and published it on GitHub for anyone running into the same issue.",
             stack: ["JavaScript", "Python", "HTML", "CSS", "Linux"],
-            challenge:
-              "Turned technical commands into a visual experience, with a documented README for the Linux community.",
-            result:
-              "Published on GitHub as an open source solution for peripherals without official drivers.",
             status: "Open source",
-            statusColor: "text-sky-300/80 border-sky-300/30",
+            statusColor: "text-emerald-300/80 border-emerald-300/30",
             link: "https://github.com/JeffersonTeles",
-            image:
-              "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=900&auto=format&fit=crop&q=80",
+            image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=900&auto=format&fit=crop&q=80",
           },
         ],
       },
       skills: {
         label: "Skills",
         heading: "Stack I use in projects and at work",
+      },
+      certifications: {
+        label: "Education",
+        heading: "Academic background",
+        course: "BSc in Software Engineering",
+        institution: "Centro Universitário FAG — Cascavel/PR",
+        type: "Undergraduate",
+        year: "Expected graduation: Nov/2026",
+        description: "Degree focused on web development, REST APIs, databases, requirements engineering and agile practices. Combining studies with hands-on L2 support experience and fullstack projects.",
       },
       contact: {
         label: "Contact",

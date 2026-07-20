@@ -1,24 +1,33 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { FiMonitor, FiServer, FiCloud, FiZap } from "react-icons/fi";
 
-const stackGrid = [
-  { icon: "⚛️", name: "React" },
-  { icon: "🟢", name: "Node.js" },
-  { icon: "📘", name: "TypeScript" },
-  { icon: "🐳", name: "Docker" },
-  { icon: "🔄", name: "CI/CD" },
-  { icon: "📦", name: "NPM" },
-  { icon: "🎨", name: "Tailwind CSS" },
-  { icon: "🤖", name: "AI Automation" },
-  { icon: "⚛️", name: "Framer Motion" },
-  { icon: "🟢", name: "Express" },
-  { icon: "📘", name: "JavaScript" },
-  { icon: "🐳", name: "Containers" },
-  { icon: "🔄", name: "Webhooks" },
-  { icon: "📦", name: "Vite" },
-  { icon: "🎨", name: "UI Systems" },
-  { icon: "🤖", name: "LLM Integrations" },
+const categories = [
+  {
+    name: "Frontend",
+    icon: FiMonitor,
+    desc: "Componentes, estado, roteamento e estilização com foco em performance e responsividade.",
+    skills: ["React", "JavaScript", "TypeScript", "Tailwind CSS", "Vite"],
+  },
+  {
+    name: "Backend",
+    icon: FiServer,
+    desc: "APIs REST, banco de dados, autenticação e integração com serviços externos.",
+    skills: ["Node.js", "Express", "Python", "PostgreSQL", "Supabase"],
+  },
+  {
+    name: "Infra & DevOps",
+    icon: FiCloud,
+    desc: "Linux como sistema principal, Docker para ambientes isolados e Git para versionamento.",
+    skills: ["Linux", "Docker", "Git/GitHub", "NFS-e APIs", "Mikrotik"],
+  },
+  {
+    name: "Automação & IA",
+    icon: FiZap,
+    desc: "Fluxos automatizados com n8n, web scraping com Playwright e integração com modelos de IA.",
+    skills: ["n8n", "Gemini AI", "Webhooks", "Playwright", "Selenium"],
+  },
 ];
 
 const Skills = () => {
@@ -49,18 +58,34 @@ const Skills = () => {
           {t("skills.heading")}
         </motion.h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {stackGrid.map(({ icon, name }, i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {categories.map((cat, idx) => (
             <motion.div
-              key={`${name}-${i}`}
-              initial={{ opacity: 0, y: 12 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-              transition={{ delay: i * 0.04 }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className="p-5 rounded-lg border border-slate-800 bg-slate-900/60 hover:border-sky-400/40 transition-all duration-300"
+              key={cat.name}
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              transition={{ delay: idx * 0.1 }}
+              className="p-6 rounded-xl border border-slate-800 bg-slate-900/60 hover:border-emerald-400/30 transition-all duration-300"
             >
-              <div className="text-3xl mb-3">{icon}</div>
-              <h3 className="text-slate-100 font-semibold text-sm">{name}</h3>
+              <div className="w-9 h-9 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center mb-4">
+                <cat.icon size={16} className="text-emerald-300" />
+              </div>
+              <h3 className="text-sm font-semibold text-slate-100 mb-2">
+                {cat.name}
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed mb-5">
+                {cat.desc}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {cat.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-2 py-1 text-[11px] rounded-md bg-slate-800 text-slate-400 border border-slate-700/60"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>

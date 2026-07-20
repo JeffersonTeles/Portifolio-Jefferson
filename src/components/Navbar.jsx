@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiFileText } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import LanguageSelector from "./LanguageSelector";
 
@@ -34,9 +34,9 @@ const Navbar = () => {
         duration={800}
         offset={-80}
         spy
-        activeClass="!text-slate-100"
+        activeClass="!text-emerald-300 !border-emerald-400/40"
         onClick={() => setMobileMenu(false)}
-        className="text-sm text-slate-400 hover:text-slate-100 transition-colors cursor-pointer"
+        className="text-sm text-slate-400 hover:text-emerald-300 transition-colors cursor-pointer px-3 py-1.5 rounded-lg border border-transparent hover:border-emerald-400/20"
       >
         {item.name}
       </ScrollLink>
@@ -44,7 +44,7 @@ const Navbar = () => {
       <RouterLink
         to={`/#${item.link}`}
         onClick={() => setMobileMenu(false)}
-        className="text-sm text-slate-400 hover:text-slate-100 transition-colors"
+        className="text-sm text-slate-400 hover:text-emerald-300 transition-colors px-3 py-1.5 rounded-lg border border-transparent hover:border-emerald-400/20"
       >
         {item.name}
       </RouterLink>
@@ -64,15 +64,24 @@ const Navbar = () => {
         <div className="premium-container flex justify-between items-center">
           <RouterLink
             to="/"
-            className="text-sm font-semibold text-slate-100 hover:text-sky-300 transition-colors"
+            className="inline-flex items-center px-4 py-2 rounded-full border border-slate-700/80 bg-slate-900/70 text-sm font-semibold text-slate-100 hover:text-emerald-300 hover:border-emerald-400/40 transition-colors"
           >
             Jefferson Teles
           </RouterLink>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
               <NavLink key={item.link} item={item} />
             ))}
+            <a
+              href="/curriculo.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-400/10 border border-emerald-400/30 text-emerald-300 text-sm font-medium hover:bg-sky-400/20 transition-colors"
+            >
+              <FiFileText size={14} />
+              Currículo
+            </a>
             <LanguageSelector />
           </div>
 
@@ -108,10 +117,19 @@ const Navbar = () => {
               aria-modal="true"
               aria-label="Menu mobile"
             >
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4">
                 {navItems.map((item) => (
                   <NavLink key={item.link} item={item} />
                 ))}
+                <a
+                  href="/curriculo.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-3 rounded-lg bg-emerald-400/10 border border-emerald-400/30 text-emerald-300 text-sm font-medium hover:bg-sky-400/20 transition-colors"
+                >
+                  <FiFileText size={14} />
+                  Currículo
+                </a>
                 <div className="flex items-center gap-4 pt-4 border-t border-slate-800/80">
                   <LanguageSelector />
                 </div>

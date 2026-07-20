@@ -131,7 +131,7 @@ const Curriculum = () => {
             Currículo Completo
           </span>
           <h2 className="text-4xl md:text-6xl font-extrabold text-white leading-[1.1] mb-6">
-            Minha <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Jornada</span>
+            Minha <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500">Jornada</span>
           </h2>
           <p className="text-white/40 text-lg max-w-2xl mx-auto">
             Uma visão completa da minha trajetória profissional, acadêmica e técnica
@@ -150,7 +150,7 @@ const Curriculum = () => {
               onClick={() => setActiveFilter(filter.id)}
               className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 ${
                 activeFilter === filter.id
-                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25"
+                  ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/25"
                   : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white"
               }`}
             >
@@ -176,7 +176,7 @@ const Curriculum = () => {
                 <div className="flex items-start justify-between gap-6">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest">
+                      <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest">
                         {item.year}
                       </span>
                       {item.type === "experience" && <FiBriefcase className="w-4 h-4 text-white/40" />}
@@ -184,7 +184,7 @@ const Curriculum = () => {
                       {item.type === "certification" && <FiAward className="w-4 h-4 text-white/40" />}
                     </div>
                     
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
                       {item.title}
                     </h3>
                     
@@ -273,14 +273,14 @@ const Curriculum = () => {
           className="mt-24"
         >
           <h3 className="text-2xl font-bold text-white mb-8 text-center">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Skills</span> Técnicos
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500">Skills</span> Técnicos
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Object.entries(curriculumData.skills).map(([category, skills]) => (
               <div key={category} className="glass-panel p-6 rounded-2xl">
                 <div className="flex items-center gap-2 mb-4">
-                  <FiCode className="w-5 h-5 text-cyan-400" />
+                  <FiCode className="w-5 h-5 text-emerald-400" />
                   <h4 className="text-sm font-bold text-white uppercase tracking-wider">
                     {category}
                   </h4>

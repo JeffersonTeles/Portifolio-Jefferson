@@ -9,7 +9,7 @@ const AnimationToggle = ({ isReduced, onToggle }) => {
       className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all ${
         isReduced
           ? "bg-white/5 border border-white/10 text-white/60"
-          : "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25"
+          : "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/25"
       }`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}

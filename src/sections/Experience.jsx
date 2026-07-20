@@ -62,7 +62,7 @@ const Experience = () => {
                   className="relative rounded-xl border border-white/10 bg-white/[0.02] p-5 md:p-6"
                 >
                   <motion.div
-                    className="absolute -left-[30px] top-7 h-3.5 w-3.5 rounded-full border border-cyan-300/40 bg-cyan-300/30"
+                    className="absolute -left-[30px] top-7 h-3.5 w-3.5 rounded-full border border-emerald-300/40 bg-emerald-300/30"
                     animate={isInView ? { scale: [0.9, 1.15, 1] } : { scale: 0.9 }}
                     transition={{ delay: 0.15 + index * 0.08, duration: 0.5 }}
                   />
