@@ -1,42 +1,83 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@400;500;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    background: #000000;
-  }
+    html {
+        scroll-behavior: smooth;
+        background: #020617;
+    }
 
-  body {
-    @apply bg-builder-bg text-white overflow-x-hidden;
-    font-family: "Inter", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+    body {
+        @apply bg-slate-950 text-slate-100 selection:bg-amber-400/20 selection:text-white overflow-x-hidden;
+        font-family: "Inter", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    @apply font-display tracking-tight leading-tight;
-  }
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply font-display tracking-cinematic leading-tight;
+    }
 }
 
 @layer components {
-  .page-container {
-    @apply max-w-4xl mx-auto px-6 md:px-8;
-  }
+    .page-container {
+        @apply max-w-7xl mx-auto px-6 md:px-12 lg:px-20;
+    }
 
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    @apply bg-slate-950;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply bg-slate-600 hover:bg-slate-500 transition-colors rounded-full;
-  }
+    .glass-panel {
+        @apply bg-slate-900/70 border border-slate-700/60 backdrop-blur-xl shadow-glass;
+    }
+
+    /* Improved contrast for text */
+    .text-high-contrast {
+        @apply text-white/90;
+    }
+
+    .text-medium-contrast {
+        @apply text-white/70;
+    }
+
+    .text-low-contrast {
+        @apply text-white/50;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        @apply bg-slate-950;
+    }
+    ::-webkit-scrollbar-thumb {
+        @apply bg-slate-700 hover:bg-slate-500 transition-colors rounded-full;
+    }
 }
+
+.text-glow {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes gradient-slow {
+    0% {
+        background-position: 0% center;
+    }
+    50% {
+        background-position: 100% center;
+    }
+    100% {
+        background-position: 0% center;
+    }
+}
+
+.animate-gradient-slow {
+    background-size: 200% auto;
+    animation: gradient-slow 10s ease infinite;
+}
+
+

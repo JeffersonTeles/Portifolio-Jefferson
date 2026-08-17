@@ -5,288 +5,328 @@ const resources = {
   pt: {
     translation: {
       nav: {
-        home: "Home",
         about: "Sobre",
+        experience: "Experiência",
         projects: "Projetos",
-        blog: "Blog",
-        lab: "Lab",
         contact: "Contato",
       },
       hero: {
-        role: "Engenheiro de Software • Automação e IA",
-        title1: "Automatizando",
-        title2: "processos que",
-        title3: "tomam tempo de gente real.",
+        role: "Engenheiro de Software • Automação & IA",
+        greeting: "Olá, sou",
         description:
-          "Trabalho com automações em Python, integração de IA e sistemas que operam no dia a dia. Nada de buzzword, só código que resolve.",
-        descriptionHighlight: "código que resolve",
-        btnWorks: "Projetos",
-        btnResume: "Currículo",
+          "Automação em Python, integração de IA e sistemas que não quebram no domingo. Sei do que estou falando porque já peguei eles quebrados.",
+        btnWorks: "Ver projetos",
+        btnResume: "Ver currículo",
+        btnGithub: "GitHub",
+        btnWhatsapp: "WhatsApp",
+        metrics: [
+          { value: "6+", label: "anos de TI" },
+          { value: "8+", label: "tickets N2/dia" },
+          { value: "3+", label: "projetos publicados" },
+        ],
       },
       about: {
         label: "> quem_sou_eu()",
-        heading1: "Quem sou",
-        p1: "Comecei mexendo em hardware — redes, servidores Linux, aquela pandilha de cabos detrás do rack. Aprendi que, por trás de qualquer sistema lento ou quebrado, tem um problema real de alguém.",
+        heading: "De quem aprendi a construir coisas reais",
+        p1: "Comecei mexendo em hardware — redes, servidores Linux, aquela pandilha de cabos detrás do rack.",
         p1Highlight: "redes e servidores Linux",
-        p2: "Depois passei para o suporte estratégico na FaturÁgil, onde ficou claro: a maioria dos 'problemas técnicos' são, na verdade, ',
+        p1End:
+          " Aprendi que, por trás de qualquer sistema lento ou quebrado, tem um problema real de alguém.",
+        p2: "Depois passei pro suporte estratégico na FaturÁgil, onde ficou claro: a maioria dos 'problemas técnicos' são, na verdade, ",
         p2Highlight: "problemas de processo",
         p2End: " que ninguém resolveu com um script antes.",
-        p3: "Hoje, construo automações e integro IA para resolver essas dores. Prefiro um código simples que funciona hoje a uma arquitetura perfeita amanhã.",
+        p3: "Hoje foco em ",
+        p3Highlight: "automação com Python, integração de IA e sistemas web",
+        p3End:
+          ". Prefiro um código simples que funciona hoje a uma arquitetura perfeita amanhã. Busco minha primeira oportunidade como desenvolvedor júnior — remoto ou Cascavel/PR.",
         tags: [
-          "Automação de Processos",
-          "Python",
-          "IA Generativa",
+          "Linux no dia a dia",
+          "Automação Python",
+          "Integração de IA",
           "Sistemas Reais",
         ],
-        timeline: [
+      },
+      experience: {
+        label: "Experiência",
+        heading: "Onde construí minha base técnica",
+        intro:
+          "Antes de buscar minha primeira vaga como desenvolvedor, passei por suporte, infraestrutura e automação. Essa vivência me ajuda a entender usuário, produção e manutenção, não só código.",
+        list: [
           {
-            year: "2020",
-            title: "Infra no chão",
-            desc: "Redes, Linux, hardware. Aprendi a pensar em sistemas do zero.",
+            period: "Mar 2026 — atual",
+            role: "Analista de Suporte Júnior",
+            company: "FaturAgil",
+            summary:
+              "Suporte N2 para sistema fiscal SaaS, com rotina de NFS-e, certificados digitais e homologação de APIs municipais.",
+            bullets: [
+              "Resolvo média de 8 tickets/dia envolvendo emissão fiscal, NBS/CBS, alíquotas e dúvidas técnicas.",
+              "Gero, atualizo e instalo certificados A1/A3 (.cer, .pem, .p12, .key) em ambiente Linux.",
+              "Documento bugs recorrentes e repasso melhorias para o time de desenvolvimento.",
+            ],
           },
           {
-            year: "2023",
-            title: "Suporte de verdade",
-            desc: "FaturÁgil. Diagnóstico de problemas reais, não só tickets.",
+            period: "Mar 2025 — Fev 2026",
+            role: "Técnico em Eletrônica e Automação Industrial",
+            company: "Maguinho Sensores",
+            summary:
+              "Montagem e manutenção de módulos eletrônicos e sensores para automação de máquinas agrícolas.",
+            bullets: [
+              "Reduzi o tempo de inatividade industrial em 25% com manutenção e diagnóstico em campo.",
+              "Integrei sensores com Arduino/ESP32, fiação, solda e chicotes elétricos.",
+              "Atendi clientes diretamente, entendendo o problema no ambiente real de operação.",
+            ],
           },
           {
-            year: "2024",
-            title: "Automação com propósito",
-            desc: "Python, IA e sistemas que não quebram no domingo.",
+            period: "Jan 2020 — Fev 2025",
+            role: "Técnico de TI — Suporte, Redes e Hardware",
+            company: "Digital Informática",
+            summary:
+              "Atendimento presencial para residências e empresas, com foco em redes, hardware, sistemas e certificados digitais.",
+            bullets: [
+              "Configurei redes LAN/WAN, DNS, IP fixo/dinâmico, VPN, CFTV, Mikrotik e Ubiquiti.",
+              "Fiz manutenção de computadores e notebooks, instalação de drivers, tokens e certificados.",
+              "Trabalhei com infraestrutura de fibra ótica, incluindo passagem de cabos, conectorização e fusão.",
+            ],
+          },
+          {
+            period: "Conclusão prevista: Nov 2026",
+            role: "Bacharelado em Engenharia de Software",
+            company: "Centro Universitário FAG",
+            summary:
+              "Graduação em andamento, com foco em desenvolvimento web, APIs, banco de dados e práticas de engenharia de software.",
+            bullets: [
+              "Uso os projetos acadêmicos como base para sistemas fullstack reais.",
+              "Tenho interesse especial em frontend, integrações REST, automação e produto.",
+            ],
           },
         ],
       },
       projects: {
-        label: "/ Projetos",
-        heading1: "Projetos",
-        heading2: "que existem de verdade.",
-        stack: "Stack",
-        challenge: "Problema real",
+        label: "Projetos",
+        heading: "Projetos com contexto real",
+        stack: "Tecnologias",
+        challenge: "O que fiz",
+        problem: "Problema",
+        solution: "Solução",
+        result: "Evidência",
         launchApp: "Ver projeto",
-        privateAccess: "Privado",
+        privateAccess: "Repositório privado",
         list: [
           {
             title: "Maestria Docente",
-            longDesc:
-              "Plataforma de gestão acadêmica usada por 30+ professores na instituição. Automatiza desde check-in de aula até geração de relatórios — tudo em um visual limpo.",
-            technicalDeepDive:
-              "Next.js + Supabase. Foco em performance e interface enxuta, sem animações pesadas.",
-            codeSnippet:
-              "export const useAttendance = (classId) => {\n  const [status, setStatus] = useState('idle');\n  const checkIn = async () => {\n    setStatus('loading');\n    await supabase.rpc('mark_attendance', { class_id: classId });\n    setStatus('success');\n  };\n  return { status, checkIn };\n};",
-            codeLanguage: "typescript",
-            stack: ["Next.js", "Supabase", "Tailwind"],
-            challenge:
-              "Manter o sistema rápido mesmo com 200+ alunos simultâneos.",
-            status: "Produção",
-            statusColor: "text-white/40 border-white/10",
-            link: "#",
-            image:
-              "https://images.unsplash.com/photo-1522199710521-7222006a3017",
+            desc: "TCC de Engenharia de Software desenvolvido em time. Modelei o fluxo de acompanhamento docente e implementei as telas principais com React e Zustand, integrado ao Supabase. O trabalho mais importante foi definir a estrutura de dados com o time antes de escrever qualquer código — a maioria dos bugs de UI vinha de dado mal modelado. Repositório privado, protótipo publicado.",
+            stack: ["React", "Vite", "Zustand", "Node.js", "Express", "Supabase"],
+            status: "Privado",
+            statusColor: "text-amber-300/80 border-amber-300/30",
+            access: "Repositório privado",
+            link: "https://projeto-maestria-vercel.vercel.app",
+            image: "/screenshot-maestria.png",
           },
           {
             title: "Casamento",
-            longDesc:
-              "Site de casamento com RSVP em tempo real. Mais de 200 convidados confirmaram presença — e o sistema nunca caiu.",
-            technicalDeepDive:
-              "Next.js + Vercel. Foco em velocidade e deploy zero-downtime.",
-            codeSnippet:
-              "export const validateRSVP = (code) => {\n  const hash = generateSecurityToken(code);\n  return api.post('/rsvp/validate', { hash });\n};",
-            codeLanguage: "javascript",
-            stack: ["Next.js", "Vercel"],
-            challenge:
-              "Escalar para picos de acesso no momento do RSVP sem downtime.",
-            status: "Produção",
-            statusColor: "text-white/40 border-white/10",
+            desc: "Site criado como presente para um casal. A prioridade era abrir rápido no celular, ter boa apresentação e não exigir manutenção. Usei Next.js com Framer Motion para as animações de entrada. Está em produção desde o dia do evento e nunca precisou de ajuste.",
+            stack: ["Next.js", "Vercel", "Framer Motion", "CSS"],
+            status: "Publicado",
+            statusColor: "text-emerald-300/80 border-emerald-300/30",
             link: "https://casamento-ten-rho.vercel.app",
-            image:
-              "https://images.unsplash.com/photo-1519225421980-715cb0215aed",
-          },
-        ],
-      },
-      services: {
-        label: "/ Serviços",
-        heading1: "O que faço",
-        heading2: "quando não estou codificando?",
-        list: [
-          {
-            title: "Automações em Python",
-            desc: "Scripts, bots e crawlers que fazem o trabalho chato por você.",
+            image: "/screenshot-casamento.png",
           },
           {
-            title: "Integração de IA",
-            desc: "OpenAI, Groq, LangChain — conecto modelos a sistemas reais.",
-          },
-          {
-            title: "Sistemas Web",
-            desc: "Next.js, React e Tailwind. Interfaces limpas, sem frescura.",
+            title: "Interface X11 para Mouse no Linux",
+            desc: "Resolvi um problema pessoal: meu mouse Redragon no Linux/X11 precisava de comandos de terminal para ajustar DPI e botões. Criei uma interface gráfica com HTML/JS que chama scripts Python por baixo, documentei no README e publiquei no GitHub pra quem tiver o mesmo problema.",
+            stack: ["JavaScript", "Python", "HTML", "CSS", "Linux"],
+            status: "Open source",
+            statusColor: "text-emerald-300/80 border-emerald-300/30",
+            link: "https://github.com/JeffersonTeles",
+            image: "/screenshot-x11.png",
           },
         ],
       },
       skills: {
-        label: "/ Stack",
-        heading: "Tecnologias",
-        categories: {
-          performance: "Automação & IA",
-          infrastructure: "Backend & Infra",
-          intelligence: "Frontend",
-        },
+        label: "Habilidades",
+        heading: "Stack que aparece nos meus projetos e no trabalho",
       },
-      lab: {
-        label: "/ Lab",
-        heading: "Experimentos",
-        tagline: "Coisas que eu testo no meu tempo livre.",
-        desc: "Protótipos técnicos de baixo nível, sem pressa de ir pra produção.",
-        items: {
-          neural: {
-            cat: "Interface",
-            title: "Neural Sync",
-            desc: "Visualização de redes neurais em tempo real.",
-          },
-        },
+      certifications: {
+        label: "Formação",
+        heading: "Formação acadêmica",
+        course: "Bacharelado em Engenharia de Software",
+        institution: "Centro Universitário FAG — Cascavel/PR",
+        type: "Graduação",
+        year: "Previsão de conclusão: Nov/2026",
+        description: "Curso focado em desenvolvimento web, APIs REST, banco de dados, engenharia de requisitos e práticas ágeis. Conciliando a graduação com experiência prática em suporte N2 e projetos fullstack.",
+      },
+      contact: {
+        label: "Contato",
+        heading: "Aberto para vaga júnior ou estágio em desenvolvimento",
+        description:
+          "Procuro uma oportunidade para entrar de vez no desenvolvimento de software. Tenho disponibilidade imediata, preferência por remoto ou Cascavel/PR, e gosto de mostrar o que já construí.",
+        btnForm: "Enviar mensagem",
+        location: "Cascavel, PR · Brasil",
+        availability: "Disponível para oportunidades",
       },
     },
   },
   en: {
     translation: {
       nav: {
-        home: "Home",
         about: "About",
+        experience: "Experience",
         projects: "Projects",
-        blog: "Blog",
-        lab: "Lab",
         contact: "Contact",
       },
       hero: {
         role: "Software Engineer • Automation & AI",
-        title1: "Automating",
-        title2: "processes that",
-        title3: "eat up real people's time.",
+        greeting: "Hi, I'm",
         description:
-          "I build Python automations, integrate AI, and ship systems that just work. No buzzwords, just code that solves real problems.",
-        descriptionHighlight: "code that solves real problems",
-        btnWorks: "Projects",
-        btnResume: "Resume",
+          "Python automations, AI integration and systems that don't break on Sunday. I know what I'm talking about because I've picked up the pieces before.",
+        btnWorks: "View projects",
+        btnResume: "View resume",
+        btnGithub: "GitHub",
+        btnWhatsapp: "WhatsApp",
+        metrics: [
+          { value: "6+", label: "years in IT" },
+          { value: "8+", label: "L2 tickets/day" },
+          { value: "3+", label: "projects published" },
+        ],
       },
       about: {
         label: "> whoami()",
-        heading1: "Who I am",
-        p1: "Started in hardware — networks, Linux servers, that cable tangle behind the rack. Learned early that behind every broken system is a real person's problem.",
+        heading: "Built by someone who fixes real problems",
+        p1: "Started in hardware — networks, Linux servers, that cable tangle behind the rack.",
         p1Highlight: "networks and Linux servers",
+        p1End:
+          " Learned early that behind every broken system is a real person's problem.",
         p2: "Moved into strategic support at FaturÁgil, where it became clear: most 'technical problems' are just ",
         p2Highlight: "unautomated processes",
         p2End: " waiting for someone to script them.",
-        p3: "Today, I build automations and integrate AI to solve these pains. I prefer simple code that works today over perfect architecture tomorrow.",
+        p3: "Today I focus on ",
+        p3Highlight: "Python automation, AI integration, and web systems",
+        p3End:
+          ". I prefer simple code that works today over perfect architecture tomorrow. Looking for my first junior developer role — remote or Cascavel, PR.",
         tags: [
-          "Process Automation",
-          "Python",
-          "Generative AI",
-          "Real Systems",
+          "Linux in daily use",
+          "Python automation",
+          "AI integration",
+          "Real systems",
         ],
-        timeline: [
+      },
+      experience: {
+        label: "Experience",
+        heading: "Where I built my technical foundation",
+        intro:
+          "Before looking for my first developer role, I worked in support, infrastructure and automation. That background helps me understand users, production issues and maintainability, not just code.",
+        list: [
           {
-            year: "2020",
-            title: "Infrastructure Roots",
-            desc: "Networking, Linux, hardware. Learned to think in systems from the ground up.",
+            period: "Mar 2026 — present",
+            role: "Junior Support Analyst",
+            company: "FaturAgil",
+            summary:
+              "L2 support for a fiscal SaaS product, covering NFS-e, digital certificates and municipal API homologation.",
+            bullets: [
+              "Handle an average of 8 tickets/day involving fiscal issuing, tax codes and technical questions.",
+              "Generate, update and install A1/A3 certificates (.cer, .pem, .p12, .key) in Linux environments.",
+              "Document recurring bugs and report improvements to the development team.",
+            ],
           },
           {
-            year: "2023",
-            title: "Real Support",
-            desc: "Support Analyst at FaturÁgil. Diagnosing real problems, not just tickets.",
+            period: "Mar 2025 — Feb 2026",
+            role: "Electronics and Industrial Automation Technician",
+            company: "Maguinho Sensores",
+            summary:
+              "Built and maintained electronic modules and sensors for agricultural machine automation.",
+            bullets: [
+              "Helped reduce industrial downtime by 25% through maintenance and field diagnostics.",
+              "Integrated Arduino/ESP32 sensors, wiring, soldering and electrical harnesses.",
+              "Worked directly with customers to understand problems in real operating environments.",
+            ],
           },
           {
-            year: "2024",
-            title: "Automation with Purpose",
-            desc: "Python, AI, and systems that don't break on Sundays.",
+            period: "Jan 2020 — Feb 2025",
+            role: "IT Technician — Support, Networking and Hardware",
+            company: "Digital Informatica",
+            summary:
+              "On-site support for homes and companies, focused on networking, hardware, systems and digital certificates.",
+            bullets: [
+              "Configured LAN/WAN, DNS, static/dynamic IP, VPN, CCTV, Mikrotik and Ubiquiti networks.",
+              "Maintained computers and notebooks, installed drivers, tokens and digital certificates.",
+              "Worked with fiber optic infrastructure, including cabling, connectorization and fusion splicing.",
+            ],
+          },
+          {
+            period: "Expected graduation: Nov 2026",
+            role: "BSc in Software Engineering",
+            company: "Centro Universitario FAG",
+            summary:
+              "Degree in progress, focused on web development, APIs, databases and software engineering practices.",
+            bullets: [
+              "Use academic projects as a base for real fullstack systems.",
+              "Especially interested in frontend, REST integrations, automation and product work.",
+            ],
           },
         ],
       },
       projects: {
-        label: "/ Projects",
-        heading1: "Projects",
-        heading2: "that actually exist.",
-        stack: "Stack",
-        challenge: "Real Problem",
-        launchApp: "View Project",
-        privateAccess: "Private",
+        label: "Projects",
+        heading: "Projects with real context",
+        stack: "Technologies",
+        challenge: "What I did",
+        problem: "Problem",
+        solution: "Solution",
+        result: "Evidence",
+        launchApp: "View project",
+        privateAccess: "Private repo",
         list: [
           {
             title: "Maestria Docente",
-            longDesc:
-              "Academic management platform used by 30+ teachers. Automates class check-in to report generation — clean UI, no fluff.",
-            technicalDeepDive:
-              "Next.js + Supabase. Prioritized performance and a lean interface.",
-            codeSnippet:
-              "export const useAttendance = (classId) => {\n  const [status, setStatus] = useState('idle');\n  const checkIn = async () => {\n    setStatus('loading');\n    await supabase.rpc('mark_attendance', { class_id: classId });\n    setStatus('success');\n  };\n  return { status, checkIn };\n};",
-            codeLanguage: "typescript",
-            stack: ["Next.js", "Supabase", "Tailwind"],
-            challenge:
-              "Keeping the app fast with 200+ students online simultaneously.",
-            status: "Production",
-            statusColor: "text-white/40 border-white/10",
-            link: "#",
-            image:
-              "https://images.unsplash.com/photo-1522199710521-7222006a3017",
+            desc: "Software engineering capstone project built as a team. I designed the teacher tracking flow and implemented the main screens using React and Zustand, integrated with Supabase. The most important step was defining the data structure with the team before writing any code — most UI bugs came from poorly modeled data. Private repo, published prototype.",
+            stack: ["React", "Vite", "Zustand", "Node.js", "Express", "Supabase"],
+            status: "Private",
+            statusColor: "text-amber-300/80 border-amber-300/30",
+            access: "Private repo",
+            link: "https://projeto-maestria-vercel.vercel.app",
+            image: "/screenshot-maestria.png",
           },
           {
-            title: "Casamento",
-            longDesc:
-              "Wedding site with real-time RSVP. 200+ guests confirmed — zero downtime.",
-            technicalDeepDive:
-              "Next.js + Vercel. Built for speed and zero-downtime deploys.",
-            codeSnippet:
-              "export const validateRSVP = (code) => {\n  const hash = generateSecurityToken(code);\n  return api.post('/rsvp/validate', { hash });\n};",
-            codeLanguage: "javascript",
-            stack: ["Next.js", "Vercel"],
-            challenge:
-              "Scaling for RSVP traffic spikes without downtime.",
-            status: "Live",
-            statusColor: "text-white/40 border-white/10",
+            title: "Wedding Site",
+            desc: "Built as a gift for a couple. Priority was fast mobile loading, clean presentation and zero maintenance. Used Next.js with Framer Motion for the entrance animations. It's been live since the wedding and has never needed any changes.",
+            stack: ["Next.js", "Vercel", "Framer Motion", "CSS"],
+            status: "Published",
+            statusColor: "text-emerald-300/80 border-emerald-300/30",
             link: "https://casamento-ten-rho.vercel.app",
-            image:
-              "https://images.unsplash.com/photo-1519225421980-715cb0215aed",
-          },
-        ],
-      },
-      services: {
-        label: "/ Services",
-        heading1: "What I do",
-        heading2: "when I'm not coding?",
-        list: [
-          {
-            title: "Python Automations",
-            desc: "Scripts, bots and crawlers that handle the boring stuff for you.",
+            image: "/screenshot-casamento.png",
           },
           {
-            title: "AI Integration",
-            desc: "OpenAI, Groq, LangChain — connecting models to real-world systems.",
-          },
-          {
-            title: "Web Systems",
-            desc: "Next.js, React, Tailwind. Clean interfaces, no fluff.",
+            title: "X11 Mouse GUI for Linux",
+            desc: "Started as a personal fix: my Redragon mouse on Linux/X11 needed terminal commands to adjust DPI and buttons. I built a simple GUI with HTML/JS calling Python scripts underneath, wrote a README, and published it on GitHub for anyone running into the same issue.",
+            stack: ["JavaScript", "Python", "HTML", "CSS", "Linux"],
+            status: "Open source",
+            statusColor: "text-emerald-300/80 border-emerald-300/30",
+            link: "https://github.com/JeffersonTeles",
+            image: "/screenshot-x11.png",
           },
         ],
       },
       skills: {
-        label: "/ Stack",
-        heading: "Tech Stack",
-        categories: {
-          performance: "Automation & AI",
-          infrastructure: "Backend & Infra",
-          intelligence: "Frontend",
-        },
+        label: "Skills",
+        heading: "Stack I use in projects and at work",
       },
-      lab: {
-        label: "/ Lab",
-        heading: "Experiments",
-        tagline: "Things I tinker with in my spare time.",
-        desc: "Low-level technical prototypes, no rush to production.",
-        items: {
-          neural: {
-            cat: "Interface",
-            title: "Neural Sync",
-            desc: "Real-time neural network visualization.",
-          },
-        },
+      certifications: {
+        label: "Education",
+        heading: "Academic background",
+        course: "BSc in Software Engineering",
+        institution: "Centro Universitário FAG — Cascavel/PR",
+        type: "Undergraduate",
+        year: "Expected graduation: Nov/2026",
+        description: "Degree focused on web development, REST APIs, databases, requirements engineering and agile practices. Combining studies with hands-on L2 support experience and fullstack projects.",
+      },
+      contact: {
+        label: "Contact",
+        heading: "Open to junior developer roles or internships",
+        description:
+          "I'm looking for an opportunity to move fully into software development. I'm immediately available, prefer remote or Cascavel/PR, and can walk through what I've already built.",
+        btnForm: "Send message",
+        location: "Cascavel, Brazil",
+        availability: "Available for opportunities",
       },
     },
   },
