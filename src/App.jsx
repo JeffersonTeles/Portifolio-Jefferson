@@ -8,6 +8,7 @@ import About from "./sections/About";
 import Experience from "./sections/Experience";
 import Projects from "./sections/Projects";
 import Skills from "./sections/TechStack";
+import Certifications from "./sections/Certifications";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 
@@ -21,6 +22,7 @@ function HomePage() {
       <Experience />
       <Projects />
       <Skills />
+      <Certifications />
       <Contact />
     </>
   );
@@ -30,7 +32,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="relative min-h-screen bg-slate-950 text-slate-100 font-sans">
+      <div className="relative min-h-screen bg-black text-white font-sans">
         <SkipLink />
         <Navbar />
         <main

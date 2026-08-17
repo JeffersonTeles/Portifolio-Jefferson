@@ -1,151 +1,103 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { FiArrowRight, FiFileText, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
-import { SiWhatsapp } from "react-icons/si";
+import React from "react";
+import { motion } from "framer-motion";
+import { FiArrowRight, FiEye } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
-import MorphicSphereBackground from "../components/MorphicSphereBackground";
 
 const Hero = () => {
   const { t } = useTranslation();
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
-  const stats = t("hero.metrics", { returnObjects: true });
 
   const fadeUp = {
-    initial: { opacity: 0, y: 24 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    initial: { opacity: 0, y: 40 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
   };
-
-  const socialLinks = [
-    {
-      icon: FiGithub,
-      url: "https://github.com/JeffersonTeles",
-      label: "GitHub",
-    },
-    {
-      icon: FiLinkedin,
-      url: "https://linkedin.com/in/jeffersonteless",
-      label: "LinkedIn",
-    },
-    {
-      icon: FiMail,
-      url: "mailto:jeffersontelesdeoliveira@gmail.com",
-      label: "Email",
-    },
-  ];
 
   return (
     <section
       id="hero"
-      ref={sectionRef}
-      className="relative min-h-screen flex items-center pt-24 pb-16 bg-slate-950 overflow-hidden"
+      className="relative min-h-screen flex items-center pt-24 bg-black"
     >
-        <MorphicSphereBackground />
-        <div className="page-container relative z-10 w-full">
-          <div className="max-w-3xl">
-            <motion.p
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-white/[0.02] rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-white/[0.01] rounded-full blur-[120px]" />
+      </div>
+
+      <div className="premium-container relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="lg:col-span-8">
+            <motion.div
               {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.05 }}
-              className="text-sm text-slate-400 mb-4"
+              transition={{ ...fadeUp.transition, delay: 0.1 }}
+              className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8"
             >
-              {t("hero.role")}
-            </motion.p>
+              <span className="text-[11px] font-medium tracking-widest text-white/70 uppercase">
+                {t("hero.role")}
+              </span>
+            </motion.div>
 
             <motion.h1
               {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.1 }}
-              className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight text-slate-100"
+              transition={{ ...fadeUp.transition, delay: 0.2 }}
+              className="text-5xl md:text-7xl lg:text-[7vw] font-extrabold leading-[1] tracking-tight mb-8 text-white"
             >
-              {t("hero.greeting")}{" "}
-              <span className="text-amber-300">Jefferson Teles</span>
+              {t("hero.title1")}
+              <br />
+              <span className="text-white/60">{t("hero.title2")}</span>
+              <br />
+              {t("hero.title3")}
             </motion.h1>
 
             <motion.p
               {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.15 }}
-              className="text-lg md:text-xl text-slate-300 leading-relaxed mb-8 max-w-2xl"
+              transition={{ ...fadeUp.transition, delay: 0.3 }}
+              className="text-lg md:text-xl text-white/60 font-light max-w-2xl mb-12 leading-relaxed"
             >
-              {t("hero.description")}
+              {t("hero.description").split(t("hero.descriptionHighlight"))[0]}
+              <span className="text-white font-medium">
+                {t("hero.descriptionHighlight")}
+              </span>
+              {t("hero.description").split(t("hero.descriptionHighlight"))[1]}
             </motion.p>
-
-            <div className="grid grid-cols-3 gap-8 mb-10 max-w-xl">
-              {stats.map((stat, index) => (
-                <div key={stat.label} className="text-center">
-                  <motion.span
-                    className="text-3xl font-bold text-slate-100"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 + index * 0.15 }}
-                  >
-                    {stat.value}
-                  </motion.span>
-                  <p className="text-sm text-slate-500 mt-1">{stat.label}</p>
-                </div>
-              ))}
-            </div>
 
             <motion.div
               {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.3 }}
-              className="flex flex-wrap gap-4 mb-8"
+              transition={{ ...fadeUp.transition, delay: 0.4 }}
+              className="flex flex-wrap gap-4"
             >
-              <a
+              <motion.a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 text-slate-950 font-semibold text-sm rounded-lg hover:bg-amber-300 hover:shadow-[0_0_24px_rgba(251,191,36,0.3)] transition-all"
+                className="group flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-semibold rounded-full hover:scale-102 transition-all duration-300"
+                whileHover={{ y: -2 }}
               >
                 {t("hero.btnWorks")}
                 <FiArrowRight size={16} />
-              </a>
-              <a
-                href="/curriculo.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-slate-700 text-slate-100 font-medium text-sm rounded-lg hover:bg-slate-800/70 transition-colors"
+              </motion.a>
+              <motion.a
+                href="#contact"
+                className="flex items-center justify-center gap-2 px-8 py-4 border border-white/20 text-white font-medium rounded-full hover:bg-white/5 transition-all duration-300"
+                whileHover={{ y: -2 }}
               >
-                <FiFileText size={16} />
+                <FiEye size={16} />
                 {t("hero.btnResume")}
-              </a>
-              <a
-                href="https://github.com/JeffersonTeles"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-slate-800 text-slate-300 font-medium text-sm rounded-lg hover:text-slate-100 hover:border-slate-600 transition-colors"
-              >
-                <FiGithub size={16} />
-                {t("hero.btnGithub")}
-              </a>
-              <a
-                href="https://wa.me/5544999277915"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-slate-800 text-slate-300 font-medium text-sm rounded-lg hover:text-slate-100 hover:border-slate-600 transition-colors"
-              >
-                <SiWhatsapp size={16} />
-                {t("hero.btnWhatsapp")}
-              </a>
+              </motion.a>
             </motion.div>
+          </div>
 
+          <div className="lg:col-span-4 hidden lg:block">
             <motion.div
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.45 }}
-              className="flex items-center gap-5"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="text-right"
             >
-              {socialLinks.map(({ icon: Icon, url, label }) => (
-                <a
-                  key={label}
-                  href={url}
-                  target={url.startsWith("mailto") ? undefined : "_blank"}
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="text-slate-400 hover:text-slate-100 transition-colors"
-                >
-                  <Icon size={20} />
-                </a>
-              ))}
+              <code className="text-xs text-white/30 font-mono leading-relaxed">
+                export default () => <span className="text-white">resolve(problems);</span>
+              </code>
             </motion.div>
           </div>
         </div>
+      </div>
     </section>
   );
 };
