@@ -1,50 +1,38 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { FiArrowRight, FiEye } from "react-icons/fi";
 
 const Hero = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="hero" className="section-padding bg-black">
+    <section className="min-h-screen flex items-center pt-24 md:pt-32">
       <div className="page-container">
-        <div className="grid lg:grid-cols[1fr_0.5fr] gap-16 items-center">
-          <div className="space-y-8">
-            <p className="text-sm font-medium text-amber-300/80 uppercase tracking-wider">
-              {t("hero.role")}
-            </p>
+        <div className="max-w-3xl">
+          <p className="text-sm font-medium text-white/60 mb-6">
+            {t("hero.role")}
+          </p>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
+            Desenvolvedor júnior com{" "}
+            <span className="text-amber-400">experiência real</span> em suporte técnico e automação.
+          </h1>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              <span className="text-amber-400">Desenvolvedor Júnior</span> com experiência em <br />suporte técnico, automação e <br />sistemas reais.
-            </h1>
+          <p className="text-lg text-slate-300 leading-relaxed mb-12 max-w-2xl">
+            {t("hero.description")}
+          </p>
 
-            <p className="text-lg text-slate-400 leading-relaxed max-w-xl">
-              {t("hero.description")}
-            </p>
-
-            <div className="flex flex-wrap gap-4 pt-4">
-              <a
-                href="#projects"
-                className="btn-amber"
-              >
-                Ver projetos
-                <FiArrowRight size={14} />
-              </a>
-              <a
-                href="#contact"
-                className="btn"
-              >
-                <FiEye size={14} />
-                Falar comigo
-              </a>
-            </div>
-          </div>
-
-          <div className="hidden lg:block text-right">
-            <code className="text-xs text-slate-500 font-mono">
-              export default () =&gt; {""}
-              <span className="text-amber-400">resolve(problems)</span>;
-            </code>
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="#projects"
+              className="px-6 py-3 bg-amber-400 text-black font-medium rounded-lg hover:opacity-90 transition-opacity"
+            >
+              Ver projetos
+            </a>
+            <a
+              href="#contact"
+              className="px-6 py-3 border border-white/20 text-white font-medium rounded-lg hover:bg-white/5 transition-colors"
+            >
+              Falar comigo
+            </a>
           </div>
         </div>
       </div>

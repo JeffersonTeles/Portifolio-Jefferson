@@ -134,10 +134,10 @@ const resources = {
       },
       contact: {
         label: "Contato",
-        heading: "Em busca de uma oportunidade como desenvolvedor júnior",
+        heading: "Vamos conversar",
         description:
-          "Estou em transição de suporte para desenvolvimento e busco minha primeira oportunidade como programador. Estou disponível imediatamente, prefiro remoto ou Cascavel/PR, e posso mostrar projetos reais que construí.",
-        btnForm: "Enviar mensagem",
+          "Estou em transição de suporte para desenvolvimento e busco minha primeira oportunidade como programador. Estou disponível imediatamente, prefiro remoto ou Cascavel/PR.",
+        formNote: "Envie uma mensagem ou fale comigo diretamente pelo email abaixo.",
         location: "Cascavel, PR · Brasil",
       },
     },
@@ -273,10 +273,10 @@ const resources = {
       },
       contact: {
         label: "Contact",
-        heading: "Seeking a junior developer position",
+        heading: "Let's talk",
         description:
-          "I'm transitioning from support to development and looking for my first opportunity as a developer. Available immediately, prefer remote or Cascavel/PR, and can walk you through real projects I've built.",
-        btnForm: "Send message",
+          "I'm transitioning from support to development and looking for my first opportunity as a developer. Available immediately, prefer remote or Cascavel, PR.",
+        formNote: "Send a message or contact me directly via email.",
         location: "Cascavel, Brazil",
       },
     },
