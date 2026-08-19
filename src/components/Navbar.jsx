@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink, useLocation } from "react-router-dom";
-import { FiMenu, FiX, FiGlobe } from "react-icons/fi";
+import { FiMenu, FiX, FiGlobe, FiFileText } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
@@ -36,9 +36,9 @@ const Navbar = () => {
         duration={800}
         offset={-80}
         spy
-        activeClass="text-white border-white/30"
+        activeClass="!text-white !border-white/20"
         onClick={() => setMobileMenu(false)}
-        className="text-sm text-white/60 hover:text-white transition-colors px-3 py-1.5 rounded-lg border border-transparent hover:border-white/10"
+        className="px-4 py-2 text-sm text-white/60 hover:text-white hover:border-white/10 border border-transparent rounded-lg transition-all"
       >
         {item.name}
       </ScrollLink>
@@ -46,7 +46,7 @@ const Navbar = () => {
       <RouterLink
         to={`/#${item.link}`}
         onClick={() => setMobileMenu(false)}
-        className="text-sm text-white/60 hover:text-white transition-colors px-3 py-1.5 rounded-lg border border-transparent hover:border-white/10"
+        className="px-4 py-2 text-sm text-white/60 hover:text-white hover:border-white/10 border border-transparent rounded-lg transition-all"
       >
         {item.name}
       </RouterLink>
@@ -54,15 +54,13 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-black/80 border-b border-white/5 py-4"
-          : "bg-transparent py-6"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-white/5 ${
+        scrolled ? "bg-black/80 backdrop-blur-md" : "bg-transparent"
       }`}
       role="navigation"
       aria-label="Navegação principal"
     >
-      <div className="max-w-3xl mx-auto px-6 md:px-12 flex justify-between items-center">
+      <div className="page-container flex justify-between items-center h-16">
         <RouterLink
           to="/"
           className="text-sm font-medium text-white hover:text-white/80 transition-colors"
@@ -70,31 +68,33 @@ const Navbar = () => {
           Jefferson Teles
         </RouterLink>
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-2">
           {navItems.map((item) => (
             <NavLink key={item.link} item={item} />
           ))}
           <button
             onClick={toggleLanguage}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-white/60 hover:text-white border border-transparent hover:border-white/10 transition-colors"
+            className="p-2 text-white/60 hover:text-white rounded-lg hover:bg-white/5 border border-transparent hover:border-white/10 transition-all"
             aria-label="Alternar idioma"
           >
-            <FiGlobe size={14} />
-            {i18n.language === "pt" ? "PT" : "EN"}
+            <FiGlobe size={16} />
+            <span className="sr-only">Idioma</span>
           </button>
           <a
             href="/Curriculo_Jefferson_Teles.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-white/60 hover:text-white transition-colors"
+            className="p-2 text-white/60 hover:text-white rounded-lg hover:bg-white/5 border border-transparent hover:border-white/10 transition-all"
+            title="Currículo em PDF"
           >
-            Currículo
+            <FiFileText size={16} />
+            <span className="sr-only">Currículo</span>
           </a>
         </div>
 
         <button
           onClick={() => setMobileMenu(!mobileMenu)}
-          className="md:hidden text-white"
+          className="md:hidden text-white p-2"
           aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"}
           aria-expanded={mobileMenu}
         >

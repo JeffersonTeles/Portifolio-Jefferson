@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiMail, FiLinkedin, FiGithub, FiSend } from "react-icons/fi";
+import { FiLinkedin, FiGithub, FiSend, FiCopy, FiCheck } from "react-icons/fi";
 import { SiWhatsapp } from "react-icons/si";
 import { useTranslation } from "react-i18next";
 
@@ -7,20 +7,14 @@ const Contact = () => {
   const { t } = useTranslation();
   const email = "jeffersontelesdeoliveira@gmail.com";
 
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle");
+  const [copied, setCopied] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus("sending");
-
+  const handleCopy = async () => {
     try {
-      await new Promise((r) => setTimeout(r, 800));
-      window.location.href = `mailto:${email}?subject=Contato via Portfólio&body=Nome: ${encodeURIComponent(form.name)}%0AEmail: ${encodeURIComponent(form.email)}%0AMensagem: ${encodeURIComponent(form.message)}`;
-      setStatus("done");
-    } catch {
-      setStatus("error");
-    }
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* ignore */ }
   };
 
   const socialLinks = [
@@ -32,95 +26,51 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-24 bg-black text-white border-t border-white/5"
+      className="section-padding"
       aria-labelledby="contact-heading"
     >
       <div className="page-container">
-        <div className="max-w-2xl">
-          <h2
-            id="contact-heading"
-            className="text-3xl md:text-4xl font-bold text-white mb-4"
-          >
-            {t("contact.heading")}
-          </h2>
-
-          <p className="text-white/60 leading-relaxed mb-8">
-            {t("contact.description")}
-          </p>
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm text-white/60 mb-2">
-                  Nome
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/30"
-                  placeholder="Seu nome"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-white/60 mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/30"
-                  placeholder="seu@email.com"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm text-white/60 mb-2">
-                Mensagem
-              </label>
-              <textarea
-                required
-                rows={4}
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-white/30 resize-none"
-                placeholder="Conte sobre a oportunidade ou projeto..."
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={status === "sending"}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-white text-black font-medium rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+        <div className="grid lg:grid-cols[1.2fr_0.8fr] gap-16">
+          <div className="space-y-8">
+            <p className="text-sm text-white/60">{t("contact.label")}</p>
+            <h2
+              id="contact-heading"
+              className="text-3xl md:text-4xl font-bold text-white"
             >
-              {status === "sending" ? (
-                "Enviando..."
-              ) : (
-                <>
-                  <FiSend size={16} />
-                  Enviar mensagem
-                </>
-              )}
-            </button>
-          </form>
+              {t("contact.heading")}
+            </h2>
+            <p className="text-slate-300 leading-relaxed max-w-xl">
+              {t("contact.description")}
+            </p>
+          </div>
 
-          <div className="mt-12 space-y-4">
-            <div className="flex items-center gap-3 text-sm">
-              <FiMail size={16} className="text-white/40" />
-              <a
-                href={`mailto:${email}`}
-                className="text-white/80 hover:text-white"
-              >
-                {email}
-              </a>
+          <div className="space-y-8">
+            <div className="space-y-2">
+              <p className="text-xs text-white/40 font-mono">Email</p>
+              <div className="flex items-center gap-3">
+                <a
+                  href={`mailto:${email}`}
+                  className="text-white/80 hover:text-white transition-colors"
+                >
+                  {email}
+                </a>
+                <button
+                  onClick={handleCopy}
+                  className="text-white/40 hover:text-white transition-colors"
+                  title="Copiar email"
+                >
+                  {copied ? <FiCheck size={14} className="text-green-400" /> : <FiCopy size={14} />}
+                </button>
+              </div>
             </div>
 
-            <div className="flex items-center gap-3 text-sm">
-              <span className="text-white/40">Redes sociais</span>
+            <div className="space-y-2">
+              <p className="text-xs text-white/40 font-mono">Localização</p>
+              <p className="text-white/80">{t("contact.location")}</p>
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-xs text-white/40 font-mono">Redes sociais</p>
               <div className="flex gap-4">
                 {socialLinks.map(({ icon: Icon, url, label }) => (
                   <a
@@ -129,7 +79,7 @@ const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="text-white/60 hover:text-white"
+                    className="w-10 h-10 rounded-lg border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:border-white/10 transition-all"
                   >
                     <Icon size={18} />
                   </a>
@@ -137,9 +87,16 @@ const Contact = () => {
               </div>
             </div>
 
-            <p className="text-sm text-white/60">
-              {t("contact.location")}
-            </p>
+            <div className="space-y-2">
+              <p className="text-xs text-white/40 font-mono">Mensagem direta</p>
+              <a
+                href={`mailto:${email}?subject=Oportunidade de desenvolvedor júnior`}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-amber-400 text-black font-medium rounded-lg text-sm hover:opacity-90 transition-opacity"
+              >
+                <FiSend size={14} />
+                Enviar email
+              </a>
+            </div>
           </div>
         </div>
       </div>

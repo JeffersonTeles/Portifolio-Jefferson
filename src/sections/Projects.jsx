@@ -9,7 +9,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-24 bg-black text-white border-t border-white/5"
+      className="section-padding border-b-section"
       aria-labelledby="projects-heading"
     >
       <div className="page-container">
@@ -23,41 +23,58 @@ const Projects = () => {
 
         <div className="space-y-16">
           {projects.map((project) => (
-            <article key={project.title} className="border-b border-white/5 pb-12 last:border-0">
-              <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8">
-                <div>
-                  <h3 className="text-2xl font-semibold text-white mb-3">
-                    {project.title}
-                  </h3>
-                  <p className="text-white/60 leading-relaxed mb-6">
-                    {project.desc}
-                  </p>
+            <article key={project.title} className="group">
+              <div className="border border-white/5 rounded-xl p-6 hover:border-white/10 transition-colors">
+                <div className="grid md:grid-cols[2fr_1fr] gap-8">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs font-mono text-amber-300">
+                        {project.status === "Publicado" || project.status === "Published" || project.status === "Open source"
+                          ? "LIVE"
+                          : "PRIVATE"}
+                      </span>
+                      <span className="tag">{project.status}</span>
+                    </div>
 
-                  {project.link !== "#" && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-white/80 hover:text-white"
-                    >
-                      Ver projeto
-                      <FiExternalLink size={16} />
-                    </a>
+                    <h3 className="text-2xl font-bold text-white">
+                      {project.title}
+                    </h3>
+
+                    <p className="text-slate-400 leading-relaxed">
+                      {project.desc}
+                    </p>
+
+                    {project.link !== "#" && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm text-amber-300 hover:text-amber-200"
+                      >
+                        Ver projeto
+                        <FiExternalLink size={14} />
+                      </a>
+                    )}
+                  </div>
+
+                  {project.image && (
+                    <div className="rounded-lg overflow-hidden border border-white/5">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        loading="lazy"
+                        className="w-full h-48 object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity"
+                      />
+                    </div>
                   )}
                 </div>
 
-                <div>
-                  <p className="text-xs text-white/40 font-mono mb-2">Stack</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 text-xs text-white/60 border border-white/10 rounded"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                <div className="flex flex-wrap gap-2 mt-6">
+                  {project.stack.map((tech) => (
+                    <span key={tech} className="tag">
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
             </article>

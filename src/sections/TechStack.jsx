@@ -31,25 +31,29 @@ const TechStack = () => {
   return (
     <section
       id="skills"
-      className="py-24 bg-black text-white border-t border-white/5"
+      className="section-padding border-b-section"
     >
       <div className="page-container">
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-12">
           {t("skills.heading")}
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {categories.map((cat) => (
-            <div key={cat.name}>
-              <div className="flex items-center gap-3 mb-4">
-                <cat.icon size={20} className="text-white/60" />
-                <h3 className="text-sm font-semibold text-white">{cat.name}</h3>
+            <div key={cat.name} className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg border border-white/5 flex items-center justify-center">
+                  <cat.icon size={16} className="text-amber-300" />
+                </div>
+                <h3 className="text-sm font-semibold text-white">
+                  {cat.name}
+                </h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {cat.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-2 py-1 text-xs text-white/60 border border-white/10 rounded"
+                    className="text-xs px-2 py-1 text-slate-400 border border-white/5 rounded"
                   >
                     {skill}
                   </span>

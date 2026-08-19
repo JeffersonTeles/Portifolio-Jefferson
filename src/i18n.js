@@ -9,6 +9,7 @@ const resources = {
         experience: "Experiência",
         projects: "Projetos",
         contact: "Contato",
+        home: "Início",
       },
       hero: {
         role: "Desenvolvedor Júnior",
