@@ -8,6 +8,7 @@ const resources = {
         about: "Sobre",
         experience: "Experiência",
         projects: "Projetos",
+        skills: "Tecnologias",
         contact: "Contato",
         home: "Início",
       },
@@ -148,7 +149,9 @@ const resources = {
         about: "About",
         experience: "Experience",
         projects: "Projects",
+        skills: "Skills",
         contact: "Contact",
+        home: "Home",
       },
       hero: {
         role: "Junior Developer",

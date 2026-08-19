@@ -1,8 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import ScrollToTop from "./components/ScrollToTop";
-import SkipLink from "./components/SkipLink";
+import Sidebar from "./components/Sidebar";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Experience from "./sections/Experience";
@@ -31,23 +30,24 @@ function HomePage() {
 function App() {
   return (
     <Router>
-      <ScrollToTop />
-      <div className="bg-black text-white font-sans">
-        <SkipLink />
+      <div className="font-sans bg-white text-slate-900">
         <Navbar />
-        <main id="main-content" className="relative z-10">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route
-              path="*"
-              element={
-                <Suspense fallback={<div>Carregando...</div>}>
-                  <NotFound />
-                </Suspense>
-              }
-            />
-          </Routes>
-        </main>
+        <div className="flex min-h-screen">
+          <Sidebar />
+          <main className="flex-1">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route
+                path="*"
+                element={
+                  <Suspense fallback={<div>Carregando...</div>}>
+                    <NotFound />
+                  </Suspense>
+                }
+              />
+            </Routes>
+          </main>
+        </div>
         <Footer />
       </div>
     </Router>

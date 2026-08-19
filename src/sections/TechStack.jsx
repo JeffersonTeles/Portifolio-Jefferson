@@ -29,22 +29,22 @@ const TechStack = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="border-b border-white/5">
+    <section className="border-b border-slate-100">
       <div className="page-container py-24">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-16">
+        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-16">
           {t("skills.heading")}
         </h2>
 
-        <div className="grid md:grid-cols-[1fr_1fr] gap-16">
+        <div className="grid md:grid-cols[1fr_1fr] gap-16">
           {categories.map((cat) => (
             <div key={cat.name} className="space-y-4">
               <div className="flex items-center gap-3">
-                <cat.icon size={18} className="text-amber-300" />
-                <h3 className="text-sm font-semibold text-white">
+                <cat.icon size={18} className="text-amber-700" />
+                <h3 className="text-sm font-semibold text-slate-900">
                   {cat.name}
                 </h3>
               </div>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-slate-500">
                 {cat.skills.join(", ")}
               </p>
             </div>
