@@ -7,7 +7,7 @@ import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Experience from "./sections/Experience";
 import Projects from "./sections/Projects";
-import Skills from "./sections/TechStack";
+import TechStack from "./sections/TechStack";
 import Certifications from "./sections/Certifications";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
@@ -21,7 +21,7 @@ function HomePage() {
       <About />
       <Experience />
       <Projects />
-      <Skills />
+      <TechStack />
       <Certifications />
       <Contact />
     </>
@@ -32,27 +32,16 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="relative min-h-screen bg-black text-white font-sans">
+      <div className="bg-black text-white font-sans">
         <SkipLink />
         <Navbar />
-        <main
-          id="main-content"
-          className="relative z-10"
-          tabIndex={-1}
-          aria-label="Conteúdo principal"
-        >
+        <main id="main-content" className="relative z-10">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route
               path="*"
               element={
-                <Suspense
-                  fallback={
-                    <div className="min-h-screen flex items-center justify-center text-white/50">
-                      Carregando...
-                    </div>
-                  }
-                >
+                <Suspense fallback={<div>Carregando...</div>}>
                   <NotFound />
                 </Suspense>
               }

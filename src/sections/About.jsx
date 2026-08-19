@@ -1,110 +1,66 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 const About = () => {
   const { t } = useTranslation();
-  const [openTimeline, setOpenTimeline] = useState(null);
+
   const timeline = t("about.timeline", { returnObjects: true });
   const tags = t("about.tags", { returnObjects: true });
 
-  const fadeUp = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-  };
-
   return (
-    <section id="about" className="py-40 bg-black">
-      <div className="premium-container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
-          <div className="lg:col-span-7">
-            <motion.span
-              {...fadeUp}
-              className="text-[11px] font-medium uppercase tracking-[0.5em] text-white/30 mb-10 block"
-            >
-              {t("about.label")}
-            </motion.span>
+    <section id="about" className="py-24 bg-black text-white">
+      <div className="page-container">
+        <div>
+          <p className="text-sm text-white/60 mb-3">{t("about.label")}</p>
 
-            <motion.h2
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.1 }}
-              className="text-4xl md:text-6xl font-extrabold text-white leading-[1.1] mb-12 tracking-tight"
-            >
-              {t("about.heading1")}
-            </motion.h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+            {t("about.heading")}
+          </h2>
 
-            <div className="space-y-8 text-xl text-white/50 font-light leading-relaxed max-w-2xl">
-              <motion.p
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: 0.2 }}
+          <p className="text-white/70 leading-relaxed max-w-2xl mb-8">
+            {t("about.p1")}
+          </p>
+          <p className="text-white/70 leading-relaxed max-w-2xl mb-8">
+            {t("about.p2")}
+          </p>
+          <p className="text-white/70 leading-relaxed max-w-2xl mb-12">
+            {t("about.p3")}
+          </p>
+
+          <div className="flex flex-wrap gap-3">
+            {tags.map((tag, i) => (
+              <span
+                key={i}
+                className="px-3 py-1 rounded-full border border-white/10 text-xs text-white/70"
               >
-                {t("about.p1")}
-              </motion.p>
-              <motion.p
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: 0.3 }}
-              >
-                {t("about.p2")}
-              </motion.p>
-              <motion.p
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: 0.4 }}
-              >
-                {t("about.p3")}
-              </motion.p>
-            </div>
-
-            <motion.div
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: 0.5 }}
-              className="flex flex-wrap gap-3 mt-16"
-            >
-              {tags.map((tag, i) => (
-                <span
-                  key={i}
-                  className="px-4 py-2 rounded-full border border-white/5 bg-white/[0.02] text-[10px] font-medium text-white/60 uppercase tracking-widest"
-                >
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
-          </div>
-
-          <div className="lg:col-span-5">
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="border-l border-white/5 pl-8"
-            >
-              <span className="text-[9px] text-white/20 font-mono uppercase tracking-wider block mb-8">
-                Jornada
+                {tag}
               </span>
+            ))}
+          </div>
+        </div>
 
-              <div className="space-y-12">
-                {timeline.map((item, i) => (
-                  <div key={i}>
-                    <button
-                      className="text-left w-full"
-                      onClick={() => setOpenTimeline(openTimeline === i ? null : i)}
-                    >
-                      <span className="text-[10px] text-white/20 font-mono block mb-1">
-                        {item.year}
-                      </span>
-                      <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-2">
-                        {item.title}
-                      </h4>
-                      <p className="text-xs text-white/30 font-light">
-                        {item.desc}
-                      </p>
-                    </button>
-                  </div>
-                ))}
+        <div className="mt-20">
+          <h3 className="text-sm font-medium text-white/60 mb-6">
+            Jornada
+          </h3>
+
+          <div className="border-l border-white/10 pl-6 space-y-10">
+            {timeline.map((item, i) => (
+              <div key={i}>
+                <span className="text-xs text-white/30 font-mono block mb-2">
+                  {item.year}
+                </span>
+                <h4 className="text-lg font-semibold text-white mb-2">
+                  {item.title}
+                </h4>
+                <p className="text-sm text-white/50 leading-relaxed">
+                  {item.desc}
+                </p>
+                <p className="text-sm text-white/50 leading-relaxed mt-2">
+                  {item.detail}
+                </p>
               </div>
-            </motion.div>
+            ))}
           </div>
         </div>
       </div>
