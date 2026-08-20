@@ -1,6 +1,8 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Navbar from "./components/Navbar";
+import BackToTop from "./components/BackToTop";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Experience from "./sections/Experience";
@@ -16,24 +18,12 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <div id="about">
-        <About />
-      </div>
-      <div id="experience">
-        <Experience />
-      </div>
-      <div id="projects">
-        <Projects />
-      </div>
-      <div id="skills">
-        <TechStack />
-      </div>
-      <div id="certifications">
-        <Certifications />
-      </div>
-      <div id="contact">
-        <Contact />
-      </div>
+      <About />
+      <Experience />
+      <Projects />
+      <TechStack />
+      <Certifications />
+      <Contact />
     </>
   );
 }
@@ -57,30 +47,33 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-[#0a0a0a]">
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route
-              path="*"
-              element={
-                <Suspense
-                  fallback={
-                    <div className="min-h-screen flex items-center justify-center text-[#333]">
-                      Carregando...
-                    </div>
-                  }
-                >
-                  <NotFound />
-                </Suspense>
-              }
-            />
-          </Routes>
-        </main>
-        <Footer />
-        <div className="copy-toast">Copied!</div>
-      </div>
+      <ErrorBoundary>
+        <div className="min-h-screen bg-[#0a0a0a]">
+          <Navbar />
+          <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route
+                path="*"
+                element={
+                  <Suspense
+                    fallback={
+                      <div className="min-h-screen flex items-center justify-center text-[#333]">
+                        Carregando...
+                      </div>
+                    }
+                  >
+                    <NotFound />
+                  </Suspense>
+                }
+              />
+            </Routes>
+          </main>
+          <Footer />
+          <BackToTop />
+          <div className="copy-toast" aria-live="polite">Copied!</div>
+        </div>
+      </ErrorBoundary>
     </Router>
   );
 }

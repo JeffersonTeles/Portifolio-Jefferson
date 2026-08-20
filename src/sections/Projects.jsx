@@ -1,8 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-
-const colors = ["#1a1520", "#151a1e", "#1a1815"];
-const accents = ["#e2a63d", "#6ee7b7", "#93c5fd"];
+import ProjectImage from "../components/ProjectImage";
 
 const Projects = () => {
   const { t } = useTranslation();
@@ -17,36 +15,17 @@ const Projects = () => {
 
         <div className="space-y-28">
           {projects.map((project, i) => (
-            <article key={project.title} className="group">
-              {/* Image placeholder with gradient */}
-              <div
-                className="w-full aspect-[16/9] rounded-lg mb-6 overflow-hidden flex items-end p-6 relative"
-                style={{ background: colors[i % colors.length] }}
-              >
-                {/* Decorative elements */}
-                <div
-                  className="absolute top-6 right-6 w-20 h-20 rounded-full opacity-20 blur-xl"
-                  style={{ background: accents[i % accents.length] }}
-                />
-                <div className="absolute top-8 right-10 text-[0.7rem] font-mono text-white/15">
-                  {project.title.toLowerCase().replace(/\s+/g, "-")}
-                </div>
+            <article
+              key={project.title}
+              className="group rounded-xl p-6 -mx-6 hover:bg-white/[0.015] transition-colors duration-500"
+            >
+              <ProjectImage
+                title={project.title}
+                index={i}
+                stack={project.stack}
+              />
 
-                {/* Stack badges */}
-                <div className="flex flex-wrap gap-1.5 relative z-10">
-                  {project.stack.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-0.5 text-[0.65rem] font-mono text-white/40 bg-white/[0.05] rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Content */}
-              <h3 className="text-[1.15rem] font-bold text-white mb-3">
+              <h3 className="text-[1.15rem] font-bold text-white mb-3 group-hover:text-[#e2a63d]/90 transition-colors duration-300">
                 {project.title}
               </h3>
 
@@ -54,7 +33,6 @@ const Projects = () => {
                 {project.desc}
               </p>
 
-              {/* Stack */}
               <div className="flex flex-wrap gap-2">
                 {project.stack.map((tech) => (
                   <span
@@ -69,7 +47,6 @@ const Projects = () => {
                 ))}
               </div>
 
-              {/* Link */}
               {project.link !== "#" && (
                 <a
                   href={project.link}

@@ -1,24 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { copyEmail } from "../utils/copyEmail";
 
 const Contact = () => {
   const { t } = useTranslation();
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(
-        "jeffersontelesdeoliveira@gmail.com"
-      );
-      const toast = document.querySelector(".copy-toast");
-      if (toast) {
-        toast.classList.add("is-visible");
-        setTimeout(() => toast.classList.remove("is-visible"), 1400);
-      }
-    } catch {
-      window.location.href =
-        "mailto:jeffersontelesdeoliveira@gmail.com";
-    }
-  };
 
   return (
     <section className="slide py-32 border-t border-white/[0.04]">
@@ -33,6 +18,7 @@ const Contact = () => {
         <button
           onClick={copyEmail}
           className="text-[#e2a63d] text-[1.05rem] border-b border-[#e2a63d]/30 hover:border-[#e2a63d] transition-colors duration-300 cursor-pointer"
+          aria-label="Copiar email"
         >
           jeffersontelesdeoliveira@gmail.com
         </button>

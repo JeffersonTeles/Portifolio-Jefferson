@@ -24,7 +24,7 @@ const TechStack = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="slide py-24 border-t border-white/[0.04]">
+    <section id="skills" className="slide py-24 border-t border-white/[0.04]">
       <div className="max-w-[720px] mx-auto px-6 md:px-10">
         <h2 className="text-[1.6rem] font-bold text-white mb-14">
           {t("skills.heading")}

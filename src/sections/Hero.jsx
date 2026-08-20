@@ -1,24 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { FiGithub, FiLinkedin } from "react-icons/fi";
+import { copyEmail } from "../utils/copyEmail";
 
 const Hero = () => {
   const { t } = useTranslation();
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(
-        "jeffersontelesdeoliveira@gmail.com"
-      );
-      const toast = document.querySelector(".copy-toast");
-      if (toast) {
-        toast.classList.add("is-visible");
-        setTimeout(() => toast.classList.remove("is-visible"), 1400);
-      }
-    } catch {
-      window.location.href =
-        "mailto:jeffersontelesdeoliveira@gmail.com";
-    }
-  };
 
   return (
     <section className="slide min-h-[85vh] flex items-center">
@@ -35,14 +21,9 @@ const Hero = () => {
           {t("hero.title1")}
         </h1>
 
-        {/* Subtitle */}
-        <p className="text-[1.1rem] text-[#999] leading-relaxed mb-4 max-w-[600px]">
-          {t("hero.subtitle")}
-        </p>
-
-        {/* Description */}
+        {/* Subtitle + description merged */}
         <p className="text-[1.1rem] text-[#999] leading-relaxed mb-10 max-w-[600px]">
-          {t("hero.description")}
+          {t("hero.subtitle")} {t("hero.description")}
         </p>
 
         {/* Actions */}
@@ -64,15 +45,38 @@ const Hero = () => {
         </div>
 
         {/* Email */}
-        <p className="text-[0.95rem] text-[#666]">
+        <p className="text-[0.95rem] text-[#666] mb-6">
           {t("hero.getInTouch")}{" "}
           <button
             onClick={copyEmail}
             className="text-[#ccc] border-b border-[#444] hover:border-[#e2a63d] hover:text-[#e2a63d] transition-colors duration-300 cursor-pointer"
+            aria-label="Copiar email"
           >
             jeffersontelesdeoliveira@gmail.com
           </button>
         </p>
+
+        {/* Social links */}
+        <div className="flex items-center gap-4">
+          <a
+            href="https://github.com/JeffersonTeles"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#444] hover:text-[#e2a63d] transition-colors duration-300"
+            aria-label="GitHub"
+          >
+            <FiGithub size={18} />
+          </a>
+          <a
+            href="https://linkedin.com/in/jeffersonteles"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#444] hover:text-[#e2a63d] transition-colors duration-300"
+            aria-label="LinkedIn"
+          >
+            <FiLinkedin size={18} />
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
@@ -7,12 +7,52 @@ const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuRef = useRef(null);
+  const firstLinkRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Focus trap for mobile menu
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        return;
+      }
+      if (e.key === "Tab" && menuRef.current) {
+        const focusables = menuRef.current.querySelectorAll(
+          'a, button, [tabindex]:not([tabindex="-1"])'
+        );
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    firstLinkRef.current?.focus();
+
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [mobileOpen]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
   const toggleLanguage = () => {
     i18n.changeLanguage(i18n.language === "pt" ? "en" : "pt");
@@ -47,7 +87,7 @@ const Navbar = () => {
           </RouterLink>
 
           {/* Desktop nav */}
-          <nav className="hidden sm:flex items-center gap-6">
+          <nav className="hidden sm:flex items-center gap-6" aria-label="Navegação principal">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -60,7 +100,7 @@ const Navbar = () => {
             <button
               onClick={toggleLanguage}
               className="text-[0.75rem] text-[#444] hover:text-[#e2a63d] font-mono uppercase tracking-wider transition-colors duration-300"
-              aria-label="Alternar idioma"
+              aria-label={i18n.language === "pt" ? "Switch to English" : "Mudar para Português"}
             >
               {i18n.language === "pt" ? "EN" : "PT"}
             </button>
@@ -71,6 +111,8 @@ const Navbar = () => {
             onClick={() => setMobileOpen(!mobileOpen)}
             className="sm:hidden text-[#666] p-2 hover:text-white transition-colors"
             aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? <FiX size={20} /> : <FiMenu size={20} />}
           </button>
@@ -84,11 +126,18 @@ const Navbar = () => {
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="absolute top-16 right-0 w-56 bg-[#0f0f0f] border-l border-white/[0.06] p-6">
+          <div
+            id="mobile-menu"
+            ref={menuRef}
+            className="absolute top-16 right-0 w-56 bg-[#0f0f0f] border-l border-white/[0.06] p-6"
+            role="dialog"
+            aria-label="Menu de navegação"
+          >
             <div className="flex flex-col gap-1">
-              {navLinks.map((link) => (
+              {navLinks.map((link, i) => (
                 <a
                   key={link.href}
+                  ref={i === 0 ? firstLinkRef : undefined}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   className="px-4 py-3 text-[0.9rem] text-[#777] hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200"
