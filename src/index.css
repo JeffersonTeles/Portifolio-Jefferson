@@ -59,6 +59,17 @@
 .slide.visible .stagger > *:nth-child(7) { transition-delay: 360ms; opacity: 1; transform: none; }
 .slide.visible .stagger > *:nth-child(8) { transition-delay: 420ms; opacity: 1; transform: none; }
 
+/* Amber gradient divider */
+.amber-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(226,166,61,0.25) 50%, transparent 100%);
+}
+
+/* Alternating section backgrounds */
+.section-alt {
+  background: #0d0d0d;
+}
+
 /* Toast notification */
 .copy-toast {
   position: fixed;

@@ -18,10 +18,13 @@ function HomePage() {
   return (
     <>
       <Hero />
+      <div className="amber-divider" />
       <About />
       <Experience />
+      <div className="amber-divider" />
       <Projects />
       <TechStack />
+      <div className="amber-divider" />
       <Certifications />
       <Contact />
     </>

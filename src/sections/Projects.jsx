@@ -7,9 +7,9 @@ const Projects = () => {
   const projects = t("projects.list", { returnObjects: true });
 
   return (
-    <section className="slide py-24 border-t border-white/[0.04]">
-      <div className="max-w-[720px] mx-auto px-6 md:px-10">
-        <h2 className="text-[1.6rem] font-bold text-white mb-16">
+    <section className="slide py-28 section-alt">
+      <div className="max-w-[900px] mx-auto px-6 md:px-10">
+        <h2 className="text-[1.8rem] font-bold text-white mb-16">
           {t("projects.heading")}
         </h2>
 
@@ -25,11 +25,11 @@ const Projects = () => {
                 stack={project.stack}
               />
 
-              <h3 className="text-[1.15rem] font-bold text-white mb-3 group-hover:text-[#e2a63d]/90 transition-colors duration-300">
+              <h3 className="text-[1.2rem] font-bold text-white mb-3 group-hover:text-[#e2a63d]/90 transition-colors duration-300">
                 {project.title}
               </h3>
 
-              <p className="text-[0.95rem] text-[#777] leading-relaxed mb-5">
+              <p className="text-[0.95rem] text-[#777] leading-relaxed mb-5 max-w-[700px]">
                 {project.desc}
               </p>
 
