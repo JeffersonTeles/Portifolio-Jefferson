@@ -12,7 +12,7 @@ const About = () => {
           {t("about.heading")}
         </h2>
 
-        <ul className="space-y-4 mb-14">
+        <ul className="stagger space-y-4 mb-14">
           {capabilities.map((item, i) => (
             <li
               key={i}

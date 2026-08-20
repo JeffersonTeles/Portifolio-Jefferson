@@ -15,7 +15,7 @@ const Experience = () => {
           {t("experience.intro")}
         </p>
 
-        <div className="space-y-0">
+        <div className="stagger space-y-0">
           {list.map((item, i) => (
             <div
               key={i}

@@ -30,7 +30,7 @@ const TechStack = () => {
           {t("skills.heading")}
         </h2>
 
-        <div className="grid sm:grid-cols-2 gap-12">
+        <div className="stagger grid sm:grid-cols-2 gap-12">
           {skills.map((group) => (
             <div key={group.category}>
               <h3 className="text-[0.75rem] text-[#555] font-mono uppercase tracking-widest mb-4">

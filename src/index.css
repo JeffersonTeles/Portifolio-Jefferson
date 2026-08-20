@@ -32,15 +32,32 @@
 /* Scroll-triggered fade-in */
 .slide {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(24px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .slide.visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Staggered children — triggers when parent .slide becomes visible */
+.slide.visible .stagger > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide.visible .stagger > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: none; }
+.slide.visible .stagger > *:nth-child(2) { transition-delay: 60ms; opacity: 1; transform: none; }
+.slide.visible .stagger > *:nth-child(3) { transition-delay: 120ms; opacity: 1; transform: none; }
+.slide.visible .stagger > *:nth-child(4) { transition-delay: 180ms; opacity: 1; transform: none; }
+.slide.visible .stagger > *:nth-child(5) { transition-delay: 240ms; opacity: 1; transform: none; }
+.slide.visible .stagger > *:nth-child(6) { transition-delay: 300ms; opacity: 1; transform: none; }
+.slide.visible .stagger > *:nth-child(7) { transition-delay: 360ms; opacity: 1; transform: none; }
+.slide.visible .stagger > *:nth-child(8) { transition-delay: 420ms; opacity: 1; transform: none; }
 
 /* Toast notification */
 .copy-toast {
@@ -65,4 +82,24 @@
 .copy-toast.is-visible {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .slide,
+  .slide.visible .stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    transition-delay: 0ms !important;
+  }
+
+  .copy-toast {
+    transition: opacity 0.2s ease !important;
+    transform: translateX(-50%) !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
 }

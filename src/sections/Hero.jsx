@@ -7,8 +7,12 @@ const Hero = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="slide min-h-[85vh] flex items-center">
-      <div className="max-w-[720px] mx-auto px-6 md:px-10 py-24">
+    <section className="slide min-h-[85vh] flex items-center relative overflow-hidden">
+      {/* Subtle amber glow */}
+      <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-[#e2a63d]/[0.03] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[350px] h-[350px] bg-[#e2a63d]/[0.015] rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="max-w-[720px] mx-auto px-6 md:px-10 py-24 relative z-10">
         {/* Role badge */}
         <div className="mb-6">
           <span className="text-[0.8rem] text-[#e2a63d] font-mono">

@@ -1,4 +1,5 @@
 import React from "react";
+import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 
 const Footer = () => {
   return (
@@ -16,22 +17,31 @@ const Footer = () => {
               jeffersontelesdeoliveira@gmail.com
             </a>
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-3">
             <a
               href="https://github.com/JeffersonTeles"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[0.8rem] text-[#444] hover:text-[#e2a63d] transition-colors duration-300"
+              className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-[#e2a63d] hover:border-[#e2a63d]/20 transition-all duration-300"
+              aria-label="GitHub"
             >
-              GitHub
+              <FiGithub size={15} />
             </a>
             <a
               href="https://linkedin.com/in/jeffersonteles"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[0.8rem] text-[#444] hover:text-[#e2a63d] transition-colors duration-300"
+              className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-[#e2a63d] hover:border-[#e2a63d]/20 transition-all duration-300"
+              aria-label="LinkedIn"
             >
-              LinkedIn
+              <FiLinkedin size={15} />
+            </a>
+            <a
+              href="mailto:jeffersontelesdeoliveira@gmail.com"
+              className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-[#e2a63d] hover:border-[#e2a63d]/20 transition-all duration-300"
+              aria-label="Email"
+            >
+              <FiMail size={15} />
             </a>
           </div>
         </div>
