@@ -3,14 +3,7 @@ import { useTranslation } from "react-i18next";
 
 const About = () => {
   const { t } = useTranslation();
-
-  const capabilities = [
-    "Build web systems with React, Node.js and Python",
-    "Automate repetitive tasks with scripts and AI integration",
-    "Work with Linux servers, networking and infrastructure",
-    "Solve real problems from actual users, not theoretical ones",
-    "Write simple code that works today",
-  ];
+  const capabilities = t("about.capabilities", { returnObjects: true });
 
   return (
     <section className="slide py-24 border-t border-white/[0.04]">
@@ -19,7 +12,7 @@ const About = () => {
           {t("about.heading")}
         </h2>
 
-        <ul className="space-y-4">
+        <ul className="space-y-4 mb-14">
           {capabilities.map((item, i) => (
             <li
               key={i}
@@ -30,6 +23,19 @@ const About = () => {
             </li>
           ))}
         </ul>
+
+        {/* GitHub stats */}
+        <div className="border-t border-white/[0.04] pt-10">
+          <p className="text-[0.7rem] text-[#444] font-mono uppercase tracking-widest mb-4">
+            GitHub
+          </p>
+          <img
+            src="https://github-readme-stats.vercel.app/api?username=JeffersonTeles&show_icons=true&hide_border=true&bg_color=0a0a0a&title_color=e2a63d&text_color=666666&icon_color=444444&ring_color=222222&count_private=true"
+            alt="GitHub Stats"
+            className="w-full max-w-[400px] opacity-60 hover:opacity-90 transition-opacity duration-500"
+            loading="lazy"
+          />
+        </div>
       </div>
     </section>
   );

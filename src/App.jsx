@@ -25,8 +25,12 @@ function HomePage() {
       <div id="projects">
         <Projects />
       </div>
-      <TechStack />
-      <Certifications />
+      <div id="skills">
+        <TechStack />
+      </div>
+      <div id="certifications">
+        <Certifications />
+      </div>
       <div id="contact">
         <Contact />
       </div>

@@ -15,7 +15,9 @@ const resources = {
       hero: {
         role: "Desenvolvedor Júnior",
         title1: "Jefferson Teles",
-        description: "Desenvolvedor em formação com experiência em suporte técnico, automação Python e sistemas que resolvem problemas reais. Estou em transição de suporte para desenvolvimento e busco minha primeira oportunidade como programador júnior.",
+        subtitle: "Desenvolvedor em formação com experiência em suporte técnico, automação Python e sistemas que resolvem problemas reais.",
+        description: "Estou em transição de suporte para desenvolvimento e busco minha primeira oportunidade como programador júnior.",
+        getInTouch: "Fale comigo",
         btnWorks: "Ver projetos",
         btnResume: "Ver currículo",
       },
@@ -25,6 +27,13 @@ const resources = {
         p1: "Comecei mexendo em hardware e redes — Linux, servidores, cabos atrás do rack. Aprendi que por trás de qualquer sistema lento ou quebrado, tem um problema real de alguém.",
         p2: "Trabalhei em suporte N2 por anos, onde descobri que a maioria dos 'problemas técnicos' são processos que ninguém resolveu com um script antes. Hoje aplico essa visão em automação Python e integração de IA.",
         p3: "Estou em transição total para desenvolvimento. Meu foco é código simples que funciona hoje, não arquiteturas perfeitas amanhã. Busco minha primeira oportunidade como desenvolvedor júnior — remoto ou Cascavel/PR.",
+        capabilities: [
+          "Construir sistemas web com React, Node.js e Python",
+          "Automatizar tarefas repetidas com scripts e integração de IA",
+          "Trabalhar com servidores Linux, redes e infraestrutura",
+          "Resolver problemas reais de usuários, não teóricos",
+          "Escrever código simples que funciona hoje",
+        ],
         tags: [
           "Linux no dia a dia",
           "Automação Python",
@@ -92,6 +101,7 @@ const resources = {
       projects: {
         label: "Projetos",
         heading: "Projetos",
+        viewProject: "Ver projeto",
         list: [
           {
             title: "Maestria Docente",
@@ -156,7 +166,9 @@ const resources = {
       hero: {
         role: "Junior Developer",
         title1: "Jefferson Teles",
-        description: "Developer in transition from technical support, focused on Python automation and web systems that solve real problems. Looking for my first opportunity as a junior developer.",
+        subtitle: "Developer in transition from technical support, focused on Python automation and web systems that solve real problems.",
+        description: "Looking for my first opportunity as a junior developer.",
+        getInTouch: "Get in touch",
         btnWorks: "View projects",
         btnResume: "View resume",
       },
@@ -166,6 +178,13 @@ const resources = {
         p1: "Started with hardware and networks — Linux, servers, cables behind the rack. Learned early that behind every broken system is a real person's problem.",
         p2: "Worked in L2 support for years, where I discovered most 'technical problems' are just processes nobody automated with a script yet. I apply that mindset to Python automation and AI integration today.",
         p3: "Fully transitioning to software development. I prefer simple code that works today over perfect architecture tomorrow. Seeking my first junior developer role — remote or Cascavel, PR.",
+        capabilities: [
+          "Build web systems with React, Node.js and Python",
+          "Automate repetitive tasks with scripts and AI integration",
+          "Work with Linux servers, networking and infrastructure",
+          "Solve real user problems, not theoretical ones",
+          "Write simple code that works today",
+        ],
         tags: [
           "Linux in daily work",
           "Python automation",
@@ -233,6 +252,7 @@ const resources = {
       projects: {
         label: "Projects",
         heading: "Projects",
+        viewProject: "View project",
         list: [
           {
             title: "Teaching Mastery",

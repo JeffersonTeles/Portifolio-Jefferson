@@ -1,6 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+const colors = ["#1a1520", "#151a1e", "#1a1815"];
+const accents = ["#e2a63d", "#6ee7b7", "#93c5fd"];
+
 const Projects = () => {
   const { t } = useTranslation();
   const projects = t("projects.list", { returnObjects: true });
@@ -15,10 +18,30 @@ const Projects = () => {
         <div className="space-y-28">
           {projects.map((project, i) => (
             <article key={project.title} className="group">
-              {/* Image placeholder */}
-              <div className="w-full aspect-[16/9] bg-[#111] border border-white/[0.04] rounded-lg mb-6 overflow-hidden flex items-center justify-center">
-                <div className="text-white/10 text-sm font-mono">
-                  {project.title}
+              {/* Image placeholder with gradient */}
+              <div
+                className="w-full aspect-[16/9] rounded-lg mb-6 overflow-hidden flex items-end p-6 relative"
+                style={{ background: colors[i % colors.length] }}
+              >
+                {/* Decorative elements */}
+                <div
+                  className="absolute top-6 right-6 w-20 h-20 rounded-full opacity-20 blur-xl"
+                  style={{ background: accents[i % accents.length] }}
+                />
+                <div className="absolute top-8 right-10 text-[0.7rem] font-mono text-white/15">
+                  {project.title.toLowerCase().replace(/\s+/g, "-")}
+                </div>
+
+                {/* Stack badges */}
+                <div className="flex flex-wrap gap-1.5 relative z-10">
+                  {project.stack.slice(0, 4).map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-0.5 text-[0.65rem] font-mono text-white/40 bg-white/[0.05] rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
 
@@ -54,7 +77,7 @@ const Projects = () => {
                   rel="noopener noreferrer"
                   className="inline-block mt-5 text-[0.85rem] text-[#888] hover:text-[#e2a63d] transition-colors duration-300 border-b border-[#333] hover:border-[#e2a63d]"
                 >
-                  View project →
+                  {t("projects.viewProject")} →
                 </a>
               )}
             </article>
