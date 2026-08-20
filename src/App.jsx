@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Experience from "./sections/Experience";
@@ -30,24 +29,21 @@ function HomePage() {
 function App() {
   return (
     <Router>
-      <div className="font-sans bg-white text-slate-900">
+      <div className="min-h-screen bg-white text-slate-900">
         <Navbar />
-        <div className="flex min-h-screen">
-          <Sidebar />
-          <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route
-                path="*"
-                element={
-                  <Suspense fallback={<div>Carregando...</div>}>
-                    <NotFound />
-                  </Suspense>
-                }
-              />
-            </Routes>
-          </main>
-        </div>
+        <main className="pt-14">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="*"
+              element={
+                <Suspense fallback={<div className="p-20 text-center text-slate-400">Carregando...</div>}>
+                  <NotFound />
+                </Suspense>
+              }
+            />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </Router>

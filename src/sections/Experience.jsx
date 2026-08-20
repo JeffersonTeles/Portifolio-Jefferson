@@ -6,41 +6,47 @@ const Experience = () => {
   const items = t("experience.list", { returnObjects: true });
 
   return (
-    <section className="border-b border-slate-100">
-      <div className="page-container py-24">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-8">
-          Experiência
+    <section id="experience" className="border-b border-slate-100">
+      <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-28">
+        <p className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-4">
+          03 — Experiência
+        </p>
+        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-4">
+          {t("experience.heading")}
         </h2>
-        <p className="text-slate-600 leading-relaxed max-w-2xl mb-16">
+        <p className="text-slate-500 leading-relaxed max-w-2xl mb-14">
           {t("experience.intro")}
         </p>
 
-        <div className="space-y-12">
+        <div className="space-y-6">
           {items.map((item) => (
-            <div key={item.company} className="border border-slate-100 rounded-xl p-8 bg-slate-50/50">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+            <div
+              key={item.company}
+              className="group border border-slate-100 rounded-2xl p-6 sm:p-8 hover:border-slate-200 transition-colors"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
                 <div>
                   <h3 className="text-lg font-semibold text-slate-900">
                     {item.role}
                   </h3>
                   <p className="text-sm text-slate-500">{item.company}</p>
                 </div>
-                <span className="text-xs font-mono text-slate-400">
+                <span className="text-xs font-mono text-slate-400 whitespace-nowrap">
                   {item.period}
                 </span>
               </div>
 
-              <p className="text-slate-600 leading-relaxed mb-6">
+              <p className="text-sm text-slate-600 leading-relaxed mb-5">
                 {item.summary}
               </p>
 
-              <ul className="space-y-3">
-                {item.bullets.map((bullet) => (
+              <ul className="space-y-2.5">
+                {item.bullets.map((bullet, j) => (
                   <li
-                    key={bullet}
-                    className="flex items-start text-sm text-slate-500 leading-relaxed"
+                    key={j}
+                    className="flex items-start gap-3 text-sm text-slate-500 leading-relaxed"
                   >
-                    <span className="w-1 h-1 rounded-full bg-slate-300 mt-2 mr-3 shrink-0" />
+                    <span className="w-1 h-1 rounded-full bg-slate-300 mt-2.5 shrink-0" />
                     {bullet}
                   </li>
                 ))}

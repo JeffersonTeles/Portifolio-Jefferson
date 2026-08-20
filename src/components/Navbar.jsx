@@ -1,91 +1,125 @@
 import React, { useState, useEffect } from "react";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { FiMenu, FiX, FiGlobe } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
-import { scroller } from "react-scroll";
+
+const navLinks = [
+  { id: "sobre", labelPt: "Sobre", labelEn: "About" },
+  { id: "experience", labelPt: "Experiência", labelEn: "Experience" },
+  { id: "projetos", labelPt: "Projetos", labelEn: "Projects" },
+  { id: "skills", labelPt: "Tecnologias", labelEn: "Skills" },
+  { id: "contato", labelPt: "Contato", labelEn: "Contact" },
+];
 
 const Navbar = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenu, setMobileMenu] = useState(false);
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const isPt = i18n.language === "pt";
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navItems = [
-    { name: t("nav.about"), link: "about" },
-    { name: t("nav.experience"), link: "experience" },
-    { name: t("nav.projects"), link: "projects" },
-    { name: t("nav.skills"), link: "skills" },
-    { name: t("nav.contact"), link: "contact" },
-  ];
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
-  const toggleLanguage = () => {
-    i18n.changeLanguage(i18n.language === "pt" ? "en" : "pt");
+  const scrollTo = (id) => {
+    setMobileOpen(false);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
-  const NavLink = ({ item }) => (
-    <button
-      onClick={() => {
-        if (isHomePage) {
-          scroller.scrollTo(item.link, { smooth: true, offset: -80 });
-        } else {
-          window.location.href = `/#${item.link}`;
-        }
-        setMobileMenu(false);
-      }}
-      className="px-4 py-2 text-sm text-slate-600 hover:text-slate-900 transition-colors"
-    >
-      {item.name}
-    </button>
-  );
-
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/80 backdrop-blur-md border-b border-slate-100"
-          : "bg-transparent"
-      }`}
-      role="navigation"
-      aria-label="Navegação principal"
-    >
-      <div className="page-container flex justify-between items-center h-16">
-        <RouterLink
-          to="/"
-          className="text-lg font-semibold text-slate-900 hover:text-amber-700 transition-colors"
-        >
-          Jefferson Teles
-        </RouterLink>
-
-        <div className="hidden md:flex items-center gap-2">
-          {navItems.map((item) => (
-            <NavLink key={item.link} item={item} />
-          ))}
-          <button
-            onClick={toggleLanguage}
-            className="p-2 text-slate-500 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-all"
-            aria-label="Alternar idioma"
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+          scrolled
+            ? "bg-white/90 backdrop-blur-md border-b border-slate-100"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 flex justify-between items-center h-14">
+          <RouterLink
+            to="/"
+            className="text-sm font-semibold text-slate-900 tracking-tight"
           >
-            <FiGlobe size={16} />
+            Jefferson<span className="text-slate-300 font-normal">.dev</span>
+          </RouterLink>
+
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => scrollTo(link.id)}
+                className="px-3 py-1.5 text-[13px] text-slate-500 hover:text-slate-900 transition-colors rounded-md hover:bg-slate-50"
+              >
+                {isPt ? link.labelPt : link.labelEn}
+              </button>
+            ))}
+            <button
+              onClick={() => i18n.changeLanguage(isPt ? "en" : "pt")}
+              className="ml-2 p-1.5 text-slate-400 hover:text-slate-700 rounded-md hover:bg-slate-50 transition-all"
+              aria-label="Toggle language"
+            >
+              <FiGlobe size={14} />
+            </button>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden p-1.5 text-slate-700"
+            aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
+          >
+            {mobileOpen ? <FiX size={18} /> : <FiMenu size={18} />}
           </button>
         </div>
+      </nav>
 
-        <button
-          onClick={() => setMobileMenu(!mobileMenu)}
-          className="md:hidden text-slate-700 p-2"
-          aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={mobileMenu}
+      {/* Mobile overlay */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-white/95 backdrop-blur-sm md:hidden"
+          onClick={() => setMobileOpen(false)}
         >
-          {mobileMenu ? <FiX size={22} /> : <FiMenu size={22} />}
-        </button>
-      </div>
-    </nav>
+          <div
+            className="flex flex-col items-center justify-center h-full gap-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => scrollTo(link.id)}
+                className="text-2xl font-semibold text-slate-900 hover:text-slate-500 transition-colors"
+              >
+                {isPt ? link.labelPt : link.labelEn}
+              </button>
+            ))}
+            <button
+              onClick={() => {
+                i18n.changeLanguage(isPt ? "en" : "pt");
+                setMobileOpen(false);
+              }}
+              className="mt-4 text-sm text-slate-400 hover:text-slate-700"
+            >
+              {isPt ? "English" : "Português"}
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
