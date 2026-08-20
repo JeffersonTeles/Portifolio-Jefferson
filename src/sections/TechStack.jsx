@@ -1,6 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { FiMonitor, FiServer, FiCloud, FiZap } from "react-icons/fi";
+import {
+  FiMonitor,
+  FiServer,
+  FiCloud,
+  FiZap,
+} from "react-icons/fi";
 
 const categories = [
   {
@@ -18,11 +23,11 @@ const categories = [
     name: "Backend",
     icon: FiServer,
     skills: [
-      { name: "Node.js", level: 65 },
-      { name: "Express", level: 60 },
       { name: "Python", level: 80 },
+      { name: "Node.js", level: 65 },
       { name: "PostgreSQL", level: 55 },
       { name: "Supabase", level: 65 },
+      { name: "Express", level: 60 },
     ],
   },
   {
@@ -30,19 +35,19 @@ const categories = [
     icon: FiCloud,
     skills: [
       { name: "Linux", level: 85 },
-      { name: "Docker", level: 45 },
       { name: "Git/GitHub", level: 75 },
-      { name: "NFS-e APIs", level: 70 },
+      { name: "Docker", level: 45 },
+      { name: "Vercel", level: 70 },
     ],
   },
   {
-    name: "Automação",
+    name: "Automação & IA",
     icon: FiZap,
     skills: [
       { name: "Python", level: 80 },
       { name: "n8n", level: 60 },
-      { name: "Webhooks", level: 70 },
       { name: "Playwright", level: 50 },
+      { name: "OpenAI API", level: 55 },
     ],
   },
 ];
@@ -51,23 +56,19 @@ const TechStack = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="skills" className="border-b border-slate-100">
-      <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-28">
-        <p className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-4">
-          05 — Tecnologias
-        </p>
-        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-14">
-          {t("skills.heading")}
-        </h2>
+    <section id="skills" className="section-gap border-t border-white/[0.04]">
+      <div className="container-xl">
+        <span className="section-label">04 — Stack</span>
+        <h2 className="section-title mb-16">{t("skills.heading")}</h2>
 
         <div className="grid sm:grid-cols-2 gap-10">
           {categories.map((cat) => (
-            <div key={cat.name} className="space-y-4">
+            <div key={cat.name} className="space-y-5">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center">
-                  <cat.icon size={16} className="text-slate-600" />
+                <div className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center">
+                  <cat.icon size={16} className="text-accent/60" />
                 </div>
-                <h3 className="text-sm font-semibold text-slate-900">
+                <h3 className="text-sm font-semibold text-white/70 uppercase tracking-wider">
                   {cat.name}
                 </h3>
               </div>
@@ -76,16 +77,16 @@ const TechStack = () => {
                 {cat.skills.map((skill) => (
                   <div key={skill.name} className="space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-slate-600">
+                      <span className="text-sm text-white/50">
                         {skill.name}
                       </span>
-                      <span className="text-xs text-slate-400 font-mono">
+                      <span className="text-[11px] text-white/20 font-mono">
                         {skill.level}%
                       </span>
                     </div>
-                    <div className="h-1 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="h-[3px] bg-white/[0.04] rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-slate-900 rounded-full"
+                        className="h-full bg-accent/40 rounded-full"
                         style={{ width: `${skill.level}%` }}
                       />
                     </div>

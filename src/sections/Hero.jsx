@@ -1,51 +1,104 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { FiArrowRight, FiGithub, FiLinkedin } from "react-icons/fi";
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   return (
-    <section className="relative overflow-hidden border-b border-slate-100">
-      <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-28 lg:py-32">
-        <div className="max-w-2xl">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-sm font-medium text-emerald-600">
-              Disponível para trabalho
+    <section
+      id="hero"
+      className="relative min-h-[90vh] flex items-center overflow-hidden"
+    >
+      {/* Subtle background glow */}
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-white/[0.01] rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="container-xl relative z-10 py-32">
+        <div className="max-w-3xl">
+          {/* Status badge */}
+          <div className="flex items-center gap-3 mb-8">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+            </span>
+            <span className="text-sm font-medium text-emerald-400/80">
+              {t("hero.role")}
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-6">
-            Desenvolvedor
+          {/* Main heading */}
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.05] tracking-tight mb-8">
+            {t("hero.title1")}
             <br />
-            <span className="text-slate-400">Júnior</span>
+            <span className="text-white/30">{t("hero.description")?.split(".")[0]}.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-slate-500 leading-relaxed mb-10 max-w-lg">
-            Sou Jefferson, desenvolvedor em transição de suporte técnico para web. 
-            Construo ferramentas que resolvem problemas reais — não demos bonitas.
+          {/* Description */}
+          <p className="text-lg md:text-xl text-white/40 font-light max-w-xl leading-relaxed mb-12">
+            {t("hero.description")}
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          {/* CTAs */}
+          <div className="flex flex-wrap items-center gap-4">
             <a
-              href="#projetos"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white font-medium rounded-lg hover:bg-slate-800 transition-colors"
+              href="#projects"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-white/90 transition-all"
             >
-              Ver projetos
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              {t("hero.btnWorks")}
+              <FiArrowRight
+                size={16}
+                className="group-hover:translate-x-1 transition-transform"
+              />
             </a>
             <a
-              href="#contato"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-slate-200 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors"
+              href="#contact"
+              className="inline-flex items-center gap-2 px-8 py-4 border border-white/10 text-white/70 font-medium rounded-full hover:bg-white/5 hover:border-white/20 hover:text-white transition-all"
             >
-              Falar comigo
+              {t("hero.btnResume")}
+            </a>
+          </div>
+
+          {/* Social links */}
+          <div className="flex items-center gap-4 mt-16">
+            <a
+              href="https://github.com/JeffersonTeles"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/20 hover:text-white/60 transition-colors"
+              aria-label="GitHub"
+            >
+              <FiGithub size={20} />
+            </a>
+            <a
+              href="https://linkedin.com/in/jeffersonteles"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/20 hover:text-white/60 transition-colors"
+              aria-label="LinkedIn"
+            >
+              <FiLinkedin size={20} />
+            </a>
+            <div className="w-px h-4 bg-white/10 mx-2" />
+            <a
+              href="/Curriculo_Jefferson_Teles.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-mono text-white/20 hover:text-accent transition-colors uppercase tracking-wider"
+            >
+              CV.pdf
             </a>
           </div>
         </div>
       </div>
 
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-slate-50 to-transparent rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-amber-50 to-transparent rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+      {/* Scroll indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        <span className="text-[10px] font-mono text-white/15 uppercase tracking-widest">
+          Scroll
+        </span>
+        <div className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent" />
+      </div>
     </section>
   );
 };

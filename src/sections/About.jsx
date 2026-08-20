@@ -3,33 +3,29 @@ import { useTranslation } from "react-i18next";
 
 const About = () => {
   const { t } = useTranslation();
-  const timeline = t("about.timeline", { returnObjects: true });
   const tags = t("about.tags", { returnObjects: true });
 
   return (
-    <section id="sobre" className="border-b border-slate-100">
-      <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-28">
-        <div className="grid lg:grid-cols-[1fr_1fr] gap-16 lg:gap-20">
-          {/* Left: About text */}
-          <div>
-            <p className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-4">
-              01 — Sobre mim
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-8">
-              {t("about.heading")}
-            </h2>
+    <section id="about" className="section-gap border-t border-white/[0.04]">
+      <div className="container-xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          {/* Left: Text */}
+          <div className="lg:col-span-7">
+            <span className="section-label">{t("about.label")}</span>
+            <h2 className="section-title mb-10">{t("about.heading")}</h2>
 
-            <div className="space-y-5 text-slate-600 leading-relaxed">
+            <div className="space-y-6 text-base md:text-lg text-white/40 font-light leading-relaxed">
               <p>{t("about.p1")}</p>
               <p>{t("about.p2")}</p>
-              <p className="text-slate-500">{t("about.p3")}</p>
+              <p>{t("about.p3")}</p>
             </div>
 
-            <div className="flex flex-wrap gap-2 mt-8">
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mt-12">
               {tags.map((tag, i) => (
                 <span
                   key={i}
-                  className="text-xs px-3 py-1.5 text-slate-600 bg-slate-50 border border-slate-100 rounded-md"
+                  className="px-3 py-1.5 text-xs font-mono text-white/40 border border-white/[0.06] rounded-full"
                 >
                   {tag}
                 </span>
@@ -37,37 +33,59 @@ const About = () => {
             </div>
           </div>
 
-          {/* Right: Timeline */}
-          <div>
-            <p className="text-xs font-mono text-slate-400 uppercase tracking-widest mb-4">
-              02 — Experiência
-            </p>
-            <h3 className="text-xl font-semibold text-slate-900 mb-10">
-              Trajetória
-            </h3>
-
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-[7px] top-2 bottom-2 w-px bg-slate-200" />
-
-              <div className="space-y-10">
-                {timeline.map((item, i) => (
-                  <div key={i} className="relative pl-8">
-                    <div className="absolute left-0 top-2 w-[15px] h-[15px] rounded-full border-2 border-slate-900 bg-white" />
-                    <span className="text-xs font-mono text-slate-400 block mb-1">
-                      {item.year}
-                    </span>
-                    <h4 className="text-base font-semibold text-slate-900 mb-1">
-                      {item.title}
-                    </h4>
-                    <p className="text-sm text-slate-500 leading-relaxed mb-1">
-                      {item.desc}
-                    </p>
-                    <p className="text-xs text-slate-400">
-                      {item.detail}
+          {/* Right: Quick facts */}
+          <div className="lg:col-span-5">
+            <div className="sticky top-28 space-y-8">
+              {/* Quick info card */}
+              <div className="glass p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center">
+                    <span className="text-xl font-bold text-accent">JT</span>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white">Jefferson Teles</p>
+                    <p className="text-xs text-white/30 font-mono">
+                      Cascavel, PR
                     </p>
                   </div>
-                ))}
+                </div>
+
+                <div className="space-y-4 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-white/30">Formação</span>
+                    <span className="text-white/60">
+                      Eng. Software — FAG
+                    </span>
+                  </div>
+                  <div className="w-full h-px bg-white/[0.04]" />
+                  <div className="flex justify-between">
+                    <span className="text-white/30">Conclusão</span>
+                    <span className="text-white/60">Nov/2026</span>
+                  </div>
+                  <div className="w-full h-px bg-white/[0.04]" />
+                  <div className="flex justify-between">
+                    <span className="text-white/30">Experiência</span>
+                    <span className="text-white/60">6+ anos em TI</span>
+                  </div>
+                  <div className="w-full h-px bg-white/[0.04]" />
+                  <div className="flex justify-between">
+                    <span className="text-white/30">Foco</span>
+                    <span className="text-white/60">Automação & IA</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* GitHub stats */}
+              <div className="glass p-6">
+                <p className="text-[10px] font-mono text-white/20 uppercase tracking-widest mb-4">
+                  GitHub Activity
+                </p>
+                <img
+                  src="https://github-readme-stats.vercel.app/api?username=JeffersonTeles&show_icons=true&hide_border=true&bg_color=00000000&title_color=e2a63d&text_color=888888&icon_color=555555&ring_color=333333&count_private=true"
+                  alt="GitHub Stats"
+                  className="w-full rounded-lg opacity-60 hover:opacity-90 transition-opacity"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>

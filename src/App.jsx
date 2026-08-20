@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";
@@ -27,17 +27,39 @@ function HomePage() {
 }
 
 function App() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <Router>
-      <div className="min-h-screen bg-white text-slate-900">
+      <div className="min-h-screen bg-surface">
         <Navbar />
-        <main className="pt-14">
+        <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route
               path="*"
               element={
-                <Suspense fallback={<div className="p-20 text-center text-slate-400">Carregando...</div>}>
+                <Suspense
+                  fallback={
+                    <div className="min-h-screen flex items-center justify-center text-white/30">
+                      Carregando...
+                    </div>
+                  }
+                >
                   <NotFound />
                 </Suspense>
               }
