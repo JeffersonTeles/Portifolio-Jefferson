@@ -11,10 +11,10 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
           {/* Left: Text */}
           <div className="lg:col-span-7">
-            <span className="section-label">{t("about.label")}</span>
+            <span className="section-label">01 — Sobre</span>
             <h2 className="section-title mb-10">{t("about.heading")}</h2>
 
-            <div className="space-y-6 text-base md:text-lg text-white/40 font-light leading-relaxed">
+            <div className="space-y-6 text-base md:text-lg text-white/35 font-light leading-relaxed">
               <p>{t("about.p1")}</p>
               <p>{t("about.p2")}</p>
               <p>{t("about.p3")}</p>
@@ -25,7 +25,7 @@ const About = () => {
               {tags.map((tag, i) => (
                 <span
                   key={i}
-                  className="px-3 py-1.5 text-xs font-mono text-white/40 border border-white/[0.06] rounded-full"
+                  className="px-3 py-1.5 text-xs font-mono text-white/35 border border-white/[0.06] rounded-full hover:border-accent/30 hover:text-accent/70 transition-colors duration-300"
                 >
                   {tag}
                 </span>
@@ -35,55 +35,59 @@ const About = () => {
 
           {/* Right: Quick facts */}
           <div className="lg:col-span-5">
-            <div className="sticky top-28 space-y-8">
-              {/* Quick info card */}
-              <div className="glass p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center">
-                    <span className="text-xl font-bold text-accent">JT</span>
+            <div className="sticky top-28 space-y-6">
+              {/* Avatar + info card */}
+              <div className="glass p-8 group hover:border-white/[0.1] transition-all duration-500">
+                {/* Avatar */}
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center">
+                      <span className="text-2xl font-black text-accent/80">
+                        JT
+                      </span>
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-surface" />
                   </div>
                   <div>
-                    <p className="font-semibold text-white">Jefferson Teles</p>
-                    <p className="text-xs text-white/30 font-mono">
-                      Cascavel, PR
+                    <p className="font-semibold text-white text-lg">
+                      Jefferson Teles
+                    </p>
+                    <p className="text-xs text-white/25 font-mono">
+                      Cascavel, PR — Brasil
                     </p>
                   </div>
                 </div>
 
-                <div className="space-y-4 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-white/30">Formação</span>
-                    <span className="text-white/60">
-                      Eng. Software — FAG
-                    </span>
-                  </div>
-                  <div className="w-full h-px bg-white/[0.04]" />
-                  <div className="flex justify-between">
-                    <span className="text-white/30">Conclusão</span>
-                    <span className="text-white/60">Nov/2026</span>
-                  </div>
-                  <div className="w-full h-px bg-white/[0.04]" />
-                  <div className="flex justify-between">
-                    <span className="text-white/30">Experiência</span>
-                    <span className="text-white/60">6+ anos em TI</span>
-                  </div>
-                  <div className="w-full h-px bg-white/[0.04]" />
-                  <div className="flex justify-between">
-                    <span className="text-white/30">Foco</span>
-                    <span className="text-white/60">Automação & IA</span>
-                  </div>
+                {/* Info rows */}
+                <div className="space-y-0">
+                  {[
+                    ["Formação", "Eng. Software — FAG"],
+                    ["Conclusão", "Nov/2026"],
+                    ["Experiência", "6+ anos em TI"],
+                    ["Foco", "Automação & IA"],
+                  ].map(([label, value], i) => (
+                    <div key={i}>
+                      {i > 0 && <div className="h-px bg-white/[0.04]" />}
+                      <div className="flex justify-between items-center py-3.5">
+                        <span className="text-xs text-white/20 font-mono uppercase tracking-wider">
+                          {label}
+                        </span>
+                        <span className="text-sm text-white/50">{value}</span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
               {/* GitHub stats */}
-              <div className="glass p-6">
-                <p className="text-[10px] font-mono text-white/20 uppercase tracking-widest mb-4">
+              <div className="glass p-6 group hover:border-white/[0.1] transition-all duration-500">
+                <p className="text-[10px] font-mono text-white/15 uppercase tracking-[0.25em] mb-4">
                   GitHub Activity
                 </p>
                 <img
-                  src="https://github-readme-stats.vercel.app/api?username=JeffersonTeles&show_icons=true&hide_border=true&bg_color=00000000&title_color=e2a63d&text_color=888888&icon_color=555555&ring_color=333333&count_private=true"
+                  src="https://github-readme-stats.vercel.app/api?username=JeffersonTeles&show_icons=true&hide_border=true&bg_color=00000000&title_color=e2a63d&text_color=666666&icon_color=444444&ring_color=222222&count_private=true"
                   alt="GitHub Stats"
-                  className="w-full rounded-lg opacity-60 hover:opacity-90 transition-opacity"
+                  className="w-full rounded-lg opacity-50 group-hover:opacity-80 transition-opacity duration-500"
                   loading="lazy"
                 />
               </div>

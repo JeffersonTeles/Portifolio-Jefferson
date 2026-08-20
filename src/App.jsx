@@ -36,16 +36,18 @@ function App() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -60px 0px" }
     );
 
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    const elements = document.querySelectorAll(".reveal, .stagger-children");
+    elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   return (
     <Router>
       <div className="min-h-screen bg-surface">
+        <div className="noise-overlay" />
         <Navbar />
         <main>
           <Routes>
@@ -55,7 +57,7 @@ function App() {
               element={
                 <Suspense
                   fallback={
-                    <div className="min-h-screen flex items-center justify-center text-white/30">
+                    <div className="min-h-screen flex items-center justify-center text-white/20">
                       Carregando...
                     </div>
                   }

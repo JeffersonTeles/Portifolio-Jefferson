@@ -8,9 +8,21 @@ const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      const sections = ["about", "experience", "projects", "skills", "contact"];
+      for (const id of sections.reverse()) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 120) {
+          setActiveSection(id);
+          break;
+        }
+      }
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -35,9 +47,9 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-surface/80 backdrop-blur-xl border-b border-white/[0.04]"
+            ? "bg-surface/85 backdrop-blur-xl border-b border-white/[0.04] shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
             : "bg-transparent"
         }`}
         role="navigation"
@@ -46,7 +58,7 @@ const Navbar = () => {
         <div className="container-xl flex justify-between items-center h-16">
           <RouterLink
             to="/"
-            className="text-lg font-bold text-white hover:text-accent transition-colors"
+            className="text-lg font-bold text-white hover:text-accent transition-colors duration-300"
           >
             JT<span className="text-accent">.</span>
           </RouterLink>
@@ -56,15 +68,22 @@ const Navbar = () => {
               <button
                 key={item.link}
                 onClick={() => scrollTo(item.link)}
-                className="px-3 py-2 text-sm text-white/40 hover:text-white transition-colors rounded-lg"
+                className={`relative px-3 py-2 text-sm rounded-lg transition-all duration-300 ${
+                  activeSection === item.link
+                    ? "text-white"
+                    : "text-white/30 hover:text-white/60"
+                }`}
               >
                 {item.name}
+                {activeSection === item.link && (
+                  <span className="absolute bottom-0.5 left-3 right-3 h-px bg-accent/60" />
+                )}
               </button>
             ))}
-            <div className="w-px h-4 bg-white/10 mx-2" />
+            <div className="w-px h-4 bg-white/[0.06] mx-2" />
             <button
               onClick={toggleLanguage}
-              className="p-2 text-white/30 hover:text-white rounded-lg hover:bg-white/5 transition-all"
+              className="p-2 text-white/20 hover:text-white rounded-lg hover:bg-white/5 transition-all duration-300"
               aria-label="Alternar idioma"
             >
               <FiGlobe size={16} />
@@ -73,7 +92,7 @@ const Navbar = () => {
 
           <button
             onClick={() => setMobileMenu(!mobileMenu)}
-            className="md:hidden text-white/50 p-2"
+            className="md:hidden text-white/40 p-2 hover:text-white transition-colors"
             aria-label={mobileMenu ? "Fechar menu" : "Abrir menu"}
             aria-expanded={mobileMenu}
           >
@@ -86,24 +105,28 @@ const Navbar = () => {
       {mobileMenu && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/70 backdrop-blur-md"
             onClick={() => setMobileMenu(false)}
           />
-          <div className="absolute top-16 right-0 w-64 h-full bg-surface border-l border-white/[0.04] p-6">
-            <div className="flex flex-col gap-2">
+          <div className="absolute top-16 right-0 w-64 h-full bg-surface/95 backdrop-blur-xl border-l border-white/[0.04] p-6">
+            <div className="flex flex-col gap-1">
               {navItems.map((item) => (
                 <button
                   key={item.link}
                   onClick={() => scrollTo(item.link)}
-                  className="px-4 py-3 text-left text-sm text-white/50 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+                  className={`px-4 py-3 text-left text-sm rounded-lg transition-all duration-300 ${
+                    activeSection === item.link
+                      ? "text-white bg-white/5"
+                      : "text-white/40 hover:text-white hover:bg-white/5"
+                  }`}
                 >
                   {item.name}
                 </button>
               ))}
-              <div className="h-px bg-white/[0.04] my-2" />
+              <div className="h-px bg-white/[0.04] my-3" />
               <button
                 onClick={toggleLanguage}
-                className="flex items-center gap-2 px-4 py-3 text-sm text-white/30 hover:text-white hover:bg-white/5 rounded-lg transition-all"
+                className="flex items-center gap-2 px-4 py-3 text-sm text-white/25 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-300"
               >
                 <FiGlobe size={14} />
                 {i18n.language === "pt" ? "English" : "Português"}
