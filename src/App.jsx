@@ -16,12 +16,20 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <About />
-      <Experience />
-      <Projects />
+      <div id="about">
+        <About />
+      </div>
+      <div id="experience">
+        <Experience />
+      </div>
+      <div id="projects">
+        <Projects />
+      </div>
       <TechStack />
       <Certifications />
-      <Contact />
+      <div id="contact">
+        <Contact />
+      </div>
     </>
   );
 }
@@ -36,18 +44,16 @@ function App() {
           }
         });
       },
-      { threshold: 0.08, rootMargin: "0px 0px -60px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
 
-    const elements = document.querySelectorAll(".reveal, .stagger-children");
-    elements.forEach((el) => observer.observe(el));
+    document.querySelectorAll(".slide").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   return (
     <Router>
-      <div className="min-h-screen bg-surface">
-        <div className="noise-overlay" />
+      <div className="min-h-screen bg-[#0a0a0a]">
         <Navbar />
         <main>
           <Routes>
@@ -57,7 +63,7 @@ function App() {
               element={
                 <Suspense
                   fallback={
-                    <div className="min-h-screen flex items-center justify-center text-white/20">
+                    <div className="min-h-screen flex items-center justify-center text-[#333]">
                       Carregando...
                     </div>
                   }
@@ -69,6 +75,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <div className="copy-toast">Copied!</div>
       </div>
     </Router>
   );

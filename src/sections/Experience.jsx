@@ -6,65 +6,50 @@ const Experience = () => {
   const list = t("experience.list", { returnObjects: true });
 
   return (
-    <section id="experience" className="section-gap border-t border-white/[0.04]">
-      <div className="container-xl">
-        <span className="section-label">02 — Experiência</span>
-        <h2 className="section-title mb-6">{t("experience.heading")}</h2>
-        <p className="text-base text-white/25 max-w-2xl mb-16">
+    <section className="slide py-24 border-t border-white/[0.04]">
+      <div className="max-w-[720px] mx-auto px-6 md:px-10">
+        <h2 className="text-[1.6rem] font-bold text-white mb-4">
+          {t("experience.heading")}
+        </h2>
+        <p className="text-[0.95rem] text-[#666] leading-relaxed mb-14">
           {t("experience.intro")}
         </p>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="hidden md:block absolute left-[100px] top-0 bottom-0 w-px bg-white/[0.04]" />
-
-          <div className="space-y-0">
-            {list.map((item, i) => (
-              <div
-                key={i}
-                className="group relative grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-12 py-10 border-t border-white/[0.04] hover:border-white/[0.08] transition-all duration-500"
-              >
-                {/* Period + dot */}
-                <div className="md:pt-0.5 flex items-center gap-4">
-                  {/* Timeline dot */}
-                  <div className="hidden md:flex relative z-10 w-3 h-3 rounded-full border-2 border-white/10 bg-surface group-hover:border-accent/50 group-hover:bg-accent/20 transition-all duration-300" />
-                  <span className="text-xs font-mono text-white/15 group-hover:text-white/25 transition-colors">
-                    {item.period}
-                  </span>
-                </div>
-
-                {/* Content */}
-                <div>
-                  <div className="mb-4">
-                    <h3 className="text-lg font-semibold text-white group-hover:text-accent/90 transition-colors duration-300">
-                      {item.role}
-                    </h3>
-                    <p className="text-sm text-accent/60 mt-0.5">
-                      {item.company}
-                    </p>
-                  </div>
-
-                  <p className="text-sm text-white/25 mb-5 leading-relaxed">
-                    {item.summary}
-                  </p>
-
-                  <ul className="space-y-2.5">
-                    {item.bullets.map((bullet, j) => (
-                      <li
-                        key={j}
-                        className="flex items-start gap-3 text-sm text-white/25 leading-relaxed"
-                      >
-                        <span className="text-accent/40 mt-1.5 text-[8px] shrink-0">
-                          ◆
-                        </span>
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+        <div className="space-y-0">
+          {list.map((item, i) => (
+            <div
+              key={i}
+              className="py-8 border-t border-white/[0.04]"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+                <h3 className="text-[1rem] font-semibold text-white">
+                  {item.role}
+                </h3>
+                <span className="text-[0.8rem] text-[#555] font-mono shrink-0">
+                  {item.period}
+                </span>
               </div>
-            ))}
-          </div>
+              <p className="text-[0.85rem] text-[#e2a63d]/70 mb-3">
+                {item.company}
+              </p>
+              <p className="text-[0.9rem] text-[#666] leading-relaxed mb-3">
+                {item.summary}
+              </p>
+              <ul className="space-y-1.5">
+                {item.bullets.map((bullet, j) => (
+                  <li
+                    key={j}
+                    className="flex items-start gap-3 text-[0.85rem] text-[#555]"
+                  >
+                    <span className="text-[#e2a63d]/40 mt-[5px] text-[8px]">
+                      ◆
+                    </span>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>
