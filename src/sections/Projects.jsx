@@ -17,7 +17,7 @@ const Projects = () => {
   };
 
   return (
-    <AnimatedSection className="py-28 section-alt">
+    <AnimatedSection id="projects" className="py-28 section-alt">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         <h2 className="text-[1.8rem] font-bold text-white mb-16">
           {t("projects.heading")}

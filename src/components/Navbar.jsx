@@ -68,14 +68,18 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-white/[0.04]"
-            : "bg-transparent"
+        className={`fixed left-0 right-0 z-50 transition-all duration-500 flex justify-center ${
+          scrolled ? "top-4" : "top-0"
         }`}
       >
-        <div className="max-w-[720px] mx-auto px-6 md:px-10 flex justify-between items-center h-16">
-          <RouterLink to="/" className="flex items-center gap-3 group">
+        <div
+          className={`w-full max-w-[900px] mx-auto flex justify-between items-center transition-all duration-500 ${
+            scrolled
+              ? "h-14 px-6 md:px-8 bg-[#0a0a0a]/80 backdrop-blur-md border border-white/[0.08] rounded-full shadow-lg"
+              : "h-20 px-6 md:px-10 bg-transparent"
+          }`}
+        >
+          <RouterLink to="/" className="flex items-center gap-3 group outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg p-1 -ml-1">
             <div className="w-8 h-8 rounded-full bg-[#1a1a1a] border border-white/[0.08] flex items-center justify-center group-hover:border-accent/30 transition-colors duration-300">
               <span className="text-[0.65rem] font-bold text-accent">
                 JT
@@ -87,19 +91,20 @@ const Navbar = () => {
           </RouterLink>
 
           {/* Desktop nav */}
-          <nav className="hidden sm:flex items-center gap-6" aria-label="Navegação principal">
+          <nav className="hidden sm:flex items-center gap-1" aria-label="Navegação principal">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-[0.85rem] text-[#555] hover:text-white transition-colors duration-300"
+                className="px-4 py-2 rounded-full text-[0.85rem] text-[#888] hover:text-white hover:bg-white/5 transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 {link.label}
               </a>
             ))}
+            <div className="w-px h-4 bg-white/10 mx-2"></div>
             <button
               onClick={toggleLanguage}
-              className="text-[0.75rem] text-[#444] hover:text-accent font-mono uppercase tracking-wider transition-colors duration-300"
+              className="px-3 py-1.5 rounded-full text-[0.75rem] text-[#666] hover:text-white hover:bg-white/5 font-mono uppercase tracking-wider transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-accent"
               aria-label={i18n.language === "pt" ? "Switch to English" : "Mudar para Português"}
             >
               {i18n.language === "pt" ? "EN" : "PT"}
@@ -109,7 +114,7 @@ const Navbar = () => {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="sm:hidden text-[#666] p-2 hover:text-white transition-colors"
+            className="sm:hidden text-[#888] p-2 -mr-2 rounded-full hover:text-white hover:bg-white/5 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"

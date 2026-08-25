@@ -8,7 +8,7 @@ const Experience = () => {
   const list = t("experience.list", { returnObjects: true });
 
   return (
-    <AnimatedSection className="py-28">
+    <AnimatedSection id="experience" className="py-28">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         <h2 className="text-[1.8rem] font-bold text-white mb-4">
           {t("experience.heading")}

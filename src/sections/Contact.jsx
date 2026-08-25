@@ -7,7 +7,7 @@ const Contact = () => {
   const { t } = useTranslation();
 
   return (
-    <AnimatedSection className="py-32 section-alt">
+    <AnimatedSection id="contact" className="py-32 section-alt">
       <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
         <h2 className="text-[2.2rem] sm:text-[2.8rem] font-bold text-white mb-5">
           {t("contact.heading")}

@@ -7,7 +7,7 @@ const About = () => {
   const capabilities = t("about.capabilities", { returnObjects: true });
 
   return (
-    <AnimatedSection className="py-28">
+    <AnimatedSection id="about" className="py-28">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-16 lg:gap-20">
           {/* Left: Text */}
