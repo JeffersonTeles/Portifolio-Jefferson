@@ -1,16 +1,32 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { FiGithub, FiLinkedin, FiMapPin } from "react-icons/fi";
+import { motion } from "framer-motion";
 import { copyEmail } from "../utils/copyEmail";
+import AnimatedSection from "../components/AnimatedSection";
 
 const Hero = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="slide min-h-[90vh] flex items-center relative overflow-hidden">
-      {/* Subtle amber glow */}
-      <div className="absolute top-[15%] left-[-8%] w-[600px] h-[600px] bg-[#e2a63d]/[0.03] rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-[#e2a63d]/[0.015] rounded-full blur-[100px] pointer-events-none" />
+    <AnimatedSection className="min-h-[90vh] flex items-center relative overflow-hidden">
+      {/* Subtle amber glow - Animated */}
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.03, 0.05, 0.03]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[15%] left-[-8%] w-[600px] h-[600px] bg-[#e2a63d] rounded-full blur-[140px] pointer-events-none" 
+      />
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.5, 1],
+          opacity: [0.015, 0.03, 0.015]
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-[#e2a63d] rounded-full blur-[100px] pointer-events-none" 
+      />
 
       {/* Grid pattern */}
       <div
@@ -46,20 +62,24 @@ const Hero = () => {
 
             {/* Actions */}
             <div className="flex flex-wrap items-center gap-4 mb-10">
-              <a
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 href="#projects"
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-black text-[0.9rem] font-medium rounded-full hover:bg-[#e2a63d] transition-colors duration-300"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-black text-[0.9rem] font-medium rounded-full hover:bg-[#e2a63d] transition-colors duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(226,166,61,0.3)]"
               >
                 {t("hero.btnWorks")}
-              </a>
-              <a
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 href="/Curriculo_Jefferson_Teles.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-[#ccc] text-[0.9rem] font-medium rounded-full hover:border-[#e2a63d]/40 hover:text-white transition-colors duration-300"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-[#ccc] text-[0.9rem] font-medium rounded-full hover:border-[#e2a63d]/40 hover:text-white transition-colors duration-300 backdrop-blur-md bg-white/[0.02]"
               >
                 {t("hero.btnResume")}
-              </a>
+              </motion.a>
             </div>
 
             {/* Email + Social */}
@@ -126,10 +146,14 @@ const Hero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <div className="w-px h-8 bg-gradient-to-b from-white/10 to-transparent" />
-      </div>
-    </section>
+      <motion.div 
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      >
+        <div className="w-px h-8 bg-gradient-to-b from-[#e2a63d]/50 to-transparent" />
+      </motion.div>
+    </AnimatedSection>
   );
 };
 

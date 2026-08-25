@@ -32,21 +32,7 @@ function HomePage() {
 }
 
 function App() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-    );
-
-    document.querySelectorAll(".slide").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  // Animations now handled by framer-motion in components
 
   return (
     <Router>

@@ -1,11 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import AnimatedSection from "../components/AnimatedSection";
 
 const Certifications = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="certifications" className="slide py-28">
+    <AnimatedSection id="certifications" className="py-28">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         <h2 className="text-[1.8rem] font-bold text-white mb-10">
           {t("certifications.heading")}
@@ -23,7 +24,7 @@ const Certifications = () => {
           </p>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 };
 

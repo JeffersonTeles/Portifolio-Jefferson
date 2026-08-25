@@ -1,12 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+import AnimatedSection from "../components/AnimatedSection";
 
 const Experience = () => {
   const { t } = useTranslation();
   const list = t("experience.list", { returnObjects: true });
 
   return (
-    <section className="slide py-28">
+    <AnimatedSection className="py-28">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         <h2 className="text-[1.8rem] font-bold text-white mb-4">
           {t("experience.heading")}
@@ -19,9 +21,13 @@ const Experience = () => {
           {/* Timeline line */}
           <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-[#e2a63d]/20 via-white/[0.06] to-transparent hidden sm:block" />
 
-          <div className="stagger space-y-0">
+          <div className="space-y-0">
             {list.map((item, i) => (
-              <div
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
                 key={i}
                 className="relative sm:pl-10 py-8 border-t border-white/[0.04] first:border-t-0"
               >
@@ -55,12 +61,12 @@ const Experience = () => {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 };
 

@@ -1,12 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { copyEmail } from "../utils/copyEmail";
+import AnimatedSection from "../components/AnimatedSection";
 
 const Contact = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="slide py-32 section-alt">
+    <AnimatedSection className="py-32 section-alt">
       <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
         <h2 className="text-[2.2rem] sm:text-[2.8rem] font-bold text-white mb-5">
           {t("contact.heading")}
@@ -27,7 +28,7 @@ const Contact = () => {
           {t("contact.location")}
         </p>
       </div>
-    </section>
+    </AnimatedSection>
   );
 };
 

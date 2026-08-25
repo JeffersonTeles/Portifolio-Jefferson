@@ -1,43 +1,26 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { FiMonitor, FiServer, FiCloud, FiZap } from "react-icons/fi";
-
-const skills = [
-  {
-    category: "Frontend",
-    icon: FiMonitor,
-    items: ["React", "JavaScript", "TypeScript", "Tailwind CSS", "Vite"],
-  },
-  {
-    category: "Backend",
-    icon: FiServer,
-    items: ["Python", "Node.js", "Express", "PostgreSQL", "Supabase"],
-  },
-  {
-    category: "Infraestrutura",
-    icon: FiCloud,
-    items: ["Linux", "Git/GitHub", "Docker", "Vercel"],
-  },
-  {
-    category: "Automação & IA",
-    icon: FiZap,
-    items: ["Python", "n8n", "Playwright", "OpenAI API"],
-  },
-];
+import { motion } from "framer-motion";
+import AnimatedSection from "../components/AnimatedSection";
+import { skills } from "../data/constants";
 
 const TechStack = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="skills" className="slide py-28 section-alt">
+    <AnimatedSection id="skills" className="py-28 section-alt">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         <h2 className="text-[1.8rem] font-bold text-white mb-14">
           {t("skills.heading")}
         </h2>
 
-        <div className="stagger grid sm:grid-cols-2 gap-5">
-          {skills.map((group) => (
-            <div
+        <div className="grid sm:grid-cols-2 gap-5">
+          {skills.map((group, i) => (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: i * 0.1, duration: 0.4 }}
               key={group.category}
               className="p-6 rounded-xl bg-[#0a0a0a]/60 border border-white/[0.04] hover:border-white/[0.08] transition-all duration-500 group"
             >
@@ -59,11 +42,11 @@ const TechStack = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 };
 

@@ -1,12 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import AnimatedSection from "../components/AnimatedSection";
 
 const About = () => {
   const { t } = useTranslation();
   const capabilities = t("about.capabilities", { returnObjects: true });
 
   return (
-    <section className="slide py-28">
+    <AnimatedSection className="py-28">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-16 lg:gap-20">
           {/* Left: Text */}
@@ -78,7 +79,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 };
 

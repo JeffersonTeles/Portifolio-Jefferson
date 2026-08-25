@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 import ProjectImage from "../components/ProjectImage";
+import AnimatedSection from "../components/AnimatedSection";
+import ProjectModal from "../components/ProjectModal";
 
 const Projects = () => {
   const { t } = useTranslation();
   const projects = t("projects.list", { returnObjects: true });
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const handleOpenModal = (project, index) => {
+    setSelectedProject(project);
+    setSelectedIndex(index);
+  };
 
   return (
-    <section className="slide py-28 section-alt">
+    <AnimatedSection className="py-28 section-alt">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         <h2 className="text-[1.8rem] font-bold text-white mb-16">
           {t("projects.heading")}
@@ -15,9 +25,14 @@ const Projects = () => {
 
         <div className="space-y-28">
           {projects.map((project, i) => (
-            <article
+            <motion.article
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
               key={project.title}
-              className="group rounded-xl p-6 -mx-6 hover:bg-white/[0.015] transition-colors duration-500"
+              className="group rounded-xl p-6 -mx-6 hover:bg-white/[0.015] transition-colors duration-500 cursor-pointer"
+              onClick={() => handleOpenModal(project, i)}
             >
               <ProjectImage
                 title={project.title}
@@ -47,21 +62,21 @@ const Projects = () => {
                 ))}
               </div>
 
-              {project.link !== "#" && (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-5 text-[0.85rem] text-[#888] hover:text-[#e2a63d] transition-colors duration-300 border-b border-[#333] hover:border-[#e2a63d]"
-                >
-                  {t("projects.viewProject")} →
-                </a>
-              )}
-            </article>
+              <div className="mt-5 text-[0.85rem] text-[#888] group-hover:text-[#e2a63d] transition-colors duration-300 inline-flex items-center gap-2">
+                Ver detalhes <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-[-10px] group-hover:translate-x-0">→</span>
+              </div>
+            </motion.article>
           ))}
         </div>
       </div>
-    </section>
+
+      <ProjectModal 
+        isOpen={!!selectedProject} 
+        onClose={() => setSelectedProject(null)} 
+        project={selectedProject}
+        index={selectedIndex}
+      />
+    </AnimatedSection>
   );
 };
 
