@@ -63,7 +63,7 @@ const Projects = () => {
               </div>
 
               <div className="mt-5 text-[0.85rem] text-[#888] group-hover:text-[#e2a63d] transition-colors duration-300 inline-flex items-center gap-2">
-                Ver detalhes <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-[-10px] group-hover:translate-x-0">→</span>
+                {t("projects.viewDetails", "Ver detalhes")} <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-[-10px] group-hover:translate-x-0">→</span>
               </div>
             </motion.article>
           ))}

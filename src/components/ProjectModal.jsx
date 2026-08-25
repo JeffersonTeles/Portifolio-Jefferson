@@ -77,7 +77,7 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
                 {/* Additional simulated content for professional feel */}
                 {project.features && (
                   <>
-                    <h4 className="text-white text-lg mt-6 mb-3 font-semibold">Features</h4>
+                    <h4 className="text-white text-lg mt-6 mb-3 font-semibold">{t("projects.features", "Principais Funcionalidades")}</h4>
                     <ul className="list-disc pl-5 space-y-1 text-[#888]">
                       {project.features.map((feature, idx) => (
                          <li key={idx}>{feature}</li>
@@ -108,7 +108,7 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
                     className="flex-1 flex justify-center items-center gap-2 px-6 py-3 bg-white/5 text-white font-medium rounded-xl border border-white/10 hover:bg-white/10 transition-colors"
                   >
                     <FiGithub size={18} />
-                    Source Code
+                    {t("projects.sourceCode", "Código Fonte")}
                   </a>
                 )}
               </div>

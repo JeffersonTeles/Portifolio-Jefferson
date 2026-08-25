@@ -73,7 +73,7 @@ const Hero = () => {
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="/Curriculo_Jefferson_Teles.pdf"
+                href="/Curriculo_Jefferson_Teles_TI.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-[#ccc] text-[0.9rem] font-medium rounded-full hover:border-[#e2a63d]/40 hover:text-white transition-colors duration-300 backdrop-blur-md bg-white/[0.02]"

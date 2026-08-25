@@ -58,12 +58,7 @@ const About = () => {
 
               {/* Info rows */}
               <div className="space-y-0">
-                {[
-                  ["Formação", "Eng. Software — FAG"],
-                  ["Conclusão", "Nov/2026"],
-                  ["Experiência", "6+ anos em TI"],
-                  ["Foco", "Automação & IA"],
-                ].map(([label, value], i) => (
+                {t("about.infoCard", { returnObjects: true }).map(([label, value], i) => (
                   <div key={i}>
                     {i > 0 && <div className="h-px bg-white/[0.03]" />}
                     <div className="flex justify-between items-center py-3">

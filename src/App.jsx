@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Navbar from "./components/Navbar";
 import BackToTop from "./components/BackToTop";
@@ -32,6 +33,7 @@ function HomePage() {
 }
 
 function App() {
+  const { t } = useTranslation();
   // Animations now handled by framer-motion in components
 
   return (
@@ -60,7 +62,7 @@ function App() {
           </main>
           <Footer />
           <BackToTop />
-          <div className="copy-toast" aria-live="polite">Copied!</div>
+          <div className="copy-toast" aria-live="polite">{t("contact.copied", "Copiado!")}</div>
         </div>
       </ErrorBoundary>
     </Router>

@@ -40,6 +40,12 @@ const resources = {
           "Integração de IA",
           "Sistemas que não quebram no domingo",
         ],
+        infoCard: [
+          ["Formação", "Eng. Software — FAG"],
+          ["Conclusão", "Nov/2026"],
+          ["Experiência", "6+ anos em TI"],
+          ["Foco", "Automação & IA"],
+        ],
         timeline: [
           {
             year: "2020 - 2025",
@@ -101,7 +107,10 @@ const resources = {
       projects: {
         label: "Projetos",
         heading: "Projetos",
-        viewProject: "Ver projeto",
+        viewDetails: "Ver detalhes",
+        viewProject: "Visitar Projeto",
+        sourceCode: "Código Fonte",
+        features: "Principais Funcionalidades",
         list: [
           {
             title: "Maestria Docente",
@@ -110,6 +119,12 @@ const resources = {
             status: "Privado",
             link: "https://projeto-maestria-vercel.vercel.app",
             image: "/screenshot-maestria.png",
+            features: [
+              "Autenticação segura via Supabase",
+              "Gerenciamento de estado global com Zustand",
+              "Painel administrativo para controle docente",
+              "Relatórios dinâmicos e exportação de dados"
+            ]
           },
           {
             title: "Site de Casamento",
@@ -117,7 +132,14 @@ const resources = {
             stack: ["Next.js", "Vercel", "Framer Motion"],
             status: "Publicado",
             link: "https://casamento-ten-rho.vercel.app",
+            github: "https://github.com/JeffersonTeles/Casamento",
             image: "/screenshot-casamento.png",
+            features: [
+              "Design responsivo 'mobile-first'",
+              "Animações de entrada com Framer Motion",
+              "Formulário de RSVP integrado",
+              "Deploy serverless via Vercel"
+            ]
           },
           {
             title: "Interface Gráfica para Mouse no Linux",
@@ -125,7 +147,14 @@ const resources = {
             stack: ["JavaScript", "Python", "HTML", "CSS", "Linux"],
             status: "Open source",
             link: "https://github.com/JeffersonTeles",
+            github: "https://github.com/JeffersonTeles",
             image: "/screenshot-x11.png",
+            features: [
+              "Integração de chamadas de sistema Linux via Python",
+              "Interface leve HTML/JS via WebSockets/IPC",
+              "Ajuste instantâneo de DPI sem reinstalação de drivers",
+              "Completamente Open Source"
+            ]
           },
         ],
       },
@@ -145,11 +174,12 @@ const resources = {
       },
       contact: {
         label: "Contato",
-        heading: "Vamos conversar",
+        heading: "Vamos conversar?",
         description:
-          "Estou em transição de suporte para desenvolvimento e busco minha primeira oportunidade como programador. Estou disponível imediatamente, prefiro remoto ou Cascavel/PR.",
+          "Seja para uma oportunidade, dúvida ou apenas para falar sobre código e hardware — minha caixa de entrada está aberta.",
+        location: "Cascavel, Paraná — Brasil (Disponível para Remoto)",
+        copied: "E-mail copiado!",
         formNote: "Envie uma mensagem ou fale comigo diretamente pelo email abaixo.",
-        location: "Cascavel, PR · Brasil",
       },
     },
   },
@@ -186,10 +216,16 @@ const resources = {
           "Write simple code that works today",
         ],
         tags: [
-          "Linux in daily work",
+          "Daily Linux user",
           "Python automation",
           "AI integration",
           "Systems that don't break on Sunday",
+        ],
+        infoCard: [
+          ["Education", "BSc Soft. Eng. — FAG"],
+          ["Graduation", "Nov/2026"],
+          ["Experience", "6+ years in IT"],
+          ["Focus", "Automation & AI"],
         ],
         timeline: [
           {
@@ -252,7 +288,10 @@ const resources = {
       projects: {
         label: "Projects",
         heading: "Projects",
-        viewProject: "View project",
+        viewDetails: "View details",
+        viewProject: "View Project",
+        sourceCode: "Source Code",
+        features: "Key Features",
         list: [
           {
             title: "Teaching Mastery",
@@ -261,6 +300,12 @@ const resources = {
             status: "Private",
             link: "https://projeto-maestria-vercel.vercel.app",
             image: "/screenshot-maestria.png",
+            features: [
+              "Secure authentication via Supabase",
+              "Global state management using Zustand",
+              "Administrative dashboard for teacher tracking",
+              "Dynamic reporting and data exports"
+            ]
           },
           {
             title: "Wedding Website",
@@ -268,7 +313,14 @@ const resources = {
             stack: ["Next.js", "Vercel", "Framer Motion"],
             status: "Published",
             link: "https://casamento-ten-rho.vercel.app",
+            github: "https://github.com/JeffersonTeles/Casamento",
             image: "/screenshot-casamento.png",
+            features: [
+              "Mobile-first responsive design",
+              "Smooth entry animations with Framer Motion",
+              "Integrated RSVP Form",
+              "Serverless deployment via Vercel"
+            ]
           },
           {
             title: "Linux Mouse GUI",
@@ -276,7 +328,14 @@ const resources = {
             stack: ["JavaScript", "Python", "HTML", "CSS", "Linux"],
             status: "Open source",
             link: "https://github.com/JeffersonTeles",
+            github: "https://github.com/JeffersonTeles",
             image: "/screenshot-x11.png",
+            features: [
+              "Linux system calls integration via Python",
+              "Lightweight HTML/JS interface",
+              "Instant DPI adjustment without driver reinstall",
+              "Fully Open Source"
+            ]
           },
         ],
       },
@@ -298,9 +357,10 @@ const resources = {
         label: "Contact",
         heading: "Let's talk",
         description:
-          "I'm transitioning from support to development and looking for my first opportunity as a developer. Available immediately, prefer remote or Cascavel, PR.",
+          "Whether it's an opportunity, a question, or just to chat about code and hardware — my inbox is always open.",
+        location: "Cascavel, Paraná — Brazil (Available for Remote)",
+        copied: "Email copied!",
         formNote: "Send a message or contact me directly via email.",
-        location: "Cascavel, Brazil",
       },
     },
   },
