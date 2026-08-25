@@ -7,17 +7,23 @@ import ProjectImage from "./ProjectImage";
 const ProjectModal = ({ isOpen, onClose, project, index }) => {
   const { t } = useTranslation();
 
-  // Prevent scroll when modal is open
+  // Prevent scroll and handle Escape key
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
     } else {
       document.body.style.overflow = "unset";
     }
     return () => {
       document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   if (!project) return null;
 
@@ -43,9 +49,10 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white/70 hover:text-white hover:bg-black/80 transition-colors border border-white/10"
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white/70 hover:text-white hover:bg-black/80 transition-colors border border-white/10 outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              aria-label="Fechar Modal"
             >
-              <FiX size={20} />
+              <FiX size={20} aria-hidden="true" />
             </button>
 
             {/* Image Area */}
@@ -65,7 +72,7 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
                 {project.stack.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-1 text-[0.75rem] text-[#e2a63d] bg-[#e2a63d]/10 border border-[#e2a63d]/20 rounded-md font-mono"
+                    className="px-2.5 py-1 text-[0.75rem] text-accent bg-accent/10 border border-accent/20 rounded-md font-mono"
                   >
                     {tech}
                   </span>
@@ -94,9 +101,9 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex justify-center items-center gap-2 px-6 py-3 bg-[#e2a63d] text-black font-medium rounded-xl hover:bg-[#d19430] transition-colors"
+                    className="flex-1 flex justify-center items-center gap-2 px-6 py-3 bg-accent text-black font-medium rounded-xl hover:bg-accent-hover transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent-hover"
                   >
-                    <FiExternalLink size={18} />
+                    <FiExternalLink size={18} aria-hidden="true" />
                     {t("projects.viewProject", "Visitar Projeto")}
                   </a>
                 )}
@@ -105,9 +112,9 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex justify-center items-center gap-2 px-6 py-3 bg-white/5 text-white font-medium rounded-xl border border-white/10 hover:bg-white/10 transition-colors"
+                    className="flex-1 flex justify-center items-center gap-2 px-6 py-3 bg-white/5 text-white font-medium rounded-xl border border-white/10 hover:bg-white/10 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                   >
-                    <FiGithub size={18} />
+                    <FiGithub size={18} aria-hidden="true" />
                     {t("projects.sourceCode", "Código Fonte")}
                   </a>
                 )}

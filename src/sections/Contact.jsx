@@ -18,7 +18,7 @@ const Contact = () => {
 
         <button
           onClick={copyEmail}
-          className="text-[#e2a63d] text-[1.1rem] border-b border-[#e2a63d]/30 hover:border-[#e2a63d] transition-colors duration-300 cursor-pointer"
+          className="text-accent text-[1.1rem] border-b border-accent/30 hover:border-accent transition-colors duration-300 cursor-pointer"
           aria-label="Copiar email"
         >
           jeffersontelesdeoliveira@gmail.com

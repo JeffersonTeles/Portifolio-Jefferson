@@ -25,8 +25,8 @@ const TechStack = () => {
               className="p-6 rounded-xl bg-[#0a0a0a]/60 border border-white/[0.04] hover:border-white/[0.08] transition-all duration-500 group"
             >
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center group-hover:border-[#e2a63d]/20 transition-colors duration-300">
-                  <group.icon size={16} className="text-[#e2a63d]/50 group-hover:text-[#e2a63d]/80 transition-colors duration-300" />
+                <div className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center group-hover:border-accent/20 transition-colors duration-300">
+                  <group.icon size={16} className="text-accent/50 group-hover:text-accent/80 transition-colors duration-300" />
                 </div>
                 <h3 className="text-[0.75rem] text-[#666] font-mono uppercase tracking-widest">
                   {group.category}

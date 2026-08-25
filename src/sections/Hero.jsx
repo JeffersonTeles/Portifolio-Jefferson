@@ -17,7 +17,7 @@ const Hero = () => {
           opacity: [0.03, 0.05, 0.03]
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[15%] left-[-8%] w-[600px] h-[600px] bg-[#e2a63d] rounded-full blur-[140px] pointer-events-none" 
+        className="absolute top-[15%] left-[-8%] w-[600px] h-[600px] bg-accent rounded-full blur-[140px] pointer-events-none" 
       />
       <motion.div 
         animate={{ 
@@ -25,7 +25,7 @@ const Hero = () => {
           opacity: [0.015, 0.03, 0.015]
         }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-[#e2a63d] rounded-full blur-[100px] pointer-events-none" 
+        className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-accent rounded-full blur-[100px] pointer-events-none" 
       />
 
       {/* Grid pattern */}
@@ -44,8 +44,8 @@ const Hero = () => {
           <div>
             {/* Role badge */}
             <div className="mb-6">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#e2a63d]/20 bg-[#e2a63d]/5 text-[0.75rem] text-[#e2a63d] font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#e2a63d] animate-pulse" />
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/20 bg-accent/5 text-[0.75rem] text-accent font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
                 {t("hero.role")}
               </span>
             </div>
@@ -66,7 +66,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="#projects"
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-black text-[0.9rem] font-medium rounded-full hover:bg-[#e2a63d] transition-colors duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(226,166,61,0.3)]"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-black text-[0.9rem] font-medium rounded-full hover:bg-accent transition-colors duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(226,166,61,0.3)] outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 {t("hero.btnWorks")}
               </motion.a>
@@ -76,7 +76,7 @@ const Hero = () => {
                 href="/Curriculo_Jefferson_Teles_TI.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-[#ccc] text-[0.9rem] font-medium rounded-full hover:border-[#e2a63d]/40 hover:text-white transition-colors duration-300 backdrop-blur-md bg-white/[0.02]"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/10 text-[#ccc] text-[0.9rem] font-medium rounded-full hover:border-accent/40 hover:text-white transition-colors duration-300 backdrop-blur-md bg-white/[0.02] outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
               >
                 {t("hero.btnResume")}
               </motion.a>
@@ -86,7 +86,7 @@ const Hero = () => {
             <div className="flex flex-wrap items-center gap-6">
               <button
                 onClick={copyEmail}
-                className="text-[0.9rem] text-[#666] border-b border-[#333] hover:border-[#e2a63d] hover:text-[#e2a63d] transition-colors duration-300 cursor-pointer"
+                className="text-[0.9rem] text-[#666] border-b border-[#333] hover:border-accent hover:text-accent transition-colors duration-300 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
                 aria-label="Copiar email"
               >
                 jeffersontelesdeoliveira@gmail.com
@@ -96,19 +96,19 @@ const Hero = () => {
                   href="https://github.com/JeffersonTeles"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#333] hover:text-[#e2a63d] transition-colors duration-300"
+                  className="text-[#333] hover:text-accent transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
                   aria-label="GitHub"
                 >
-                  <FiGithub size={17} />
+                  <FiGithub size={17} aria-hidden="true" />
                 </a>
                 <a
                   href="https://linkedin.com/in/jeffersonteles"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#333] hover:text-[#e2a63d] transition-colors duration-300"
+                  className="text-[#333] hover:text-accent transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
                   aria-label="LinkedIn"
                 >
-                  <FiLinkedin size={17} />
+                  <FiLinkedin size={17} aria-hidden="true" />
                 </a>
               </div>
             </div>
@@ -119,7 +119,7 @@ const Hero = () => {
             {/* Avatar */}
             <div className="relative">
               <div className="w-36 h-36 rounded-full bg-[#111] border-2 border-white/[0.06] flex items-center justify-center">
-                <span className="text-5xl font-black text-[#e2a63d]/20 select-none">
+                <span className="text-5xl font-black text-accent/20 select-none">
                   JT
                 </span>
               </div>
@@ -151,7 +151,7 @@ const Hero = () => {
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <div className="w-px h-8 bg-gradient-to-b from-[#e2a63d]/50 to-transparent" />
+        <div className="w-px h-8 bg-gradient-to-b from-accent/50 to-transparent" />
       </motion.div>
     </AnimatedSection>
   );

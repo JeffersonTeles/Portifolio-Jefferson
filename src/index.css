@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --accent-rgb: 226, 166, 61;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -13,7 +17,7 @@
   }
 
   ::selection {
-    @apply bg-[#e2a63d]/20 text-white;
+    @apply bg-accent/20 text-white;
   }
 
   ::-webkit-scrollbar {
@@ -62,7 +66,7 @@
 /* Amber gradient divider */
 .amber-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(226,166,61,0.25) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(var(--accent-rgb), 0.25) 50%, transparent 100%);
 }
 
 /* Alternating section backgrounds */

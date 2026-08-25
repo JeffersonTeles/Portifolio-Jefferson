@@ -40,7 +40,7 @@ const Projects = () => {
                 stack={project.stack}
               />
 
-              <h3 className="text-[1.2rem] font-bold text-white mb-3 group-hover:text-[#e2a63d]/90 transition-colors duration-300">
+              <h3 className="text-[1.2rem] font-bold text-white mb-3 group-hover:text-accent/90 transition-colors duration-300">
                 {project.title}
               </h3>
 
@@ -62,7 +62,7 @@ const Projects = () => {
                 ))}
               </div>
 
-              <div className="mt-5 text-[0.85rem] text-[#888] group-hover:text-[#e2a63d] transition-colors duration-300 inline-flex items-center gap-2">
+              <div className="mt-5 text-[0.85rem] text-[#888] group-hover:text-accent transition-colors duration-300 inline-flex items-center gap-2">
                 {t("projects.viewDetails", "Ver detalhes")} <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-[-10px] group-hover:translate-x-0">→</span>
               </div>
             </motion.article>

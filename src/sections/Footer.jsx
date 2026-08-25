@@ -12,7 +12,7 @@ const Footer = () => {
             </span>
             <a
               href="mailto:jeffersontelesdeoliveira@gmail.com"
-              className="text-[0.85rem] text-[#555] hover:text-[#e2a63d] transition-colors duration-300"
+              className="text-[0.85rem] text-[#555] hover:text-accent transition-colors duration-300"
             >
               jeffersontelesdeoliveira@gmail.com
             </a>
@@ -22,7 +22,7 @@ const Footer = () => {
               href="https://github.com/JeffersonTeles"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-[#e2a63d] hover:border-[#e2a63d]/20 transition-all duration-300"
+              className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-accent hover:border-accent/20 transition-all duration-300"
               aria-label="GitHub"
             >
               <FiGithub size={15} />
@@ -31,14 +31,14 @@ const Footer = () => {
               href="https://linkedin.com/in/jeffersonteles"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-[#e2a63d] hover:border-[#e2a63d]/20 transition-all duration-300"
+              className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-accent hover:border-accent/20 transition-all duration-300"
               aria-label="LinkedIn"
             >
               <FiLinkedin size={15} />
             </a>
             <a
               href="mailto:jeffersontelesdeoliveira@gmail.com"
-              className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-[#e2a63d] hover:border-[#e2a63d]/20 transition-all duration-300"
+              className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-accent hover:border-accent/20 transition-all duration-300"
               aria-label="Email"
             >
               <FiMail size={15} />

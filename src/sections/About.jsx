@@ -22,7 +22,7 @@ const About = () => {
                   key={i}
                   className="flex items-start gap-4 text-[1rem] text-[#777] leading-relaxed"
                 >
-                  <span className="text-[#e2a63d] mt-[6px] text-[10px]">●</span>
+                  <span className="text-accent mt-[6px] text-[10px]">●</span>
                   {item}
                 </li>
               ))}
@@ -48,7 +48,7 @@ const About = () => {
               {/* Avatar */}
               <div className="flex items-center gap-4 mb-6 pb-6 border-b border-white/[0.04]">
                 <div className="w-12 h-12 rounded-full bg-[#111] border border-white/[0.08] flex items-center justify-center">
-                  <span className="text-lg font-bold text-[#e2a63d]/40">JT</span>
+                  <span className="text-lg font-bold text-accent/40">JT</span>
                 </div>
                 <div>
                   <p className="text-[0.9rem] font-semibold text-white">Jefferson Teles</p>

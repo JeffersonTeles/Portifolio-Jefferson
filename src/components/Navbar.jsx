@@ -76,8 +76,8 @@ const Navbar = () => {
       >
         <div className="max-w-[720px] mx-auto px-6 md:px-10 flex justify-between items-center h-16">
           <RouterLink to="/" className="flex items-center gap-3 group">
-            <div className="w-8 h-8 rounded-full bg-[#1a1a1a] border border-white/[0.08] flex items-center justify-center group-hover:border-[#e2a63d]/30 transition-colors duration-300">
-              <span className="text-[0.65rem] font-bold text-[#e2a63d]">
+            <div className="w-8 h-8 rounded-full bg-[#1a1a1a] border border-white/[0.08] flex items-center justify-center group-hover:border-accent/30 transition-colors duration-300">
+              <span className="text-[0.65rem] font-bold text-accent">
                 JT
               </span>
             </div>
@@ -99,7 +99,7 @@ const Navbar = () => {
             ))}
             <button
               onClick={toggleLanguage}
-              className="text-[0.75rem] text-[#444] hover:text-[#e2a63d] font-mono uppercase tracking-wider transition-colors duration-300"
+              className="text-[0.75rem] text-[#444] hover:text-accent font-mono uppercase tracking-wider transition-colors duration-300"
               aria-label={i18n.language === "pt" ? "Switch to English" : "Mudar para Português"}
             >
               {i18n.language === "pt" ? "EN" : "PT"}
@@ -151,7 +151,7 @@ const Navbar = () => {
                   toggleLanguage();
                   setMobileOpen(false);
                 }}
-                className="px-4 py-3 text-left text-[0.85rem] text-[#555] hover:text-[#e2a63d] font-mono transition-colors duration-200"
+                className="px-4 py-3 text-left text-[0.85rem] text-[#555] hover:text-accent font-mono transition-colors duration-200"
               >
                 {i18n.language === "pt" ? "English" : "Português"}
               </button>

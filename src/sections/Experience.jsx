@@ -19,7 +19,7 @@ const Experience = () => {
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-[#e2a63d]/20 via-white/[0.06] to-transparent hidden sm:block" />
+          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-accent/20 via-white/[0.06] to-transparent hidden sm:block" />
 
           <div className="space-y-0">
             {list.map((item, i) => (
@@ -32,8 +32,8 @@ const Experience = () => {
                 className="relative sm:pl-10 py-8 border-t border-white/[0.04] first:border-t-0"
               >
                 {/* Timeline dot */}
-                <div className="absolute left-0 top-[38px] w-[15px] h-[15px] rounded-full border-2 border-[#e2a63d]/30 bg-[#0a0a0a] hidden sm:flex items-center justify-center">
-                  <div className="w-[5px] h-[5px] rounded-full bg-[#e2a63d]/60" />
+                <div className="absolute left-0 top-[38px] w-[15px] h-[15px] rounded-full border-2 border-accent/30 bg-[#0a0a0a] hidden sm:flex items-center justify-center">
+                  <div className="w-[5px] h-[5px] rounded-full bg-accent/60" />
                 </div>
 
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
@@ -44,7 +44,7 @@ const Experience = () => {
                     {item.period}
                   </span>
                 </div>
-                <p className="text-[0.85rem] text-[#e2a63d]/60 mb-3 font-medium">
+                <p className="text-[0.85rem] text-accent/60 mb-3 font-medium">
                   {item.company}
                 </p>
                 <p className="text-[0.9rem] text-[#666] leading-relaxed mb-4">
@@ -56,7 +56,7 @@ const Experience = () => {
                       key={j}
                       className="flex items-start gap-3 text-[0.85rem] text-[#555]"
                     >
-                      <span className="text-[#e2a63d]/30 mt-[5px] text-[8px] shrink-0">◆</span>
+                      <span className="text-accent/30 mt-[5px] text-[8px] shrink-0">◆</span>
                       {bullet}
                     </li>
                   ))}
