@@ -7,15 +7,44 @@ import ProjectImage from "./ProjectImage";
 const ProjectModal = ({ isOpen, onClose, project, index }) => {
   const { t } = useTranslation();
 
-  // Prevent scroll and handle Escape key
+  const modalRef = React.useRef(null);
+
+  // Prevent scroll and handle focus trap & Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      
+      if (e.key === "Tab" && modalRef.current) {
+        const focusables = modalRef.current.querySelectorAll(
+          'a, button, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusables.length === 0) return;
+        
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
 
     if (isOpen) {
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleKeyDown);
+      setTimeout(() => {
+        if (modalRef.current) {
+          const focusables = modalRef.current.querySelectorAll('button, a');
+          if (focusables.length) focusables[0].focus();
+        }
+      }, 100);
     } else {
       document.body.style.overflow = "unset";
     }
@@ -39,11 +68,15 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
             className="absolute inset-0 bg-[#0a0a0a]/80 backdrop-blur-sm"
           />
           <motion.div
+            ref={modalRef}
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
             className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#111] border border-white/10 shadow-2xl flex flex-col md:flex-row"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import ProjectImage from "../components/ProjectImage";
 import AnimatedSection from "../components/AnimatedSection";
-import ProjectModal from "../components/ProjectModal";
+
+const ProjectModal = lazy(() => import("../components/ProjectModal"));
 
 const Projects = () => {
   const { t } = useTranslation();
@@ -23,13 +24,21 @@ const Projects = () => {
           {t("projects.heading")}
         </h2>
 
-        <div className="space-y-28">
+        <motion.div 
+          className="space-y-28"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.1 } }
+          }}
+        >
           {projects.map((project, i) => (
             <motion.article
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+              }}
               key={project.title}
               className="group rounded-xl p-6 -mx-6 hover:bg-white/[0.015] transition-colors duration-500 cursor-pointer"
               onClick={() => handleOpenModal(project, i)}
@@ -67,15 +76,17 @@ const Projects = () => {
               </div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
 
-      <ProjectModal 
-        isOpen={!!selectedProject} 
-        onClose={() => setSelectedProject(null)} 
-        project={selectedProject}
-        index={selectedIndex}
-      />
+      <Suspense fallback={null}>
+        <ProjectModal 
+          isOpen={!!selectedProject} 
+          onClose={() => setSelectedProject(null)} 
+          project={selectedProject}
+          index={selectedIndex}
+        />
+      </Suspense>
     </AnimatedSection>
   );
 };

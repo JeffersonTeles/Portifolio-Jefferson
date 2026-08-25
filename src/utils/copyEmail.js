@@ -9,6 +9,6 @@ export const copyEmail = async () => {
       setTimeout(() => toast.classList.remove("is-visible"), 1400);
     }
   } catch {
-    window.location.href = `mailto:${EMAIL}`;
+    window.location.href = `mailto:${EMAIL}?subject=Vi%20seu%20portf%C3%B3lio%20e...&body=Ol%C3%A1%20Jefferson%2C%0A%0A`;
   }
 };

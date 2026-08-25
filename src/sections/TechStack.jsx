@@ -17,10 +17,10 @@ const TechStack = () => {
         <div className="grid sm:grid-cols-2 gap-5">
           {skills.map((group, i) => (
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.1, duration: 0.4 }}
+              variants={{
+                hidden: { opacity: 0, scale: 0.95 },
+                visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } }
+              }}
               key={group.category}
               className="p-6 rounded-xl bg-[#0a0a0a]/60 border border-white/[0.04] hover:border-white/[0.08] transition-all duration-500 group"
             >

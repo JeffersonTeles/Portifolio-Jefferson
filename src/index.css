@@ -8,12 +8,28 @@
   }
 
   html {
+    font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
     scroll-behavior: smooth;
+    cursor: none;
   }
 
   body {
-    @apply bg-[#0a0a0a] text-[#e5e5e5] antialiased;
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #050505; /* Black background */
+    color: #fff;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Fallback for touch devices */
+  @media (pointer: coarse) {
+    html, body {
+      cursor: auto;
+    }
   }
 
   ::selection {
