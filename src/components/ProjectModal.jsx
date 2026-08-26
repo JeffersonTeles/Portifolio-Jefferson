@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FiX, FiExternalLink, FiGithub } from "react-icons/fi";
-import { useTranslation } from "react-i18next";
-import ProjectImage from "./ProjectImage";
+import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiX, FiExternalLink, FiGithub } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
+import ProjectImage from './ProjectImage';
 
 const ProjectModal = ({ isOpen, onClose, project, index }) => {
   const { t } = useTranslation();
@@ -12,17 +12,17 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
   // Prevent scroll and handle focus trap & Escape key
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         onClose();
         return;
       }
-      
-      if (e.key === "Tab" && modalRef.current) {
+
+      if (e.key === 'Tab' && modalRef.current) {
         const focusables = modalRef.current.querySelectorAll(
           'a, button, [tabindex]:not([tabindex="-1"])'
         );
         if (focusables.length === 0) return;
-        
+
         const first = focusables[0];
         const last = focusables[focusables.length - 1];
 
@@ -37,8 +37,8 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
     };
 
     if (isOpen) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
       setTimeout(() => {
         if (modalRef.current) {
           const focusables = modalRef.current.querySelectorAll('button, a');
@@ -46,11 +46,11 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
         }
       }, 100);
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     }
     return () => {
-      document.body.style.overflow = "unset";
-      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, onClose]);
 
@@ -72,7 +72,7 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+            transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
             className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#111] border border-white/10 shadow-2xl flex flex-col md:flex-row"
             role="dialog"
             aria-modal="true"
@@ -97,10 +97,8 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
 
             {/* Content Area */}
             <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col">
-              <h3 className="text-[1.8rem] font-bold text-white mb-2">
-                {project.title}
-              </h3>
-              
+              <h3 className="text-[1.8rem] font-bold text-white mb-2">{project.title}</h3>
+
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.stack.map((tech) => (
                   <span
@@ -117,10 +115,12 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
                 {/* Additional simulated content for professional feel */}
                 {project.features && (
                   <>
-                    <h4 className="text-white text-lg mt-6 mb-3 font-semibold">{t("projects.features", "Principais Funcionalidades")}</h4>
+                    <h4 className="text-white text-lg mt-6 mb-3 font-semibold">
+                      {t('projects.features', 'Principais Funcionalidades')}
+                    </h4>
                     <ul className="list-disc pl-5 space-y-1 text-[#888]">
                       {project.features.map((feature, idx) => (
-                         <li key={idx}>{feature}</li>
+                        <li key={idx}>{feature}</li>
                       ))}
                     </ul>
                   </>
@@ -129,7 +129,7 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-4 mt-8 pt-6 border-t border-white/10">
-                {project.link !== "#" && (
+                {project.link !== '#' && (
                   <a
                     href={project.link}
                     target="_blank"
@@ -137,7 +137,7 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
                     className="flex-1 flex justify-center items-center gap-2 px-6 py-3 bg-accent text-black font-medium rounded-xl hover:bg-accent-hover transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent-hover"
                   >
                     <FiExternalLink size={18} aria-hidden="true" />
-                    {t("projects.viewProject", "Visitar Projeto")}
+                    {t('projects.viewProject', 'Visitar Projeto')}
                   </a>
                 )}
                 {project.github && (
@@ -148,7 +148,7 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
                     className="flex-1 flex justify-center items-center gap-2 px-6 py-3 bg-white/5 text-white font-medium rounded-xl border border-white/10 hover:bg-white/10 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                   >
                     <FiGithub size={18} aria-hidden="true" />
-                    {t("projects.sourceCode", "Código Fonte")}
+                    {t('projects.sourceCode', 'Código Fonte')}
                   </a>
                 )}
               </div>

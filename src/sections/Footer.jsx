@@ -1,5 +1,5 @@
-import React from "react";
-import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import React from 'react';
+import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 
 const Footer = () => {
   return (

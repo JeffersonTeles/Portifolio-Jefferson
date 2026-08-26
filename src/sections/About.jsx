@@ -1,10 +1,10 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import AnimatedSection from "../components/AnimatedSection";
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import AnimatedSection from '../components/AnimatedSection';
 
 const About = () => {
   const { t } = useTranslation();
-  const capabilities = t("about.capabilities", { returnObjects: true });
+  const capabilities = t('about.capabilities', { returnObjects: true });
 
   return (
     <AnimatedSection id="about" className="py-28">
@@ -12,9 +12,7 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-16 lg:gap-20">
           {/* Left: Text */}
           <div>
-            <h2 className="text-[1.8rem] font-bold text-white mb-8">
-              {t("about.heading")}
-            </h2>
+            <h2 className="text-[1.8rem] font-bold text-white mb-8">{t('about.heading')}</h2>
 
             <ul className="stagger space-y-4 mb-12">
               {capabilities.map((item, i) => (
@@ -58,7 +56,7 @@ const About = () => {
 
               {/* Info rows */}
               <div className="space-y-0">
-                {t("about.infoCard", { returnObjects: true }).map(([label, value], i) => (
+                {t('about.infoCard', { returnObjects: true }).map(([label, value], i) => (
                   <div key={i}>
                     {i > 0 && <div className="h-px bg-white/[0.03]" />}
                     <div className="flex justify-between items-center py-3">

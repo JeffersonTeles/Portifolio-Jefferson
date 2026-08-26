@@ -1,7 +1,7 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { copyEmail } from "../utils/copyEmail";
-import AnimatedSection from "../components/AnimatedSection";
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { copyEmail } from '../utils/copyEmail';
+import AnimatedSection from '../components/AnimatedSection';
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -10,10 +10,10 @@ const Contact = () => {
     <AnimatedSection id="contact" className="py-32 section-alt">
       <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
         <h2 className="text-[2.2rem] sm:text-[2.8rem] font-bold text-white mb-5">
-          {t("contact.heading")}
+          {t('contact.heading')}
         </h2>
         <p className="text-[1rem] text-[#555] leading-relaxed mb-10 max-w-md mx-auto">
-          {t("contact.description")}
+          {t('contact.description')}
         </p>
 
         <button
@@ -24,9 +24,7 @@ const Contact = () => {
           jeffersontelesdeoliveira@gmail.com
         </button>
 
-        <p className="text-[0.8rem] text-[#333] mt-5 font-mono">
-          {t("contact.location")}
-        </p>
+        <p className="text-[0.8rem] text-[#333] mt-5 font-mono">{t('contact.location')}</p>
       </div>
     </AnimatedSection>
   );

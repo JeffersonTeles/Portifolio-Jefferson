@@ -5,14 +5,14 @@ const AnimatedSection = ({ children, className = '', id = '' }) => {
   const containerVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
-      opacity: 1, 
+      opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
-        staggerChildren: 0.15
-      }
-    }
+        ease: 'easeOut',
+        staggerChildren: 0.15,
+      },
+    },
   };
 
   return (
@@ -21,7 +21,7 @@ const AnimatedSection = ({ children, className = '', id = '' }) => {
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: '-100px' }}
       variants={containerVariants}
     >
       {children}

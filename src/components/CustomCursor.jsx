@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -8,7 +8,7 @@ const CustomCursor = () => {
 
   useEffect(() => {
     // Detect touch device
-    if (window.matchMedia("(pointer: coarse)").matches) {
+    if (window.matchMedia('(pointer: coarse)').matches) {
       setIsTouchDevice(true);
       return;
     }
@@ -20,10 +20,10 @@ const CustomCursor = () => {
     const handleMouseOver = (e) => {
       const target = e.target;
       if (
-        target.tagName.toLowerCase() === "a" ||
-        target.tagName.toLowerCase() === "button" ||
-        target.closest("a") ||
-        target.closest("button")
+        target.tagName.toLowerCase() === 'a' ||
+        target.tagName.toLowerCase() === 'button' ||
+        target.closest('a') ||
+        target.closest('button')
       ) {
         setIsHovering(true);
       } else {
@@ -31,12 +31,12 @@ const CustomCursor = () => {
       }
     };
 
-    window.addEventListener("mousemove", updateMousePosition);
-    window.addEventListener("mouseover", handleMouseOver);
+    window.addEventListener('mousemove', updateMousePosition);
+    window.addEventListener('mouseover', handleMouseOver);
 
     return () => {
-      window.removeEventListener("mousemove", updateMousePosition);
-      window.removeEventListener("mouseover", handleMouseOver);
+      window.removeEventListener('mousemove', updateMousePosition);
+      window.removeEventListener('mouseover', handleMouseOver);
     };
   }, []);
 
@@ -52,7 +52,7 @@ const CustomCursor = () => {
           scale: isHovering ? 2 : 1,
         }}
         transition={{
-          type: "spring",
+          type: 'spring',
           stiffness: 1000,
           damping: 50,
           mass: 0.1,
@@ -67,7 +67,7 @@ const CustomCursor = () => {
           opacity: isHovering ? 0 : 0.5,
         }}
         transition={{
-          type: "spring",
+          type: 'spring',
           stiffness: 200,
           damping: 30,
           mass: 0.5,

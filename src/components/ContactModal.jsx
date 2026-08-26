@@ -1,47 +1,47 @@
-import React, { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FiX, FiSend, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
-import emailjs from "@emailjs/browser";
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiX, FiSend, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
+import emailjs from '@emailjs/browser';
 
 // -------------------------------------------------------
 // Configure o EmailJS em https://emailjs.com (plano grátis)
 // 1. Crie um Email Service e um Email Template
 // 2. Substitua as constantes abaixo com seus IDs reais
 // -------------------------------------------------------
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
 // -------------------------------------------------------
 
 const ContactModal = ({ isOpen, onClose }) => {
   const formRef = useRef(null);
-  const [step, setStep] = useState("idle"); // idle | sending | success | error
-  const [formData, setForm] = useState({ name: "", email: "", message: "" });
-  const [errors, setErrors] = useState({ name: "", email: "", message: "" });
+  const [step, setStep] = useState('idle'); // idle | sending | success | error
+  const [formData, setForm] = useState({ name: '', email: '', message: '' });
+  const [errors, setErrors] = useState({ name: '', email: '', message: '' });
 
   const validateForm = () => {
-    const newErrors = { name: "", email: "", message: "" };
+    const newErrors = { name: '', email: '', message: '' };
     let isValid = true;
 
     if (!formData.name.trim()) {
-      newErrors.name = "Nome é obrigatório";
+      newErrors.name = 'Nome é obrigatório';
       isValid = false;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
-      newErrors.email = "Email é obrigatório";
+      newErrors.email = 'Email é obrigatório';
       isValid = false;
     } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Email inválido";
+      newErrors.email = 'Email inválido';
       isValid = false;
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = "Mensagem é obrigatória";
+      newErrors.message = 'Mensagem é obrigatória';
       isValid = false;
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = "Escreva pelo menos 10 caracteres";
+      newErrors.message = 'Escreva pelo menos 10 caracteres';
       isValid = false;
     }
 
@@ -52,7 +52,7 @@ const ContactModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    setStep("sending");
+    setStep('sending');
     try {
       await emailjs.sendForm(
         EMAILJS_SERVICE_ID,
@@ -60,18 +60,18 @@ const ContactModal = ({ isOpen, onClose }) => {
         formRef.current,
         EMAILJS_PUBLIC_KEY
       );
-      setStep("success");
-      setForm({ name: "", email: "", message: "" });
+      setStep('success');
+      setForm({ name: '', email: '', message: '' });
     } catch (err) {
-      console.error("EmailJS error:", err);
-      setStep("error");
+      console.error('EmailJS error:', err);
+      setStep('error');
     }
   };
 
   const handleClose = () => {
-    setStep("idle");
-    setForm({ name: "", email: "", message: "" });
-    setErrors({ name: "", email: "", message: "" });
+    setStep('idle');
+    setForm({ name: '', email: '', message: '' });
+    setErrors({ name: '', email: '', message: '' });
     onClose();
   };
 
@@ -108,7 +108,7 @@ const ContactModal = ({ isOpen, onClose }) => {
           </div>
 
           <div className="p-6">
-            {step === "success" ? (
+            {step === 'success' ? (
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -116,7 +116,9 @@ const ContactModal = ({ isOpen, onClose }) => {
               >
                 <FiCheckCircle size={40} className="text-amber-400" />
                 <h4 className="text-slate-100 font-semibold text-lg">Mensagem enviada!</h4>
-                <p className="text-slate-400 text-sm">Retorno em breve. Você também pode me chamar pelo WhatsApp.</p>
+                <p className="text-slate-400 text-sm">
+                  Retorno em breve. Você também pode me chamar pelo WhatsApp.
+                </p>
                 <button
                   onClick={handleClose}
                   className="mt-4 px-6 py-2.5 bg-amber-400 text-slate-950 font-semibold text-sm rounded-lg hover:bg-amber-300 transition-colors"
@@ -124,7 +126,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                   Fechar
                 </button>
               </motion.div>
-            ) : step === "error" ? (
+            ) : step === 'error' ? (
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -133,7 +135,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                 <FiAlertCircle size={40} className="text-red-400" />
                 <h4 className="text-slate-100 font-semibold text-lg">Falha ao enviar</h4>
                 <p className="text-slate-400 text-sm">
-                  Tente novamente ou fale diretamente pelo{" "}
+                  Tente novamente ou fale diretamente pelo{' '}
                   <a
                     href="https://linkedin.com/in/jeffersonteless"
                     target="_blank"
@@ -141,8 +143,8 @@ const ContactModal = ({ isOpen, onClose }) => {
                     className="text-amber-400 hover:text-amber-300 transition-colors"
                   >
                     LinkedIn
-                  </a>{" "}
-                  ou{" "}
+                  </a>{' '}
+                  ou{' '}
                   <a
                     href="https://wa.me/5544999277915"
                     target="_blank"
@@ -150,10 +152,11 @@ const ContactModal = ({ isOpen, onClose }) => {
                     className="text-amber-400 hover:text-amber-300 transition-colors"
                   >
                     WhatsApp
-                  </a>.
+                  </a>
+                  .
                 </p>
                 <button
-                  onClick={() => setStep("idle")}
+                  onClick={() => setStep('idle')}
                   className="mt-4 px-6 py-2.5 bg-slate-800 text-slate-100 font-medium text-sm rounded-lg hover:bg-slate-700 transition-colors border border-slate-700"
                 >
                   Tentar novamente
@@ -172,12 +175,12 @@ const ContactModal = ({ isOpen, onClose }) => {
                       value={formData.name}
                       className={`w-full bg-slate-800/60 border rounded-lg px-4 py-2.5 text-slate-100 text-sm outline-none placeholder:text-slate-600 focus:bg-slate-800 transition-colors ${
                         errors.name
-                          ? "border-red-500/60"
-                          : "border-slate-700 focus:border-slate-500"
+                          ? 'border-red-500/60'
+                          : 'border-slate-700 focus:border-slate-500'
                       }`}
                       onChange={(e) => {
                         setForm({ ...formData, name: e.target.value });
-                        if (errors.name) setErrors({ ...errors, name: "" });
+                        if (errors.name) setErrors({ ...errors, name: '' });
                       }}
                     />
                     {errors.name && <p className="text-xs text-red-400">{errors.name}</p>}
@@ -192,12 +195,12 @@ const ContactModal = ({ isOpen, onClose }) => {
                       value={formData.email}
                       className={`w-full bg-slate-800/60 border rounded-lg px-4 py-2.5 text-slate-100 text-sm outline-none placeholder:text-slate-600 focus:bg-slate-800 transition-colors ${
                         errors.email
-                          ? "border-red-500/60"
-                          : "border-slate-700 focus:border-slate-500"
+                          ? 'border-red-500/60'
+                          : 'border-slate-700 focus:border-slate-500'
                       }`}
                       onChange={(e) => {
                         setForm({ ...formData, email: e.target.value });
-                        if (errors.email) setErrors({ ...errors, email: "" });
+                        if (errors.email) setErrors({ ...errors, email: '' });
                       }}
                     />
                     {errors.email && <p className="text-xs text-red-400">{errors.email}</p>}
@@ -215,12 +218,12 @@ const ContactModal = ({ isOpen, onClose }) => {
                     maxLength={2000}
                     className={`w-full bg-slate-800/60 border rounded-lg px-4 py-2.5 text-slate-100 text-sm outline-none resize-none placeholder:text-slate-600 focus:bg-slate-800 transition-colors ${
                       errors.message
-                        ? "border-red-500/60"
-                        : "border-slate-700 focus:border-slate-500"
+                        ? 'border-red-500/60'
+                        : 'border-slate-700 focus:border-slate-500'
                     }`}
                     onChange={(e) => {
                       setForm({ ...formData, message: e.target.value });
-                      if (errors.message) setErrors({ ...errors, message: "" });
+                      if (errors.message) setErrors({ ...errors, message: '' });
                     }}
                   />
                   <div className="flex justify-between">
@@ -231,10 +234,10 @@ const ContactModal = ({ isOpen, onClose }) => {
 
                 <button
                   type="submit"
-                  disabled={step === "sending"}
+                  disabled={step === 'sending'}
                   className="w-full py-3 bg-amber-400 text-slate-950 font-semibold text-sm rounded-lg hover:bg-amber-300 hover:shadow-[0_0_24px_rgba(251,191,36,0.3)] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {step === "sending" ? (
+                  {step === 'sending' ? (
                     <>
                       <div className="w-4 h-4 border-2 border-slate-950/20 border-t-slate-950 rounded-full animate-spin" />
                       Enviando...

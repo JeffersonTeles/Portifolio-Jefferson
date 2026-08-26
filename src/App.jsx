@@ -1,21 +1,22 @@
-import React, { lazy, Suspense, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { MotionConfig } from "framer-motion";
-import ErrorBoundary from "./components/ErrorBoundary";
-import Navbar from "./components/Navbar";
-import BackToTop from "./components/BackToTop";
-import Hero from "./sections/Hero";
-import About from "./sections/About";
-import Experience from "./sections/Experience";
-import Projects from "./sections/Projects";
-import TechStack from "./sections/TechStack";
-import Certifications from "./sections/Certifications";
-import Contact from "./sections/Contact";
-import Footer from "./sections/Footer";
-import CustomCursor from "./components/CustomCursor";
+import React, { lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { MotionConfig } from 'framer-motion';
+import ErrorBoundary from './components/ErrorBoundary';
+import Navbar from './components/Navbar';
+import BackToTop from './components/BackToTop';
+import Hero from './sections/Hero';
+import About from './sections/About';
+import Experience from './sections/Experience';
+import Projects from './sections/Projects';
+import TechStack from './sections/TechStack';
+import Certifications from './sections/Certifications';
+import Blog from './sections/Blog';
+import Contact from './sections/Contact';
+import Footer from './sections/Footer';
+import CustomCursor from './components/CustomCursor';
 
-const NotFound = lazy(() => import("./pages/NotFound"));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function HomePage() {
   return (
@@ -29,6 +30,7 @@ function HomePage() {
       <TechStack />
       <div className="amber-divider" />
       <Certifications />
+      <Blog />
       <Contact />
     </>
   );
@@ -40,20 +42,6 @@ function App() {
   useEffect(() => {
     document.documentElement.lang = i18n.language;
   }, [i18n.language]);
-
-  useEffect(() => {
-    let keySequence = "";
-    const handleKeyDown = (e) => {
-      keySequence += e.key.toLowerCase();
-      if (keySequence.length > 4) keySequence = keySequence.slice(-4);
-      if (keySequence === "devm") {
-        alert("💻 Matrix Mode Activated: Prepare for the real world!");
-        document.body.style.filter = "hue-rotate(90deg) contrast(1.2)";
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
   return (
     <MotionConfig reducedMotion="user">
@@ -83,7 +71,9 @@ function App() {
             </main>
             <Footer />
             <BackToTop />
-            <div className="copy-toast" aria-live="polite">{t("contact.copied", "Copiado!")}</div>
+            <div className="copy-toast" aria-live="polite">
+              {t('contact.copied', 'Copiado!')}
+            </div>
           </div>
         </ErrorBoundary>
       </Router>
