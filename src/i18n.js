@@ -36,6 +36,14 @@ const resources = {
           "Integração de hardware",
           "Resolução de problemas reais",
         ],
+        infoCard: [
+          ["Localização", "Tupãssi/PR"],
+          ["Formação", "Engenharia de Software"],
+          ["Conclusão", "Jan/2027"],
+          ["Experiência", "6 anos em suporte"],
+          ["Stack", "Linux · Docker · Java · Python"],
+          ["Status", "Buscando vaga Júnior"],
+        ],
         timeline: [
           {
             period: "Jan 2020 — Fev 2025",
@@ -143,6 +151,20 @@ const resources = {
             image: "/screenshot-casamento.png",
           },
         ],
+        viewDetails: "Ver detalhes",
+        viewProject: "Ver projeto",
+        sourceCode: "Código fonte",
+        features: "Funcionalidades",
+      },
+      certifications: {
+        label: "Formação",
+        heading: "Formação acadêmica",
+        course: "Bacharelado em Engenharia de Software",
+        institution: "Centro Universitário FAG — Tupãssi/PR",
+        type: "Graduação",
+        year: "Previsão de conclusão: Jan/2027",
+        description:
+          "Curso focado em desenvolvimento web, APIs REST, banco de dados e engenharia de software. Conciliando a graduação com experiência prática em suporte N2 e projetos fullstack.",
       },
       skills: {
         label: "Habilidades",
@@ -227,6 +249,14 @@ const resources = {
           "Script automation",
           "Hardware integration",
           "Real problem solving",
+        ],
+        infoCard: [
+          ["Location", "Tupãssi, PR"],
+          ["Degree", "Software Engineering"],
+          ["Graduation", "Jan/2027"],
+          ["Experience", "6 years in support"],
+          ["Stack", "Linux · Docker · Java · Python"],
+          ["Status", "Looking for Junior role"],
         ],
         timeline: [
           {
@@ -339,6 +369,20 @@ const resources = {
             image: "/screenshot-casamento.png",
           },
         ],
+        viewDetails: "View details",
+        viewProject: "View project",
+        sourceCode: "Source code",
+        features: "Features",
+      },
+      certifications: {
+        label: "Education",
+        heading: "Academic background",
+        course: "BSc in Software Engineering",
+        institution: "Centro Universitário FAG — Tupãssi/PR",
+        type: "Undergraduate",
+        year: "Expected graduation: Jan/2027",
+        description:
+          "Degree focused on web development, REST APIs, databases and software engineering practices. Combining studies with hands-on support experience and fullstack projects.",
       },
       skills: {
         label: "Skills",
