@@ -13,7 +13,7 @@ const TechStack = () => {
         <h2 className="text-[1.8rem] font-bold text-white mb-14">{t('skills.heading')}</h2>
 
         <div className="grid sm:grid-cols-2 gap-5">
-          {skills.map((group, i) => (
+          {skills.map((group) => (
             <motion.div
               variants={{
                 hidden: { opacity: 0, scale: 0.95 },
