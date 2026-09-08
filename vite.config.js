@@ -10,6 +10,24 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
-    sourcemap: false,
+    sourcemap: process.env.NODE_ENV === "development",
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          router: ["react-router-dom"],
+          motion: ["framer-motion"],
+          icons: ["react-icons", "lucide-react"],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
   },
 });

@@ -42,6 +42,21 @@ npm run dev
 npm run build
 ```
 
+## Scripts disponíveis
+
+- `npm run dev` - Inicia servidor de desenvolvimento
+- `npm run build` - Build para produção
+- `npm run preview` - Preview do build de produção
+- `npm run lint` - Executa ESLint
+- `npm run format` - Formata código com Prettier
+- `npm run test` - Executa testes
+- `npm run test:watch` - Executa testes em modo watch
+- `npm run test:coverage` - Executa testes com coverage
+
+## Contribuindo
+
+Veja [CONTRIBUTING.md](./CONTRIBUTING.md) para diretrizes de contribuição.
+
 ## Observação
 
 Alguns projetos são privados por contexto acadêmico ou particular. O objetivo deste perfil é mostrar raciocínio, qualidade de entrega e consistência, sem exagero de métrica.

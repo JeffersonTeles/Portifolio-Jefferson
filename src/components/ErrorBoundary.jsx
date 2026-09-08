@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -15,12 +15,10 @@ class ErrorBoundary extends React.Component {
       return (
         <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] px-6">
           <div className="text-center">
-            <p className="text-[#555] text-[0.95rem] mb-4">
-              Algo deu errado.
-            </p>
+            <p className="text-[#555] text-[0.95rem] mb-4">Algo deu errado.</p>
             <button
               onClick={() => window.location.reload()}
-              className="text-[#e2a63d] text-[0.85rem] border-b border-[#e2a63d]/30 hover:border-[#e2a63d] transition-colors"
+              className="text-accent text-[0.85rem] border-b border-accent/30 hover:border-accent transition-colors"
             >
               Recarregar página
             </button>

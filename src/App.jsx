@@ -1,18 +1,22 @@
-import React, { lazy, Suspense, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ErrorBoundary from "./components/ErrorBoundary";
-import Navbar from "./components/Navbar";
-import BackToTop from "./components/BackToTop";
-import Hero from "./sections/Hero";
-import About from "./sections/About";
-import Experience from "./sections/Experience";
-import Projects from "./sections/Projects";
-import TechStack from "./sections/TechStack";
-import Certifications from "./sections/Certifications";
-import Contact from "./sections/Contact";
-import Footer from "./sections/Footer";
+import React, { lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { MotionConfig } from 'framer-motion';
+import ErrorBoundary from './components/ErrorBoundary';
+import Navbar from './components/Navbar';
+import BackToTop from './components/BackToTop';
+import Hero from './sections/Hero';
+import About from './sections/About';
+import Experience from './sections/Experience';
+import Projects from './sections/Projects';
+import TechStack from './sections/TechStack';
+import Certifications from './sections/Certifications';
+import Blog from './sections/Blog';
+import Contact from './sections/Contact';
+import Footer from './sections/Footer';
+import CustomCursor from './components/CustomCursor';
 
-const NotFound = lazy(() => import("./pages/NotFound"));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function HomePage() {
   return (
@@ -26,58 +30,54 @@ function HomePage() {
       <TechStack />
       <div className="amber-divider" />
       <Certifications />
+      <Blog />
       <Contact />
     </>
   );
 }
 
 function App() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-    );
+  const { t, i18n } = useTranslation();
 
-    document.querySelectorAll(".slide").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
 
   return (
-    <Router>
-      <ErrorBoundary>
-        <div className="min-h-screen bg-[#0a0a0a]">
-          <Navbar />
-          <main>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route
-                path="*"
-                element={
-                  <Suspense
-                    fallback={
-                      <div className="min-h-screen flex items-center justify-center text-[#333]">
-                        Carregando...
-                      </div>
-                    }
-                  >
-                    <NotFound />
-                  </Suspense>
-                }
-              />
-            </Routes>
-          </main>
-          <Footer />
-          <BackToTop />
-          <div className="copy-toast" aria-live="polite">Copied!</div>
-        </div>
-      </ErrorBoundary>
-    </Router>
+    <MotionConfig reducedMotion="user">
+      <Router>
+        <ErrorBoundary>
+          <CustomCursor />
+          <div className="min-h-screen bg-[#0a0a0a]">
+            <Navbar />
+            <main>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route
+                  path="*"
+                  element={
+                    <Suspense
+                      fallback={
+                        <div className="min-h-screen flex items-center justify-center text-[#333]">
+                          Carregando...
+                        </div>
+                      }
+                    >
+                      <NotFound />
+                    </Suspense>
+                  }
+                />
+              </Routes>
+            </main>
+            <Footer />
+            <BackToTop />
+            <div className="copy-toast" aria-live="polite">
+              {t('contact.copied', 'Copiado!')}
+            </div>
+          </div>
+        </ErrorBoundary>
+      </Router>
+    </MotionConfig>
   );
 }
 
