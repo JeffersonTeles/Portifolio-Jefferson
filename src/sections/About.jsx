@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FiServer, FiWifi, FiCpu, FiCheckCircle } from 'react-icons/fi';
+import { FiServer, FiWifi, FiCpu, FiCheckCircle, FiGithub } from 'react-icons/fi';
 import AnimatedSection from '../components/AnimatedSection';
 
 const About = () => {
@@ -44,12 +44,23 @@ const About = () => {
                 GitHub Activity
               </p>
               <div className="p-4 rounded-2xl bg-white/[0.01] border border-white/[0.05] overflow-hidden">
-                <img
-                  src="https://github-readme-stats.vercel.app/api?username=JeffersonTeles&show_icons=true&hide_border=true&bg_color=0a0a0a&title_color=e2a63d&text_color=666666&icon_color=444444&ring_color=222222&count_private=true"
-                  alt="GitHub Stats"
-                  className="w-full max-w-[420px] opacity-60 hover:opacity-95 transition-opacity duration-500 mx-auto"
-                  loading="lazy"
-                />
+                <a
+                  href="https://github.com/JeffersonTeles"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <img
+                    src="https://github-readme-stats.vercel.app/api?username=JeffersonTeles&show_icons=true&hide_border=true&bg_color=0a0a0a&title_color=e2a63d&text_color=666666&icon_color=444444&ring_color=222222&count_private=true&cache_bust=174"
+                    alt="GitHub Stats"
+                    className="w-full max-w-[420px] opacity-60 hover:opacity-95 transition-opacity duration-500 mx-auto"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.target.src = 'https://github-profile-summary-cards.vercel.app/api/cards/profile?username=JeffersonTeles&theme=dracula';
+                      e.target.classList.add('opacity-80');
+                    }}
+                  />
+                </a>
               </div>
             </div>
           </div>

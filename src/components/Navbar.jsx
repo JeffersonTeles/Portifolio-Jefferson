@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { FiMenu, FiX, FiDownload, FiUser, FiBriefcase, FiFolder, FiMail, FiGlobe } from 'react-icons/fi';
+import { FiMenu, FiX, FiDownload, FiUser, FiBriefcase, FiFolder, FiMail, FiGlobe, FiGithub } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import { useScroll } from '../hooks/useScroll';
 import { useMobileMenu } from '../hooks/useMobileMenu';
@@ -78,13 +78,17 @@ const Navbar = () => {
               : 'h-20 px-6 md:px-10 bg-[#0a0a0c]/60 backdrop-blur-md border border-white/10 rounded-2xl md:rounded-full shadow-lg'
           }`}
         >
-          {/* Logo / Brand */}
+          {/* Logo / Brand com foto */}
           <RouterLink
             to="/"
             className="flex items-center gap-3 group outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg p-1 -ml-1"
           >
-            <div className="w-9 h-9 rounded-full bg-[#151518] border border-accent/40 flex items-center justify-center group-hover:border-accent group-hover:shadow-[0_0_15px_rgba(226,166,61,0.4)] transition-all duration-300">
-              <span className="text-[0.7rem] font-bold text-accent">JT</span>
+            <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-accent/40 flex items-center justify-center group-hover:border-accent group-hover:shadow-[0_0_15px_rgba(226,166,61,0.4)] transition-all duration-300">
+              <img
+                src="https://avatars.githubusercontent.com/u/70072903?v=4"
+                alt="Jefferson Teles"
+                className="w-full h-full object-cover"
+              />
             </div>
             <span className="text-[0.95rem] font-semibold text-white tracking-wide group-hover:text-accent transition-colors">
               Jefferson Teles
