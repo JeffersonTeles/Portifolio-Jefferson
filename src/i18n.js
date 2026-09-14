@@ -14,7 +14,7 @@ const resources = {
       hero: {
         role: "Analista de Suporte Júnior em transição para Desenvolvimento",
         title1: "Jefferson Teles",
-        subtitle: "6 anos de experiência em suporte, redes, hardware e infraestrutura. Atuo em suporte N2 de sistemas fiscais SaaS: analiso JSON/XML, homologo APIs de Prefeituras e gero certificados digitais A1/A3 via terminal Linux. Cursando Engenharia de Software — conclusão jan/2027.",
+        subtitle: "6+ anos de experiência em TI, redes, hardware e infraestrutura. Atuo em suporte N2 de sistemas fiscais SaaS: analiso JSON/XML, homologo APIs de Prefeituras e gero certificados digitais A1/A3 via terminal Linux. Cursando Engenharia de Software — conclusão jan/2027.",
         description: "Cascavel, Paraná · Desenvolvimento · Linux · Docker · Java · Python · Flutter · Arduino · ESP32",
         getInTouch: "Fale comigo",
         btnWorks: "Ver projetos",
@@ -22,7 +22,7 @@ const resources = {
       },
       about: {
         heading: "Sobre mim",
-        p1: "Comecei mexendo com hardware — trocando peças, montando computadores. Depois fui parar em rede e infraestrutura. Hoje, 6 anos depois, atuo em suporte N2 de sistema fiscal SaaS: analiso JSON/XML, homologo APIs de Prefeituras, configuro certificados digitais A1/A3 via terminal Linux.",
+        p1: "Comecei mexendo com hardware — trocando peças, montando computadores. Depois fui parar em rede e infraestrutura. Hoje, atuo em suporte N2 de sistema fiscal SaaS (na FaturÁgil): analiso JSON/XML, homologo APIs de Prefeituras, configuro certificados digitais A1/A3 via terminal Linux. Nas experiências anteriores, prestei atendimento técnico a clientes em áreas de redes e automação.",
         p2: "O que me mantém produtivo é resolver problemas reais. Montei sensores com Arduino/ESP32 em fábrica, configurei redes com Mikrotik e Ubiquiti, e hoje estou aprendendo a construir as ferramentas que eu próprio usaria. Cursando Engenharia de Software (conclusão jan/2027).",
         p3: "",
         capabilities: [
@@ -40,7 +40,7 @@ const resources = {
           ["Localização", "Cascavel, Paraná"],
           ["Formação", "Engenharia de Software"],
           ["Conclusão", "Jan/2027"],
-          ["Experiência", "6 anos em suporte"],
+          ["Experiência", "6+ anos em TI e Infra"],
           ["Stack", "Linux · Docker · Java · Python"],
           ["Status", "Buscando vaga Júnior"],
         ],
@@ -73,7 +73,7 @@ const resources = {
       experience: {
         label: "Experiência",
         heading: "Experiência profissional",
-        intro: "Antes de buscar minha primeira vaga como desenvolvedor, passei por suporte técnico, infraestrutura e automação. Essa vivência me ajuda a entender o usuário final, não só o código.",
+        intro: "Antes de buscar minha primeira vaga como desenvolvedor, passei por suporte técnico, infraestrutura, redes e automação industrial. Essa vivência me ajuda a entender o usuário final, não só o código.",
         list: [
           {
             period: "Mar 2026 — atual",
@@ -122,9 +122,9 @@ const resources = {
         list: [
           {
             title: "Maestria Docente — TCC de Engenharia de Software",
-            desc: "Desenvolvimento do frontend do sistema de gestão de trilhas de desenvolvimento docente, solicitado por coordenadora institucional para substituir controle manual em Planilha/Excel. Implementação de interfaces com React, Zustand e Tailwind CSS, colaborando via Git/GitHub. O ponto central foi definir a estrutura de dados com a equipe antes de escrever código — a maioria dos bugs vinha de dados mal modelados em contexto acadêmico.",
+            desc: "Desenvolvimento em equipe (TCC de Engenharia de Software) do sistema de gestão de trilhas de desenvolvimento docente, solicitado por coordenadora institucional. O sistema já está funcional, usável e atualmente em fase de testes pela instituição. Implementação com React, Zustand e Tailwind CSS, colaborando via Git/GitHub. O foco foi estruturar os dados de forma robusta para atender ao contexto acadêmico.",
             stack: ["React", "Vite", "Zustand", "Node.js", "Express", "Supabase"],
-            status: "TCC (em andamento)",
+            status: "TCC (em fase de testes)",
             repo: null,
             link: "https://projeto-maestria-vercel.vercel.app",
             linkLabel: "Ver demo",
@@ -142,7 +142,7 @@ const resources = {
           },
           {
             title: "Site de Casamento de Alta Performance",
-            desc: "Desenvolvimento do meu próprio site de casamento focado em performance absoluta (Mobile-first). Alcançou 98+ de pontuação no Lighthouse com arquitetura de zero manutenção.",
+            desc: "Desenvolvimento do próprio site de casamento focado em alta performance, design responsivo e arquitetura moderna (Mobile-first) com zero manutenção.",
             stack: ["Frontend", "Performance", "Web Vitals", "Responsividade"],
             status: "Projeto pessoal",
             repo: null,
@@ -228,7 +228,7 @@ const resources = {
       hero: {
         role: "Junior Support Analyst transitioning to Development",
         title1: "Jefferson Teles",
-        subtitle: "6 years of experience in support, networking, hardware and infrastructure. L2 support for fiscal SaaS systems with JSON/XML analysis and digital certificates via Linux terminal. Studying Software Engineering — graduation Jan/2027.",
+        subtitle: "6+ years of experience in IT, networking, hardware and infrastructure. L2 support for fiscal SaaS systems with JSON/XML analysis and digital certificates via Linux terminal. Studying Software Engineering — graduation Jan/2027.",
         description: "Cascavel, Paraná · Development · Linux · Docker · Java · Python · Flutter · Arduino · ESP32",
         getInTouch: "Get in touch",
         btnWorks: "View projects",
@@ -236,7 +236,7 @@ const resources = {
       },
       about: {
         heading: "About me",
-        p1: "I started with hardware — swapping parts, building computers. Then I ended up in networking and infrastructure. Now, 6 years later, I work in L2 support for fiscal SaaS systems: analyzing JSON/XML, homologating City Hall APIs, configuring A1/A3 digital certificates via Linux terminal.",
+        p1: "I started with hardware — swapping parts, building computers. Then I ended up in networking and infrastructure. Now, I work in L2 support for fiscal SaaS systems (at FaturÁgil): analyzing JSON/XML, homologating City Hall APIs, configuring A1/A3 digital certificates via Linux terminal. In previous roles, I provided technical support to clients in networking and automation.",
         p2: "What keeps me productive is solving real problems. I built sensors with Arduino/ESP32 in a factory, configured networks with Mikrotik and Ubiquiti, and now I'm learning to build the tools I'd use myself. Studying Software Engineering (graduation Jan/2027).",
         p3: "",
         capabilities: [
@@ -254,7 +254,7 @@ const resources = {
           ["Location", "Cascavel, Paraná"],
           ["Degree", "Software Engineering"],
           ["Graduation", "Jan/2027"],
-          ["Experience", "6 years in support"],
+          ["Experience", "6+ years in IT & Infra"],
           ["Stack", "Linux · Docker · Java · Python"],
           ["Status", "Looking for Junior role"],
         ],
@@ -293,7 +293,7 @@ const resources = {
       experience: {
         label: "Experience",
         heading: "Professional experience",
-        intro: "Before looking for my first developer role, I worked in technical support, infrastructure and automation. That background helps me understand the end user, not just the code.",
+        intro: "Before looking for my first developer role, I worked in technical support, infrastructure, networking and industrial automation. That background helps me understand the end user, not just the code.",
         list: [
           {
             period: "Mar 2026 — present",
@@ -340,10 +340,10 @@ const resources = {
         heading: "Projects",
         list: [
           {
-            title: "Teaching Mastery — TCC in Software Engineering",
-            desc: "Frontend development of a teacher training track management system, requested by an institutional coordinator to replace manual Word-based control. Implementation of interfaces with React, Zustand and Tailwind CSS, collaborating via Git/GitHub. The key step was defining the data structure with the team before writing code — most bugs came from poorly modeled data in an academic context.",
+            title: "Teaching Mastery — Software Engineering Capstone (TCC)",
+            desc: "Team development (Software Engineering Capstone) of the teacher training track management system, requested by an institutional coordinator. The system is functional, usable, and currently undergoing testing by the institution. Built with React, Zustand, and Tailwind CSS, collaborating via Git/GitHub.",
             stack: ["React", "Vite", "Zustand", "Node.js", "Express", "Supabase"],
-            status: "Capstone (ongoing)",
+            status: "Capstone (testing phase)",
             repo: null,
             link: "https://projeto-maestria-vercel.vercel.app",
             linkLabel: "View demo",
@@ -361,8 +361,8 @@ const resources = {
           },
           {
             title: "Wedding Website",
-            desc: "Built as a wedding gift. Priority was fast mobile loading, clean presentation and zero maintenance. Built with Next.js, live since the wedding day and never needed changes.",
-            stack: ["Next.js", "Vercel", "Framer Motion"],
+            desc: "Development of own wedding website focused on high performance, responsive design, and modern architecture (Mobile-first) with zero maintenance.",
+            stack: ["Frontend", "Performance", "Web Vitals", "Responsividade"],
             status: "Published",
             link: "https://casamento-ten-rho.vercel.app",
             linkLabel: "View site",
@@ -405,23 +405,23 @@ const resources = {
           },
           {
             category: "Frontend",
-            context: "projects",
+            context: "projetos",
             items: ["HTML5", "CSS3", "JavaScript", "React", "Tailwind CSS", "Git/GitHub"],
           },
           {
             category: "Backend & Data",
-            context: "projects",
+            context: "projetos/Graduação institucional",
             items: ["Node.js", "Express", "Java", "Python", "PostgreSQL", "Supabase", "SQL", "REST APIs"],
           },
           {
             category: "Mobile",
-            context: "projects",
+            context: "projetos",
             items: ["Flutter", "Dart", "Android", "SQLite"],
           },
           {
             category: "Electronics",
-            context: "projects",
-            items: ["Arduino", "ESP32", "Module Assembly", "Embedded Systems"],
+            context: "projetos",
+            items: ["Mobile/IoT", "Arduino", "ESP32", "Module Assembly", "Embedded Systems"],
           },
         ],
       },
