@@ -13,6 +13,8 @@ const ProjectImage = ({ title, index = 0, stack = [] }) => {
     filename = 'casamento';
   } else if (lowerTitle.includes('x11') || lowerTitle.includes('mouse') || lowerTitle.includes('linux')) {
     filename = 'x11';
+  } else if (lowerTitle.includes('telesseg')) {
+    filename = 'telesseg';
   } else {
     filename = index === 0 ? 'maestria' : index === 1 ? 'x11' : 'casamento';
   }
