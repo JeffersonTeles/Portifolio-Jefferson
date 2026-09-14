@@ -1,5 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronDown, ChevronRight, Phone, Menu, X } from 'lucide-react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { MotionConfig } from 'framer-motion';
+import { ChevronDown, Phone, Menu, X } from 'lucide-react';
+import ErrorBoundary from './components/ErrorBoundary';
+import Navbar from './components/Navbar';
+import BackToTop from './components/BackToTop';
+import About from './sections/About';
+import Experience from './sections/Experience';
+import Projects from './sections/Projects';
+import TechStack from './sections/TechStack';
+import Certifications from './sections/Certifications';
+import Blog from './sections/Blog';
+import Contact from './sections/Contact';
+import Footer from './sections/Footer';
+
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const logoSvg = (
   <svg fill="currentColor" height="32" viewBox="0 0 145 48" width="96" xmlns="http://www.w3.org/2000/svg">
@@ -14,9 +30,6 @@ const logoSvg = (
     </g>
   </svg>
 );
-
-const navLinks = ['Products', 'Pricing', 'Solutions', 'Resources'];
-const chevronLinks = ['Solutions', 'Resources'];
 
 function WordByWord({ text, delay, className }) {
   const words = text.split(' ');
@@ -37,19 +50,20 @@ function WordByWord({ text, delay, className }) {
   );
 }
 
-export default function App() {
+function PromptHeroSection() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { t, i18n } = useTranslation();
 
-  useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [mobileOpen]);
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === 'pt' ? 'en' : 'pt');
+  };
+
+  const navLinks = [
+    { label: t('nav.about'), href: '#about' },
+    { label: t('nav.experience'), href: '#experience' },
+    { label: t('nav.projects'), href: '#projects' },
+    { label: t('nav.contact'), href: '#contact' },
+  ];
 
   return (
     <div className="min-h-screen w-full bg-black text-white overflow-hidden relative">
@@ -100,29 +114,38 @@ export default function App() {
 
       {/* Navigation Bar */}
       <nav className="relative z-20 flex items-center justify-between px-6 md:px-12 py-5">
-        <div className="flex items-center flex-shrink-0">
-          <div className="text-white">{logoSvg}</div>
+        <div className="flex items-center flex-shrink-0 gap-3">
+          <div className="w-8 h-8 rounded-full bg-[#1a1a1a] border border-white/[0.08] flex items-center justify-center">
+            <span className="text-[0.65rem] font-bold text-accent">JT</span>
+          </div>
+          <span className="text-[0.9rem] font-semibold text-white">Jefferson Teles</span>
         </div>
 
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
+              key={link.href}
+              href={link.href}
               className="text-sm font-normal text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-1"
             >
-              {link}
-              {chevronLinks.includes(link) && (
+              {link.label}
+              {['Solutions', 'Resources', 'Solutions'].includes(link.label) && (
                 <ChevronDown size={14} className="text-white/50" />
               )}
             </a>
           ))}
+          <button
+            onClick={toggleLanguage}
+            className="px-3 py-1.5 rounded-full text-[0.75rem] text-[#666] hover:text-white hover:bg-white/5 font-mono uppercase tracking-wider transition-all duration-300"
+          >
+            {i18n.language === 'pt' ? 'EN' : 'PT'}
+          </button>
         </div>
 
         <div className="hidden md:flex items-center gap-6">
-          <a href="tel:+1234567890" className="flex items-center gap-2 text-sm font-normal text-white/70 hover:text-white transition-colors duration-200">
+          <a href="tel:+5545999999999" className="flex items-center gap-2 text-sm font-normal text-white/70 hover:text-white transition-colors duration-200">
             <Phone size={14} />
-            <span>+1 (234) 567-890</span>
+            <span>WhatsApp</span>
           </a>
           <a href="#contact" className="text-sm font-normal text-white/70 hover:text-white transition-colors duration-200">
             Contact Us
@@ -150,22 +173,23 @@ export default function App() {
           </button>
           {navLinks.map((link) => (
             <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
+              key={link.href}
+              href={link.href}
               className="text-lg font-normal text-white/70 hover:text-white transition-colors duration-200"
               onClick={() => setMobileOpen(false)}
             >
-              {link}
+              {link.label}
             </a>
           ))}
-          <a
-            href="tel:+1234567890"
-            className="flex items-center gap-2 text-lg font-normal text-white/70 hover:text-white transition-colors duration-200"
-            onClick={() => setMobileOpen(false)}
+          <button
+            onClick={() => {
+              toggleLanguage();
+              setMobileOpen(false);
+            }}
+            className="text-lg font-normal text-white/70 hover:text-white transition-colors duration-200 font-mono"
           >
-            <Phone size={18} />
-            <span>+1 (234) 567-890</span>
-          </a>
+            {i18n.language === 'pt' ? 'English' : 'Português'}
+          </button>
           <a
             href="#contact"
             className="text-lg font-normal text-white/70 hover:text-white transition-colors duration-200"
@@ -179,21 +203,98 @@ export default function App() {
       {/* Hero Content */}
       <main className="relative z-10 flex items-center justify-center min-h-[calc(100vh-80px)] px-6">
         <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-[62px] font-bold leading-tight mb-6">
-            <WordByWord text="Build Strong, Build Smart" delay={0.5} />
+          <div className="mb-4">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/20 bg-accent/5 text-[0.75rem] text-accent font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" aria-hidden="true" />
+              {t('hero.role')}
+            </span>
+          </div>
+          <h1 className="text-[62px] font-bold leading-tight mb-6 tracking-tight">
+            <WordByWord text="Jefferson Teles" delay={0.5} />
           </h1>
           <p className="text-[15px] font-light text-white/70 mb-10 leading-relaxed mx-auto" style={{ maxWidth: '42ch' }}>
-            <WordByWord text="High-quality construction materials for every project, from foundation to finish." delay={1.4} />
+            <WordByWord text="High-quality software solutions and robust infrastructure for every project, from foundation to finish." delay={1.4} />
           </p>
-          <a
-            href="#quote"
-            className="inline-block bg-white text-black px-8 py-3 text-sm font-medium rounded-lg opacity-0 hover:scale-105 active:scale-95 transition-all duration-300"
-            style={{ animation: `fadeIn 0.6s ease forwards 2.5s` }}
-          >
-            Get a Quote
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="#projects"
+              className="inline-block bg-white text-black px-8 py-3 text-sm font-medium rounded-lg opacity-0 hover:scale-105 active:scale-95 transition-all duration-300"
+              style={{ animation: `fadeIn 0.6s ease forwards 2.5s` }}
+            >
+              {t('hero.btnWorks')}
+            </a>
+            <a
+              href="/Curriculo_Jefferson_Teles_TI.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block border border-white/20 bg-white/10 backdrop-blur-md text-white px-8 py-3 text-sm font-medium rounded-lg opacity-0 hover:bg-white/20 active:scale-95 transition-all duration-300"
+              style={{ animation: `fadeIn 0.6s ease forwards 2.7s` }}
+            >
+              {t('hero.btnResume')}
+            </a>
+          </div>
         </div>
       </main>
     </div>
   );
 }
+
+function HomePage() {
+  return (
+    <>
+      <PromptHeroSection />
+      <About />
+      <Experience />
+      <Projects />
+      <TechStack />
+      <Certifications />
+      <Blog />
+      <Contact />
+    </>
+  );
+}
+
+function App() {
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
+
+  return (
+    <MotionConfig reducedMotion="user">
+      <Router>
+        <ErrorBoundary>
+          <div className="min-h-screen bg-[#0a0a0a] text-white">
+            <main>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route
+                  path="*"
+                  element={
+                    <Suspense
+                      fallback={
+                        <div className="min-h-screen flex items-center justify-center text-[#333]">
+                          Carregando...
+                        </div>
+                      }
+                    >
+                      <NotFound />
+                    </Suspense>
+                  }
+                />
+              </Routes>
+            </main>
+            <Footer />
+            <BackToTop />
+            <div className="copy-toast" aria-live="polite">
+              {t('contact.copied', 'Copiado!')}
+            </div>
+          </div>
+        </ErrorBoundary>
+      </Router>
+    </MotionConfig>
+  );
+}
+
+export default App;
