@@ -15,7 +15,7 @@ const resources = {
         role: "Analista de Suporte Júnior em transição para Desenvolvimento",
         title1: "Jefferson Teles",
         subtitle: "6 anos de experiência em suporte, redes, hardware e infraestrutura. Atuo em suporte N2 de sistemas fiscais SaaS: analiso JSON/XML, homologo APIs de Prefeituras e gero certificados digitais A1/A3 via terminal Linux. Cursando Engenharia de Software — conclusão jan/2027.",
-        description: "Tupãssi, PR · Desenvolvimento · Linux · Docker · Java · Python · Flutter · Arduino · ESP32",
+        description: "Cascavel, Paraná · Desenvolvimento · Linux · Docker · Java · Python · Flutter · Arduino · ESP32",
         getInTouch: "Fale comigo",
         btnWorks: "Ver projetos",
         btnResume: "Ver currículo",
@@ -37,7 +37,7 @@ const resources = {
           "Resolução de problemas reais",
         ],
         infoCard: [
-          ["Localização", "Tupãssi/PR"],
+          ["Localização", "Cascavel, Paraná"],
           ["Formação", "Engenharia de Software"],
           ["Conclusão", "Jan/2027"],
           ["Experiência", "6 anos em suporte"],
@@ -48,13 +48,13 @@ const resources = {
           {
             period: "Jan 2020 — Fev 2025",
             role: "Técnico de TI — Suporte, Redes e Hardware",
-            company: "Digital Informática, Tupãssi/PR",
+            company: "Digital Informática, Cascavel, Paraná",
             summary: "Suporte presencial em residências e empresas, com diagnóstico, manutenção e conserto de computadores e notebooks. Configurei redes LAN/WAN, DNS, cabeamento estruturado, VPN e CFTV. Recuperação de acesso via CMD e scripts de automação de tarefas repetitivas. Instalação de certificados A1/A3 e tokens em Windows e Linux. Implantação de VPN, CFTV e infraestrutura de fibra ótica para clientes empresariais.",
           },
           {
             period: "Mar 2025 — Fev 2026",
             role: "Técnico em Eletrônica e Automação Industrial",
-            company: "Maguinho Sensores, Tupãssi/PR",
+            company: "Maguinho Sensores, Cascavel, Paraná",
             summary: "Montagem e manutenção de módulos eletrônicos para automação de máquinas agrícolas.",
             bullets: [
               "Diagnóstico de falhas em sistemas embarcados e equipamentos em campo, contribuindo para reduzir paradas operacionais",
@@ -91,7 +91,7 @@ const resources = {
           {
             period: "Mar 2025 — Fev 2026",
             role: "Técnico em Eletrônica e Automação Industrial",
-            company: "Maguinho Sensores, Tupãssi/PR",
+            company: "Maguinho Sensores, Cascavel, Paraná",
             summary: "Montagem e manutenção de módulos eletrônicos para automação de máquinas agrícolas.",
             bullets: [
               "Diagnóstico de falhas em sistemas embarcados e equipamentos em campo, contribuindo para reduzir paradas operacionais",
@@ -103,7 +103,7 @@ const resources = {
           {
             period: "Jan 2020 — Fev 2025",
             role: "Técnico de TI — Suporte, Redes e Hardware",
-            company: "Digital Informática, Tupãssi/PR",
+            company: "Digital Informática, Cascavel, Paraná",
             summary: "Atuação formal e autônoma ao longo do período.",
             bullets: [
               "Suporte presencial em residências e empresas, com diagnóstico, manutenção e conserto de computadores e notebooks",
@@ -160,7 +160,7 @@ const resources = {
         label: "Formação",
         heading: "Formação acadêmica",
         course: "Bacharelado em Engenharia de Software",
-        institution: "Centro Universitário FAG — Tupãssi/PR",
+        institution: "Centro Universitário FAG — Cascavel, Paraná",
         type: "Graduação",
         year: "Previsão de conclusão: Jan/2027",
         description:
@@ -212,7 +212,7 @@ const resources = {
         heading: "Precisa de um script que não existe?",
         description: "Automatizei algo? Precisa de um site que funciona? Ou quer conversar sobre código. Estou disponível.",
         phoneLabel: "WhatsApp",
-        location: "Tupãssi/PR · Brasil",
+        location: "Cascavel, Paraná · Brasil",
       },
     },
   },
@@ -229,7 +229,7 @@ const resources = {
         role: "Junior Support Analyst transitioning to Development",
         title1: "Jefferson Teles",
         subtitle: "6 years of experience in support, networking, hardware and infrastructure. L2 support for fiscal SaaS systems with JSON/XML analysis and digital certificates via Linux terminal. Studying Software Engineering — graduation Jan/2027.",
-        description: "Tupãssi, PR · Development · Linux · Docker · Java · Python · Flutter · Arduino · ESP32",
+        description: "Cascavel, Paraná · Development · Linux · Docker · Java · Python · Flutter · Arduino · ESP32",
         getInTouch: "Get in touch",
         btnWorks: "View projects",
         btnResume: "View resume",
@@ -251,7 +251,7 @@ const resources = {
           "Real problem solving",
         ],
         infoCard: [
-          ["Location", "Tupãssi, PR"],
+          ["Location", "Cascavel, Paraná"],
           ["Degree", "Software Engineering"],
           ["Graduation", "Jan/2027"],
           ["Experience", "6 years in support"],
@@ -262,13 +262,13 @@ const resources = {
           {
             period: "Jan 2020 — Feb 2025",
             role: "IT Technician — Support, Networking and Hardware",
-            company: "Digital Informática, Tupãssi/PR",
+            company: "Digital Informática, Cascavel, Paraná",
             summary: "On-site support for homes and businesses, with diagnosis, maintenance and repair of computers and laptops. LAN/WAN network configuration, routers, static/dynamic IP, DNS, structured cabling, VPN and CCTV. System access recovery via CMD and repetitive task automation scripts. A1/A3 digital certificate and token installation on Windows and Linux. VPN, CCTV and fiber optic infrastructure deployment for enterprise clients.",
           },
           {
             period: "Mar 2025 — Feb 2026",
             role: "Electronics and Industrial Automation Technician",
-            company: "Maguinho Sensores, Tupãssi/PR",
+            company: "Maguinho Sensores, Cascavel, Paraná",
             summary: "Assembly and maintenance of electronic modules for agricultural machine automation.",
             bullets: [
               "Fault diagnosis in embedded systems and field equipment, contributing to reduce operational downtime",
@@ -310,7 +310,7 @@ const resources = {
           {
             period: "Mar 2025 — Feb 2026",
             role: "Electronics and Industrial Automation Technician",
-            company: "Maguinho Sensores, Tupãssi/PR",
+            company: "Maguinho Sensores, Cascavel, Paraná",
             summary: "Assembly and maintenance of electronic modules for agricultural machine automation.",
             bullets: [
               "Helped reduce industrial downtime through field maintenance and diagnostics",
@@ -322,7 +322,7 @@ const resources = {
           {
             period: "Jan 2020 — Feb 2025",
             role: "IT Technician — Support, Networking and Hardware",
-            company: "Digital Informática, Tupãssi/PR",
+            company: "Digital Informática, Cascavel, Paraná",
             summary: "Formal and independent work throughout the period.",
             bullets: [
               "On-site support for homes and companies, with diagnosis, maintenance and repair of computers and notebooks",
@@ -378,7 +378,7 @@ const resources = {
         label: "Education",
         heading: "Academic background",
         course: "BSc in Software Engineering",
-        institution: "Centro Universitário FAG — Tupãssi/PR",
+        institution: "Centro Universitário FAG — Cascavel, Paraná",
         type: "Undergraduate",
         year: "Expected graduation: Jan/2027",
         description:
@@ -430,7 +430,7 @@ const resources = {
         heading: "Need a script that doesn't exist?",
         description: "Automated something? Need a website that works? Or just want to talk code. I'm available.",
         phoneLabel: "WhatsApp",
-        location: "Tupãssi, PR, Brazil",
+        location: "Cascavel, Paraná, Brazil",
       },
     },
   },

@@ -59,7 +59,7 @@ const About = () => {
                 </div>
                 <div>
                   <p className="text-[0.9rem] font-semibold text-white">Jefferson Teles</p>
-                  <p className="text-[0.7rem] text-[#555] font-mono">Tupãssi, PR</p>
+                  <p className="text-[0.7rem] text-[#555] font-mono">Cascavel, Paraná</p>
                 </div>
               </div>
 
