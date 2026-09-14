@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { MotionConfig } from 'framer-motion';
-import { ChevronDown, Phone, Menu, X } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import ErrorBoundary from './components/ErrorBoundary';
 import Navbar from './components/Navbar';
 import BackToTop from './components/BackToTop';
@@ -14,7 +14,7 @@ import Certifications from './sections/Certifications';
 import Blog from './sections/Blog';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
-import ProfileCard3D from './components/ProfileCard3D';
+import ProfileVisual from './components/ProfileVisual';
 
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -38,22 +38,10 @@ function WordByWord({ text, delay, className }) {
 }
 
 function PromptHeroSection() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const { t, i18n } = useTranslation();
-
-  const toggleLanguage = () => {
-    i18n.changeLanguage(i18n.language === 'pt' ? 'en' : 'pt');
-  };
-
-  const navLinks = [
-    { label: t('nav.about'), href: '#about' },
-    { label: t('nav.experience'), href: '#experience' },
-    { label: t('nav.projects'), href: '#projects' },
-    { label: t('nav.contact'), href: '#contact' },
-  ];
+  const { t } = useTranslation();
 
   return (
-    <section className="h-screen w-screen bg-black text-white overflow-hidden relative flex flex-col justify-between">
+    <section className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#0a0a0a]">
       <style>{`
         @keyframes fadeSlideUp {
           from {
@@ -73,119 +61,53 @@ function PromptHeroSection() {
             opacity: 1;
           }
         }
-        @keyframes videoFadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
-        .video-fade-in {
-          animation: videoFadeIn 1.5s ease forwards;
+        .animate-gradient-bg {
+          background-size: 200% 200%;
+          animation: gradientShift 15s ease infinite;
         }
       `}</style>
 
-      {/* Video Background */}
+      {/* Background com CSS gradients — sem vídeo */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <video
-          src="https://cdn.sceneai.art/Hero Section Video/a8132a81-b526-4f91-8095-003ce931ecdd.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover video-fade-in"
+        {/* Camada base escura */}
+        <div className="absolute inset-0 bg-[#0a0a0a]" />
+
+        {/* Gradientes animados sutis */}
+        <div
+          className="absolute inset-0 opacity-30 animate-gradient-bg"
+          style={{
+            background: 'linear-gradient(135deg, rgba(226,166,61,0.06) 0%, rgba(110,231,183,0.04) 30%, rgba(147,197,253,0.03) 60%, rgba(226,166,61,0.05) 100%)',
+          }}
         />
-        <div className="absolute inset-0 bg-black/60" />
+
+        {/* Grid pattern sutil */}
+        <div
+          className="absolute inset-0 opacity-[0.015] pointer-events-none"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+
+        {/* Glow centers */}
+        <div className="absolute top-[15%] left-[-10%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none" />
+
+        {/* Vignette */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-transparent to-[#0a0a0a]/30 pointer-events-none" />
       </div>
 
-      {/* Navigation Bar */}
-      <nav className="relative z-20 flex items-center justify-between px-6 md:px-16 py-6 w-full flex-shrink-0">
-        <div className="flex items-center flex-shrink-0 gap-3">
-          <div className="w-9 h-9 rounded-full bg-[#1a1a1a] border border-accent/30 flex items-center justify-center shadow-[0_0_15px_rgba(226,166,61,0.3)]">
-            <span className="text-[0.7rem] font-bold text-accent">JT</span>
-          </div>
-          <span className="text-[0.95rem] font-semibold text-white tracking-wide">Jefferson Teles</span>
-        </div>
+      {/* Navbar unificado */}
+      <Navbar />
 
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-normal text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-1"
-            >
-              {link.label}
-            </a>
-          ))}
-          <button
-            onClick={toggleLanguage}
-            className="px-3.5 py-1.5 rounded-full text-[0.75rem] text-[#888] hover:text-white hover:bg-white/10 font-mono uppercase tracking-wider transition-all duration-300 border border-white/10"
-          >
-            {i18n.language === 'pt' ? 'EN' : 'PT'}
-          </button>
-        </div>
-
-        <div className="hidden md:flex items-center gap-6">
-          <a href="tel:+5545999999999" className="flex items-center gap-2 text-sm font-normal text-white/70 hover:text-white transition-colors duration-200">
-            <Phone size={14} className="text-accent" />
-            <span>WhatsApp</span>
-          </a>
-          <a href="#contact" className="text-sm font-normal text-white/70 hover:text-white transition-colors duration-200">
-            Contact Us
-          </a>
-        </div>
-
-        <button
-          className="md:hidden text-white p-2"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={26} /> : <Menu size={26} />}
-        </button>
-      </nav>
-
-      {/* Mobile Full-Screen Overlay Menu */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center gap-8 md:hidden">
-          <button
-            className="absolute top-6 right-6 text-white p-2"
-            onClick={() => setMobileOpen(false)}
-            aria-label="Close menu"
-          >
-            <X size={26} />
-          </button>
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-xl font-medium text-white/80 hover:text-white transition-colors duration-200"
-              onClick={() => setMobileOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
-          <button
-            onClick={() => {
-              toggleLanguage();
-              setMobileOpen(false);
-            }}
-            className="text-lg font-mono text-accent"
-          >
-            {i18n.language === 'pt' ? 'Switch to English' : 'Mudar para Português'}
-          </button>
-          <a
-            href="#contact"
-            className="text-xl font-medium text-white/80 hover:text-white transition-colors duration-200"
-            onClick={() => setMobileOpen(false)}
-          >
-            Contact Us
-          </a>
-        </div>
-      )}
-
-      {/* Hero Content with 3D Profile Tilt Card */}
-      <main className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8">
+      {/* Hero Content com ProfileVisual */}
+      <main className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8 pt-16 pb-8">
         <div className="text-center lg:text-left flex-1 max-w-2xl">
           <div className="mb-4 inline-block">
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-[0.8rem] text-accent font-mono shadow-[0_0_15px_rgba(226,166,61,0.2)]">
@@ -193,11 +115,11 @@ function PromptHeroSection() {
               {t('hero.role')}
             </span>
           </div>
-          <h1 className="text-[42px] sm:text-[56px] font-bold leading-tight mb-4 tracking-tight">
-            <WordByWord text="Jefferson Teles" delay={0.3} />
+          <h1 className="text-[42px] sm:text-[56px] font-bold leading-tight mb-4 tracking-tight text-white">
+            <WordByWord text={t('hero.title1')} delay={0.3} />
           </h1>
-          <p className="text-[14px] sm:text-[16px] font-light text-white/70 mb-8 leading-relaxed" style={{ maxWidth: '46ch' }}>
-            <WordByWord text="Full Stack Software Developer & Infrastructure Specialist. Building high-performance systems from foundation to finish." delay={1.0} />
+          <p className="text-[14px] sm:text-[16px] font-light text-white/60 mb-8 leading-relaxed" style={{ maxWidth: '46ch' }}>
+            <WordByWord text={t('hero.tagline')} delay={1.0} />
           </p>
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
             <a
@@ -219,16 +141,16 @@ function PromptHeroSection() {
           </div>
         </div>
 
-        {/* Right Side: Interactive 3D Profile Tilt Card */}
+        {/* Right Side: ProfileVisual */}
         <div className="flex-1 w-full max-w-[380px] lg:max-w-[420px]">
-          <ProfileCard3D />
+          <ProfileVisual />
         </div>
       </main>
 
-      {/* Bottom subtle indicator */}
+      {/* Bottom indicator */}
       <div className="relative z-10 pb-6 text-center flex-shrink-0">
         <a href="#about" className="inline-flex flex-col items-center text-white/40 hover:text-white transition-colors duration-300">
-          <span className="text-[0.7rem] font-mono tracking-widest uppercase mb-1">Explore</span>
+          <span className="text-[0.7rem] font-mono tracking-widest uppercase mb-1">{t('hero.explore')}</span>
           <ChevronDown size={16} className="animate-bounce text-accent" />
         </a>
       </div>

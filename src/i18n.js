@@ -19,6 +19,9 @@ const resources = {
         getInTouch: "Fale comigo",
         btnWorks: "Ver projetos",
         btnResume: "Ver currículo",
+        tagline: "FullStack Developer & Especialista em Infraestrutura. Construindo sistemas de alta performance, do fundamento ao fim.",
+        experienceBadge: "20 anos · Disponível Júnior",
+        explore: "Explorar",
       },
       about: {
         heading: "Sobre mim",
@@ -262,6 +265,9 @@ const resources = {
         getInTouch: "Get in touch",
         btnWorks: "View projects",
         btnResume: "View resume",
+        tagline: "Full Stack Software Developer & Infrastructure Specialist. Building high-performance systems from foundation to finish.",
+        experienceBadge: "20+ years · Available for Junior role",
+        explore: "Explore",
       },
       about: {
         heading: "About me",

@@ -1,7 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FiCheckCircle, FiTerminal, FiCpu, FiShield, FiCode } from 'react-icons/fi';
 
 export default function ProfileVisual() {
+  const { t } = useTranslation();
+
   return (
     <div className="relative w-full max-w-[380px] lg:max-w-[420px] mx-auto group">
       {/* Background ambient neon glow aura */}
@@ -23,7 +26,7 @@ export default function ProfileVisual() {
         <div className="flex items-center justify-between mb-5 relative z-10">
           <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 border border-accent/40 text-accent text-[0.7rem] font-mono shadow-[0_0_15px_rgba(226,166,61,0.3)]">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-ping" />
-            20 anos · Disponível Júnior
+            {t('hero.experienceBadge')}
           </div>
           <span className="text-[0.65rem] font-mono text-cyan-400/80 tracking-widest uppercase">ID: 2026.JT</span>
         </div>
