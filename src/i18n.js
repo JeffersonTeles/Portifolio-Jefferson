@@ -231,6 +231,7 @@ const resources = {
         heading: "Precisa de um script que não existe?",
         description: "Automatizei algo? Precisa de um site que funciona? Ou quer conversar sobre código. Estou disponível.",
         phoneLabel: "WhatsApp",
+        whatsapp: "Falar no WhatsApp",
         location: "Cascavel, Paraná · Brasil",
         improvementIdeas: [
           "Formulário funcional com envio por e-mail (ex.: Formspree, EmailJS)",
@@ -477,6 +478,7 @@ const resources = {
         heading: "Need a script that doesn't exist?",
         description: "Automated something? Need a website that works? Or just want to talk code. I'm available.",
         phoneLabel: "WhatsApp",
+        whatsapp: "Chat on WhatsApp",
         location: "Cascavel, Paraná, Brazil",
         improvementIdeas: [
           "Functional form with email submission (e.g. Formspree, EmailJS)",
