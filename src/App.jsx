@@ -14,7 +14,7 @@ import Certifications from './sections/Certifications';
 import Blog from './sections/Blog';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
-import ThreeFace3D from './components/ThreeFace3D';
+import ProfileCard3D from './components/ProfileCard3D';
 
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -96,11 +96,11 @@ function PromptHeroSection() {
           playsInline
           className="w-full h-full object-cover video-fade-in"
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* Navigation Bar */}
-      <nav className="relative z-20 flex items-center justify-between px-6 md:px-16 py-6 w-full">
+      <nav className="relative z-20 flex items-center justify-between px-6 md:px-16 py-6 w-full flex-shrink-0">
         <div className="flex items-center flex-shrink-0 gap-3">
           <div className="w-9 h-9 rounded-full bg-[#1a1a1a] border border-accent/30 flex items-center justify-center shadow-[0_0_15px_rgba(226,166,61,0.3)]">
             <span className="text-[0.7rem] font-bold text-accent">JT</span>
@@ -184,8 +184,8 @@ function PromptHeroSection() {
         </div>
       )}
 
-      {/* Hero Content with 3D Holographic Face/Diamond Element */}
-      <main className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8 py-12">
+      {/* Hero Content with 3D Profile Tilt Card */}
+      <main className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8">
         <div className="text-center lg:text-left flex-1 max-w-2xl">
           <div className="mb-4 inline-block">
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-[0.8rem] text-accent font-mono shadow-[0_0_15px_rgba(226,166,61,0.2)]">
@@ -193,10 +193,10 @@ function PromptHeroSection() {
               {t('hero.role')}
             </span>
           </div>
-          <h1 className="text-[48px] sm:text-[62px] font-bold leading-tight mb-6 tracking-tight">
+          <h1 className="text-[42px] sm:text-[56px] font-bold leading-tight mb-4 tracking-tight">
             <WordByWord text="Jefferson Teles" delay={0.3} />
           </h1>
-          <p className="text-[15px] sm:text-[17px] font-light text-white/70 mb-8 leading-relaxed" style={{ maxWidth: '46ch' }}>
+          <p className="text-[14px] sm:text-[16px] font-light text-white/70 mb-8 leading-relaxed" style={{ maxWidth: '46ch' }}>
             <WordByWord text="Full Stack Software Developer & Infrastructure Specialist. Building high-performance systems from foundation to finish." delay={1.0} />
           </p>
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
@@ -219,17 +219,14 @@ function PromptHeroSection() {
           </div>
         </div>
 
-        {/* Right Side: 3D Holographic Face / Diamond Element in Hero */}
-        <div className="flex-1 w-full max-w-[420px] lg:max-w-[480px] h-[320px] sm:h-[400px] relative">
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-accent/20 via-transparent to-blue-500/20 blur-xl opacity-70 pointer-events-none" />
-          <div className="relative z-10 w-full h-full rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md p-4 flex items-center justify-center shadow-2xl">
-            <ThreeFace3D />
-          </div>
+        {/* Right Side: Interactive 3D Profile Tilt Card */}
+        <div className="flex-1 w-full max-w-[380px] lg:max-w-[420px]">
+          <ProfileCard3D />
         </div>
       </main>
 
       {/* Bottom subtle indicator */}
-      <div className="relative z-10 pb-6 text-center">
+      <div className="relative z-10 pb-6 text-center flex-shrink-0">
         <a href="#about" className="inline-flex flex-col items-center text-white/40 hover:text-white transition-colors duration-300">
           <span className="text-[0.7rem] font-mono tracking-widest uppercase mb-1">Explore</span>
           <ChevronDown size={16} className="animate-bounce text-accent" />
