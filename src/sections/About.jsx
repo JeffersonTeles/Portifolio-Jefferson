@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import AnimatedSection from '../components/AnimatedSection';
+import ThreeFace3D from '../components/ThreeFace3D';
 
 const About = () => {
   const { t } = useTranslation();
@@ -40,17 +41,25 @@ const About = () => {
             </div>
           </div>
 
-          {/* Right: Info card */}
-          <div className="lg:sticky lg:top-28 h-fit">
+          {/* Right: Info card + 3D Holographic Avatar */}
+          <div className="lg:sticky lg:top-28 h-fit space-y-6">
+            {/* 3D Holographic Face Avatar */}
+            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] overflow-hidden text-center">
+              <p className="text-[0.65rem] font-mono text-[#555] uppercase tracking-wider mb-2">
+                Holographic 3D Avatar
+              </p>
+              <ThreeFace3D />
+            </div>
+
             <div className="p-6 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-              {/* Avatar */}
+              {/* Avatar header */}
               <div className="flex items-center gap-4 mb-6 pb-6 border-b border-white/[0.04]">
                 <div className="w-12 h-12 rounded-full bg-[#111] border border-white/[0.08] flex items-center justify-center">
                   <span className="text-lg font-bold text-accent/40">JT</span>
                 </div>
                 <div>
                   <p className="text-[0.9rem] font-semibold text-white">Jefferson Teles</p>
-                  <p className="text-[0.7rem] text-[#555] font-mono">Cascavel, PR</p>
+                  <p className="text-[0.7rem] text-[#555] font-mono">Tupãssi, PR</p>
                 </div>
               </div>
 
