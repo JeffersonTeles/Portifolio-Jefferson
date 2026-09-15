@@ -125,35 +125,53 @@ function PromptHeroSection() {
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-        @keyframes sparkRotate {
-          0% { transform: rotate(0deg); box-shadow: 0 0 0px rgba(226,166,61,0); }
-          25% { box-shadow: 0 0 25px rgba(226,166,61,0.4), 0 0 50px rgba(226,166,61,0.2); }
-          50% { transform: rotate(180deg); box-shadow: 0 0 15px rgba(110,231,183,0.3); }
-          75% { box-shadow: 0 0 30px rgba(110,231,183,0.5), 0 0 60px rgba(110,231,183,0.3); }
-          100% { transform: rotate(360deg); box-shadow: 0 0 0px rgba(226,166,61,0); }
+        @keyframes borderRay {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
         @keyframes sparkPulse {
           0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 0.7; transform: scale(1.3); }
+          50% { opacity: 0.9; transform: scale(1.1); }
         }
         .animate-gradient-bg {
           background-size: 200% 200%;
           animation: gradientShift 15s ease infinite;
         }
+        .spark-flash {
+          position: relative;
+          overflow: visible;
+        }
+        .spark-flash::before {
+          content: '';
+          position: absolute;
+          inset: -3px;
+          border-radius: inherit;
+          background: linear-gradient(90deg, transparent, rgba(226,166,61,0.8), rgba(110,231,183,0.8), transparent);
+          background-size: 200% 100%;
+          background-position: 0% 50%;
+          animation: borderRay 4s linear infinite;
+          z-index: -1;
+          pointer-events: none;
+          opacity: 0.8;
+        }
         .spark-flash::after {
           content: '';
           position: absolute;
-          inset: -4px;
+          inset: -6px;
           border-radius: inherit;
-          background: conic-gradient(from 0deg, transparent, rgba(226,166,61,0.6), transparent 30%, rgba(110,231,183,0.6), transparent 60%, rgba(226,166,61,0.4), transparent);
+          background: radial-gradient(circle at center, rgba(226,166,61,0.4) 0%, rgba(110,231,183,0.2) 40%, transparent 70%);
           opacity: 0;
-          animation: sparkRotate 3s linear infinite;
-          z-index: -1;
+          animation: sparkPulse 2.5s ease-in-out infinite;
+          z-index: -2;
           pointer-events: none;
         }
-        .spark-flash:hover::after {
+        .spark-flash:hover::before {
           opacity: 1;
-          animation-duration: 1.5s;
+          animation-duration: 2s;
+        }
+        .spark-flash:hover::after {
+          opacity: 0.6;
         }
         .spark-pulse {
           animation: sparkPulse 2s ease-in-out infinite;
