@@ -14,7 +14,6 @@ import Certifications from './sections/Certifications';
 import Blog from './sections/Blog';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
-import ProfileVisual from './components/ProfileVisual';
 
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -106,15 +105,9 @@ function PromptHeroSection() {
       {/* Navbar unificado */}
       <Navbar />
 
-      {/* Hero Content com ProfileVisual */}
-      <main className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8 pt-16 pb-8">
+      {/* Hero Content */}
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8 pt-16 pb-8">
         <div className="text-center lg:text-left flex-1 max-w-2xl">
-          <div className="mb-4 inline-block">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-[0.8rem] text-accent font-mono shadow-[0_0_15px_rgba(226,166,61,0.2)]">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" aria-hidden="true" />
-              {t('hero.role')}
-            </span>
-          </div>
           <h1 className="text-[42px] sm:text-[56px] font-bold leading-tight mb-4 tracking-tight text-white">
             <WordByWord text={t('hero.title1')} delay={0.3} />
           </h1>
@@ -139,11 +132,6 @@ function PromptHeroSection() {
               {t('hero.btnResume')}
             </a>
           </div>
-        </div>
-
-        {/* Right Side: ProfileVisual */}
-        <div className="flex-1 w-full max-w-[380px] lg:max-w-[420px]">
-          <ProfileVisual />
         </div>
       </main>
 

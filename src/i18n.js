@@ -12,7 +12,6 @@ const resources = {
         contact: "Contato",
       },
       hero: {
-        role: "Analista de Suporte Júnior em transição para Desenvolvimento",
         title1: "Jefferson Teles",
         subtitle: "6+ anos de experiência em TI, redes, hardware e infraestrutura. Atuo em suporte N2 de sistemas fiscais SaaS: analiso JSON/XML, homologo APIs de Prefeituras e gero certificados digitais A1/A3 via terminal Linux. Cursando Engenharia de Software — conclusão jan/2027.",
         description: "Cascavel, Paraná · Desenvolvimento · Linux · Docker · Java · Python · Flutter · Arduino · ESP32",
@@ -20,7 +19,6 @@ const resources = {
         btnWorks: "Ver projetos",
         btnResume: "Ver currículo",
         tagline: "FullStack Developer & Especialista em Infraestrutura. Construindo sistemas de alta performance, do fundamento ao fim.",
-        experienceBadge: "20 anos · Disponível Júnior",
         explore: "Explorar",
       },
       about: {
@@ -258,7 +256,6 @@ const resources = {
         contact: "Contact",
       },
       hero: {
-        role: "Junior Support Analyst transitioning to Development",
         title1: "Jefferson Teles",
         subtitle: "6+ years of experience in IT, networking, hardware and infrastructure. L2 support for fiscal SaaS systems with JSON/XML analysis and digital certificates via Linux terminal. Studying Software Engineering — graduation Jan/2027.",
         description: "Cascavel, Paraná · Development · Linux · Docker · Java · Python · Flutter · Arduino · ESP32",
@@ -266,7 +263,6 @@ const resources = {
         btnWorks: "View projects",
         btnResume: "View resume",
         tagline: "Full Stack Software Developer & Infrastructure Specialist. Building high-performance systems from foundation to finish.",
-        experienceBadge: "20+ years · Available for Junior role",
         explore: "Explore",
       },
       about: {
