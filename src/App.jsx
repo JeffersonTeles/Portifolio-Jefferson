@@ -40,33 +40,6 @@ function WordByWord({ text, delay, className }) {
   );
 }
 
-function ImpactSection() {
-  const impactItems = [
-    { value: '6+', label: 'Anos em TI' },
-    { value: '8', label: 'Tickets/dia' },
-    { value: '3', label: 'Projetos' },
-    { value: '100%', label: 'Uptime' },
-  ];
-
-  return (
-    <section className="py-16 border-t border-white/[0.04] bg-[#0a0a0a]/50">
-      <div className="max-w-[700px] mx-auto px-6">
-        <h3 className="text-[0.7rem] text-[#555] font-mono uppercase tracking-[0.25em] text-center mb-8">
-          Números que importam
-        </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {impactItems.map((item) => (
-            <div key={item.label} className="text-center">
-              <div className="text-[2.5rem] font-bold text-accent mb-1">{item.value}</div>
-              <div className="text-[0.7rem] text-[#777] font-mono uppercase tracking-wider">{item.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function PromptHeroSection() {
   const { t } = useTranslation();
 
@@ -112,6 +85,22 @@ function PromptHeroSection() {
         <script type="application/ld+json">{JSON.stringify(schemaMarkup)}</script>
       </Helmet>
       <style>{`
+        @keyframes fadeSlideUp {
+          from { opacity: 0; transform: translateY(24px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes sparkOrbit {
+          0% { transform: translate(-50%, -50%) rotate(0deg) translateX(28px) rotate(0deg); }
+          100% { transform: translate(-50%, -50%) rotate(360deg) translateX(28px) rotate(-360deg); }
+        }
+        @keyframes glowPulse {
+          0%, 100% { opacity: 0.6; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.05); }
+        }
         .spark-flash {
           position: relative;
         }
@@ -125,96 +114,72 @@ function PromptHeroSection() {
             0 0 15px rgba(226,166,61,0.3),
             0 0 30px rgba(226,166,61,0.15),
             inset 0 0 15px rgba(226,166,61,0.05);
-          animation: auraPulse 2.5s ease-in-out infinite;
+          animation: glowPulse 3s ease-in-out infinite;
           pointer-events: none;
           z-index: -1;
         }
-        /* Spark orbitando ao redor do botão */
         .spark-flash::after {
           content: '';
           position: absolute;
-          width: 6px;
-          height: 6px;
-          background: #e2a63d;
-          border-radius: 50%;
           top: 50%;
           left: 50%;
+          width: 6px;
+          height: 6px;
           margin-top: -3px;
           margin-left: -3px;
-          box-shadow: 0 0 10px rgba(226,166,61,0.8), 0 0 20px rgba(226,166,61,0.4);
+          background: #e2a63d;
+          border-radius: 50%;
+          box-shadow: 0 0 8px rgba(226,166,61,0.8), 0 0 15px rgba(226,166,61,0.5), 0 0 25px rgba(226,166,61,0.3);
           z-index: 10;
           pointer-events: none;
           animation: sparkOrbit 3s linear infinite;
         }
         .spark-flash:hover::after {
-          animation-duration: 1.5s;
           background: #ff6b35;
-          box-shadow: 0 0 15px rgba(255,107,53,0.9), 0 0 30px rgba(255,107,53,0.5);
-        }
-        @keyframes auraPulse {
-          0%, 100% { box-shadow: 0 0 15px rgba(226,166,61,0.3), 0 0 30px rgba(226,166,61,0.15), inset 0 0 15px rgba(226,166,61,0.05); }
-          50% { box-shadow: 0 0 25px rgba(226,166,61,0.5), 0 0 45px rgba(226,166,61,0.25), inset 0 0 15px rgba(226,166,61,0.05); }
-        }
-        @keyframes sparkOrbit {
-          0% { transform: rotate(0deg) translateX(28px) rotate(0deg); }
-          100% { transform: rotate(360deg) translateX(28px) rotate(-360deg); }
-        }
-        .spark-pulse {
-          animation: sparkPulse 2s ease-in-out infinite;
+          box-shadow: 0 0 12px rgba(255,107,53,0.9), 0 0 20px rgba(255,107,53,0.6), 0 0 35px rgba(255,107,53,0.4);
+          animation-duration: 1.5s;
         }
       `}</style>
 
-       {/* Background mais dinâmico */}
-       <div className="absolute inset-0 z-0 pointer-events-none">
-         <div className="absolute inset-0 bg-[#0a0a0a]" />
-         <div
-           className="absolute inset-0 opacity-30 animate-gradient-bg"
-           style={{
-             background: 'linear-gradient(135deg, rgba(226,166,61,0.06) 0%, rgba(110,231,183,0.04) 30%, rgba(147,197,253,0.03) 60%, rgba(226,166,61,0.05) 100%)',
-           }}
-         />
-
-         {/* Grid mais fino e escuro */}
-         <div
-           className="absolute inset-0 opacity-[0.02] pointer-events-none"
-           style={{
-             backgroundImage:
-               'linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)',
-             backgroundSize: '40px 40px',
-           }}
-         />
-
-         {/* Glows pulsantes */}
-         <div className="absolute top-[15%] left-[-10%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
-         <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDelay: '1s' }} />
-
-         {/* Vignette mais forte */}
-         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/70 via-transparent to-[#0a0a0a]/40 pointer-events-none" />
-
-         {/* Gradientes radiais para dar profundidade */}
-         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(226,166,61,0.08)_0%,_transparent_50%),_radial-gradient(ellipse_at_bottom_left,_rgba(110,231,183,0.05)_0%,_transparent_50%)] pointer-events-none" />
-       </div>
+      {/* Background limpo e minimalista */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[#0a0a0a]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.03] via-transparent to-cyan-500/[0.02]" />
+        <div className="absolute inset-0 opacity-[0.012] pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
+        <div className="absolute top-[15%] left-[-10%] w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-cyan-500/3 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/70 via-transparent to-[#0a0a0a]/40 pointer-events-none" />
+      </div>
 
       <Navbar />
 
-      <main id="main-content" className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8 pt-[120px] pb-8 lg:pt-20">
+      <main id="main-content" className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8 pt-[100px] pb-8 lg:pt-[140px]">
         <div className="text-center lg:text-left flex-1 max-w-2xl">
-          <div className="mb-4 inline-block">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-[0.8rem] text-accent font-mono shadow-[0_0_15px_rgba(226,166,61,0.2)]">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" aria-hidden="true" />
+          {/* Badge de role - sem piscar, apenas borda sutil */}
+          <div className="mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/30 bg-accent/5 text-[0.75rem] text-accent font-mono tracking-wide shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
               {t('hero.role')}
             </span>
           </div>
-          <h1 className="text-[42px] sm:text-[56px] font-bold leading-tight mb-4 tracking-tight text-white">
+
+          {/* Nome com fonte melhorada */}
+          <h1 className="text-[44px] sm:text-[58px] font-sans font-bold leading-[1.05] mb-5 tracking-tight text-white">
             <WordByWord text={t('hero.title1')} delay={0.3} />
           </h1>
-          <p className="text-[15px] sm:text-[17px] font-light text-white/70 mb-8 leading-relaxed" style={{ maxWidth: '46ch' }}>
+
+          {/* Tagline - separado do subtitle */}
+          <p className="text-[15px] sm:text-[17px] font-medium text-white/75 mb-6 leading-relaxed" style={{ maxWidth: '48ch' }}>
             <WordByWord text={t('hero.tagline')} delay={1.0} />
           </p>
-          <p className="text-[0.85rem] text-[#666] mb-6">
+
+          {/* Subtitle - informações adicionais */}
+          <p className="text-[0.8rem] text-[#666] mb-8 max-w-xl leading-relaxed border-l-2 border-accent/20 pl-4">
             {t('hero.subtitle')}
           </p>
-           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+
+          {/* Botões */}
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
             <SparkButton href="#projects">
               {t('hero.btnWorks')}
             </SparkButton>
@@ -224,19 +189,20 @@ function PromptHeroSection() {
             <SparkButton href="#contact">
               {t('contact.getInTouch') || 'Fale comigo'}
             </SparkButton>
-           </div>
+          </div>
         </div>
       </main>
 
-       <div className="relative z-10 pb-6 text-center flex-shrink-0">
-         <a href="#about" className="block text-[0.7rem] font-mono tracking-widest uppercase text-white/40 hover:text-white transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-accent mb-2 sm:hidden">
-           {t('hero.explore')}
-         </a>
-         <a href="#about" className="hidden sm:flex sm:inline-flex sm:flex-col sm:items-center text-white/40 hover:text-white transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-accent">
-           <span className="text-[0.7rem] font-mono tracking-widest uppercase mb-1">{t('hero.explore')}</span>
-           <ChevronDown size={16} className="animate-bounce text-accent" />
-         </a>
-       </div>
+      {/* Scroll indicator */}
+      <div className="relative z-10 pb-6 text-center flex-shrink-0">
+        <a href="#about" className="block text-[0.7rem] font-mono tracking-widest uppercase text-white/40 hover:text-white transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-accent mb-2 sm:hidden">
+          {t('hero.explore')}
+        </a>
+        <a href="#about" className="hidden sm:flex sm:inline-flex sm:items-center text-white/40 hover:text-white transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-accent">
+          <span className="text-[0.7rem] font-mono tracking-widest uppercase mb-1">{t('hero.explore')}</span>
+          <ChevronDown size={16} className="animate-bounce text-accent" />
+        </a>
+      </div>
     </section>
   );
 }
