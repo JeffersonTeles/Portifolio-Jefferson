@@ -117,11 +117,10 @@ function PromptHeroSection() {
         .spark-flash::before {
           content: '';
           position: absolute;
-          inset: -4px;
+          inset: -3px;
           border-radius: inherit;
-          border: 1.5px solid rgba(226,166,61,0.1);
+          border: 1.5px solid rgba(226,166,61,0.15);
           box-shadow:
-            0 0 0px rgba(226,166,61,0),
             0 0 15px rgba(226,166,61,0.3),
             0 0 30px rgba(226,166,61,0.15),
             inset 0 0 15px rgba(226,166,61,0.05);
@@ -129,41 +128,38 @@ function PromptHeroSection() {
           pointer-events: none;
           z-index: -1;
         }
+        /* Spark orbitando ao redor do botão */
         .spark-flash::after {
           content: '';
           position: absolute;
-          inset: -8px;
-          border-radius: inherit;
-          border: 1px solid rgba(226,166,61,0.15);
-          box-shadow:
-            0 0 20px rgba(226,166,61,0.15),
-            0 0 40px rgba(226,166,61,0.08),
-            0 0 60px rgba(110,231,183,0.05);
-          animation: auraRotate 4s linear infinite;
+          width: 6px;
+          height: 6px;
+          background: #e2a63d;
+          border-radius: 50%;
+          top: 50%;
+          left: 50%;
+          margin-top: -3px;
+          margin-left: -3px;
+          box-shadow: 0 0 10px rgba(226,166,61,0.8), 0 0 20px rgba(226,166,61,0.4);
+          z-index: 10;
           pointer-events: none;
-          z-index: -2;
-        }
-        .spark-flash:hover::before {
-          box-shadow:
-            0 0 0px rgba(226,166,61,0),
-            0 0 25px rgba(226,166,61,0.5),
-            0 0 50px rgba(226,166,61,0.3),
-            0 0 70px rgba(226,166,61,0.2),
-            inset 0 0 20px rgba(226,166,61,0.1);
+          animation: sparkOrbit 3s linear infinite;
         }
         .spark-flash:hover::after {
-          box-shadow:
-            0 0 30px rgba(226,166,61,0.25),
-            0 0 60px rgba(226,166,61,0.15),
-            0 0 90px rgba(110,231,183,0.1);
+          animation-duration: 1.5s;
+          background: #ff6b35;
+          box-shadow: 0 0 15px rgba(255,107,53,0.9), 0 0 30px rgba(255,107,53,0.5);
         }
         @keyframes auraPulse {
-          0%, 100% { box-shadow: 0 0 0px rgba(226,166,61,0), 0 0 15px rgba(226,166,61,0.3), 0 0 30px rgba(226,166,61,0.15), inset 0 0 15px rgba(226,166,61,0.05); }
-          50% { box-shadow: 0 0 0px rgba(226,166,61,0), 0 0 25px rgba(226,166,61,0.5), 0 0 45px rgba(226,166,61,0.25), 0 0 60px rgba(226,166,61,0.15), inset 0 0 15px rgba(226,166,61,0.05); }
+          0%, 100% { box-shadow: 0 0 15px rgba(226,166,61,0.3), 0 0 30px rgba(226,166,61,0.15), inset 0 0 15px rgba(226,166,61,0.05); }
+          50% { box-shadow: 0 0 25px rgba(226,166,61,0.5), 0 0 45px rgba(226,166,61,0.25), inset 0 0 15px rgba(226,166,61,0.05); }
         }
-        @keyframes auraRotate {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+        @keyframes sparkOrbit {
+          0% { transform: rotate(0deg) translateX(28px) rotate(0deg); }
+          100% { transform: rotate(360deg) translateX(28px) rotate(-360deg); }
+        }
+        .spark-pulse {
+          animation: sparkPulse 2s ease-in-out infinite;
         }
       `}</style>
 
