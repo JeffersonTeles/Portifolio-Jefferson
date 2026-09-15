@@ -1,9 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
 const DarkModeToggle = () => {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    const stored = localStorage.getItem('theme');
+    if (stored) return stored === 'dark';
+    return true;
+  });
+
+  useEffect(() => {
+    const html = document.documentElement;
+    if (isDark) {
+      html.classList.remove('light-theme');
+      html.classList.add('dark-theme');
+      document.body.style.backgroundColor = '#0a0a0a';
+      document.body.style.color = '#ffffff';
+    } else {
+      html.classList.remove('dark-theme');
+      html.classList.add('light-theme');
+      document.body.style.backgroundColor = '#f5f5f5';
+      document.body.style.color = '#1a1a1a';
+    }
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }, [isDark]);
 
   const toggle = () => setIsDark((prev) => !prev);
 

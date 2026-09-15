@@ -155,7 +155,7 @@ function PromptHeroSection() {
 
       <Navbar />
 
-      <main id="main-content" className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8 pt-16 pb-8">
+      <main id="main-content" className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8 pt-20 pb-8 lg:pt-16">
         <div className="text-center lg:text-left flex-1 max-w-2xl">
           <div className="mb-4 inline-block">
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-[0.8rem] text-accent font-mono shadow-[0_0_15px_rgba(226,166,61,0.2)]">
@@ -200,12 +200,15 @@ function PromptHeroSection() {
         </div>
       </main>
 
-      <div className="relative z-10 pb-6 text-center flex-shrink-0">
-        <a href="#about" className="inline-flex flex-col items-center text-white/40 hover:text-white transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-accent">
-          <span className="text-[0.7rem] font-mono tracking-widest uppercase mb-1">{t('hero.explore')}</span>
-          <ChevronDown size={16} className="animate-bounce text-accent" />
-        </a>
-      </div>
+       <div className="relative z-10 pb-6 text-center flex-shrink-0">
+         <a href="#about" className="block text-[0.7rem] font-mono tracking-widest uppercase text-white/40 hover:text-white transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-accent mb-2 sm:hidden">
+           {t('hero.explore')}
+         </a>
+         <a href="#about" className="hidden sm:flex sm:inline-flex sm:flex-col sm:items-center text-white/40 hover:text-white transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-accent">
+           <span className="text-[0.7rem] font-mono tracking-widest uppercase mb-1">{t('hero.explore')}</span>
+           <ChevronDown size={16} className="animate-bounce text-accent" />
+         </a>
+       </div>
     </section>
   );
 }
@@ -224,7 +227,6 @@ function HomePage() {
       <TechStack />
       <Certifications />
       <Contact />
-      <Footer />
     </>
   );
 }
