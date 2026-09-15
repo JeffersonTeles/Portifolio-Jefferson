@@ -4,23 +4,20 @@ import { motion } from 'framer-motion';
 
 const DarkModeToggle = () => {
   const [isDark, setIsDark] = useState(() => {
-    const stored = localStorage.getItem('theme');
-    if (stored) return stored === 'dark';
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('theme');
+      if (stored) return stored === 'dark';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
     return true;
   });
 
   useEffect(() => {
     const html = document.documentElement;
     if (isDark) {
-      html.classList.remove('light-theme');
-      html.classList.add('dark-theme');
-      document.body.style.backgroundColor = '#0a0a0a';
-      document.body.style.color = '#ffffff';
+      html.classList.remove('light');
     } else {
-      html.classList.remove('dark-theme');
-      html.classList.add('light-theme');
-      document.body.style.backgroundColor = '#f5f5f5';
-      document.body.style.color = '#1a1a1a';
+      html.classList.add('light');
     }
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }, [isDark]);
@@ -30,8 +27,12 @@ const DarkModeToggle = () => {
   return (
     <button
       onClick={toggle}
-      className="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-full bg-[#1a1a1a] border border-white/10 flex items-center justify-center text-[#888] hover:text-accent hover:border-accent/30 transition-all duration-300 shadow-lg focus-visible:ring-2 focus-visible:ring-accent"
+      className="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-[#aaa] hover:text-accent hover:border-accent/40 transition-all duration-300 shadow-lg hover:shadow-xl focus-visible:ring-2 focus-visible:ring-accent dark:hover:shadow-2xl"
       aria-label={isDark ? 'Modo claro' : 'Modo escuro'}
+      style={{
+        backgroundColor: isDark ? '#1a1a1a' : '#f0f0f0',
+        color: isDark ? '#aaa' : '#555',
+      }}
     >
       {isDark ? (
         <motion.span
