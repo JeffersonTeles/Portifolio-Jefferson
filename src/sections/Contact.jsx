@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { FiCheck, FiSend, FiLoader, FiGithub, FiLinkedin } from 'react-icons/fi';
 import { copyEmail } from '../utils/copyEmail';
 import AnimatedSection from '../components/AnimatedSection';
+import SparkButton from '../components/SparkButton';
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -116,10 +117,10 @@ const Contact = () => {
                 Mensagem enviada com sucesso! Retornarei em breve.
               </div>
             ) : (
-              <button
+              <SparkButton
                 type="submit"
                 disabled={status === 'loading'}
-                className="w-full py-4 rounded-xl bg-white text-black font-semibold text-[0.95rem] hover:bg-accent hover:text-white transition-all duration-300 flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 spark-hover"
+                className="w-full"
               >
                 {status === 'loading' ? (
                   <>
@@ -132,7 +133,7 @@ const Contact = () => {
                     Enviar Mensagem
                   </>
                 )}
-              </button>
+              </SparkButton>
             )}
           </form>
         </div>

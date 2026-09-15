@@ -10,6 +10,7 @@ import BackToTop from './components/BackToTop';
 import ScrollProgress from './components/ScrollProgress';
 import SkipLink from './components/SkipLink';
 import DarkModeToggle from './components/DarkModeToggle';
+import SparkButton from './components/SparkButton';
 import About from './sections/About';
 import Experience from './sections/Experience';
 import Projects from './sections/Projects';
@@ -213,31 +214,17 @@ function PromptHeroSection() {
           <p className="text-[0.85rem] text-[#666] mb-6">
             {t('hero.subtitle')}
           </p>
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-          <a
-            href="#projects"
-            className="relative inline-block bg-white text-black px-8 py-3.5 text-sm font-semibold rounded-xl opacity-0 hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] focus-visible:ring-2 focus-visible:ring-accent spark-flash"
-            style={{ animation: `fadeIn 0.6s ease forwards 1.6s` }}
-          >
-            {t('hero.btnWorks')}
-          </a>
-          <a
-            href="/Curriculo_Jefferson_Teles_TI.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative inline-block border border-white/20 bg-white/10 backdrop-blur-md text-white px-8 py-3.5 text-sm font-medium rounded-xl opacity-0 hover:bg-white/20 active:scale-95 transition-all duration-300 spark-hover spark-flash"
-            style={{ animation: `fadeIn 0.6s ease forwards 1.9s` }}
-          >
-            {t('hero.btnResume')}
-          </a>
-          <a
-            href="#contact"
-            className="relative inline-block border border-accent/30 text-accent px-8 py-3.5 text-sm font-medium rounded-xl opacity-0 hover:bg-accent/10 active:scale-95 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-accent spark-flash"
-            style={{ animation: `fadeIn 0.6s ease forwards 2.2s` }}
-          >
-            {t('contact.getInTouch') || 'Fale comigo'}
-          </a>
-          </div>
+           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+            <SparkButton href="#projects">
+              {t('hero.btnWorks')}
+            </SparkButton>
+            <SparkButton href="/Curriculo_Jefferson_Teles_TI.pdf" target="_blank" rel="noopener noreferrer">
+              {t('hero.btnResume')}
+            </SparkButton>
+            <SparkButton href="#contact">
+              {t('contact.getInTouch') || 'Fale comigo'}
+            </SparkButton>
+           </div>
         </div>
       </main>
 

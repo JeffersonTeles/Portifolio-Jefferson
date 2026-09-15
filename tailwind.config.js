@@ -24,6 +24,7 @@ export default {
         "fade-in": "fadeIn 0.6s ease-out forwards",
         "slide-up": "slideUp 0.6s ease-out forwards",
         "slide-in-right": "slideInRight 0.5s ease-out forwards",
+        "spin-border": "spinBorder 2.5s linear infinite",
       },
       keyframes: {
         fadeIn: {
@@ -37,6 +38,10 @@ export default {
         slideInRight: {
           "0%": { opacity: "0", transform: "translateX(20px)" },
           "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        spinBorder: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "100%": { backgroundPosition: "100% 50%" },
         },
       },
     },
