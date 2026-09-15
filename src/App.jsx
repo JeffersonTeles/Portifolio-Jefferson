@@ -14,7 +14,6 @@ import Certifications from './sections/Certifications';
 import Blog from './sections/Blog';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
-import ProfileVisual from './components/ProfileVisual';
 
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -133,11 +132,6 @@ function PromptHeroSection() {
               {t('hero.btnResume')}
             </a>
           </div>
-        </div>
-
-        {/* Right Side: ProfileVisual */}
-        <div className="flex-1 w-full max-w-[380px] lg:max-w-[420px] mt-8 lg:mt-0">
-          <ProfileVisual />
         </div>
       </main>
 
