@@ -14,6 +14,7 @@ import Certifications from './sections/Certifications';
 import Blog from './sections/Blog';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
+import ProfileVisual from './components/ProfileVisual';
 
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -106,7 +107,7 @@ function PromptHeroSection() {
       <Navbar />
 
       {/* Hero Content */}
-      <main className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8 pt-16 pb-8">
+      <main className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8 pt-16 pb-8">
         <div className="text-center lg:text-left flex-1 max-w-2xl">
           <h1 className="text-[42px] sm:text-[56px] font-bold leading-tight mb-4 tracking-tight text-white">
             <WordByWord text={t('hero.title1')} delay={0.3} />
@@ -132,6 +133,11 @@ function PromptHeroSection() {
               {t('hero.btnResume')}
             </a>
           </div>
+        </div>
+
+        {/* Right Side: ProfileVisual */}
+        <div className="flex-1 w-full max-w-[380px] lg:max-w-[420px] mt-8 lg:mt-0">
+          <ProfileVisual />
         </div>
       </main>
 

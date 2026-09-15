@@ -6,7 +6,7 @@ export default function ProfileVisual() {
   const { t } = useTranslation();
 
   return (
-    <div className="relative w-full max-w-[380px] lg:max-w-[420px] mx-auto group">
+    <div className="relative w-full max-w-[380px] lg:max-w-[420px] mx-auto">
       {/* Background ambient neon glow aura */}
       <div className="absolute -inset-2 bg-gradient-to-r from-accent/30 via-cyan-500/20 to-accent/30 rounded-3xl blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-700 animate-pulse pointer-events-none" />
 
@@ -21,13 +21,6 @@ export default function ProfileVisual() {
             backgroundSize: '25px 25px'
           }}
         />
-
-        {/* Top Status Header */}
-        <div className="flex justify-end mb-5 relative z-10">
-          <span className="text-[0.65rem] font-mono text-cyan-400/80 tracking-widest uppercase">
-            ID: 2026.JT
-          </span>
-        </div>
 
         {/* Real Photo Portrait with Neon Cyberpunk Frame */}
         <div className="flex flex-col items-center text-center mb-5 relative z-10">
@@ -54,14 +47,14 @@ export default function ProfileVisual() {
           <p className="text-[0.7rem] text-[#777] font-mono mt-1">Cascavel, Paraná</p>
         </div>
 
-        {/* Floating Technical Badges — mais discreto */}
-        <div className="grid grid-cols-2 gap-2 relative z-10">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-cyan-500/15 text-xs text-white/80 font-mono">
-            <FiTerminal className="text-cyan-400 flex-shrink-0" size={13} />
+        {/* Floating Technical Badges */}
+        <div className="grid grid-cols-2 gap-2.5 mb-4 relative z-10">
+          <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.04] border border-cyan-500/20 text-xs text-white/90 font-mono shadow-inner hover:border-cyan-500/50 transition-colors">
+            <FiTerminal className="text-cyan-400 flex-shrink-0" size={14} />
             <span>Linux & Docker</span>
           </div>
-          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-accent/15 text-xs text-white/80 font-mono">
-            <FiCpu className="text-accent flex-shrink-0" size={13} />
+          <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.04] border border-accent/20 text-xs text-white/90 font-mono shadow-inner hover:border-accent/50 transition-colors">
+            <FiCpu className="text-accent flex-shrink-0" size={14} />
             <span>Python & Java</span>
           </div>
         </div>

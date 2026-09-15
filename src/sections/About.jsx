@@ -51,14 +51,10 @@ const About = () => {
                   className="block"
                 >
                   <img
-                    src="https://github-readme-stats.vercel.app/api?username=JeffersonTeles&show_icons=true&hide_border=true&bg_color=0a0a0a&title_color=e2a63d&text_color=666666&icon_color=444444&ring_color=222222&count_private=true&cache_bust=174"
+                    src="https://github-profile-summary-cards.vercel.app/api/cards/profile?username=JeffersonTeles&theme=dracula"
                     alt="GitHub Stats"
-                    className="w-full max-w-[420px] opacity-60 hover:opacity-95 transition-opacity duration-500 mx-auto"
+                    className="w-full max-w-[420px] opacity-80 hover:opacity-95 transition-opacity duration-500 mx-auto"
                     loading="lazy"
-                    onError={(e) => {
-                      e.target.src = 'https://github-profile-summary-cards.vercel.app/api/cards/profile?username=JeffersonTeles&theme=dracula';
-                      e.target.classList.add('opacity-80');
-                    }}
                   />
                 </a>
               </div>
