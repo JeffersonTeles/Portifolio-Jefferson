@@ -33,7 +33,7 @@ const TechStack = () => {
                   {group.category}
                 </h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 overflow-x-auto pb-2">
                 {group.items.map((item) => (
                   <span
                     key={item}

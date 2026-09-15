@@ -9,11 +9,13 @@ const Contact = () => {
   const { t } = useTranslation();
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [copied, setCopied] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('loading');
     setErrorMessage('');
+    setCopied(false);
 
     const formData = new FormData(e.target);
     formData.append('access_key', import.meta.env.VITE_WEB3FORMS_KEY || 'YOUR_WEB3FORMS_ACCESS_KEY');
@@ -40,6 +42,12 @@ const Contact = () => {
       setStatus('error');
       setErrorMessage('Erro de conexão. Verifique sua rede e tente novamente.');
     }
+  };
+
+  const handleCopyEmail = () => {
+    copyEmail();
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -140,12 +148,14 @@ const Contact = () => {
 
         <div className="text-center mt-10">
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <button
-              onClick={copyEmail}
-              className="text-accent text-[1.05rem] border-b border-accent/30 hover:border-accent transition-colors duration-300 cursor-pointer"
+             <button
+              onClick={handleCopyEmail}
+              className={`text-[1.05rem] border-b border-accent/30 hover:border-accent transition-colors duration-300 cursor-pointer ${
+                copied ? 'text-green-400 border-green-400' : 'text-accent'
+              }`}
               aria-label="Copiar email"
             >
-              jeffersontelesdeoliveira@gmail.com
+              {copied ? 'Copiado!' : 'jeffersontelesdeoliveira@gmail.com'}
             </button>
               <a
                 href={`https://wa.me/5544999277915?text=${encodeURIComponent('Olá Jefferson, gostaria de falar sobre uma oportunidade ou projeto.')}`}

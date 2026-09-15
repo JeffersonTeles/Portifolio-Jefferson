@@ -23,7 +23,7 @@ const Projects = () => {
         <h2 className="text-[1.8rem] font-bold text-white mb-16">{t('projects.heading')}</h2>
 
         <motion.div
-          className="space-y-28"
+          className="space-y-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
@@ -38,7 +38,7 @@ const Projects = () => {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
               }}
               key={project.title}
-              className="group rounded-xl p-6 -mx-6 hover:bg-white/[0.015] transition-colors duration-500 cursor-pointer"
+              className="group relative rounded-xl p-6 -mx-6 hover:bg-white/[0.02] hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-500 cursor-pointer"
               onClick={() => handleOpenModal(project, i)}
             >
               <ProjectImage title={project.title} index={i} stack={project.stack} />
