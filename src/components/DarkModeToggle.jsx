@@ -1,8 +1,9 @@
+import React, { useState } from 'react';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
 const DarkModeToggle = () => {
-  const [isDark, setIsDark] = React.useState(true);
+  const [isDark, setIsDark] = useState(true);
 
   const toggle = () => setIsDark((prev) => !prev);
 
