@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FiServer, FiWifi, FiCpu, FiCheckCircle, FiGithub } from 'react-icons/fi';
+import { FiServer, FiWifi, FiCpu, FiCheckCircle } from 'react-icons/fi';
 import AnimatedSection from '../components/AnimatedSection';
 
 const About = () => {
@@ -37,28 +37,6 @@ const About = () => {
                 );
               })}
             </div>
-
-            {/* GitHub stats */}
-            <div className="pt-8 border-t border-white/[0.04]">
-              <p className="text-[0.65rem] text-[#444] font-mono uppercase tracking-[0.2em] mb-4">
-                GitHub Activity
-              </p>
-              <div className="p-4 rounded-2xl bg-white/[0.01] border border-white/[0.05] overflow-hidden">
-                <a
-                  href="https://github.com/JeffersonTeles"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
-                >
-                  <img
-                    src="https://github-profile-summary-cards.vercel.app/api/cards/profile?username=JeffersonTeles&theme=dracula"
-                    alt="GitHub Stats"
-                    className="w-full max-w-[420px] opacity-80 hover:opacity-95 transition-opacity duration-500 mx-auto"
-                    loading="lazy"
-                  />
-                </a>
-              </div>
-            </div>
           </div>
 
           {/* Right: Info card */}
@@ -67,7 +45,7 @@ const About = () => {
               {/* Avatar header */}
               <div className="flex items-center gap-4 mb-6 pb-6 border-b border-white/[0.06]">
                 <div className="w-12 h-12 rounded-2xl overflow-hidden border border-accent/40 flex-shrink-0 shadow-md">
-                  <img src="/jefferson-avatar.jpg" alt="Jefferson" className="w-full h-full object-cover" />
+                  <img src="/jefferson-avatar.jpg" alt="Jefferson Teles" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <p className="text-[0.9rem] font-semibold text-white flex items-center gap-1">

@@ -125,37 +125,75 @@ function PromptHeroSection() {
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
+        @keyframes sparkRotate {
+          0% { transform: rotate(0deg); box-shadow: 0 0 0px rgba(226,166,61,0); }
+          25% { box-shadow: 0 0 25px rgba(226,166,61,0.4), 0 0 50px rgba(226,166,61,0.2); }
+          50% { transform: rotate(180deg); box-shadow: 0 0 15px rgba(110,231,183,0.3); }
+          75% { box-shadow: 0 0 30px rgba(110,231,183,0.5), 0 0 60px rgba(110,231,183,0.3); }
+          100% { transform: rotate(360deg); box-shadow: 0 0 0px rgba(226,166,61,0); }
+        }
+        @keyframes sparkPulse {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.3); }
+        }
         .animate-gradient-bg {
           background-size: 200% 200%;
           animation: gradientShift 15s ease infinite;
         }
+        .spark-flash::after {
+          content: '';
+          position: absolute;
+          inset: -4px;
+          border-radius: inherit;
+          background: conic-gradient(from 0deg, transparent, rgba(226,166,61,0.6), transparent 30%, rgba(110,231,183,0.6), transparent 60%, rgba(226,166,61,0.4), transparent);
+          opacity: 0;
+          animation: sparkRotate 3s linear infinite;
+          z-index: -1;
+          pointer-events: none;
+        }
+        .spark-flash:hover::after {
+          opacity: 1;
+          animation-duration: 1.5s;
+        }
+        .spark-pulse {
+          animation: sparkPulse 2s ease-in-out infinite;
+        }
       `}</style>
 
-      {/* Background melhorado */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[#0a0a0a]" />
-        <div
-          className="absolute inset-0 opacity-30 animate-gradient-bg"
-          style={{
-            background: 'linear-gradient(135deg, rgba(226,166,61,0.06) 0%, rgba(110,231,183,0.04) 30%, rgba(147,197,253,0.03) 60%, rgba(226,166,61,0.05) 100%)',
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.015] pointer-events-none"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
-        />
-        <div className="absolute top-[15%] left-[-10%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-transparent to-[#0a0a0a]/30 pointer-events-none" />
-      </div>
+       {/* Background mais dinâmico */}
+       <div className="absolute inset-0 z-0 pointer-events-none">
+         <div className="absolute inset-0 bg-[#0a0a0a]" />
+         <div
+           className="absolute inset-0 opacity-30 animate-gradient-bg"
+           style={{
+             background: 'linear-gradient(135deg, rgba(226,166,61,0.06) 0%, rgba(110,231,183,0.04) 30%, rgba(147,197,253,0.03) 60%, rgba(226,166,61,0.05) 100%)',
+           }}
+         />
+
+         {/* Grid mais fino e escuro */}
+         <div
+           className="absolute inset-0 opacity-[0.02] pointer-events-none"
+           style={{
+             backgroundImage:
+               'linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)',
+             backgroundSize: '40px 40px',
+           }}
+         />
+
+         {/* Glows pulsantes */}
+         <div className="absolute top-[15%] left-[-10%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+         <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDelay: '1s' }} />
+
+         {/* Vignette mais forte */}
+         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/70 via-transparent to-[#0a0a0a]/40 pointer-events-none" />
+
+         {/* Gradientes radiais para dar profundidade */}
+         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(226,166,61,0.08)_0%,_transparent_50%),_radial-gradient(ellipse_at_bottom_left,_rgba(110,231,183,0.05)_0%,_transparent_50%)] pointer-events-none" />
+       </div>
 
       <Navbar />
 
-      <main id="main-content" className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8 pt-20 pb-8 lg:pt-16">
+      <main id="main-content" className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 max-w-7xl mx-auto w-full gap-8 pt-[120px] pb-8 lg:pt-20">
         <div className="text-center lg:text-left flex-1 max-w-2xl">
           <div className="mb-4 inline-block">
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent/30 bg-accent/10 text-[0.8rem] text-accent font-mono shadow-[0_0_15px_rgba(226,166,61,0.2)]">
@@ -173,29 +211,29 @@ function PromptHeroSection() {
             {t('hero.subtitle')}
           </p>
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-            <a
-              href="#projects"
-              className="inline-block bg-white text-black px-8 py-3.5 text-sm font-semibold rounded-xl opacity-0 hover:scale-105 active:scale-95 transition-all duration-300 spark-hover shadow-[0_0_20px_rgba(255,255,255,0.3)] focus-visible:ring-2 focus-visible:ring-accent"
-              style={{ animation: `fadeIn 0.6s ease forwards 1.6s` }}
-            >
-              {t('hero.btnWorks')}
-            </a>
-            <a
-              href="/Curriculo_Jefferson_Teles_TI.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block border border-white/20 bg-white/10 backdrop-blur-md text-white px-8 py-3.5 text-sm font-medium rounded-xl opacity-0 hover:bg-white/20 active:scale-95 transition-all duration-300 spark-hover focus-visible:ring-2 focus-visible:ring-accent"
-              style={{ animation: `fadeIn 0.6s ease forwards 1.9s` }}
-            >
-              {t('hero.btnResume')}
-            </a>
-            <a
-              href="#contact"
-              className="inline-block border border-accent/30 text-accent px-8 py-3.5 text-sm font-medium rounded-xl opacity-0 hover:bg-accent/10 active:scale-95 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-accent"
-              style={{ animation: `fadeIn 0.6s ease forwards 2.2s` }}
-            >
-              {t('contact.getInTouch') || 'Fale comigo'}
-            </a>
+          <a
+            href="#projects"
+            className="relative inline-block bg-white text-black px-8 py-3.5 text-sm font-semibold rounded-xl opacity-0 hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] focus-visible:ring-2 focus-visible:ring-accent spark-flash"
+            style={{ animation: `fadeIn 0.6s ease forwards 1.6s` }}
+          >
+            {t('hero.btnWorks')}
+          </a>
+          <a
+            href="/Curriculo_Jefferson_Teles_TI.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative inline-block border border-white/20 bg-white/10 backdrop-blur-md text-white px-8 py-3.5 text-sm font-medium rounded-xl opacity-0 hover:bg-white/20 active:scale-95 transition-all duration-300 spark-hover spark-flash"
+            style={{ animation: `fadeIn 0.6s ease forwards 1.9s` }}
+          >
+            {t('hero.btnResume')}
+          </a>
+          <a
+            href="#contact"
+            className="relative inline-block border border-accent/30 text-accent px-8 py-3.5 text-sm font-medium rounded-xl opacity-0 hover:bg-accent/10 active:scale-95 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-accent spark-flash"
+            style={{ animation: `fadeIn 0.6s ease forwards 2.2s` }}
+          >
+            {t('contact.getInTouch') || 'Fale comigo'}
+          </a>
           </div>
         </div>
       </main>
@@ -220,7 +258,6 @@ function HomePage() {
       <ScrollProgress />
       <DarkModeToggle />
       <PromptHeroSection />
-      <ImpactSection />
       <About />
       <Experience />
       <Projects />
