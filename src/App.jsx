@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { MotionConfig } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import ErrorBoundary from './components/ErrorBoundary';
 import Navbar from './components/Navbar';
 import BackToTop from './components/BackToTop';
@@ -23,7 +23,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 function WordByWord({ text, delay, className }) {
   const words = text.split(' ');
   return (
-    <div className={className}>
+    <span className={className}>
       {words.map((word, i) => (
         <span
           key={i}
@@ -35,7 +35,7 @@ function WordByWord({ text, delay, className }) {
           {word}{' '}
         </span>
       ))}
-    </div>
+    </span>
   );
 }
 
@@ -69,6 +69,30 @@ function ImpactSection() {
 function PromptHeroSection() {
   const { t } = useTranslation();
 
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jefferson Teles",
+    "url": "https://portifolio-jefferson-phi.vercel.app",
+    "image": "https://portifolio-jefferson-phi.vercel.app/og-image.png",
+    "jobTitle": t('hero.role'),
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Centro Universitário FAG",
+      "url": "https://www.fag.edu.br"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cascavel",
+      "addressRegion": "Paraná",
+      "addressCountry": "BR"
+    },
+    "sameAs": [
+      "https://github.com/JeffersonTeles",
+      "https://linkedin.com/in/jeffersonteles"
+    ]
+  };
+
   return (
     <section className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#0a0a0a] scroll-margin-top-20">
       <Helmet>
@@ -84,6 +108,7 @@ function PromptHeroSection() {
         <meta name="twitter:description" content={t('hero.tagline')} />
         <meta name="twitter:image" content="https://portifolio-jefferson-phi.vercel.app/og-image.png" />
         <link rel="canonical" href="https://portifolio-jefferson-phi.vercel.app/" />
+        <script type="application/ld+json">{JSON.stringify(schemaMarkup)}</script>
       </Helmet>
 
       <style>{`
@@ -212,76 +237,48 @@ function App() {
   }, [i18n.language]);
 
   return (
-    <MotionConfig reducedMotion="user">
-      <Router>
-        <ErrorBoundary>
-          <div className="min-h-screen bg-[#0a0a0a] text-white">
-            <Helmet>
-              <meta charSet="utf-8" />
-              <meta name="viewport" content="width=device-width, initial-scale=1" />
-              <meta name="theme-color" content="#0a0a0a" />
-              <link rel="icon" type="image/png" href="/pwa-192x192.png" />
-              <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-              <link rel="manifest" href="/manifest.json" />
-            </Helmet>
-            <main>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route
-                  path="*"
-                  element={
-                    <Suspense
-                      fallback={
-                        <div className="min-h-screen flex items-center justify-center text-[#333]">
-                          Carregando...
-                        </div>
-                      }
-                    >
-                      <NotFound />
-                    </Suspense>
-                  }
-                />
-              </Routes>
-            </main>
-            <Footer />
-            <BackToTop />
-          <div className="copy-toast" aria-live="polite">
-            {t('contact.copied', 'Copiado!')}
-          </div>
-          <script type="application/ld+json" dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Jefferson Teles",
-              "url": "https://portifolio-jefferson-phi.vercel.app",
-              "image": "https://portifolio-jefferson-phi.vercel.app/og-image.png",
-              "jobTitle": "Analista de Suporte Júnior em transição para Desenvolvimento",
-              "worksFor": {
-                "@type": "Organization",
-                "name": "FaturÁgil",
-                "url": "https://faturaagil.com.br"
-              },
-              "alumniOf": {
-                "@type": "CollegeOrUniversity",
-                "name": "Centro Universitário FAG",
-                "url": "https://www.fag.edu.br"
-              },
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Cascavel",
-                "addressRegion": "Paraná",
-                "addressCountry": "BR"
-              },
-              "sameAs": [
-                "https://github.com/JeffersonTeles",
-                "https://linkedin.com/in/jeffersonteles"
-              ]
-            })
-          }} />
-          </div>
-        </ErrorBoundary>
-      </Router>
-    </MotionConfig>
+    <HelmetProvider>
+      <MotionConfig reducedMotion="user">
+        <Router>
+          <ErrorBoundary>
+            <div className="min-h-screen bg-[#0a0a0a] text-white">
+              <Helmet>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="theme-color" content="#0a0a0a" />
+                <link rel="icon" type="image/png" href="/pwa-192x192.png" />
+                <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+                <link rel="manifest" href="/manifest.json" />
+              </Helmet>
+              <main>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route
+                    path="*"
+                    element={
+                      <Suspense
+                        fallback={
+                          <div className="min-h-screen flex items-center justify-center text-[#333]">
+                            Carregando...
+                          </div>
+                        }
+                      >
+                        <NotFound />
+                      </Suspense>
+                    }
+                  />
+                </Routes>
+              </main>
+              <Footer />
+              <BackToTop />
+              <div className="copy-toast" aria-live="polite">
+                {t('contact.copied', 'Copiado!')}
+              </div>
+            </div>
+          </ErrorBoundary>
+        </Router>
+      </MotionConfig>
+    </HelmetProvider>
   );
 }
 

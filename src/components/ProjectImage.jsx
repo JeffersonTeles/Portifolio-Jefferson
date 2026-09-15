@@ -27,7 +27,7 @@ const ProjectImage = ({ title, index = 0, stack = [] }) => {
       {!isLoaded && <div className="absolute inset-0 bg-[#151515] animate-pulse" />}
       <img
         src={imgSrc}
-        srcset={`${fallbackSrc} 2x`}
+        srcSet={`${fallbackSrc} 2x`}
         alt={`Screenshot do projeto ${title}`}
         loading="lazy"
         onLoad={() => setIsLoaded(true)}
