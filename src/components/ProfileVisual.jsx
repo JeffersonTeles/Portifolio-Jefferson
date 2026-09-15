@@ -23,12 +23,10 @@ export default function ProfileVisual() {
         />
 
         {/* Top Status Header */}
-        <div className="flex items-center justify-between mb-5 relative z-10">
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 border border-accent/40 text-accent text-[0.7rem] font-mono shadow-[0_0_15px_rgba(226,166,61,0.3)]">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-ping" />
-            {t('hero.experienceBadge')}
-          </div>
-          <span className="text-[0.65rem] font-mono text-cyan-400/80 tracking-widest uppercase">ID: 2026.JT</span>
+        <div className="flex justify-end mb-5 relative z-10">
+          <span className="text-[0.65rem] font-mono text-cyan-400/80 tracking-widest uppercase">
+            ID: 2026.JT
+          </span>
         </div>
 
         {/* Real Photo Portrait with Neon Cyberpunk Frame */}
@@ -56,14 +54,14 @@ export default function ProfileVisual() {
           <p className="text-[0.7rem] text-[#777] font-mono mt-1">Cascavel, Paraná</p>
         </div>
 
-        {/* Floating Technical Badges */}
-        <div className="grid grid-cols-2 gap-2.5 mb-4 relative z-10">
-          <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.04] border border-cyan-500/20 text-xs text-white/90 font-mono shadow-inner hover:border-cyan-500/50 transition-colors">
-            <FiTerminal className="text-cyan-400 flex-shrink-0" size={14} />
+        {/* Floating Technical Badges — mais discreto */}
+        <div className="grid grid-cols-2 gap-2 relative z-10">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-cyan-500/15 text-xs text-white/80 font-mono">
+            <FiTerminal className="text-cyan-400 flex-shrink-0" size={13} />
             <span>Linux & Docker</span>
           </div>
-          <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.04] border border-accent/20 text-xs text-white/90 font-mono shadow-inner hover:border-accent/50 transition-colors">
-            <FiCpu className="text-accent flex-shrink-0" size={14} />
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-accent/15 text-xs text-white/80 font-mono">
+            <FiCpu className="text-accent flex-shrink-0" size={13} />
             <span>Python & Java</span>
           </div>
         </div>
