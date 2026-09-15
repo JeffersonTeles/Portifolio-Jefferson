@@ -103,8 +103,8 @@ const Navbar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`relative px-4 py-2 rounded-full text-[0.85rem] transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-accent group ${
-                    isActive ? 'text-white font-medium bg-white/10' : 'text-[#888] hover:text-white hover:bg-white/5'
+                  className={`relative px-4 py-2 rounded-full text-[0.85rem] font-medium transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-accent group ${
+                    isActive ? 'text-white bg-white/10' : 'text-[#aaa] hover:text-white hover:bg-white/5'
                   }`}
                 >
                   {link.label}
