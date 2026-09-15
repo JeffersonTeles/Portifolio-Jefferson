@@ -110,71 +110,60 @@ function PromptHeroSection() {
         <link rel="canonical" href="https://portifolio-jefferson-phi.vercel.app/" />
         <script type="application/ld+json">{JSON.stringify(schemaMarkup)}</script>
       </Helmet>
-
       <style>{`
-        @keyframes fadeSlideUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        @keyframes borderRay {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        @keyframes sparkPulse {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 0.9; transform: scale(1.1); }
-        }
-        .animate-gradient-bg {
-          background-size: 200% 200%;
-          animation: gradientShift 15s ease infinite;
-        }
         .spark-flash {
           position: relative;
-          overflow: visible;
         }
         .spark-flash::before {
           content: '';
           position: absolute;
-          inset: -3px;
+          inset: -4px;
           border-radius: inherit;
-          background: linear-gradient(90deg, transparent, rgba(226,166,61,0.8), rgba(110,231,183,0.8), transparent);
-          background-size: 200% 100%;
-          background-position: 0% 50%;
-          animation: borderRay 4s linear infinite;
-          z-index: -1;
+          border: 1.5px solid rgba(226,166,61,0.1);
+          box-shadow:
+            0 0 0px rgba(226,166,61,0),
+            0 0 15px rgba(226,166,61,0.3),
+            0 0 30px rgba(226,166,61,0.15),
+            inset 0 0 15px rgba(226,166,61,0.05);
+          animation: auraPulse 2.5s ease-in-out infinite;
           pointer-events: none;
-          opacity: 0.8;
+          z-index: -1;
         }
         .spark-flash::after {
           content: '';
           position: absolute;
-          inset: -6px;
+          inset: -8px;
           border-radius: inherit;
-          background: radial-gradient(circle at center, rgba(226,166,61,0.4) 0%, rgba(110,231,183,0.2) 40%, transparent 70%);
-          opacity: 0;
-          animation: sparkPulse 2.5s ease-in-out infinite;
-          z-index: -2;
+          border: 1px solid rgba(226,166,61,0.15);
+          box-shadow:
+            0 0 20px rgba(226,166,61,0.15),
+            0 0 40px rgba(226,166,61,0.08),
+            0 0 60px rgba(110,231,183,0.05);
+          animation: auraRotate 4s linear infinite;
           pointer-events: none;
+          z-index: -2;
         }
         .spark-flash:hover::before {
-          opacity: 1;
-          animation-duration: 2s;
+          box-shadow:
+            0 0 0px rgba(226,166,61,0),
+            0 0 25px rgba(226,166,61,0.5),
+            0 0 50px rgba(226,166,61,0.3),
+            0 0 70px rgba(226,166,61,0.2),
+            inset 0 0 20px rgba(226,166,61,0.1);
         }
         .spark-flash:hover::after {
-          opacity: 0.6;
+          box-shadow:
+            0 0 30px rgba(226,166,61,0.25),
+            0 0 60px rgba(226,166,61,0.15),
+            0 0 90px rgba(110,231,183,0.1);
         }
-        .spark-pulse {
-          animation: sparkPulse 2s ease-in-out infinite;
+        @keyframes auraPulse {
+          0%, 100% { box-shadow: 0 0 0px rgba(226,166,61,0), 0 0 15px rgba(226,166,61,0.3), 0 0 30px rgba(226,166,61,0.15), inset 0 0 15px rgba(226,166,61,0.05); }
+          50% { box-shadow: 0 0 0px rgba(226,166,61,0), 0 0 25px rgba(226,166,61,0.5), 0 0 45px rgba(226,166,61,0.25), 0 0 60px rgba(226,166,61,0.15), inset 0 0 15px rgba(226,166,61,0.05); }
+        }
+        @keyframes auraRotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
       `}</style>
 
