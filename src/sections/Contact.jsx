@@ -42,7 +42,7 @@ const Contact = () => {
   };
 
   return (
-    <AnimatedSection id="contact" className="py-32 section-alt relative overflow-hidden">
+    <AnimatedSection id="contact" className="py-32 section-alt relative overflow-hidden scroll-margin-top-20">
       {/* Background glow element */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-accent/10 rounded-full blur-[120px] pointer-events-none" />
 

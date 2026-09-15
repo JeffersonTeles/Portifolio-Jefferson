@@ -6,7 +6,7 @@ const Certifications = () => {
   const { t } = useTranslation();
 
   return (
-    <AnimatedSection id="certifications" className="py-28">
+    <AnimatedSection id="certifications" className="py-28 scroll-margin-top-20">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         <h2 className="text-[1.8rem] font-bold text-white mb-10">{t('certifications.heading')}</h2>
 

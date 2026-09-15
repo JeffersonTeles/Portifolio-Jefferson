@@ -19,16 +19,19 @@ const ProjectImage = ({ title, index = 0, stack = [] }) => {
     filename = index === 0 ? 'maestria' : index === 1 ? 'x11' : 'casamento';
   }
 
-  const src = `/screenshot-${filename}.png`;
+  const imgSrc = `/screenshot-${filename}.webp`;
+  const fallbackSrc = `/screenshot-${filename}.png`;
 
   return (
     <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-[#111] border border-white/[0.08] mb-6 shadow-2xl group-hover:border-accent/40 transition-all duration-500">
       {!isLoaded && <div className="absolute inset-0 bg-[#151515] animate-pulse" />}
       <img
-        src={src}
+        src={imgSrc}
+        srcset={`${fallbackSrc} 2x`}
         alt={`Screenshot do projeto ${title}`}
         loading="lazy"
         onLoad={() => setIsLoaded(true)}
+        onError={(e) => { e.target.src = fallbackSrc; }}
         className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         }`}

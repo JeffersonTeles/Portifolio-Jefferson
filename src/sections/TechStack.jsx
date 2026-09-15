@@ -8,7 +8,7 @@ const TechStack = () => {
   const { t } = useTranslation();
 
   return (
-    <AnimatedSection id="skills" className="py-28 section-alt">
+    <AnimatedSection id="skills" className="py-28 section-alt scroll-margin-top-20">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         <h2 className="text-[1.8rem] font-bold text-white mb-14">{t('skills.heading')}</h2>
 

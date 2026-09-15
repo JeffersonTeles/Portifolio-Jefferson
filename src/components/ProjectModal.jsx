@@ -112,19 +112,6 @@ const ProjectModal = ({ isOpen, onClose, project, index }) => {
 
               <div className="text-[#999] leading-relaxed max-w-none flex-grow text-sm sm:text-base space-y-4">
                 <p>{project.desc}</p>
-                {/* Additional simulated content for professional feel */}
-                {project.features && (
-                  <>
-                    <h4 className="text-white text-lg mt-6 mb-3 font-semibold">
-                      {t('projects.features', 'Principais Funcionalidades')}
-                    </h4>
-                    <ul className="list-disc pl-5 space-y-1 text-[#888]">
-                      {project.features.map((feature, idx) => (
-                        <li key={idx}>{feature}</li>
-                      ))}
-                    </ul>
-                  </>
-                )}
               </div>
 
               {/* Action Buttons */}

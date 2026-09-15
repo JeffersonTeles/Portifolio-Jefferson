@@ -17,7 +17,7 @@ const Experience = () => {
   ];
 
   return (
-    <AnimatedSection id="experience" className="py-28">
+    <AnimatedSection id="experience" className="py-28 scroll-margin-top-20">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         <h2 className="text-[1.8rem] font-bold text-white mb-4">{t('experience.heading')}</h2>
         <p className="text-[0.95rem] text-[#777] leading-relaxed mb-16 max-w-[600px]">
