@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Github, Linkedin } from 'lucide-react';
 import { copyEmail } from '../utils/copyEmail';
+import SpecularButton from '../components/SpecularButton';
 
 const Hero = () => {
   const { t } = useTranslation();
@@ -22,12 +23,27 @@ const Hero = () => {
 
           {/* Actions */}
           <div className="flex flex-wrap items-center gap-4 mb-10">
-            <a
-              href="#projects"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-black text-[0.9rem] font-medium rounded-full hover:bg-accent transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            <SpecularButton
+              size="lg"
+              radius={9999}
+              tint="#ffffff"
+              tintOpacity={0}
+              blur={0}
+              textColor="#000000"
+              lineColor="#e2a63d"
+              baseColor="#333333"
+              intensity={1}
+              shineSize={10}
+              shineFade={40}
+              thickness={1}
+              speed={0.35}
+              followMouse
+              proximity={250}
+              autoAnimate={false}
+              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
             >
               {t('hero.btnWorks')}
-            </a>
+            </SpecularButton>
             <a
               href="/Curriculo_Jefferson_Teles_TI.pdf"
               target="_blank"
