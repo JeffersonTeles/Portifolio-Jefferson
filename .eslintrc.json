@@ -23,6 +23,14 @@
       "version": "detect"
     }
   },
+  "overrides": [
+    {
+      "files": ["**/__tests__/**/*.{js,jsx}", "**/*.test.{js,jsx}"],
+      "env": {
+        "jest": true
+      }
+    }
+  ],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",

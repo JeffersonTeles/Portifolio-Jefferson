@@ -1,8 +1,6 @@
 import React, { useState, lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
 import ProjectImage from '../components/ProjectImage';
-import AnimatedSection from '../components/AnimatedSection';
 
 const ProjectModal = lazy(() => import('../components/ProjectModal'));
 
@@ -18,25 +16,13 @@ const Projects = () => {
   };
 
   return (
-    <AnimatedSection id="projects" className="py-28 section-alt">
+    <section id="projects" className="py-28 section-alt">
       <div className="max-w-[900px] mx-auto px-6 md:px-10">
         <h2 className="text-[1.8rem] font-bold text-white mb-16">{t('projects.heading')}</h2>
 
-        <motion.div
-          className="space-y-28"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          variants={{
-            visible: { transition: { staggerChildren: 0.1 } },
-          }}
-        >
+        <div className="space-y-28">
           {projects.map((project, i) => (
-            <motion.article
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-              }}
+            <article
               key={project.title}
               className="group rounded-xl p-6 -mx-6 hover:bg-white/[0.015] transition-colors duration-500 cursor-pointer"
               onClick={() => handleOpenModal(project, i)}
@@ -68,9 +54,9 @@ const Projects = () => {
                   →
                 </span>
               </div>
-            </motion.article>
+            </article>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       <Suspense fallback={null}>
@@ -81,7 +67,7 @@ const Projects = () => {
           index={selectedIndex}
         />
       </Suspense>
-    </AnimatedSection>
+    </section>
   );
 };
 

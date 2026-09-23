@@ -1,7 +1,13 @@
 import React from 'react';
-import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
+import { Linkedin, Mail, Github } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
+
+  const iconBtn =
+    'w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-accent hover:border-accent/20 transition-colors';
+
   return (
     <footer className="py-16 border-t border-white/[0.04]">
       <div className="max-w-[720px] mx-auto px-6 md:px-10">
@@ -12,7 +18,7 @@ const Footer = () => {
             </span>
             <a
               href="mailto:jeffersontelesdeoliveira@gmail.com"
-              className="text-[0.85rem] text-[#555] hover:text-accent transition-colors duration-300"
+              className="text-[0.85rem] text-[#555] hover:text-accent transition-colors"
             >
               jeffersontelesdeoliveira@gmail.com
             </a>
@@ -22,26 +28,26 @@ const Footer = () => {
               href="https://github.com/JeffersonTeles"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-accent hover:border-accent/20 transition-all duration-300"
+              className={iconBtn}
               aria-label="GitHub"
             >
-              <FiGithub size={15} />
+              <Github size={15} />
             </a>
             <a
               href="https://linkedin.com/in/jeffersonteles"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-accent hover:border-accent/20 transition-all duration-300"
+              className={iconBtn}
               aria-label="LinkedIn"
             >
-              <FiLinkedin size={15} />
+              <Linkedin size={15} />
             </a>
             <a
               href="mailto:jeffersontelesdeoliveira@gmail.com"
-              className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#444] hover:text-accent hover:border-accent/20 transition-all duration-300"
+              className={iconBtn}
               aria-label="Email"
             >
-              <FiMail size={15} />
+              <Mail size={15} />
             </a>
           </div>
         </div>

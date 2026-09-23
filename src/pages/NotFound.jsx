@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi';
+import { ArrowLeft } from 'lucide-react';
 
 const NotFound = () => {
   return (
@@ -12,7 +12,7 @@ const NotFound = () => {
           to="/"
           className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-medium rounded-lg hover:opacity-90 transition-opacity"
         >
-          <FiArrowLeft size={16} />
+          <ArrowLeft size={16} />
           Voltar ao início
         </Link>
       </div>
