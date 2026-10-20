@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react';
 
 type Theme = 'dark' | 'light';
 type ThemeContextValue = {
@@ -25,12 +25,16 @@ function getInitialTheme(): Theme {
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('dark');
+  const isInitialized = useRef(false);
 
   useEffect(() => {
-    setThemeState(getInitialTheme());
+    const initial = getInitialTheme();
+    setThemeState(initial);
+    isInitialized.current = true;
   }, []);
 
   useEffect(() => {
+    if (!isInitialized.current) return;
     if (typeof document === 'undefined') return;
     const root = document.documentElement;
     root.setAttribute('data-theme', theme);

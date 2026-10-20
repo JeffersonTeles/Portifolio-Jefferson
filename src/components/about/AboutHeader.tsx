@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { siteConfig } from '@/config/site';
+import { ResumeLink } from '@/components/ui/ResumeLink';
 import styles from './About.module.css';
 
 export function AboutHeader() {
@@ -18,6 +19,7 @@ export function AboutHeader() {
           <Link href="/contact" className="btn btn--primary btn--specular">
             <Mail size={16} aria-hidden /> Fale Comigo
           </Link>
+          <ResumeLink className="btn btn--ghost" />
           <a
             href={siteConfig.social.github}
             target="_blank"

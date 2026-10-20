@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Github, Linkedin, Mail, Rss, Terminal } from 'lucide-react';
+import { ResumeLink } from '@/components/ui/ResumeLink';
 import { siteConfig } from '@/config/site';
 import styles from './Layout.module.css';
 
@@ -25,6 +26,7 @@ export function Footer() {
             <p className={styles.footerDescription}>
               Suporte técnico, automação industrial e a construção de interfaces web com contexto.
             </p>
+            <ResumeLink className={styles.footerResume} iconSize={14} />
           </div>
 
           <div>

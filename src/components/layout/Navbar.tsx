@@ -4,11 +4,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { ResumeLink } from '../ui/ResumeLink';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import styles from './Layout.module.css';
+
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 type IndicatorPosition = {
   left: number;
@@ -27,7 +30,7 @@ export function Navbar() {
     href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
   const activeHref = siteConfig.navigation.find((item) => isActive(item.href))?.href;
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const nav = desktopNavRef.current;
     if (!nav) return;
 
@@ -92,6 +95,7 @@ export function Navbar() {
         </nav>
 
         <div className="inline-flex">
+          <ResumeLink className={styles.navResume} label="Currículo" iconSize={14} />
           <ThemeToggle />
           <button
             type="button"
@@ -124,6 +128,9 @@ export function Navbar() {
                   </li>
                 );
               })}
+              <li>
+                <ResumeLink className={styles.mobileMenuLink} label="Baixar currículo" />
+              </li>
             </ul>
           </nav>
         </div>

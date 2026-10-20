@@ -11,10 +11,11 @@ export const siteConfig = {
   locale: 'pt_BR',
   email: 'jeffersontelesdeoliveira@gmail.com',
   resumePath: '/Curriculo_Jefferson_Teles_TI.pdf',
+  resumeDownloadName: 'Curriculo_Jefferson_Teles.pdf',
   ogImage: '/og-image.png',
   social: {
     github: 'https://github.com/JeffersonTeles',
-    linkedin: 'https://linkedin.com/in/jeffersonteles',
+    linkedin: 'https://www.linkedin.com/in/jeffersonteless/',
   },
   navigation: [
     { href: '/projetos', label: 'Projetos' },

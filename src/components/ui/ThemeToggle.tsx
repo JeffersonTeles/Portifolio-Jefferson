@@ -33,7 +33,6 @@ export function ThemeToggle() {
       onClick={handleToggle}
       className={styles.button}
       aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
-      aria-pressed={isDark}
       title={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
     >
       <AnimatePresence mode="wait" initial={false}>

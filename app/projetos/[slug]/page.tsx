@@ -37,7 +37,10 @@ export default async function ProjectCasePage({ params }: { params: Promise<Para
 
   if (!project) notFound();
 
-  const externalLabel = project.repository ? 'Ver repositório' : 'Abrir projeto';
+  const isTool = project.kind === 'tool';
+  const primaryUrl = isTool ? (project.repository ?? project.url) : project.url;
+  const primaryLabel = isTool ? 'Ver repositório' : 'Abrir projeto';
+  const hasSeparateRepo = Boolean(project.repository && project.repository !== project.url);
 
   return (
     <article className={styles.casePage}>
@@ -58,13 +61,23 @@ export default async function ProjectCasePage({ params }: { params: Promise<Para
             </div>
             <div className={styles.caseActions}>
               <a
-                href={project.url}
+                href={primaryUrl}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="btn btn--primary btn--specular"
               >
-                {externalLabel} <ExternalLink size={15} aria-hidden />
+                {primaryLabel} <ExternalLink size={15} aria-hidden />
               </a>
+              {hasSeparateRepo && project.repository && (
+                <a
+                  href={project.repository}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="btn btn--ghost"
+                >
+                  Ver no GitHub <ExternalLink size={15} aria-hidden />
+                </a>
+              )}
             </div>
           </div>
         </header>
@@ -81,20 +94,43 @@ export default async function ProjectCasePage({ params }: { params: Promise<Para
             </div>
           </div>
           <aside className={styles.caseAside}>
-            <span>Registro do projeto</span>
-            <p>
-              Uma peça de interface criada para tornar um contexto específico mais claro e
-              navegável. Este registro apresenta o recorte atual do projeto e os seus pontos
-              principais.
-            </p>
+            <span>Ficha técnica</span>
+            <dl className={styles.caseFacts}>
+              <div>
+                <dt>Problema</dt>
+                <dd>{project.problem}</dd>
+              </div>
+              <div>
+                <dt>Meu papel</dt>
+                <dd>{project.role}</dd>
+              </div>
+              <div>
+                <dt>Stack</dt>
+                <dd>{project.stack.join(' · ')}</dd>
+              </div>
+              <div>
+                <dt>Código</dt>
+                <dd>{project.codeNote}</dd>
+              </div>
+            </dl>
             <a
-              href={project.url}
+              href={primaryUrl}
               target="_blank"
               rel="noreferrer noopener"
               className={styles.caseExternal}
             >
-              {externalLabel} <ArrowUpRight size={15} aria-hidden />
+              {primaryLabel} <ArrowUpRight size={15} aria-hidden />
             </a>
+            {hasSeparateRepo && project.repository && (
+              <a
+                href={project.repository}
+                target="_blank"
+                rel="noreferrer noopener"
+                className={styles.caseExternal}
+              >
+                Ver código no GitHub <ArrowUpRight size={15} aria-hidden />
+              </a>
+            )}
           </aside>
         </div>
       </div>

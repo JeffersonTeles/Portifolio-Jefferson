@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint . --ext .js,.mjs,.ts,.tsx --max-warnings 0",
     "typecheck": "next typegen && tsc --noEmit",
-    "check": "npm run lint && npm run typecheck"
+    "check": "npm run lint && npm run typecheck",
+    "test": "node --experimental-strip-types --no-warnings --loader ./tests/loader.mjs --test tests/**/*.test.mjs"
   },
   "dependencies": {
     "@mdx-js/mdx": "^3.1.1",

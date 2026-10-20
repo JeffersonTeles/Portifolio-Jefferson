@@ -15,7 +15,9 @@ type ProjectFlipCardProps = {
 export function ProjectFlipCard({ project }: ProjectFlipCardProps) {
   const [flipped, setFlipped] = useState(false);
   const reduceMotion = useReducedMotion();
-  const externalLabel = project.repository ? 'Ver repositório' : 'Abrir projeto';
+  const isTool = project.kind === 'tool';
+  const targetUrl = isTool ? (project.repository ?? project.url) : project.url;
+  const externalLabel = isTool ? 'Ver repositório' : 'Abrir projeto';
 
   return (
     <div className={styles.wrapper}>
@@ -36,10 +38,10 @@ export function ProjectFlipCard({ project }: ProjectFlipCardProps) {
             <span className={styles.frontLabel}>Screenshot real</span>
           </div>
           <div className={`${styles.face} ${styles.back}`} aria-hidden={!flipped}>
-            <span className={styles.backLabel}>Contexto do projeto</span>
-            <h2>O que existe aqui.</h2>
+            <span className={styles.backLabel}>Stack e papel</span>
+            <h2>{project.role}</h2>
             <ul>
-              {project.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+              {project.stack.map((item) => <li key={item}>{item}</li>)}
             </ul>
             <span className={styles.backIndex}>{project.category}</span>
           </div>
@@ -56,7 +58,7 @@ export function ProjectFlipCard({ project }: ProjectFlipCardProps) {
           {flipped ? 'Ver tela' : 'Ver contexto'}
         </button>
         <a
-          href={project.url}
+          href={targetUrl}
           target="_blank"
           rel="noreferrer noopener"
           className={styles.externalLink}

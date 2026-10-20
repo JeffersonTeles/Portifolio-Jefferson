@@ -128,6 +128,36 @@
   line-height: 1.65;
 }
 
+.timelineItem .company {
+  margin-top: 0.25rem;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.bullets {
+  display: flex;
+  max-width: 40rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.bullets li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.bullets li::before {
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  content: '→';
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
 .techList,
 .principles {
   border-top: 1px solid var(--color-border-strong);

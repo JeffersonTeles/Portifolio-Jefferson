@@ -74,6 +74,22 @@
   line-height: 1.65;
 }
 
+.heroStatus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.6rem;
+}
+
+.heroStatus li {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
 .heroActions {
   display: flex;
   flex-wrap: wrap;

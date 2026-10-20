@@ -19,12 +19,12 @@ const principles = [
 ];
 
 const tools = [
-  { label: 'Linux / Bash', detail: 'Diagnóstico e automação no ambiente de trabalho.' },
-  { label: 'Redes / hardware', detail: 'A base prática que iniciou a trajetória.' },
-  { label: 'APIs / JSON / XML', detail: 'Integrações e leitura de sistemas no suporte N2.' },
-  { label: 'React / Next.js', detail: 'Projetos de interface para praticar o próximo capítulo.' },
-  { label: 'TypeScript / CSS', detail: 'Organização, legibilidade e manutenção do código.' },
-  { label: 'Documentação', detail: 'Registrar decisões para que elas continuem úteis.' },
+  { label: 'Frontend', detail: 'React, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS, Vite, Zustand.' },
+  { label: 'Backend e dados', detail: 'Node.js, Express, Python, PostgreSQL, Supabase, SQL e APIs REST.' },
+  { label: 'Mobile', detail: 'Flutter, Dart, Android, SQLite e integrações REST.' },
+  { label: 'Automação', detail: 'n8n, Gemini AI, webhooks, JSON e fluxos de integração.' },
+  { label: 'Infraestrutura', detail: 'Linux, Windows, TCP/IP, DNS, VPN, Mikrotik, Ubiquiti e fibra óptica.' },
+  { label: 'Ferramentas', detail: 'Git/GitHub, Docker, VS Code e Trello.' },
 ];
 
 export function AboutBentoGrid() {
@@ -32,10 +32,9 @@ export function AboutBentoGrid() {
     <>
       <section className={styles.section} aria-labelledby="base-title">
         <header className={styles.sectionHeader}>
-          <h2 id="base-title">Base técnica, sem fumo.</h2>
+          <h2 id="base-title">Competências técnicas.</h2>
           <p>
-            Ferramentas que uso para investigar, construir e explicar. O contexto de cada projeto
-            é que decide o que faz sentido usar.
+            O que uso no dia a dia e nos projetos, agrupado por área.
           </p>
         </header>
         <div className={styles.techList}>
@@ -62,10 +61,6 @@ export function AboutBentoGrid() {
               <p>{principle.description}</p>
             </article>
           ))}
-        </div>
-        <div className={styles.studyNote}>
-          <span>Estudo atual</span>
-          <strong>Engenharia de Software · FAG</strong>
         </div>
       </section>
     </>

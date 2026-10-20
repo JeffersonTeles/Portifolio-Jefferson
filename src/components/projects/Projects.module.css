@@ -258,6 +258,30 @@
   line-height: 1.65;
 }
 
+.caseFacts {
+  display: flex;
+  flex-direction: column;
+}
+
+.caseFacts > div {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.caseFacts dt {
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.caseFacts dd {
+  margin-top: 0.4rem;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
 .caseAside .caseExternal {
   margin-top: 1.5rem;
 }

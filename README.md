@@ -16,6 +16,7 @@ A aplicação fica disponível em `http://localhost:3000` por padrão.
 
 ```bash
 npm run check
+npm test
 npm run build
 npm audit --omit=dev --audit-level=high
 ```

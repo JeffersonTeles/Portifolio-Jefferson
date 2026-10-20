@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Github, Linkedin, Mail, MapPin, MessageCircle } from 'lucide-react';
 import { ContactForm } from '@/components/ui/ContactForm';
+import { ResumeLink } from '@/components/ui/ResumeLink';
 import { siteConfig } from '@/config/site';
 import { createPageMetadata } from '@/lib/metadata';
 import styles from '@/components/ui/ContactForm.module.css';
@@ -20,7 +21,7 @@ const contacts = [
   },
   {
     label: 'LinkedIn',
-    value: 'linkedin.com/in/jeffersonteles',
+    value: 'linkedin.com/in/jeffersonteless',
     href: siteConfig.social.linkedin,
     Icon: Linkedin,
   },
@@ -70,6 +71,7 @@ export default function ContactPage() {
               <strong>Cascavel, Paraná</strong>
               <span>Projetos e oportunidades podem ser conversados por aqui.</span>
             </div>
+            <ResumeLink className="btn btn--ghost" label="Baixar currículo em PDF" />
             <p className={styles.location}>
               Prefere começar pelo contexto? <Link href="/about" className="link-underline">Conheça a trajetória</Link>.
             </p>

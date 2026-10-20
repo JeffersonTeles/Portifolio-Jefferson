@@ -11,7 +11,11 @@ export type PortfolioProject = {
   url: string;
   repository?: string;
   kind: ProjectKind;
+  role: string;
+  stack: string[];
+  problem: string;
   highlights: string[];
+  codeNote: string;
 };
 
 export const portfolioProjects: PortfolioProject[] = [
@@ -20,69 +24,91 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'TELESSEG',
     category: 'Site institucional',
     description:
-      'A empresa precisava de um canal mais claro para seus clientes. Construí essa página para centralizar exames, documentos e planos de Saúde e Segurança do Trabalho, facilitando o contato direto.',
+      'Site da TELESSEG, empresa de Saúde e Segurança do Trabalho, para centralizar exames, documentos, treinamentos e planos em um único canal de contato.',
     image: '/screenshot-telesseg.png',
     imageAlt: 'Screenshot real da página inicial do projeto TELESSEG',
-    tags: ['Interface institucional', 'WhatsApp', 'Conteúdo'],
+    tags: ['Site institucional', 'HTML/CSS/JS', 'WhatsApp'],
     url: 'https://telesseg.com.br',
     kind: 'site',
+    role: 'Desenvolvimento da página, do conteúdo e do fluxo de contato.',
+    stack: ['HTML', 'CSS', 'JavaScript', 'WhatsApp'],
+    problem:
+      'A empresa precisava de um canal claro para os clientes encontrarem serviços e falarem direto com a equipe.',
     highlights: [
       'Exames ocupacionais, laudos e envio ao eSocial',
       'Treinamentos de NRs e programas da NR-01',
       'Plano corporativo e contato por WhatsApp',
     ],
+    codeNote: 'Site em produção com domínio próprio.',
   },
   {
     slug: 'maestria-docente',
     title: 'Maestria Docente',
-    category: 'Experiência educacional',
+    category: 'Plataforma educacional (TCC)',
     description:
-      'O desafio era tornar o consumo de material de mestrado mais agradável. Desenvolvi uma interface focada na apresentação clara do contexto e em uma experiência de leitura sem distrações.',
+      'Sistema web fullstack do meu TCC para acompanhar trilhas, cursos e certificados docentes, com foco em leitura sem distrações.',
     image: '/screenshot-maestria.png',
     imageAlt: 'Screenshot real da tela de acesso da plataforma Maestria Docente',
-    tags: ['Interface educacional', 'Projeto visual'],
+    tags: ['Fullstack', 'TCC', 'Supabase'],
     url: 'https://projeto-maestria-vercel.vercel.app',
     kind: 'platform',
+    role: 'Frontend, organização do fluxo, modelagem inicial e integração com backend e banco de dados.',
+    stack: ['React', 'Vite', 'Tailwind CSS', 'Zustand', 'Node.js', 'Express', 'PostgreSQL', 'Supabase'],
+    problem:
+      'Tornar o consumo de material de mestrado mais claro, com trilhas, cursos e certificados em um só lugar.',
     highlights: [
-      'Contexto do projeto apresentado na primeira tela',
-      'Experiência visual voltada ao contexto educacional',
-      'Projeto apresentado como referência de interface',
+      'Tela de acesso e contexto do projeto na primeira tela',
+      'Acompanhamento de trilhas, cursos e certificados docentes',
+      'Integração entre frontend, API Node/Express e banco PostgreSQL via Supabase',
     ],
+    codeNote: 'Repositório privado por envolver contexto acadêmico e institucional.',
   },
   {
     slug: 'casamento',
     title: 'Jefferson & Beatriz',
-    category: 'Experiência editorial',
+    category: 'Site pessoal com painel',
     description:
-      'Um projeto muito pessoal: o site do meu casamento. Criei para centralizar todas as informações para os convidados (local, lista de presentes) em uma experiência editorial única e elegante.',
+      'Site do meu casamento, com convite, confirmação de presença e um painel de organização para os noivos.',
     image: '/screenshot-casamento.png',
     imageAlt: 'Screenshot real da página de casamento Jefferson e Beatriz',
-    tags: ['Save the date', 'Editorial', 'Mapas'],
+    tags: ['Supabase', 'RSVP', 'Vercel'],
     url: 'https://casamento-ten-rho.vercel.app',
     kind: 'site',
+    role: 'Projeto pessoal desenvolvido do início ao fim.',
+    stack: ['HTML', 'CSS', 'JavaScript', 'Tailwind CSS', 'React', 'Supabase Auth', 'Vercel'],
+    problem:
+      'Reunir informações dos convidados e organizar presença, tarefas e lista de presentes sem planilhas soltas.',
     highlights: [
-      'Data, local, programação e traje sugerido',
-      'Contagem regressiva e atalhos para mapas',
-      'Lista de presentes e mural de mensagens',
+      'Contagem regressiva, data, local e atalhos para mapas',
+      'Confirmação de presença por link individual (RSVP)',
+      'Painel de organização com login dos noivos via Supabase Auth',
+      'Cron na Vercel para manter o banco ativo',
     ],
+    codeNote: 'Código público no GitHub (JeffersonTeles/Casamento).',
+    repository: 'https://github.com/JeffersonTeles/Casamento',
   },
   {
     slug: 'linux-mouse-gui',
     title: 'Attack Shark X11',
-    category: 'Ferramenta desktop',
+    category: 'Ferramenta desktop open source',
     description:
-      'Comprei esse mouse e não havia software para Linux. Para resolver minha própria dor (e da comunidade), criei um aplicativo desktop em Python com interface webview para configurá-lo.',
+      'Aplicativo desktop para configurar o mouse Attack Shark X11 no Linux, onde o fabricante não oferece software.',
     image: '/screenshot-x11.png',
     imageAlt: 'Screenshot real da interface do Attack Shark X11 Configurator',
-    tags: ['Linux', 'Python', 'WebView'],
+    tags: ['Linux', 'Python', 'pywebview'],
     url: 'https://github.com/JeffersonTeles/attack-shark-x11-configurator',
     repository: 'https://github.com/JeffersonTeles/attack-shark-x11-configurator',
     kind: 'tool',
+    role: 'Projeto pessoal, da ideia à documentação de instalação.',
+    stack: ['Python', 'pywebview', 'JavaScript', 'HTML', 'CSS', 'Bun', 'Linux'],
+    problem:
+      'Comprei o mouse e não existia software para Linux. Criei a interface para configurá-lo sem comandos manuais no terminal.',
     highlights: [
-      'Configuração do mouse Attack Shark X11',
-      'Python e pywebview em ambiente Linux',
-      'Instalação e atalho documentados no repositório',
+      'Interface gráfica em pywebview para configurar o mouse',
+      'Instalação, execução e atalho de desktop documentados no README',
+      'Código aberto para outros usuários do mesmo periférico',
     ],
+    codeNote: 'Código público no GitHub.',
   },
 ];
 
