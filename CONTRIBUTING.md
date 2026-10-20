@@ -1,160 +1,70 @@
-# Contributing to Jefferson Teles Portfolio
+# Contributing
 
-Thank you for your interest in contributing to this portfolio project!
+## Prerequisites
 
-## Getting Started
-
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
+- Node.js 18.18 or newer
+- npm
 - Git
 
-### Installation
+## Setup
 
-1. Fork the repository
-2. Clone your fork:
 ```bash
-git clone https://github.com/YOUR_USERNAME/Portifolio-Jefferson.git
-cd Portifolio-Jefferson
-```
-
-3. Install dependencies:
-```bash
-npm install
-```
-
-4. Copy environment variables:
-```bash
+npm ci
 cp .env.example .env
-```
-
-5. Start development server:
-```bash
 npm run dev
 ```
 
-## Development
+The local application runs at `http://localhost:3000` by default.
 
-### Available Scripts
+## Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-- `npm run format` - Format code with Prettier
-- `npm run test` - Run tests
-- `npm run test:watch` - Run tests in watch mode
-- `npm run test:coverage` - Run tests with coverage
+- `npm run dev` starts the Next.js development server.
+- `npm run build` creates the production build.
+- `npm start` starts the production server.
+- `npm run lint` runs ESLint with warnings treated as errors.
+- `npm run typecheck` generates Next route types and runs strict TypeScript validation.
+- `npm run check` runs lint and typecheck together.
 
-### Project Structure
+## Architecture
 
-```
-src/
-├── components/       # Reusable components
-├── sections/        # Page sections (Hero, About, etc.)
-├── hooks/           # Custom React hooks
-├── utils/           # Utility functions
-├── data/            # Static data
-├── i18n.js          # Internationalization config
-├── main.jsx         # Entry point
-└── App.jsx          # Main app component
+```text
+app/                  Next.js routes, metadata and HTTP adapters
+content/posts/        MDX source of truth for published content
+public/               Static public assets
+src/components/       Shared UI and feature components
+src/config/           Public site configuration
+src/lib/              Server-only and isomorphic helpers
+src/types/            Shared TypeScript contracts
 ```
 
-### Code Style
+Keep pages focused on metadata, data loading and composition. Put reusable visual behavior in `src/components`, public identity values in `src/config/site.ts`, and filesystem access in server-only modules such as `src/lib/posts.server.ts`.
 
-This project uses:
-- **ESLint** for linting
-- **Prettier** for code formatting
-- **Husky** for git hooks
+Client components must start with `'use client'` and should be limited to interactive behavior. Route handlers must keep secrets server-side and validate untrusted input.
 
-Code is automatically formatted and linted on commit.
+## Adding Posts
 
-## Making Changes
+Create `content/posts/<slug>.mdx` with `title`, `description`, `date`, `tags` and optional `cover`, `coverAlt`, `author`, `readingTime` and `draft` frontmatter.
 
-### Adding New Features
+Interactive MDX widgets belong in `src/components/widgets` and must be registered in `src/components/mdx/MDXComponents.tsx`.
 
-1. Create a new branch:
+## Validation
+
+Before opening a pull request:
+
 ```bash
-git checkout -b feature/your-feature-name
-```
-
-2. Make your changes following the project structure
-
-3. Test your changes:
-```bash
-npm run lint
-npm run test
+npm run check
 npm run build
-```
-
-4. Commit your changes:
-```bash
-git add .
-git commit -m "feat: add your feature description"
-```
-
-5. Push and create a pull request
-
-### Commit Message Convention
-
-Follow conventional commits:
-- `feat:` - New feature
-- `fix:` - Bug fix
-- `docs:` - Documentation changes
-- `style:` - Code style changes (formatting)
-- `refactor:` - Code refactoring
-- `test:` - Adding or updating tests
-- `chore:` - Maintenance tasks
-
-## Testing
-
-### Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
-```
-
-### Writing Tests
-
-Tests should be placed in `src/components/__tests__/` or `src/sections/__tests__/`.
-
-Example:
-```jsx
-import { render, screen } from '@testing-library/react';
-import MyComponent from '../MyComponent';
-
-describe('MyComponent', () => {
-  it('renders correctly', () => {
-    render(<MyComponent />);
-    expect(screen.getByText('Hello')).toBeInTheDocument();
-  });
-});
+npm audit --omit=dev --audit-level=high
 ```
 
 ## Accessibility
 
-This project aims to be accessible to all users. When making changes:
+- Use semantic HTML.
+- Preserve visible focus states.
+- Provide labels and alternative text.
+- Respect reduced-motion preferences.
+- Maintain WCAG AA contrast in both themes.
 
-- Use semantic HTML elements
-- Add appropriate ARIA labels
-- Ensure keyboard navigation works
-- Test with screen readers
-- Maintain color contrast ratios (WCAG AA)
+## Commit Convention
 
-## Performance
-
-- Use lazy loading for images
-- Optimize bundle size with code splitting
-- Minimize re-renders
-- Use React.memo when appropriate
-
-## Questions?
-
-Feel free to open an issue for questions or suggestions.
+Use concise Conventional Commit messages such as `feat:`, `fix:`, `docs:`, `refactor:` and `chore:`.
