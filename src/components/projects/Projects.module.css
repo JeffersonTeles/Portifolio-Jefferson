@@ -119,6 +119,7 @@
 .caseBack {
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
   gap: 0.4rem;
   margin-bottom: clamp(3rem, 6vw, 5rem);
   color: var(--color-text-muted);
@@ -180,6 +181,7 @@
 .caseExternal {
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
   gap: 0.4rem;
   color: var(--color-text-muted);
   font-size: 0.82rem;

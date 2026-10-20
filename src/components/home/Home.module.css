@@ -103,6 +103,7 @@
 .externalLink {
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
   gap: 0.45rem;
   color: var(--color-text);
   font-size: 0.86rem;

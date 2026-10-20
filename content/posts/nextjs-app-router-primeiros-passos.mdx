@@ -1,6 +1,6 @@
 ---
-title: Next.js App Router — primeiros passos sem travar (guia prático 2026)
-description: Tudo que eu gostaria de ter lido ao começar com o App Router do Next.js. Estrutura, Server Components, RSC e erros comuns — na prática.
+title: "Next.js App Router — anotações práticas da migração do portfólio"
+description: Estrutura de pastas, Server Components, metadados e lições aprendidas ao migrar a interface deste portfólio para Next.js 15.
 date: 2026-09-18
 tags:
   - nextjs
@@ -11,11 +11,11 @@ cover: /og-image.png
 coverAlt: Tela com código Next.js
 ---
 
-## O que é esse tal de App Router?
+## O que muda com o App Router na prática?
 
-Lançado oficialmente no Next.js 13, o **App Router** substituiu o Pages Router como a abordagem padrão do framework. A ideia é simples: pastas viram rotas, e o arquivo `page.tsx` dentro de uma pasta vira a página daquela rota.
+Ao migrar a interface deste portfólio do Vite para o **Next.js 15 com App Router**, a principal diferença foi a mudança de modelo mental: pastas definem rotas, e arquivos `page.tsx` recebem Server Components por padrão.
 
-No lugar de `pages/about.tsx` agora você faz:
+No lugar de um roteador em cliente, a estrutura passa a ser:
 
 ```
 app/
@@ -23,13 +23,13 @@ app/
     page.tsx  →  /about
 ```
 
-Parece uma mudança pequena — mas *tudo ao redor* dela muda: **Server Components por padrão**, `layout.tsx` aninhados, streamings, `loading.tsx`, `error.tsx`, `generateMetadata`, `generateStaticParams`...
+Parece uma mudança simples, mas ela envolve: **Server Components por padrão**, `layout.tsx` aninhados, `loading.tsx`, `error.tsx`, `generateMetadata` e `generateStaticParams`.
 
-> A melhor forma de aprender é fazer. Vamos criar um mini-blog em 5 passos.
+> Estas notas documentam a arquitetura adotada neste projeto e os pontos de atenção da migração.
 
 ---
 
-## Passo 1: A estrutura mínima
+## Passo 1: A estrutura adotada no projeto
 
 Todo projeto novo de App Router começa mais ou menos assim:
 

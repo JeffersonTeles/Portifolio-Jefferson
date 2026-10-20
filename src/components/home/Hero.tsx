@@ -15,9 +15,9 @@ export function Hero() {
             Jefferson Teles / Desenvolvedor & Analista de Suporte
           </div>
           <h1 className={styles.heroTitle}>
-            Criando interfaces
+            Do diagnóstico técnico
             <br />
-            <span>que resolvem problemas.</span>
+            <span>à construção de interfaces.</span>
           </h1>
           <p className={styles.heroDescription}>
             Olá, sou o Jefferson. Trabalho com suporte técnico, automação industrial e desenvolvimento Frontend. Gosto de transformar processos complexos em sistemas claros e acessíveis.

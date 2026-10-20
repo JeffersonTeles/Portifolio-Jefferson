@@ -1,6 +1,6 @@
 ---
-title: Componentes React interativos DENTRO do Markdown? Com MDX é possível
-description: Um guia completo pra montar um pipeline MDX no Next.js 15+ com syntax highlighting, widgets React e o mesmo design system do resto do seu site.
+title: "Componentes React dentro do Markdown: como estruturei o pipeline MDX"
+description: Como configurei o pipeline de compilação MDX com Shiki, rehype-pretty-code e widgets interativos diretamente neste projeto.
 date: 2026-09-21
 tags:
   - react
@@ -11,27 +11,25 @@ cover: /og-image.png
 coverAlt: Código MDX misturado com JSX
 ---
 
-## O problema: texto estático é chato
+## Interatividade dentro do conteúdo editorial
 
-Um blog técnico moderno não pode ser só texto. O pessoal do [Josh W. Comeau](https://www.joshwcomeau.com/) ensinou isso pra indústria toda: **quando o leitor interage, ele aprende melhor**.
+Para que os artigos técnicos não ficassem limitados a blocos estáticos de texto, estruturei neste portfólio um pipeline com **MDX** para permitir a inserção de componentes React reais diretamente nos posts, preservando o design system do site.
 
-Você pode explicar o que é um estado em React com 4 parágrafos — ou pode mostrar um contador funcionando e deixar a pessoa clicar. A segunda opção sempre ganha.
-
-O **MDX** é a ferramenta que permite isso. Ele é o **Markdown esteroide**:
+Em vez de embeds externos ou iframes, o conteúdo renderiza componentes integrados:
 
 ```mdx
 # Meu post
 
-Isso aqui é markdown normal. Mas olha só:
+Exemplo de widget interativo integrado:
 
 <CounterDemo title="Clique nos botões!" />
 ```
 
-O componente `<CounterDemo />` ali no meio é **React de verdade**. Não é um iframe, não é um embed. É o mesmo código que você usa no resto do site.
+O componente `<CounterDemo />` executa como **React de verdade**, compilado com syntax highlighting via Shiki e plugins Rehype.
 
 ---
 
-## Antes de tudo: o que você vai precisar
+## Antes de tudo: as dependências do pipeline no projeto
 
 No nosso projeto estamos usando:
 
