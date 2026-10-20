@@ -1,0 +1,223 @@
+---
+title: Next.js App Router — primeiros passos sem travar (guia prático 2026)
+description: Tudo que eu gostaria de ter lido ao começar com o App Router do Next.js. Estrutura, Server Components, RSC e erros comuns — na prática.
+date: 2026-09-18
+tags:
+  - nextjs
+  - react
+  - typescript
+  - tutorial
+cover: /og-image.png
+coverAlt: Tela com código Next.js
+---
+
+## O que é esse tal de App Router?
+
+Lançado oficialmente no Next.js 13, o **App Router** substituiu o Pages Router como a abordagem padrão do framework. A ideia é simples: pastas viram rotas, e o arquivo `page.tsx` dentro de uma pasta vira a página daquela rota.
+
+No lugar de `pages/about.tsx` agora você faz:
+
+```
+app/
+  about/
+    page.tsx  →  /about
+```
+
+Parece uma mudança pequena — mas *tudo ao redor* dela muda: **Server Components por padrão**, `layout.tsx` aninhados, streamings, `loading.tsx`, `error.tsx`, `generateMetadata`, `generateStaticParams`...
+
+> A melhor forma de aprender é fazer. Vamos criar um mini-blog em 5 passos.
+
+---
+
+## Passo 1: A estrutura mínima
+
+Todo projeto novo de App Router começa mais ou menos assim:
+
+```
+app/
+├── layout.tsx       → Layout compartilhado de TODAS as páginas
+├── page.tsx         → Página inicial (/)
+├── globals.css      → CSS global
+├── about/
+│   └── page.tsx     → /about
+└── blog/
+    ├── page.tsx     → /blog
+    └── [slug]/
+        └── page.tsx → /blog/:slug (rota dinâmica)
+```
+
+O arquivo `layout.tsx` é novo: ele define a casca HTML que se repete (Navbar, Footer, Providers de tema). Tudo que você colocar nele aparece em **todas** as páginas.
+
+```tsx showLineNumbers
+// app/layout.tsx
+import type { Metadata } from 'next';
+import './globals.css';
+import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
+
+export const metadata: Metadata = {
+  title: 'Meu Blog',
+  description: 'Blog sobre Next.js',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="pt-BR">
+      <body>
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
+```
+
+---
+
+## Passo 2: Server vs Client Components — a parte que confunde
+
+Essa é a maior mudança mental do App Router:
+
+| **Server Components (padrão)** | **Client Components** |
+|---|---|
+| Rodam no servidor | Rodam no navegador |
+| Podem acessar DB, FS, secrets | Precisam de `'use client'` no topo |
+| **Não** podem usar hooks (`useState`, `useEffect`) | Podem usar hooks, eventos, interatividade |
+| Menos JS enviado pro browser | Bundle maior no cliente |
+
+A regra de ouro:
+
+> Comece sempre como Server Component. Use Client Component **apenas quando precisar** de interatividade (estado, eventos, animações).
+
+### Exemplo: um ThemeToggle
+
+Isso **não** funciona em Server Component (usa `useState`):
+
+```tsx
+'use client'; // ← OBRIGATÓRIO no topo do arquivo
+
+import { useState } from 'react';
+
+export function ThemeToggle() {
+  const [dark, setDark] = useState(true);
+
+  return (
+    <button onClick={() => setDark((d) => !d)}>
+      {dark ? '☀️ Modo claro' : '🌙 Modo escuro'}
+    </button>
+  );
+}
+```
+
+Coloque o comentário `'use client'` **na primeira linha** — e tudo volta a funcionar.
+
+---
+
+## Passo 3: Rotas dinâmicas com `generateStaticParams`
+
+No Pages Router usávamos `getStaticPaths` + `getStaticProps`. Agora temos `generateStaticParams` + componente assíncrono.
+
+```tsx showLineNumbers {4}
+// app/blog/[slug]/page.tsx
+import { getPostBySlug, getAllPostSlugs } from '@/lib/posts.server';
+import { notFound } from 'next/navigation';
+
+export function generateStaticParams() {
+  return getAllPostSlugs().map((slug) => ({ slug }));
+}
+
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+
+  if (!post) notFound();
+
+  return (
+    <article>
+      <h1>{post.title}</h1>
+      <p>{post.content}</p>
+    </article>
+  );
+}
+```
+
+Sim — páginas no App Router podem ser **funções `async`**. Você faz `await` direto na página, sem `useEffect`, sem `loading` state manual.
+
+---
+
+## Passo 4: Loading nativo com `loading.tsx`
+
+Você cria um arquivo `loading.tsx` na pasta da rota — e o Next.js mostra aquele estado automaticamente enquanto a página carrega:
+
+```tsx
+// app/blog/loading.tsx
+export default function Loading() {
+  return (
+    <div className="skeleton-wrapper" aria-label="Carregando posts...">
+      <div className="skeleton-card" />
+      <div className="skeleton-card" />
+      <div className="skeleton-card" />
+    </div>
+  );
+}
+```
+
+Funciona igual para `error.tsx` (trata erros naquela parte da árvore) e `not-found.tsx` (404 específico da rota).
+
+---
+
+## Passo 5: Metadata SEO por página
+
+No lugar do `next/head`, agora você exporta um objeto `metadata` em qualquer `page.tsx` ou `layout.tsx`:
+
+```tsx
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Sobre mim · Meu Blog',
+  description: 'Quem sou eu e por que escrevo esse blog.',
+  openGraph: {
+    title: 'Sobre mim',
+    images: ['/og-image.png'],
+  },
+  alternates: { canonical: '/about' },
+};
+
+export default function AboutPage() {
+  return <h1>Sobre mim</h1>;
+}
+```
+
+---
+
+## Erros que eu cometi (pra você não repetir)
+
+1. **Esquecer o `'use client'`** — se usar `useState` ou `onClick`, precisa dele no topo do arquivo.
+2. **Passar funções de Server Component pra Client** — não rola. Funções não são serializáveis.
+3. **Fazer tudo Client Component** — perde todo o ganho de performance do RSC.
+4. **Tentar usar `window` em Server Component** — use `'use client'` ou `typeof window !== 'undefined'`.
+5. **Metadata dinâmica com `useState`** — `metadata` só funciona como export estático, não tem acesso ao hook.
+
+---
+
+## Resumo mental
+
+- Pastas = rotas; `page.tsx` = página.
+- `layout.tsx` = casca compartilhada.
+- Server Component por padrão (rápido, sem JS no cliente).
+- `'use client'` + hooks só quando precisar de interatividade.
+- `generateStaticParams` substitui `getStaticPaths`.
+- `loading.tsx`, `error.tsx`, `not-found.tsx` = convenções poderosas.
+
+E é isso! O App Router parece complicado no começo porque tem **muita convenção nova** — mas depois que você pega o jeito, você não quer voltar pro Pages Router.
+
+No próximo post eu mostro como integrar **MDX + Shiki** no App Router, exatamente como estou usando nesse blog. Se não quiser perder, assina o RSS ou volta semana que vem. 😄

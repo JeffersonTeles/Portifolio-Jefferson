@@ -1,0 +1,904 @@
+.hero {
+  position: relative;
+  display: flex;
+  min-height: min(760px, 100dvh);
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(5rem, 8vw, 7rem) 0 clamp(4rem, 7vw, 6rem);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  opacity: 0.5;
+  background-image: linear-gradient(var(--color-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
+  background-size: 5rem 5rem;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+.heroGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  align-items: center;
+  gap: clamp(2.5rem, 6vw, 6rem);
+}
+
+.heroCopy {
+  max-width: 40rem;
+}
+
+.heroKicker {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.8rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.signalDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 12%, transparent);
+}
+
+.heroTitle {
+  max-width: 14ch;
+  font-size: clamp(2.9rem, 5.2vw, 5rem);
+  font-weight: 600;
+  letter-spacing: -0.075em;
+  line-height: 0.91;
+  text-wrap: balance;
+}
+
+.heroTitle span {
+  color: var(--color-accent);
+}
+
+.heroDescription {
+  max-width: 31rem;
+  margin-top: 1.5rem;
+  color: var(--color-text-muted);
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  line-height: 1.65;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.4rem;
+}
+
+.heroSecondaryLink,
+.textLink,
+.externalLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--color-text);
+  font-size: 0.86rem;
+  font-weight: 500;
+  transition: color var(--transition-fast), gap var(--transition-fast);
+}
+
+.heroSecondaryLink:hover,
+.textLink:hover,
+.externalLink:hover {
+  gap: 0.7rem;
+  color: var(--color-accent);
+}
+
+.heroFigure {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface-1);
+  box-shadow: 18px 18px 0 color-mix(in srgb, var(--color-accent) 10%, transparent);
+}
+
+.figureMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.2rem 0.2rem 0.8rem;
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.figureImage {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--color-bg-sunken);
+}
+
+.figureImageMotion {
+  position: absolute;
+  inset: 0;
+}
+
+.figureImage img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.signalLine {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--color-accent);
+}
+
+.signalLabel {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.3rem 0.45rem;
+  background: var(--color-bg);
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.heroFigure figcaption {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0.25rem 0.3rem;
+}
+
+.heroFigure figcaption span {
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.heroFigure figcaption h2 {
+  margin-top: 0.35rem;
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+}
+
+.heroFigure figcaption a {
+  display: inline-flex;
+  color: var(--color-text-subtle);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.heroFigure figcaption a:hover {
+  color: var(--color-accent);
+  transform: translate(2px, -2px);
+}
+
+.journeySection,
+.practiceSection,
+.projectsSection,
+.journalSection,
+.contactSection {
+  padding: clamp(4.5rem, 7vw, 7rem) 0;
+}
+
+.journeySection {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.journeyLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(2rem, 6vw, 6rem);
+}
+
+.journeyIntro h2,
+.practiceIntro h2,
+.projectsHeader h1,
+.projectsHeader h2,
+.journalHeader h2,
+.contactLine h2 {
+  max-width: 14ch;
+  font-size: clamp(2.4rem, 4.2vw, 4.4rem);
+  font-weight: 600;
+  letter-spacing: -0.065em;
+  line-height: 0.96;
+  text-wrap: balance;
+}
+
+.journeyIntro p,
+.practiceIntro p,
+.projectsHeader p,
+.contactLine p {
+  max-width: 35rem;
+  margin-top: 1.5rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.studyNote {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.studyNote span,
+.journeyItem time,
+.practiceTags,
+.journalRow time,
+.journalRow > div > span {
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.studyNote strong {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.journeyRail {
+  position: relative;
+  padding-left: 2.75rem;
+}
+
+.journeyRail::before {
+  position: absolute;
+  top: 0.8rem;
+  bottom: 1.2rem;
+  left: 0.6rem;
+  width: 1px;
+  content: '';
+  background: var(--color-border-strong);
+}
+
+.journeyItem {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 0 0 3.25rem;
+}
+
+.journeyItem:last-child {
+  padding-bottom: 0;
+}
+
+.journeyMarker {
+  position: absolute;
+  left: -2.75rem;
+  display: grid;
+  width: 1.2rem;
+  height: 1.2rem;
+  place-items: center;
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  background: var(--color-bg);
+}
+
+.journeyMarker span {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.journeyItem > div:last-child {
+  min-width: 0;
+  grid-column: 2;
+}
+
+.journeyItem h3 {
+  margin-top: 0.45rem;
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.journeyItem p {
+  max-width: 34rem;
+  margin-top: 0.65rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.projectsSection {
+  background: var(--color-bg-sunken);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.projectsHeader,
+.journalHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+  align-items: end;
+  gap: clamp(2rem, 6vw, 6rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.featuredProject {
+  display: grid;
+  grid-template-columns: minmax(0, 1.32fr) minmax(20rem, 0.68fr);
+  min-height: 31rem;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface-1);
+}
+
+.featuredImage,
+.projectCardImage {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.featuredImage {
+  min-height: 27rem;
+}
+
+.featuredImage img,
+.projectCardImage img {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 650ms var(--ease-out-expo), filter 650ms var(--ease-out-expo);
+}
+
+.featuredImage:hover img,
+.projectCardImage:hover img {
+  transform: scale(1.025);
+  filter: saturate(0.92) contrast(1.04);
+}
+
+.imageIndex,
+.projectCardImage > span {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.32rem 0.48rem;
+  background: var(--color-bg);
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.featuredContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-left: 1px solid var(--color-border);
+}
+
+.projectMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.featuredContent h3 {
+  margin-top: 1.3rem;
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+.featuredContent > p {
+  margin-top: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.projectTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.4rem;
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.projectTags span::before {
+  margin-right: 0.35rem;
+  color: var(--color-accent);
+  content: '·';
+}
+
+.projectActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.externalLink {
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+}
+
+.projectsCount {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.projectGallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem 1.25rem;
+}
+
+.projectTile {
+  min-width: 0;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.projectTileFeatured {
+  grid-column: 1 / -1;
+}
+
+.projectTileVisual {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-sunken);
+}
+
+.projectTileVisual img {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 600ms var(--ease-out-expo), filter 600ms var(--ease-out-expo);
+}
+
+.projectTile:hover .projectTileVisual img {
+  transform: scale(1.018);
+  filter: saturate(0.92) contrast(1.04);
+}
+
+.projectTileNumber,
+.projectTileType {
+  position: absolute;
+  padding: 0.35rem 0.5rem;
+  background: var(--color-bg);
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.projectTileNumber {
+  top: 0.75rem;
+  right: 0.75rem;
+}
+
+.projectTileType {
+  right: 0.75rem;
+  bottom: 0.75rem;
+  color: var(--color-text);
+}
+
+.projectTileBody {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.15rem;
+}
+
+.projectTileHeading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.projectTileHeading h3 {
+  font-size: clamp(1.35rem, 2.3vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.projectTileHeading h3 a:hover {
+  color: var(--color-accent);
+}
+
+.projectTileHeading p {
+  max-width: 34rem;
+  margin-top: 0.65rem;
+  color: var(--color-text-muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.projectTileHeading > svg {
+  flex: 0 0 auto;
+  color: var(--color-text-subtle);
+}
+
+.projectTileFooter {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.35rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.projectTileFooter .projectTags {
+  margin-top: 0;
+}
+
+.projectFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.projectFooter p {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.practiceSection {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.practiceLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(2rem, 6vw, 6rem);
+}
+
+.practiceList {
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.practiceItem {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) minmax(8rem, 0.45fr);
+  align-items: start;
+  gap: 1.5rem;
+  padding: 1.8rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.practiceNumber {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.practiceItem h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.practiceItem p {
+  max-width: 35rem;
+  margin-top: 0.55rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.practiceTags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 0.5rem;
+  text-align: right;
+}
+
+.journalSection {
+  background: var(--color-bg-sunken);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.journalHeader {
+  align-items: end;
+}
+
+.journalHeader .textLink {
+  justify-self: end;
+  margin-bottom: 0.5rem;
+}
+
+.journalList {
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.journalRow {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr) 1.5rem;
+  align-items: start;
+  gap: 2rem;
+  padding: 1.7rem 0;
+  border-bottom: 1px solid var(--color-border);
+  transition: padding var(--transition-fast), background-color var(--transition-fast);
+}
+
+.journalRow:hover {
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  background: var(--color-surface-1);
+}
+
+.journalRow h3 {
+  margin-top: 0.45rem;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.journalRow h3 a:hover {
+  color: var(--color-accent);
+}
+
+.journalRow p {
+  max-width: 46rem;
+  margin-top: 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.journalRow > svg {
+  margin-top: 0.2rem;
+  color: var(--color-text-subtle);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.journalRow:hover > svg {
+  color: var(--color-accent);
+  transform: translateX(3px);
+}
+
+.emptyState {
+  padding: 2rem 0;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.contactSection {
+  padding-top: clamp(5rem, 8vw, 7rem);
+  padding-bottom: clamp(5rem, 8vw, 7rem);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.contactLine {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 3rem;
+}
+
+@media (max-width: 1000px) {
+  .heroGrid,
+  .journeyLayout,
+  .practiceLayout {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .heroCopy {
+    max-width: 46rem;
+  }
+
+  .heroTitle {
+    max-width: 11ch;
+  }
+
+  .heroFigure {
+    width: min(100%, 48rem);
+  }
+
+  .journeyIntro h2,
+  .practiceIntro h2,
+  .projectsHeader h1,
+  .projectsHeader h2,
+  .journalHeader h2,
+  .contactLine h2 {
+    max-width: 16ch;
+  }
+
+  .featuredProject {
+    grid-template-columns: 1fr;
+  }
+
+  .featuredContent {
+    border-top: 1px solid var(--color-border);
+    border-left: 0;
+  }
+
+  .projectGallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .projectTileFeatured {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding: 5rem 0 5.5rem;
+  }
+
+  .heroKicker {
+    align-items: flex-start;
+    font-size: 0.75rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(3.1rem, 15vw, 5rem);
+  }
+
+  .heroActions,
+  .projectFooter,
+  .contactLine {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .heroActions {
+    display: flex;
+    gap: 1.1rem;
+  }
+
+  .journeySection,
+  .practiceSection,
+  .projectsSection,
+  .journalSection,
+  .contactSection {
+    padding: 5.5rem 0;
+  }
+
+  .journeyIntro h2,
+  .practiceIntro h2,
+  .projectsHeader h1,
+  .projectsHeader h2,
+  .journalHeader h2,
+  .contactLine h2 {
+    font-size: clamp(2.55rem, 13vw, 4rem);
+  }
+
+  .journeyRail {
+    padding-left: 2.3rem;
+  }
+
+  .journeyRail::before {
+    left: 0.42rem;
+  }
+
+  .journeyMarker {
+    left: -2.3rem;
+  }
+
+  .journeyItem {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .journeyItem > div:last-child {
+    grid-column: auto;
+  }
+
+  .journeyItem:last-child {
+    padding-bottom: 0;
+  }
+
+  .projectsHeader,
+  .journalHeader {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .journalHeader .textLink {
+    justify-self: start;
+    margin: 0;
+  }
+
+  .projectGallery {
+    grid-template-columns: 1fr;
+  }
+
+  .projectTileFeatured {
+    grid-column: auto;
+  }
+
+  .practiceItem {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .practiceTags {
+    grid-column: 2;
+    justify-content: start;
+    text-align: left;
+  }
+
+  .journalRow {
+    grid-template-columns: 1fr 1.25rem;
+    gap: 1rem;
+  }
+
+  .journalRow time,
+  .journalRow > div {
+    grid-column: 1;
+  }
+
+  .journalRow > svg {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .contactLine .btn {
+    margin-top: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroFigure,
+  .heroSecondaryLink,
+  .textLink,
+  .externalLink,
+  .featuredImage img,
+  .projectCardImage img,
+  .journalRow,
+  .journalRow > svg {
+    transition: none;
+  }
+}

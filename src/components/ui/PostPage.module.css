@@ -1,0 +1,143 @@
+.page {
+  padding: clamp(5.5rem, 10vw, 9rem) 0;
+}
+
+.header {
+  max-width: 58rem;
+  margin: 0 auto clamp(3rem, 7vw, 6rem);
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 3rem;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.back:hover {
+  color: var(--color-accent);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.tag {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.header h1 {
+  max-width: 15ch;
+  font-size: clamp(3rem, 6.5vw, 6rem);
+  font-weight: 600;
+  letter-spacing: -0.08em;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+.description {
+  max-width: 42rem;
+  margin-top: 1.5rem;
+  color: var(--color-text-muted);
+  font-size: var(--fs-md);
+  line-height: 1.75;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cover {
+  position: relative;
+  aspect-ratio: 16 / 8;
+  overflow: hidden;
+  margin-bottom: clamp(3rem, 7vw, 6rem);
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-bg-sunken);
+}
+
+.cover img {
+  object-fit: cover;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 15rem;
+  align-items: start;
+  gap: clamp(3rem, 8vw, 8rem);
+}
+
+.contentMain {
+  min-width: 0;
+}
+
+.related {
+  margin-top: clamp(5rem, 9vw, 8rem);
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.relatedHeader {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.relatedHeader h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.relatedHeader a {
+  color: var(--color-accent);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 900px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .header h1 {
+    font-size: clamp(2.8rem, 14vw, 4.5rem);
+  }
+
+  .cover {
+    aspect-ratio: 1.25;
+  }
+
+  .relatedHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

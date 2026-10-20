@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 
-const outFile = path.resolve("Curriculo_Jefferson_Teles_2026.docx");
+const outFile = path.resolve("public/Curriculo_Jefferson_Teles_TI.docx");
 const workDir = fs.mkdtempSync(path.join(os.tmpdir(), "jefferson-docx-"));
 
 const escapeXml = (value) =>

@@ -1,0 +1,118 @@
+.card {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(1.2rem, 3vw, 2.5rem);
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+  transition: padding var(--transition-fast), background-color var(--transition-fast);
+}
+
+.card:hover {
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  background: var(--color-surface-1);
+}
+
+.cardFeatured {
+  grid-template-columns: minmax(18rem, 1.1fr) minmax(0, 0.9fr);
+  padding-top: 0;
+}
+
+.image {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--color-bg-sunken);
+}
+
+.image img {
+  object-fit: cover;
+  transition: transform 550ms var(--ease-out-expo), filter 550ms var(--ease-out-expo);
+}
+
+.card:hover .image img {
+  transform: scale(1.025);
+  filter: saturate(0.92) contrast(1.04);
+}
+
+.body {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.title {
+  max-width: 20ch;
+  margin-top: 1rem;
+  font-size: clamp(1.45rem, 3vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.title a:hover {
+  color: var(--color-accent);
+}
+
+.description {
+  max-width: 38rem;
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-accent);
+}
+
+@media (max-width: 700px) {
+  .card,
+  .cardFeatured {
+    grid-template-columns: 1fr;
+  }
+
+  .cardFeatured {
+    padding-top: 1.5rem;
+  }
+
+  .image {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .image img {
+    transition: none;
+  }
+}

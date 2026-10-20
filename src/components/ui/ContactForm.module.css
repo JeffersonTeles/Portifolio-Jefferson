@@ -1,0 +1,219 @@
+.page {
+  padding: clamp(5.5rem, 10vw, 9rem) 0;
+}
+
+.header {
+  max-width: 48rem;
+  margin-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.kicker {
+  display: block;
+  margin-bottom: 1.2rem;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  max-width: 10ch;
+  font-size: clamp(3.2rem, 7vw, 6.7rem);
+  font-weight: 600;
+  letter-spacing: -0.08em;
+  line-height: 0.9;
+  text-wrap: balance;
+}
+
+.header p {
+  max-width: 38rem;
+  margin-top: 1.6rem;
+  color: var(--color-text-muted);
+  font-size: var(--fs-md);
+  line-height: 1.75;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(3rem, 9vw, 9rem);
+  align-items: start;
+}
+
+.contactList {
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.contactRow {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) 1.25rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast), padding var(--transition-fast);
+}
+
+.contactRow:hover {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  color: var(--color-accent);
+}
+
+.contactRow > svg:first-child {
+  color: var(--color-accent);
+}
+
+.contactRow strong {
+  display: block;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.contactRow span {
+  display: block;
+  overflow: hidden;
+  margin-top: 0.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.location {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+
+.location strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.formPanel {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface-1);
+}
+
+.formPanel h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+}
+
+.formPanel > p {
+  max-width: 32rem;
+  margin-top: 0.7rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.field label {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tooltipTrigger {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-subtle);
+  transition: color var(--transition-fast);
+}
+
+.tooltipTrigger:hover,
+.tooltipTrigger:focus-visible {
+  color: var(--color-accent);
+}
+
+.field textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+.formActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
+
+.status {
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--color-border);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.status--error {
+  border-color: color-mix(in srgb, var(--color-accent) 50%, var(--color-border));
+  color: var(--color-accent);
+}
+
+.status--success {
+  border-color: color-mix(in srgb, var(--color-positive) 55%, var(--color-border));
+  color: var(--color-positive);
+}
+
+@media (max-width: 850px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .header h1 {
+    font-size: clamp(3rem, 14vw, 4.5rem);
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formActions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

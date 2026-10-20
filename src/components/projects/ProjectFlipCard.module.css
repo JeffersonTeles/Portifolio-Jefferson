@@ -1,0 +1,161 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.scene {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  perspective: 1400px;
+}
+
+.card {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border-strong);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.front {
+  background: var(--color-bg-sunken);
+}
+
+.front img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.front::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 65%, rgba(20, 18, 15, 0.65));
+  content: '';
+}
+
+.frontLabel,
+.backLabel,
+.backIndex {
+  position: absolute;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.frontLabel {
+  right: 0.9rem;
+  bottom: 0.8rem;
+  padding: 0.35rem 0.5rem;
+  background: var(--color-bg);
+  color: var(--color-accent);
+}
+
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  background: var(--color-surface-1);
+  transform: rotateY(180deg);
+}
+
+.backLabel {
+  position: static;
+  color: var(--color-accent);
+}
+
+.back h2 {
+  max-width: 12ch;
+  margin-top: 1rem;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.back ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 34rem;
+  margin-top: 1.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.back li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.back li::before {
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  content: '→';
+}
+
+.backIndex {
+  right: 1rem;
+  bottom: 0.9rem;
+  color: var(--color-text-subtle);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.externalLink,
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.externalLink:hover,
+.backLink:hover {
+  color: var(--color-accent);
+}
+
+.backLink {
+  align-self: flex-start;
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 560px) {
+  .back {
+    padding: 1.25rem;
+  }
+
+  .back h2 {
+    font-size: 2rem;
+  }
+
+  .back ul {
+    font-size: 0.8rem;
+  }
+
+  .actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,280 @@
+---
+title: Componentes React interativos DENTRO do Markdown? Com MDX é possível
+description: Um guia completo pra montar um pipeline MDX no Next.js 15+ com syntax highlighting, widgets React e o mesmo design system do resto do seu site.
+date: 2026-09-21
+tags:
+  - react
+  - nextjs
+  - typescript
+  - frontend
+cover: /og-image.png
+coverAlt: Código MDX misturado com JSX
+---
+
+## O problema: texto estático é chato
+
+Um blog técnico moderno não pode ser só texto. O pessoal do [Josh W. Comeau](https://www.joshwcomeau.com/) ensinou isso pra indústria toda: **quando o leitor interage, ele aprende melhor**.
+
+Você pode explicar o que é um estado em React com 4 parágrafos — ou pode mostrar um contador funcionando e deixar a pessoa clicar. A segunda opção sempre ganha.
+
+O **MDX** é a ferramenta que permite isso. Ele é o **Markdown esteroide**:
+
+```mdx
+# Meu post
+
+Isso aqui é markdown normal. Mas olha só:
+
+<CounterDemo title="Clique nos botões!" />
+```
+
+O componente `<CounterDemo />` ali no meio é **React de verdade**. Não é um iframe, não é um embed. É o mesmo código que você usa no resto do site.
+
+---
+
+## Antes de tudo: o que você vai precisar
+
+No nosso projeto estamos usando:
+
+```json showLineNumbers
+{
+  "next": "15.x",
+  "@mdx-js/mdx": "^3.1.1",
+  "rehype-pretty-code": "^0.13.2",
+  "rehype-slug": "^6.0.0",
+  "remark-frontmatter": "^5.0.0",
+  "remark-gfm": "^4.0.0",
+  "shiki": "^1.10.0"
+}
+```
+
+`@mdx-js/mdx` compila o conteúdo no servidor. O arquivo é lido com `gray-matter`, enquanto `rehype-slug` e `rehype-pretty-code` cuidam de âncoras e syntax highlighting.
+
+---
+
+## Passo 1: Montando os componentes reutilizáveis
+
+Antes de qualquer coisa, vamos criar o **widget interativo** que vai ser embutido no post.
+
+Chamamos de `CounterDemo` — ele tem um contador com incremento/decremento, um visual bonito, animações e até um sistema de reações.
+
+<CounterDemo title="Isto já é o widget rodando dentro do próprio post! 🤯" />
+
+Viu? Você pode clicar nos botões, dar reações, o estado sobrevive a interações — é React completo, executando no navegador, renderizado a partir de um arquivo Markdown.
+
+### O código desse widget (simplificado)
+
+No nosso repositório ele está em `src/components/widgets/CounterDemo.tsx`, e a estrutura é parecida com essa:
+
+```tsx showLineNumbers {5,9,14}
+'use client'; // ← OBRIGATÓRIO! Widget tem interatividade
+
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+export function CounterDemo({ title }: { title: string }) {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h3>{title}</h3>
+
+      <motion.div
+        key={count}
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+      >
+        {count}
+      </motion.div>
+
+      <div>
+        <button onClick={() => setCount((c) => Math.max(0, c - 1))}>
+          −
+        </button>
+        <button onClick={() => setCount((c) => c + 1)}>
+          +
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+A sacada aqui é:
+
+1. Marque `'use client'` no topo do widget — **mesmo** que o resto do MDX seja Server Component.
+2. Passe esse widget no mapa `mdxComponents` entregue ao renderizador.
+
+---
+
+## Passo 2: O map de components MDX
+
+Você cria um arquivo tipo `MDXComponents.tsx` que diz ao MDX: *"quando você encontrar a tag X, use meu componente React"*.
+
+```tsx showLineNumbers
+import type { MDXComponents } from 'mdx/types';
+import Image from 'next/image';
+import Link from 'next/link';
+import { CounterDemo } from '../widgets/CounterDemo';
+
+export const mdxComponents: MDXComponents = {
+  // Sobrescreve headings pra usar nosso design system
+  h1: (props) => <h1 className="h1" {...props} />,
+  h2: (props) => <h2 className="h2" {...props} />,
+  h3: (props) => <h3 className="h3" {...props} />,
+
+  // Sobrescreve links pra usar Next Link
+  a: ({ href, children, ...rest }) => {
+    if (href?.startsWith('/')) {
+      return (
+        <Link href={href} className="link-underline" {...rest}>
+          {children}
+        </Link>
+      );
+    }
+    return (
+      <a href={href} target="_blank" rel="noreferrer noopener" className="link-underline" {...rest}>
+        {children}
+      </a>
+    );
+  },
+
+  // Sobrescreve imagens pra usar Next Image otimizado
+  img: ({ src, alt }) => (src ? <Image src={src} alt={alt ?? ''} width={900} height={500} /> : null),
+
+  // WIDGET CUSTOM! É assim que ele aparece no MDX.
+  CounterDemo,
+};
+```
+
+---
+
+## Passo 3: Compilando o MDX no servidor
+
+O renderizador fica em `src/components/mdx/PostMDXRenderer.tsx`. Ele compila a string com o mesmo `react/jsx-runtime` instalado no projeto e injeta o mapa de componentes:
+
+```tsx showLineNumbers {1,6,9,16}
+import { compile, run } from '@mdx-js/mdx';
+import * as runtime from 'react/jsx-runtime';
+import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeSlug from 'rehype-slug';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkGfm from 'remark-gfm';
+import { mdxComponents } from './MDXComponents';
+import { prettyCodeOptions } from '@/lib/shiki';
+
+export async function PostMDXRenderer({ source }: { source: string }) {
+  const compiled = await compile(source, {
+    outputFormat: 'function-body',
+    remarkPlugins: [remarkGfm, remarkFrontmatter],
+    rehypePlugins: [rehypeSlug, [rehypePrettyCode, prettyCodeOptions]],
+  });
+
+  const { default: Content } = await run(compiled, { ...runtime });
+
+  return (
+    <div className="prose">
+      <Content components={mdxComponents} />
+    </div>
+  );
+}
+```
+
+A página do post continua sendo um Server Component e apenas chama esse renderizador assíncrono.
+
+---
+
+## Passo 4: Syntax highlighting de respeito com Shiki
+
+O `rehype-pretty-code` com o Shiki produz blocos de código **bons de verdade** — tema consistente, cores vivas, line numbers, highlight de linhas.
+
+Tudo o que você precisa é configurar dual-theme (dark/light) nas opções:
+
+```ts showLineNumbers
+export const prettyCodeOptions = {
+  theme: {
+    dark: 'github-dark-dimmed',
+    light: 'github-light',
+  },
+  keepBackground: false,
+  defaultLang: 'plaintext',
+};
+```
+
+E aplicar um CSS decente em `globals.css`:
+
+```css
+pre {
+  background: var(--color-bg-sunken);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  font-family: var(--font-mono);
+  overflow-x: auto;
+}
+
+:root[data-theme='dark'] pre[data-theme],
+:root[data-theme='dark'] pre[data-theme] span {
+  color: var(--shiki-dark) !important;
+}
+
+:root[data-theme='light'] pre[data-theme],
+:root[data-theme='light'] pre[data-theme] span {
+  color: var(--shiki-light) !important;
+}
+
+pre [data-highlighted-line] {
+  background: rgba(255, 92, 138, 0.12);
+  border-left: 2px solid var(--color-accent-pink);
+}
+```
+
+---
+
+## O que dá pra fazer com isso?
+
+Qualquer componente React do seu design system, direto no Markdown:
+
+```mdx
+<CTABanner
+  title="Pronto pra começar?"
+  description="Assina o RSS e não perde nenhum post novo."
+  link="/rss.xml"
+/>
+
+<ComparadorAntesDepois
+  antes="/images/mobile-ui-antigo.png"
+  depois="/images/mobile-ui-novo.png"
+/>
+
+<QuizPergunta
+  pergunta="Qual é a flag obrigatória num widget MDX?"
+  alternativas={["'use server'", "'use client'", "'use mdx'"]}
+  resposta={1}
+/>
+```
+
+As únicas limitações são sua imaginação (e o tempo de build).
+
+---
+
+## Dicas que economizaram meu cabelo
+
+1. **Todo componente passado pro MDX que tem interatividade precisa de `'use client'`**, mesmo que o MDX seja assíncrono e renderize no servidor.
+2. **Nunca passe funções/closures via props no MDX.** Os valores precisam ser serializáveis (strings, numbers, objetos simples).
+3. **MDX + Server Components combina que é uma beleza.** O texto todo renderiza no servidor (rápido, leve) e só os widgets interativos vão pro cliente.
+4. **Use `generateStaticParams`** pra pré-renderizar todos os posts no build. Blog é conteúdo estático, não precisa SSR em runtime.
+
+---
+
+## Resumo
+
+- MDX = Markdown + React Components, tudo no mesmo arquivo.
+- `@mdx-js/mdx` compila o artigo no servidor sem duplicar a runtime do React.
+- `rehype-pretty-code` + Shiki = syntax highlighting profissional sem dores.
+- Widgets React rodando no meio de artigos = **engajamento e aprendizado melhores**.
+
+Se você ainda não usa MDX no seu blog, dê uma chance. Quando você tem o primeiro widget funcionando no meio de um post, não volta mais pro Markdown cru.
+
+O código completo desse blog (arquitetura, widgets, posts de exemplo) está tudo no repositório. O README explica como rodar localmente e adicionar novos posts.
+
+Até o próximo artigo — e fica à vontade pra brincar no contador ali de cima mais um pouco! 😄
