@@ -2,7 +2,7 @@ import { CyberHero } from '@/components/home/CyberHero';
 import { Capabilities } from '@/components/home/Capabilities';
 import { ContactBanner } from '@/components/home/ContactBanner';
 import { Journey } from '@/components/home/Journey';
-import { ProjectShowcase } from '@/components/home/ProjectShowcase';
+import { ProjectBento } from '@/components/home/ProjectBento';
 import { createPageMetadata } from '@/lib/metadata';
 
 export const metadata = createPageMetadata({
@@ -17,7 +17,7 @@ export default function HomePage() {
     <>
       <CyberHero />
       <Journey />
-      <ProjectShowcase />
+      <ProjectBento />
       <Capabilities />
       <ContactBanner />
     </>
