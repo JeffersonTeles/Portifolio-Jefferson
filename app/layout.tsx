@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google';
+import { Space_Grotesk, Geist, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import { siteConfig } from '@/config/site';
@@ -9,17 +9,24 @@ import { ThemeProvider } from '@/components/ui/ThemeProvider';
 import { ScrollProgress } from '@/components/ui/ScrollProgress';
 import { MotionProvider } from '@/components/ui/MotionProvider';
 
-const ibmPlexSans = IBM_Plex_Sans({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
-  variable: '--font-ibm-plex-sans',
+  variable: '--font-space-grotesk',
   display: 'swap',
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
+const geist = Geist({
   subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-ibm-plex-mono',
+  weight: ['400', '500', '600'],
+  variable: '--font-geist',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-jetbrains-mono',
   display: 'swap',
 });
 
@@ -111,7 +118,7 @@ const antiFlickerScript = `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${ibmPlexSans.variable} ${ibmPlexMono.variable}`} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${spaceGrotesk.variable} ${geist.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <Script id="theme-anti-flicker" strategy="beforeInteractive">
           {antiFlickerScript}
