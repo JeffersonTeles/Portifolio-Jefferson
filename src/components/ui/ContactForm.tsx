@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
-import { Info, Mail, Send } from 'lucide-react';
+import { Info, Send } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { WarmTooltip } from './WarmTooltip';
 import styles from './ContactForm.module.css';
@@ -126,13 +126,13 @@ export function ContactForm() {
 
       {status === 'success' && (
         <div className={`${styles.status} ${styles['status--success']}`} role="status">
-          <Mail size={16} aria-hidden /> Mensagem enviada.
+          <span className="font-mono text-accent">Data Transfer Complete</span>
         </div>
       )}
 
       <div className={styles.formActions}>
         <button type="submit" className="btn btn--primary" disabled={status === 'loading'}>
-          {status === 'loading' ? 'Enviando…' : 'Enviar mensagem'}
+          {status === 'loading' ? 'Encrypting packet…' : 'Enviar mensagem'}
           <Send size={15} aria-hidden />
         </button>
       </div>
