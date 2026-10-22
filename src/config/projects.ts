@@ -48,7 +48,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description:
       'Sistema web fullstack do meu TCC para acompanhar trilhas, cursos e certificados docentes, com foco em leitura sem distrações.',
     image: '/screenshot-maestria.png',
-    imageAlt: 'Screenshot real da tela de acesso da plataforma Maestria Docente',
+    imageAlt: 'Screenshot real do dashboard da plataforma Maestria Docente',
     tags: ['Fullstack', 'TCC', 'Supabase'],
     url: 'https://projeto-maestria-vercel.vercel.app',
     kind: 'platform',
