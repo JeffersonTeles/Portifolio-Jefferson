@@ -22,12 +22,12 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     slug: 'telesseg',
     title: 'TELESSEG',
-    category: 'Site institucional',
+    category: 'Landing page',
     description:
-      'Site da TELESSEG, empresa de Saúde e Segurança do Trabalho, para centralizar exames, documentos, treinamentos e planos em um único canal de contato.',
+      'Landing page da TELESSEG, empresa de Saúde e Segurança do Trabalho, para apresentar serviços e direcionar contato por WhatsApp.',
     image: '/screenshot-telesseg.png',
     imageAlt: 'Screenshot real da página inicial do projeto TELESSEG',
-    tags: ['Site institucional', 'HTML/CSS/JS', 'WhatsApp'],
+    tags: ['Landing page', 'HTML/CSS/JS', 'WhatsApp'],
     url: 'https://telesseg.com.br',
     kind: 'site',
     role: 'Desenvolvimento da página, do conteúdo e do fluxo de contato.',
@@ -39,7 +39,7 @@ export const portfolioProjects: PortfolioProject[] = [
       'Treinamentos de NRs e programas da NR-01',
       'Plano corporativo e contato por WhatsApp',
     ],
-    codeNote: 'Site em produção com domínio próprio.',
+    codeNote: 'Landing page em produção com domínio próprio.',
   },
   {
     slug: 'maestria-docente',
