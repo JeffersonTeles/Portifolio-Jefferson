@@ -3,6 +3,7 @@ import { Capabilities } from '@/components/home/Capabilities';
 import { ContactBanner } from '@/components/home/ContactBanner';
 import { Journey } from '@/components/home/Journey';
 import { ProjectBento } from '@/components/home/ProjectBento';
+import { SkillsTerminal } from '@/components/home/SkillsTerminal';
 import { createPageMetadata } from '@/lib/metadata';
 
 export const metadata = createPageMetadata({
@@ -18,6 +19,7 @@ export default function HomePage() {
       <CyberHero />
       <Journey />
       <ProjectBento />
+      <SkillsTerminal />
       <Capabilities />
       <ContactBanner />
     </>
